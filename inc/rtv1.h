@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/10 20:05:54 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/10 23:22:40 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RTV1_H
 
 #include "../libft/inc/libft.h"
+#include "../SDL2-2.0.10/include/SDL.h"
 
 void 	init(void);
 
