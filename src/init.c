@@ -10,9 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "libui.h"
 
-void init(void)
+int	init_window(t_window *window)
 {
-	ft_printf("All is ok. No ?\n");
+	window->position.x = 0;
+	window->position.y = 0;
+	window->size.x = HEIGHT;
+	window->size.y = WIDTH;
+	window->flags = SDL_WINDOW_SHOWN | SDL_WINDOW_POPUP_MENU;
+	return (1);
 }

@@ -10,12 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef LIBUI_H
+# define LIBUI_H
 
 #include "../libft/inc/libft.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 
-void 	init(void);
+#define HEIGHT	400
+#define WIDTH	400
+
+typedef struct		s_point
+{
+
+	int				x;
+	int				y;
+}					t_point;
+
+typedef struct		s_window
+{
+
+	t_point			position;
+	t_point			size;
+	Uint32			flags;
+	SDL_Window		*ptr;
+	SDL_Renderer 	*render;
+}					t_window;
+
+/*
+**	window.c
+*/
+
+int					init_window(t_window *window);
+int					create_window(const char *title, t_window *w);
+
+
 
 #endif

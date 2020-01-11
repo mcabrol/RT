@@ -10,18 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "libui.h"
 
-int		main(void)
+int	create_window(const char *title, t_window *w)
 {
-	if (SDL_Init(SDL_INIT_VIDEO) == -1)
-	{
-		ft_printf("Erreur d'initialisation de la SDL");
-		exit(EXIT_FAILURE);
-	}
-	SDL_Quit();
-	ft_printf("Libft ok\n");
-	init();
-	return (EXIT_SUCCESS);
-
+	w->ptr = SDL_CreateWindow(title, w->position.x, w->position.y,
+										w->size.x, w->size.y, w->flags);
+	return (w->ptr != NULL);
 }
