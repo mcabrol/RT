@@ -14,40 +14,52 @@
 # define RTV1_H
 
 # include "../libft/inc/libft.h"
-# include "../minilibx/mlx.h"
+// # include "../minilibx/mlx.h"
 # include <math.h>
+# include <stdint.h>
 
-# define HEIGHT	100
-# define WIDTH	100
-# define ZERO	0.0, 0.0, 0.0
 
-typedef enum 		s_reflect	// material types, used in radiance()
-{
-	DIFF,
-	SPEC,
-	REFR
-}					e_reflect;
+# define HEIGHT			100
+# define WIDTH			100
+# define ZERO			0.0, 0.0, 0.0
+# define FALSE			0
+# define TRUE			1
+
+# define DIFF	0
+# define SPEC	1
+# define REFR	2
+
+# define RAND48_SEED_0	(0x330e)
+# define RAND48_SEED_1	(0xabcd)
+# define RAND48_SEED_2	(0x1234)
+# define RAND48_MULT_0	(0xe66d)
+# define RAND48_MULT_1	(0xdeec)
+# define RAND48_MULT_2	(0x0005)
+# define RAND48_ADD   	(0x000b)
 
 typedef struct		s_vec
 {
 	double			x;
 	double			y;
-	double			z;
+	double 			z;
 }					t_vec;
 
 typedef struct		s_ray
 {
 	t_vec			o; 			// Origin
-	t_vec			d; 			// Direction
+	t_vec			d;			// Direction
+	double			tmin;
+	double			tmax;
+	int				depth;
 }					t_ray;
 
 typedef struct		s_sphere
 {
-	double			radius;
-	t_vec			position;
-	t_vec			emission;
-	t_vec			color;
-	e_reflect		reflect;
+	double			r;			// radius
+	t_vec			p;			// position
+	t_vec			e;			// emission
+	t_vec			f;			// reflection
+	int				reflect;	// material type
 }					t_sphere;
 
 typedef struct 		s_scene
@@ -69,54 +81,64 @@ typedef struct		s_point
 **	rtv1.c
 */
 
-void 				loop(t_scene *scene);
 
 /*
 **	vector.c
 */
 
 t_vec				vec(double a, double b, double c);
-t_vec 				norm(t_vec vec);
+t_vec				*cpy(t_vec *v1, t_vec *v2);
+t_vec				*norm(t_vec *v);
+double 				norm_s(t_vec *v);
+
 
 /*
 **	ray.c
 */
 
-t_ray				ray(t_vec i, t_vec j);
+t_vec				eval(t_ray *r, double t);
+void				printr(t_ray *r);
 
 /*
 **	sphere.c
 */
 
-t_sphere			sphere(double radius, t_vec position, t_vec emission,
-					t_vec color, e_reflect reflect);
-
 /*
 **	scene.c
 */
 
-t_scene				init_scene(void);
 
 /*
 **	intersect.c
 */
 
-int				 	intersect(const t_ray *r, double *t, int *id);
+int 				intersect(t_ray *ray, size_t *id);
+int 				intersect_sphere(t_sphere *sphere, t_ray *ray);
 
 /*
 **	operator.c
 */
 
-t_vec				add(t_vec v1, t_vec v2);
-t_vec				sub(t_vec v1, t_vec v2);
-t_vec				mult(t_vec v1, t_vec v2);
-t_vec				multn(t_vec v1, double n);
-t_vec				divn(t_vec v1, double n);
+t_vec				sum(t_vec *v1, t_vec *v2);
+t_vec				sub(t_vec *v1, t_vec *v2);
+t_vec				multi(t_vec *v1, t_vec *v2);
+t_vec				nmulti(t_vec *v1, double n);
+t_vec				divide(t_vec *v1, t_vec *v2);
+t_vec				ndivide(t_vec *v1, double n);
+double				dot(t_vec *v1, t_vec *v2);
+double				max(t_vec *v);
+t_vec				minus(t_vec *v);
+t_vec				cross(t_vec *v1, t_vec *v2);
+
+
+
 
 /*
 **	calcul.c
 */
 
-double				clamp(double x);
+double				clamp(double x, double low, double high);
+uint8_t				to_byte(double x, double gamma);
+
 
 #endif

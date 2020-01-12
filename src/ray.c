@@ -12,11 +12,16 @@
 
 #include "rtv1.h"
 
-t_ray	ray(t_vec i, t_vec j)
+t_vec	eval(t_ray *r, double t)
 {
-	t_ray ray;
+	t_vec dt;
 
-	ray.o = i;
-	ray.d = j;
-	return (ray);
+	dt = nmulti(&r->d, t);
+	return (sum(&r->o, &dt));
+}
+
+void	printr(t_ray *r)
+{
+	ft_printf("o: [%f %f %f]\nd: [%f %f %f]\n",
+	r->o.x, r->o.y, r->o.z, r->d.x, r->d.y, r->d.z);
 }

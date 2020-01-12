@@ -11,15 +11,3 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-t_sphere	sphere(double radius, t_vec position, t_vec emission, t_vec color, e_reflect reflect)
-{
-	t_sphere sphere;
-
-	sphere.radius = radius;
-	sphere.position = position;
-	sphere.emission = emission;
-	sphere.color = color;
-	sphere.reflect = reflect;
-	return (sphere);
-}

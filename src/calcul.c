@@ -12,12 +12,18 @@
 
 #include "rtv1.h"
 
-double	clamp(double x)
+double	clamp(double x, double low, double high)
 {
-	if (x < 0)
-		return (0);
-	else if (x > 1)
-		return (1);
+	if (x < high)
+		if (x > low)
+			return (x);
+		else
+			return (low);
 	else
-		return (x);
+		return (high);
+}
+
+uint8_t	to_byte(double x, double gamma)
+{
+	return ((uint8_t)clamp(255.0 * pow(x, 1.0 / gamma), 0.0, 255.0));
 }

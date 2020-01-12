@@ -12,9 +12,9 @@
 
 NAME = rtv1
 CFLAGS = -O3 -Wall -Wextra -Werror
-INC = -Iinc -Iminilibx
+INC = -Iinc
 SRC := $(shell find src -type f -regex ".*\.c")
-LIB = libft/libft.a minilibx/libmlx.a
+LIB = libft/libft.a -lm
 
 COMPILE.c = $(CC) $(CFLAGS) $(INC) $(TARGET_ARCH) -c
 OBJ = $(SRC:%.c=%.o)
@@ -23,7 +23,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	@make -C minilibx
 	@gcc $(CFLAGS) $(INC) $? $(LIB) -o $(NAME)
 
 clean:
