@@ -11,3 +11,15 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+t_sphere		sphere(double r, t_vec p, t_vec e, t_vec f, int reflect)
+{
+	t_sphere sphere;
+
+	sphere.r = r;
+	sphere.p = p;
+	sphere.e = e;
+	sphere.f = f;
+	sphere.reflect = reflect;
+	return (sphere);
+}

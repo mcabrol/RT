@@ -37,9 +37,17 @@ t_vec		divide(t_vec *v1, t_vec *v2)
 	return (vec(v1->x / v2->x, v1->y / v2->y, v1->z / v2->z));
 }
 
+t_vec		divide3(double a, t_vec *v)
+{
+	return (vec(a / v->x, a / v->y, a / v->z));
+}
+
 t_vec		ndivide(t_vec *v1, double n)
 {
-	return (vec(v1->x / n, v1->y / n, v1->z / n));
+	double a;
+
+	a = 1.0 / n;
+	return (vec(v1->x * a, v1->y * a, v1->z * a));
 }
 
 double		dot(t_vec *v1, t_vec *v2)

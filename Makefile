@@ -11,10 +11,12 @@
 # **************************************************************************** #
 
 NAME = rtv1
-CFLAGS = -O3 -Wall -Wextra -Werror
-INC = -Iinc
+CFLAGS = -O3 # -Wall -Wextra -Werror
+INC = -Iinc -Iminilibx
 SRC := $(shell find src -type f -regex ".*\.c")
-LIB = libft/libft.a -lm
+LIB = libft/libft.a minilibx/libmlx.a -lm
+FRAMEWORK = -framework OpenGL -framework AppKit
+SANATIZE = -fsanitize=address
 
 COMPILE.c = $(CC) $(CFLAGS) $(INC) $(TARGET_ARCH) -c
 OBJ = $(SRC:%.c=%.o)
@@ -23,7 +25,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	@gcc $(CFLAGS) $(INC) $? $(LIB) -o $(NAME)
+	@make -C minilibx
+	@gcc $(CFLAGS) $(INC) $? $(LIB) $(FRAMEWORK) -o $(NAME)
 
 clean:
 	@make clean -C libft
