@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   radiance.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/10 22:49:10 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/13 20:00:18 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 		F = multi(&F, &shape->f);
 
 		// Russian roulette
-		if (4u < r->depth) {
+		if (4u < (unsigned int)r->depth) {
 			double continue_probability = max(&shape->f);
 			if (erand48(xseed) >= continue_probability) {
 				return L;

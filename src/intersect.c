@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/10 22:49:10 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/13 18:02:01 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-bool 	intersect(t_ray *ray, size_t *id)
+BOOL 	intersect(t_ray *ray, size_t *id)
 {
 	t_sphere	obj[9];
 	bool		hit;
@@ -80,7 +80,7 @@ bool 	intersect(t_ray *ray, size_t *id)
 	return (hit);
 }
 
-int 	intersect_sphere(t_sphere *sphere, t_ray *ray)
+BOOL 	intersect_sphere(t_sphere *sphere, t_ray *ray)
 {
 	t_vec	op;
 	double	dop;

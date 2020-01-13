@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/10 22:49:10 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/13 20:09:35 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		main(int ac, char **av)
 
 void 		rtv1(t_win *win)
 {
-	int 			samples;
 	t_vec			eye;
 	t_vec			gaze;
 	t_vec 			*ls;

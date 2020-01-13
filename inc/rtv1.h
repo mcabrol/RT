@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/10 23:22:40 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/13 18:00:58 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "../libft/inc/libft.h"
 # include "../minilibx/mlx.h"
+# include <OpenCL/opencl.h>
 # include <math.h>
 # include <stdint.h>
-
 
 # define HEIGHT					500u
 # define WIDTH					600u
@@ -43,7 +43,7 @@
 # define RAND48_MULT_2			(0x0005)
 # define RAND48_ADD   			(0x000b)
 
-typedef int 		bool;
+typedef int 		BOOL;
 
 typedef struct		s_vec
 {
@@ -142,8 +142,8 @@ t_scene 			init_scene(void);
 **	intersect.c
 */
 
-int 				intersect(t_ray *ray, size_t *id);
-int 				intersect_sphere(t_sphere *sphere, t_ray *ray);
+BOOL 				intersect(t_ray *ray, size_t *id);
+BOOL 				intersect_sphere(t_sphere *sphere, t_ray *ray);
 
 /*
 **	operator.c
