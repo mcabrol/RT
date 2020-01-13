@@ -166,18 +166,18 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 			return L;
 		}
 
-		const t_sphere *shape = &scene->obj[id];
-		const t_vec p = eval(r, r->tmax);
+		t_sphere *shape = &scene->obj[id];
+		t_vec p = eval(r, r->tmax);
 		t_vec n = sub(&p, &shape->p);
 		norm(&n);
 
-		const t_vec l = multi(&F, &shape->e);
+		t_vec l = multi(&F, &shape->e);
 		L = sum(&L, &l);
 		F = multi(&F, &shape->f);
 
 		// Russian roulette
 		if (4u < r->depth) {
-			const double continue_probability = max(&shape->f);
+			double continue_probability = max(&shape->f);
 			if (erand48(xseed) >= continue_probability) {
 				return L;
 			}
@@ -208,7 +208,7 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 		}
 
 		default: {
-			const t_vec w = (0.0 > dot(&n, &r->d)) ? n : minus(&n);
+			 t_vec w = (0.0 > dot(&n, &r->d)) ? n : minus(&n);
 			t_vec _u = { 0.0, 0.0, 0.0 };
 			if (fabs(w.x) > 0.1) {
 				_u.y = 1.0;
@@ -218,13 +218,13 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 			}
 			t_vec u = cross(&_u, &w);
 			norm(&u);
-			const t_vec v = cross(&w, &u);
+			 t_vec v = cross(&w, &u);
 
-			const t_vec sample_d = cosine_weighted_sample(erand48(xseed), erand48(xseed));
-			const t_vec _x = nmulti(&u, sample_d.x);
-			const t_vec _y = nmulti(&v, sample_d.y);
-			const t_vec _z = nmulti(&w, sample_d.z);
-			const t_vec _xy = sum(&_x, &_y);
+			 t_vec sample_d = cosine_weighted_sample(erand48(xseed), erand48(xseed));
+			 t_vec _x = nmulti(&u, sample_d.x);
+			 t_vec _y = nmulti(&v, sample_d.y);
+			 t_vec _z = nmulti(&w, sample_d.z);
+			 t_vec _xy = sum(&_x, &_y);
 			t_vec d = sum(&_xy, &_z);
 			r->o = p;
 			r->d = *norm(&d);;
