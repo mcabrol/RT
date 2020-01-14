@@ -154,7 +154,7 @@
 // 	ft_printf("### YOOOOOOO ###\n");
 // }
 
-t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
+void		radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3], t_vec *dest)
 {
 	t_ray *r = ray;
 	t_vec p;
@@ -175,7 +175,8 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 	while (TRUE) {
 		size_t id;
 		if (!intersect(r, &id, scene)) {
-			return L;
+			veccp(&L, dest);
+			return ;
 		}
 
 		t_sphere *shape = &scene->obj[id];
@@ -191,7 +192,8 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 		if (4u < (unsigned int)r->depth) {
 			double continue_probability = max(&shape->f);
 			if (erand48(xseed) >= continue_probability) {
-				return L;
+				veccp(&L, dest);
+				return ;
 			}
 			ndivide_(&F, continue_probability);
 		}

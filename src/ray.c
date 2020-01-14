@@ -12,16 +12,32 @@
 
 #include "rtv1.h"
 
-t_ray	ray(t_vec o, t_vec d, double tmin, double tmax, int depth)
+void	ray(t_vec o, t_vec d, double tmin, double tmax, int depth, t_ray *dest)
 {
-	t_ray ray;
+	dest->o = o;
+	dest->d = d;
+	dest->tmin = tmin;
+	dest->tmax = tmax;
+	dest->depth = depth;
+}
 
-	ray.o = o;
-	ray.d = d;
-	ray.tmin = tmin;
-	ray.tmax = tmax;
-	ray.depth = depth;
-	return (ray);
+void 	prepare_ray(t_algo *rt, t_target *target, t_cam *cam)
+{
+	double u1;
+	double u2;
+	double dx;
+	double dy;
+
+	u1 = 2.0 * erand48(cam->xseed);
+	u2 = 2.0 * erand48(cam->xseed);
+	dx = (u1 < 1.0f) ? sqrt(u1) - 1.0 : 1.0 - sqrt(2.0 - u1);
+	dy = (u2 < 1.0f) ? sqrt(u2) - 1.0 : 1.0 - sqrt(2.0 - u2);
+	nmulti(&cam->cx, (((rt->sx + 0.5 + dx) / 2.0 + rt->x) / WIDTH - 0.5), &target->a);
+	nmulti(&cam->cy, (((rt->sy + 0.5 + dy) / 2.0 + rt->y) / HEIGHT - 0.5), &target->b);
+	sum(&target->a, &target->b, &target->ab);
+	sum(&target->ab, &cam->gaze, &target->d);
+	nmulti(&target->d, 130.0, &target->d_t);
+	sum(&cam->eye, &target->d_t, &target->eye_t);
 }
 
 void	init_cam(t_cam *cam)

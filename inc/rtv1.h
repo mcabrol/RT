@@ -19,8 +19,8 @@
 # include <math.h>
 # include <stdint.h>
 
-# define HEIGHT					920u
-# define WIDTH					1080u
+# define HEIGHT					500u
+# define WIDTH					500u
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
@@ -51,6 +51,25 @@ typedef struct		s_vec
 	double			y;
 	double 			z;
 }					t_vec;
+
+typedef struct		s_algo
+{
+	int				x;			// Screen x counter
+	int				y;			// Screen y counter
+	int				s;			// Sample counter
+	unsigned int	sx;			// Zone render x
+	unsigned int	sy;			// Zone render y
+}					t_algo;
+
+typedef struct		s_target
+{
+	t_vec			a;
+	t_vec			b;
+	t_vec			ab;
+	t_vec			d_t;		// Directon tmp
+	t_vec			eye_t;		// Eye tmp
+	t_vec			d;			// Vector for ray
+}					t_target;
 
 typedef struct		s_ray
 {
@@ -117,7 +136,8 @@ void 				rtv1(t_win *win);
 */
 
 void				vec(double a, double b, double c, t_vec *dest);
-t_vec				veccp(double a, double b, double c);
+t_vec				vecp(double a, double b, double c);
+void				veccp(t_vec *v, t_vec *dest);
 t_vec				*norm(t_vec *v);
 double 				norm_s(t_vec *v);
 
@@ -125,7 +145,8 @@ double 				norm_s(t_vec *v);
 **	ray.c
 */
 
-t_ray				ray(t_vec o, t_vec d, double tmin, double tmax, int depth);
+void				ray(t_vec o, t_vec d, double tmin, double tmax, int depth, t_ray *dest);
+void 				prepare_ray(t_algo *rt, t_target *target, t_cam *cam);
 void				init_cam(t_cam *cam);
 void				eval(t_ray *r, double t, t_vec *dest);
 void				printr(t_ray *r);
@@ -135,7 +156,8 @@ void				printv(t_vec *v);
 **	radiance.c
 */
 
-t_vec 				radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3]);
+void				radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3],
+	 				t_vec *dest);
 
 /*
 **	sphere.c

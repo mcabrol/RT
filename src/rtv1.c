@@ -25,83 +25,60 @@ int		main(int ac, char **av)
 void 		rtv1(t_win *win)
 {
 	t_vec 			*ls;
-	int 			y;
-	int 			x;
-	int 			s;
-	unsigned int 	sx;
-	unsigned int 	sy;
 	unsigned int 	i;
-	unsigned short	xseed[3];
-	double			u1;
-	double			u2;
-	double			dx;
-	double			dy;
-	t_vec			a;
-	t_vec			b;
-	t_vec			ab;
-	t_vec			d;
-	t_vec			d_t;
 	t_vec			l;
 	t_vec			m;
 	t_vec			l_t;
-	t_vec			eye_dt;
 	t_ray			ry;
 	t_cam 			cam;
 	t_scene 		scene;
+	t_target		target;
+	t_algo			rt;
 
 	init_scene(&scene, win);
 	init_cam(&cam);
 	ls = (t_vec *)malloc(WIDTH * HEIGHT * sizeof(t_vec));
-	y = 0u;
-	while ((unsigned int)y < HEIGHT)
+	rt.y = 0u;
+	while ((unsigned int)rt.y < HEIGHT)
 	{
-		ft_dprintf(2, "\rRendering (%u spp) %5.2f%%", scene.samples * 4, 100.0 * y / (HEIGHT - 1));
-		xseed[0] = 0;
-		xseed[1] = 0;
-		xseed[2] = (unsigned short)(y * y * y);
-		x = 0u;
-		while ((unsigned int)x < WIDTH)
+		ft_dprintf(2, "\rRendering (%u spp) %5.2f%%", scene.samples * 4, 100.0 * rt.y / (HEIGHT - 1));
+		cam.xseed[0] = 0;
+		cam.xseed[1] = 0;
+		cam.xseed[2] = (unsigned short)(rt.y * rt.y * rt.y);
+		rt.x = 0u;
+		while ((unsigned int)rt.x < WIDTH)
 		{
-			sy = 0u;
-			i = (HEIGHT - 1u - y) * WIDTH + x;
-			while (sy < 2u)
+			rt.sy = 0u;
+			i = (HEIGHT - 1u - rt.y) * WIDTH + rt.x;
+			while (rt.sy < 2u)
 			{
-				sx = 0u;
-				while (sx < 2u)
+				rt.sx = 0u;
+				while (rt.sx < 2u)
 				{
 					vec(0.0, 0.0, 0.0, &m);
-					s = 0u;
-					while (s < scene.samples)
+					rt.s = 0u;
+					while (rt.s < scene.samples)
 					{
-						u1 = 2.0 * erand48(xseed);
-						u2 = 2.0 * erand48(xseed);
-						dx = (u1 < 1.0f) ? sqrt(u1) - 1.0 : 1.0 - sqrt(2.0 - u1);
-						dy = (u2 < 1.0f) ? sqrt(u2) - 1.0 : 1.0 - sqrt(2.0 - u2);
-						nmulti(&cam.cx, (((sx + 0.5 + dx) / 2.0 + x) / WIDTH - 0.5), &a);
-						nmulti(&cam.cy, (((sy + 0.5 + dy) / 2.0 + y) / HEIGHT - 0.5), &b);
-						sum(&a, &b, &ab);
-						sum(&ab, &cam.gaze, &d);
-						nmulti(&d, 130.0, &d_t);
-						sum(&cam.eye, &d_t, &eye_dt);
-						ry = ray(eye_dt, *norm(&d), EPSILON_SPHERE, INFINITY, 0);
-						l_t = radiance(&scene, &ry, cam.xseed);
+						prepare_ray(&rt, &target, &cam);
+						ray(target.eye_t, *norm(&target.d), EPSILON_SPHERE, INFINITY, 0, &ry);
+						radiance(&scene, &ry, cam.xseed, &l_t);
 						ndivide(&l_t, (double)scene.samples, &l);
 						sum_(&m, &l);
-						s++;
+						(rt.s)++;
 					}
 					clamp3(&m, 0.0, 1.0, &l_t);
 					nmulti(&l_t, 0.25, &l);
 					sum_(&ls[i], &l);
 					// ft_printf("ls[%d] = ", i);
 					//printv(&ls[i]);
-					put_pixel(win, (WIDTH - x), (HEIGHT - y), &ls[i]);
-					sx++;
+					put_pixel(win, (WIDTH - rt.x), (HEIGHT - rt.y), &ls[i]);
+					(rt.sx)++;
 				}
-				sy++;
+				(rt.sy)++;
 			}
-			x++;
+			(rt.x)++;
 		}
-		y++;
+		(rt.y)++;
 	}
 	// for (size_t i = 0; i < WIDTH * HEIGHT; ++i) {
 	// 	ft_printf("%d %d %d ", to_byte(ls[i].x, GAMMA),
