@@ -157,23 +157,35 @@
 t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 {
 	t_ray *r = ray;
+	t_vec p;
+	t_vec n;
+	t_vec l;
+	t_vec u;
+	t_vec v;
+	t_vec sample_d;
+	t_vec _x;
+	t_vec _y;
+	t_vec _z;
+	t_vec _xy;
+	t_vec d;
+	t_vec w;
 	t_vec L = { 0.0, 0.0, 0.0 };
 	t_vec F = { 1.0, 1.0, 1.0 };
 
 	while (TRUE) {
 		size_t id;
-		if (!intersect(r, &id)) {
+		if (!intersect(r, &id, scene)) {
 			return L;
 		}
 
 		t_sphere *shape = &scene->obj[id];
-		t_vec p = eval(r, r->tmax);
-		t_vec n = sub(&p, &shape->p);
+		eval(r, r->tmax, &p);
+		sub(&p, &shape->p, &n);
 		norm(&n);
 
-		t_vec l = multi(&F, &shape->e);
-		L = sum(&L, &l);
-		F = multi(&F, &shape->f);
+		multi(&F, &shape->e, &l);
+		sum_(&L, &l);
+		multi_(&F, &shape->f);
 
 		// Russian roulette
 		if (4u < (unsigned int)r->depth) {
@@ -181,7 +193,7 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 			if (erand48(xseed) >= continue_probability) {
 				return L;
 			}
-			F = ndivide(&F, continue_probability);
+			ndivide_(&F, continue_probability);
 		}
 
 		// Next path segment
@@ -189,7 +201,7 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 
 		case SPEC: {
 			r->o = p;
-			r->d = specular_reflect(&r->d, &n);
+			specular_reflect(&r->d, &n, &r->d);
 			r->tmin = EPSILON_SPHERE;
 			r->tmax = INFINITY;
 			r->depth++;
@@ -200,7 +212,7 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 			r->o = p;
 			double pr;
 			r->d = specular_transmit(&r->d, &n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, xseed);
-			F = nmulti(&F, pr);
+			nmulti_(&F, pr);
 			r->tmin = EPSILON_SPHERE;
 			r->tmax = INFINITY;
 			r->depth++;
@@ -208,7 +220,10 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 		}
 
 		default: {
-			 t_vec w = (0.0 > dot(&n, &r->d)) ? n : minus(&n);
+			 if (0.0 > dot(&n, &r->d))
+			 	w = n;
+			else
+				minus(&n, &w);
 			t_vec _u = { 0.0, 0.0, 0.0 };
 			if (fabs(w.x) > 0.1) {
 				_u.y = 1.0;
@@ -216,16 +231,15 @@ t_vec radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3])
 			else {
 				_u.x = 1.0;
 			}
-			t_vec u = cross(&_u, &w);
+			cross(&_u, &w, &u);
 			norm(&u);
-			 t_vec v = cross(&w, &u);
-
-			 t_vec sample_d = cosine_weighted_sample(erand48(xseed), erand48(xseed));
-			 t_vec _x = nmulti(&u, sample_d.x);
-			 t_vec _y = nmulti(&v, sample_d.y);
-			 t_vec _z = nmulti(&w, sample_d.z);
-			 t_vec _xy = sum(&_x, &_y);
-			t_vec d = sum(&_xy, &_z);
+			cross(&w, &u, &v);
+			cosine_weighted_sample(erand48(xseed), erand48(xseed), &sample_d);
+			nmulti(&u, sample_d.x, &_x);
+			nmulti(&v, sample_d.y, &_y);
+			nmulti(&w, sample_d.z, &_z);
+			sum(&_x, &_y, &_xy);
+			sum(&_xy, &_z, &d);
 			r->o = p;
 			r->d = *norm(&d);;
 			r->tmin = EPSILON_SPHERE;

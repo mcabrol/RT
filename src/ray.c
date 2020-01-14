@@ -24,12 +24,24 @@ t_ray	ray(t_vec o, t_vec d, double tmin, double tmax, int depth)
 	return (ray);
 }
 
-t_vec	eval(t_ray *r, double t)
+void	init_cam(t_cam *cam)
+{
+	vec(50, 52, 295.6, &cam->eye);
+	vec(0, -0.042612, -1, &cam->gaze);
+	norm(&cam->gaze);
+	cam->fov = 0.5135;
+	vec(WIDTH * cam->fov / HEIGHT, 0.0, 0.0, &cam->cx);
+	cross(&cam->cx, &cam->gaze, &cam->cy);
+	norm(&cam->cy);
+	nmulti_(&cam->cy, cam->fov);
+}
+
+void	eval(t_ray *r, double t, t_vec *dest)
 {
 	t_vec dt;
 
-	dt = nmulti(&r->d, t);
-	return (sum(&r->o, &dt));
+	nmulti(&r->d, t, &dt);
+	sum(&r->o, &dt, dest);
 }
 
 void	printr(t_ray *r)

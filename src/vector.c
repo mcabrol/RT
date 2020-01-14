@@ -12,7 +12,14 @@
 
 #include "rtv1.h"
 
-t_vec		vec(double a, double b, double c)
+void		vec(double a, double b, double c, t_vec *dest)
+{
+	dest->x = a;
+	dest->y = b;
+	dest->z = c;
+}
+
+t_vec		veccp(double a, double b, double c)
 {
 	t_vec vector;
 
@@ -22,17 +29,10 @@ t_vec		vec(double a, double b, double c)
 	return (vector);
 }
 
-t_vec		*cpy(t_vec *v1, t_vec *v2)
-{
-	v1->x = v2->x;
-	v1->y = v2->y;
-	v1->z = v2->z;
-	return (v1);
-}
-
 t_vec		*norm(t_vec *v)
 {
 	double a;
+	
 	a = 1 / sqrt(norm_s(v));
 	v->x *= a;
 	v->y *= a;

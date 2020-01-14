@@ -12,68 +12,83 @@
 
 #include "rtv1.h"
 
-t_vec		sum(t_vec *v1, t_vec *v2)
+void		sum(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	return (vec(v1->x + v2->x, v1->y + v2->y, v1->z + v2->z));
+	vec(v1->x + v2->x, v1->y + v2->y, v1->z + v2->z, dest);
 }
 
-t_vec		sub(t_vec *v1, t_vec *v2)
+void		sum_(t_vec *v1, t_vec *v2)
 {
-	return (vec(v1->x - v2->x, v1->y - v2->y, v1->z - v2->z));
+	v1->x += v2->x;
+	v1->y += v2->y;
+	v1->z += v2->z;
 }
 
-t_vec		multi(t_vec *v1, t_vec *v2)
+void		sub(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	return (vec(v1->x * v2->x, v1->y * v2->y, v1->z * v2->z));
+	vec(v1->x - v2->x, v1->y - v2->y, v1->z - v2->z, dest);
 }
 
-t_vec		nmulti(t_vec *v1, double n)
+void		multi(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	return (vec(v1->x * n, v1->y * n, v1->z * n));
+	vec(v1->x * v2->x, v1->y * v2->y, v1->z * v2->z, dest);
 }
 
-t_vec		divide(t_vec *v1, t_vec *v2)
+void		multi_(t_vec *v1, t_vec *v2)
 {
-	return (vec(v1->x / v2->x, v1->y / v2->y, v1->z / v2->z));
+	v1->x *= v2->x;
+	v1->y *= v2->y;
+	v1->z *= v2->z;
 }
 
-t_vec		divide3(double a, t_vec *v)
+void		nmulti(t_vec *v1, double n, t_vec *dest)
 {
-	return (vec(a / v->x, a / v->y, a / v->z));
+	vec(v1->x * n, v1->y * n, v1->z * n, dest);
 }
 
-t_vec		ndivide(t_vec *v1, double n)
+void		nmulti_(t_vec *v1, double n)
+{
+	v1->x *= n;
+	v1->y *= n;
+	v1->z *= n;
+}
+
+void		divide(t_vec *v1, t_vec *v2, t_vec *dest)
+{
+	vec(v1->x / v2->x, v1->y / v2->y, v1->z / v2->z, dest);
+}
+
+void		divide3(double a, t_vec *v, t_vec *dest)
+{
+	vec(a / v->x, a / v->y, a / v->z, dest);
+}
+
+void		ndivide(t_vec *v1, double n, t_vec *dest)
 {
 	double a;
 
 	a = 1.0 / n;
-	return (vec(v1->x * a, v1->y * a, v1->z * a));
+	vec(v1->x * a, v1->y * a, v1->z * a, dest);
 }
 
-double		dot(t_vec *v1, t_vec *v2)
+void		ndivide_(t_vec *v1, double n)
 {
-	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+	double a;
+
+	a = 1.0 / n;
+	v1->x *= a;
+	v1->y *= a;
+	v1->z *= a;
 }
 
-double		max(t_vec *v)
+void		minus(t_vec *v, t_vec *dest)
 {
-	if (v->x > v->y && v->x > v->z)
-		return (v->x);
-	else
-		if (v->y > v->z)
-			return (v->y);
-		else
-			return (v->z);
+	vec(-v->x, -v->y, -v->z, dest);
 }
 
-t_vec		minus(t_vec *v)
+void		cross(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	return (vec(-v->x, -v->y, -v->z));
-}
-
-t_vec		cross(t_vec *v1, t_vec *v2)
-{
-	return (vec(v1->y * v2->z - v1->z * v2->y,
+	vec(v1->y * v2->z - v1->z * v2->y,
 				v1->z * v2->x - v1->x * v2->z,
-				v1->x * v2->y - v1->y * v2->x));
+				v1->x * v2->y - v1->y * v2->x, dest);
 }

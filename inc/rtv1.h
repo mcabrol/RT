@@ -19,8 +19,8 @@
 # include <math.h>
 # include <stdint.h>
 
-# define HEIGHT					500u
-# define WIDTH					600u
+# define HEIGHT					920u
+# define WIDTH					1080u
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
@@ -70,10 +70,20 @@ typedef struct		s_sphere
 	int				reflect;	// material type
 }					t_sphere;
 
+typedef struct		s_cam
+{
+	unsigned short	xseed[3];
+	double			fov;
+	t_vec			gaze;
+	t_vec			eye;
+	t_vec			cx;
+	t_vec			cy;
+}					t_cam;
+
 typedef struct 		s_scene
 {
 	int				samples;
-	t_sphere		obj[9];
+	t_sphere		obj[11];
 }					t_scene;
 
 typedef struct		s_point
@@ -106,8 +116,8 @@ void 				rtv1(t_win *win);
 **	vector.c
 */
 
-t_vec				vec(double a, double b, double c);
-t_vec				*cpy(t_vec *v1, t_vec *v2);
+void				vec(double a, double b, double c, t_vec *dest);
+t_vec				veccp(double a, double b, double c);
 t_vec				*norm(t_vec *v);
 double 				norm_s(t_vec *v);
 
@@ -116,7 +126,8 @@ double 				norm_s(t_vec *v);
 */
 
 t_ray				ray(t_vec o, t_vec d, double tmin, double tmax, int depth);
-t_vec				eval(t_ray *r, double t);
+void				init_cam(t_cam *cam);
+void				eval(t_ray *r, double t, t_vec *dest);
 void				printr(t_ray *r);
 void				printv(t_vec *v);
 
@@ -136,37 +147,41 @@ t_sphere			sphere(double r, t_vec p, t_vec e, t_vec f, int reflect);
 **	sphere.c
 */
 
-t_scene 			init_scene(void);
+void 				init_scene(t_scene *scene, t_win *win);
 
 /*
 **	intersect.c
 */
 
-BOOL 				intersect(t_ray *ray, size_t *id);
+BOOL 				intersect(t_ray *ray, size_t *id, t_scene *scene);
 BOOL 				intersect_sphere(t_sphere *sphere, t_ray *ray);
 
 /*
 **	operator.c
 */
 
-t_vec				sum(t_vec *v1, t_vec *v2);
-t_vec				sub(t_vec *v1, t_vec *v2);
-t_vec				multi(t_vec *v1, t_vec *v2);
-t_vec				nmulti(t_vec *v1, double n);
-t_vec				divide(t_vec *v1, t_vec *v2);
-t_vec				ndivide(t_vec *v1, double n);
-t_vec				divide3(double a, t_vec *v);
-double				dot(t_vec *v1, t_vec *v2);
-double				max(t_vec *v);
-t_vec				minus(t_vec *v);
-t_vec				cross(t_vec *v1, t_vec *v2);
+void				sum(t_vec *v1, t_vec *v2, t_vec *dest);
+void				sub(t_vec *v1, t_vec *v2, t_vec *dest);
+void				multi(t_vec *v1, t_vec *v2, t_vec *dest);
+void				nmulti(t_vec *v1, double n, t_vec *dest);
+void				divide(t_vec *v1, t_vec *v2, t_vec *dest);
+void				ndivide(t_vec *v1, double n, t_vec *dest);
+void				divide3(double a, t_vec *v, t_vec *dest);
+void				minus(t_vec *v, t_vec *dest);
+void				cross(t_vec *v1, t_vec *v2, t_vec *dest);
+void				sum_(t_vec *v1, t_vec *v2);
+void				multi_(t_vec *v1, t_vec *v2);
+void				nmulti_(t_vec *v1, double n);
+void				ndivide_(t_vec *v1, double n);
 
 /*
 **	calcul.c
 */
 
+double				dot(t_vec *v1, t_vec *v2);
+double				max(t_vec *v);
 double				clamp(double x, double low, double high);
-t_vec				clamp3(t_vec *v, double low, double high);
+void				clamp3(t_vec *v, double low, double high, t_vec *dest);
 uint8_t				to_byte(double x, double gamma);
 double				reflectance(double n1, double n2);
 double				schlick_reflectance(double n1, double n2, double c);
@@ -175,13 +190,13 @@ double				schlick_reflectance(double n1, double n2, double c);
 **	sample.c
 */
 
-t_vec				cosine_weighted_sample(double u1, double u2);
+void				cosine_weighted_sample(double u1, double u2, t_vec *dest);
 
 /*
 **	specular.c
 */
 
-t_vec				specular_reflect(t_vec *d, t_vec *n);
+void				specular_reflect(t_vec *d, t_vec *n, t_vec *dest);
 t_vec				specular_transmit(t_vec *d, t_vec *n, double n_out,
 					double n_in, double *pr, unsigned short xseed[3]);
 
@@ -194,6 +209,5 @@ void				erase(t_win *win);
 int					expose_hook(t_win *win);
 void				put_pixel(t_win *win, int x, int y, t_vec *v);
 int					key(int keycode, t_win *win);
-
 
 #endif

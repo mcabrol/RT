@@ -12,12 +12,12 @@
 
 #include "rtv1.h"
 
-t_vec		specular_reflect(t_vec *d, t_vec *n)
+void		specular_reflect(t_vec *d, t_vec *n, t_vec *dest)
 {
 	t_vec a;
 
-	a = nmulti(n, 2.0 * dot(n, d));
-	return (sub(d, &a));
+	nmulti(n, 2.0 * dot(n, d), &a);
+	sub(d, &a, dest);
 }
 
 t_vec		specular_transmit(t_vec *d, t_vec *n, double n_out, double n_in, double *pr, unsigned short xseed[3])
@@ -37,9 +37,12 @@ t_vec		specular_transmit(t_vec *d, t_vec *n, double n_out, double n_in, double *
 	double	tr;
 	double	p_tr;
 
-	d_re = specular_reflect(d, n);
+	specular_reflect(d, n, &d_re);
 	out_to_in = (dot(n, d) < 0) ? TRUE : FALSE;
-	nl = out_to_in ? *n : minus(n);
+	if (out_to_in)
+		nl = *n;
+	else
+		minus(n, &nl);
 	nn = out_to_in ? n_out / n_in : n_in / n_out;
 	cos_theta = dot(d, &nl);
 	cos2_phi = 1.0 - nn * nn * (1.0 - cos_theta * cos_theta);
@@ -48,9 +51,9 @@ t_vec		specular_transmit(t_vec *d, t_vec *n, double n_out, double n_in, double *
 		*pr = 1.0;
 		return (d_re);
 	}
-	a = nmulti(d, nn);
-	a = nmulti(&nl, (nn * cos_theta + sqrt(cos2_phi)));
-	d_tr = sub(&a, &b);
+	nmulti(d, nn, &a);
+	nmulti(&nl, (nn * cos_theta + sqrt(cos2_phi)), &a);
+	sub(&a, &b, &d_tr);
 	norm(&d_tr);
 	c = 1.0 - (out_to_in ? -cos_theta : dot(&d_tr, n));
 	re = schlick_reflectance(n_out, n_in, c);

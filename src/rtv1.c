@@ -24,10 +24,7 @@ int		main(int ac, char **av)
 
 void 		rtv1(t_win *win)
 {
-	t_vec			eye;
-	t_vec			gaze;
 	t_vec 			*ls;
-	double			fov;
 	int 			y;
 	int 			x;
 	int 			s;
@@ -37,8 +34,6 @@ void 		rtv1(t_win *win)
 	unsigned short	xseed[3];
 	double			u1;
 	double			u2;
-	t_vec			cx;
-	t_vec			cy;
 	double			dx;
 	double			dy;
 	t_vec			a;
@@ -49,19 +44,13 @@ void 		rtv1(t_win *win)
 	t_vec			l;
 	t_vec			m;
 	t_vec			l_t;
+	t_vec			eye_dt;
 	t_ray			ry;
+	t_cam 			cam;
 	t_scene 		scene;
 
-	scene = init_scene();
-	scene.samples = (win->ac == 2) ? atoi(win->av[1]) / 4 : 1;
-	eye = vec(50, 52, 295.6);
-	gaze = vec(0, -0.042612, -1);
-	norm(&gaze);
-	fov = 0.5135;
-	cx = vec(WIDTH * fov / HEIGHT, 0.0, 0.0);
-	cy = cross(&cx, &gaze);
-	norm(&cy);
-	cy = nmulti(&cy, fov);
+	init_scene(&scene, win);
+	init_cam(&cam);
 	ls = (t_vec *)malloc(WIDTH * HEIGHT * sizeof(t_vec));
 	y = 0u;
 	while ((unsigned int)y < HEIGHT)
@@ -80,7 +69,7 @@ void 		rtv1(t_win *win)
 				sx = 0u;
 				while (sx < 2u)
 				{
-					m = vec(0.0, 0.0, 0.0);
+					vec(0.0, 0.0, 0.0, &m);
 					s = 0u;
 					while (s < scene.samples)
 					{
@@ -88,22 +77,23 @@ void 		rtv1(t_win *win)
 						u2 = 2.0 * erand48(xseed);
 						dx = (u1 < 1.0f) ? sqrt(u1) - 1.0 : 1.0 - sqrt(2.0 - u1);
 						dy = (u2 < 1.0f) ? sqrt(u2) - 1.0 : 1.0 - sqrt(2.0 - u2);
-						a = nmulti(&cx, (((sx + 0.5 + dx) / 2.0 + x) / WIDTH - 0.5));
-						b = nmulti(&cy, (((sy + 0.5 + dy) / 2.0 + y) / HEIGHT - 0.5));
-						ab = sum(&a, &b);
-						d = sum(&ab, &gaze);
-						d_t = nmulti(&d, 130.0);
-						ry = ray(sum(&eye, &d_t), *norm(&d), EPSILON_SPHERE, INFINITY, 0);
-						l_t = radiance(&scene, &ry, xseed);
-						l = ndivide(&l_t, (double)scene.samples);
-						m = sum(&m, &l);
+						nmulti(&cam.cx, (((sx + 0.5 + dx) / 2.0 + x) / WIDTH - 0.5), &a);
+						nmulti(&cam.cy, (((sy + 0.5 + dy) / 2.0 + y) / HEIGHT - 0.5), &b);
+						sum(&a, &b, &ab);
+						sum(&ab, &cam.gaze, &d);
+						nmulti(&d, 130.0, &d_t);
+						sum(&cam.eye, &d_t, &eye_dt);
+						ry = ray(eye_dt, *norm(&d), EPSILON_SPHERE, INFINITY, 0);
+						l_t = radiance(&scene, &ry, cam.xseed);
+						ndivide(&l_t, (double)scene.samples, &l);
+						sum_(&m, &l);
 						s++;
 					}
-					l_t = clamp3(&m, 0.0, 1.0);
-					l = nmulti(&l_t, 0.25);
-					ls[i] = sum(&ls[i], &l);
+					clamp3(&m, 0.0, 1.0, &l_t);
+					nmulti(&l_t, 0.25, &l);
+					sum_(&ls[i], &l);
 					// ft_printf("ls[%d] = ", i);
-					// printv(&ls[i]);
+					//printv(&ls[i]);
 					put_pixel(win, (WIDTH - x), (HEIGHT - y), &ls[i]);
 					sx++;
 				}
