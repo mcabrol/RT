@@ -28,8 +28,8 @@ void 	prepare_ray(t_algo *rt, t_target *target, t_cam *cam)
 	double dx;
 	double dy;
 
-	u1 = 2.0 * erand48(cam->xseed);
-	u2 = 2.0 * erand48(cam->xseed);
+	u1 = 2.0 * erand48(rt->xseed);
+	u2 = 2.0 * erand48(rt->xseed);
 	dx = (u1 < 1.0f) ? sqrt(u1) - 1.0 : 1.0 - sqrt(2.0 - u1);
 	dy = (u2 < 1.0f) ? sqrt(u2) - 1.0 : 1.0 - sqrt(2.0 - u2);
 	nmulti(&cam->cx, (((rt->sx + 0.5 + dx) / 2.0 + rt->x) / WIDTH - 0.5), &target->a);
