@@ -19,11 +19,13 @@ brew install gcc cmake
 
 ## Architecture
 
+_file.c_ todo
+
 | Algorithm     | Objects Manager   | Math         | Graphic   | Kernel     |
 | ------------- | ----------------- | ------------ | --------- | ---------- |
 | intersect.c   | scene.c           | vetor.c      | mlx.c     | opencl.c   |
-| radiace.c     | sphere.c          | operator.c   |           |            |
-| ray.c         |                   | calcul.c     |           |            |
-| rtv1.c        |                   | sample.c     |           |            |
-| specular.c    |                   |              |           |            |
-| srand48.c     |                   |              |           |            |
+| radiace.c     | sphere.c          | operator.c   | _gui.c_   | kernel.cl  |
+| ray.c         | _cone.c_          | calcul.c     | _text.c_  |            |
+| rtv1.c        | _cylinder.c_      | sample.c     |           |            |
+| specular.c    | _cube.c_          |              |           |            |
+| srand48.c     | _plan.c_          |              |           |            |
