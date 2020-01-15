@@ -1,0 +1,25 @@
+| Algorithm | Object Manager | Math | Kernel
+
+Algorithm
+	rtv1.c
+	ray.c
+	radiance.c
+	specular.c
+	intersect.c
+	thread.c
+	srand48.c
+
+Math
+	vector.c
+	sphere.c
+	operator.c
+	calcul.c
+	sample.c
+
+Object Manager
+	scene.c
+	camera.c
+
+Kernel
+	kernel.cl	-> produit scalaire, division vecteur... etc
+	kernel.c	-> #include "kernel.cl.h" prepare et execute sur GPU

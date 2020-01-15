@@ -15,7 +15,13 @@
 
 # include "../libft/inc/libft.h"
 # include "../minilibx/mlx.h"
-# include <OpenCL/opencl.h>
+
+# if defined(__APPLE__) || defined(__MACOSX)
+	# include <OpenCL/cl.h>
+# else
+	# include <CL/cl.h>
+#endif
+
 # include <math.h>
 # include <stdint.h>
 
@@ -57,8 +63,14 @@ typedef struct		s_algo
 	int				x;			// Screen x counter
 	int				y;			// Screen y counter
 	int				s;			// Sample counter
+	unsigned int	i;			// Cursor
 	unsigned int	sx;			// Zone render x
 	unsigned int	sy;			// Zone render y
+	t_vec			l;
+	t_vec			m;
+	t_vec			l_t;
+	unsigned short	xseed[3];	// Generate random float
+	t_vec			*ls;		// Result
 }					t_algo;
 
 typedef struct		s_target
@@ -91,7 +103,6 @@ typedef struct		s_sphere
 
 typedef struct		s_cam
 {
-	unsigned short	xseed[3];
 	double			fov;
 	t_vec			gaze;
 	t_vec			eye;
@@ -130,6 +141,8 @@ typedef struct		s_win
 */
 
 void 				rtv1(t_win *win);
+void 				init_seed(t_algo *rt);
+
 
 /*
 **	vector.c
