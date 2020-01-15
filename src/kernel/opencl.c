@@ -31,10 +31,10 @@ void 	opencl(void)
 {
 	char *k[5];
 	dispatch_queue_t queue;
-	cl_program kernelProgram;
+	// cl_program kernelProgram;
 	char name[128];
-	double *mem_in;
-	double *mem_out;
+	// double *mem_in;
+	// double *mem_out;
 
 	k[0] = "__kernel void		dot(global t_vec *v1, global t_vec *v2, global double *out)\n";
 	k[0] = "{																			   \n";
@@ -54,11 +54,11 @@ void 	opencl(void)
 
 	// Create array of calc
 
-	mem_in = gcl_malloc(sizeof(cl_float), SIZE, test_in, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR);
-	mem_out = gcl_malloc(sizeof(cl_float), SIZE, NULL, CL_MEM_WRITE_ONLY);
-
-	//kernelProgram = clCreateProgramWithSource(context, 4, kernelSource, 0, 0);
-
-	gcl_free(mem_in);
-    gcl_free(mem_out);
+	// mem_in = gcl_malloc(sizeof(cl_float), SIZE, test_in, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR);
+	// mem_out = gcl_malloc(sizeof(cl_float), SIZE, NULL, CL_MEM_WRITE_ONLY);
+	//
+	// //kernelProgram = clCreateProgramWithSource(context, 4, kernelSource, 0, 0);
+	//
+	// gcl_free(mem_in);
+    // gcl_free(mem_out);
 }
