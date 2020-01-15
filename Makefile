@@ -6,7 +6,7 @@
 #    By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/10 11:25:08 by mcabrol           #+#    #+#              #
-#    Updated: 2020/01/13 20:00:00 by mcabrol          ###   ########.fr        #
+#    Updated: 2020/01/15 15:56:54 by mcabrol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -O3 -Wall -Wextra -Werror
 INC = -Iinc -Iminilibx-linux
 SRC := $(shell find src -type f -regex ".*\.c")
 LIB = libft/libft.a minilibx/libmlx.a # -lm -lmlx -lXext -lX11
-FRAMEWORK = -framework OpenGL -framework AppKit
+FRAMEWORK = -framework OpenCL -framework OpenGL -framework AppKit
 SANATIZE = -fsanitize=address
 
 COMPILE.c = $(CC) $(CFLAGS) $(INC) $(TARGET_ARCH) -c

@@ -6,13 +6,13 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/13 20:00:18 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:44:04 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-// t_vec	radiance(t_ray *ray, unsigned short xseed[3])
+// t_vec	radiance(t_ray *ray, unsigned short rt->xseed[3])
 // {
 // 	t_ray		*r;
 // 	t_vec		p;
@@ -99,7 +99,7 @@
 // 		if (4u < (unsigned int)r->depth)
 // 		{
 // 			prob = max(&shape->f);
-// 			if (erand48(xseed) >= prob)
+// 			if (erand48(rt->xseed) >= prob)
 // 				return (l1);
 // 			f = ndivide(&f, prob);
 // 		}
@@ -118,7 +118,7 @@
 // 		{
 // 			// ft_printf("hit REFRACTION\n");
 // 			r->o = p;
-// 			r->d = specular_transmit(&r->d, &n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, xseed);
+// 			r->d = specular_transmit(&r->d, &n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, rt->xseed);
 // 			f = nmulti(&f, pr);
 // 			r->tmin = EPSILON_SPHERE;
 // 			r->tmax = INFINITY;
@@ -137,7 +137,7 @@
 // 			u = cross(&u, &w);
 // 			norm(&u);
 // 			v = cross(&w, &u);
-// 			sample = cosine_weighted_sample(erand48(xseed), erand48(xseed));
+// 			sample = cosine_weighted_sample(erand48(rt->xseed), erand48(rt->xseed));
 // 			x = nmulti(&u, sample.x);
 // 			y = nmulti(&v, sample.y);
 // 			z = nmulti(&w, sample.z);
@@ -154,48 +154,51 @@
 // 	ft_printf("### YOOOOOOO ###\n");
 // }
 
-void		radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3], t_vec *dest)
+void		radiance(t_scene *scene, t_ray *ray, t_algo *rt)
 {
-	t_ray *r = ray;
-	t_vec p;
-	t_vec n;
-	t_vec l;
-	t_vec u;
-	t_vec v;
-	t_vec sample_d;
-	t_vec _x;
-	t_vec _y;
-	t_vec _z;
-	t_vec _xy;
-	t_vec d;
-	t_vec w;
-	t_vec L = { 0.0, 0.0, 0.0 };
-	t_vec F = { 1.0, 1.0, 1.0 };
+	t_ray		*r;
+	size_t		id;
+	double		pr;
+	t_vec		p;
+	t_vec		n;
+	t_vec		l;
+	t_vec		u;
+	t_vec		v;
+	t_vec		sample_d;
+	t_vec		_x;
+	t_vec		_y;
+	t_vec		_z;
+	t_vec		_xy;
+	t_vec		d;
+	t_vec		w;
+	t_vec		blank;
+	t_vec		roll;
+	t_sphere	*shape;
 
+	r = ray;
+	vec(0.0, 0.0, 0.0, &blank);
+	vec(1.0, 1.0, 1.0, &roll);
 	while (TRUE) {
-		size_t id;
 		if (!intersect(r, &id, scene)) {
-			veccp(&L, dest);
+			veccp(&blank, &rt->l_t);
 			return ;
 		}
-
-		t_sphere *shape = &scene->obj[id];
+		shape = &scene->obj[id];
 		eval(r, r->tmax, &p);
 		sub(&p, &shape->p, &n);
 		norm(&n);
-
-		multi(&F, &shape->e, &l);
-		sum_(&L, &l);
-		multi_(&F, &shape->f);
+		multiplication(&roll, &shape->e, &l);
+		sum_(&blank, &l);
+		multi_(&roll, &shape->f);
 
 		// Russian roulette
 		if (4u < (unsigned int)r->depth) {
 			double continue_probability = max(&shape->f);
-			if (erand48(xseed) >= continue_probability) {
-				veccp(&L, dest);
+			if (erand48(rt->xseed) >= continue_probability) {
+				veccp(&blank, &rt->l_t);
 				return ;
 			}
-			ndivide_(&F, continue_probability);
+			ndivide_(&roll, continue_probability);
 		}
 
 		// Next path segment
@@ -212,9 +215,8 @@ void		radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3], t_vec *dest)
 
 		case REFR: {
 			r->o = p;
-			double pr;
-			r->d = specular_transmit(&r->d, &n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, xseed);
-			nmulti_(&F, pr);
+			r->d = specular_transmit(&r->d, &n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, rt->xseed);
+			nmulti_(&roll, pr);
 			r->tmin = EPSILON_SPHERE;
 			r->tmax = INFINITY;
 			r->depth++;
@@ -236,7 +238,7 @@ void		radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3], t_vec *dest)
 			cross(&_u, &w, &u);
 			norm(&u);
 			cross(&w, &u, &v);
-			cosine_weighted_sample(erand48(xseed), erand48(xseed), &sample_d);
+			cosine_weighted_sample(erand48(rt->xseed), erand48(rt->xseed), &sample_d);
 			nmulti(&u, sample_d.x, &_x);
 			nmulti(&v, sample_d.y, &_y);
 			nmulti(&w, sample_d.z, &_z);

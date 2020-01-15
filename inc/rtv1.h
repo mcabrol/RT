@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/13 18:00:58 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/15 17:22:58 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,13 @@
 # include "../libft/inc/libft.h"
 # include "../minilibx/mlx.h"
 
-# if defined(__APPLE__) || defined(__MACOSX)
-	# include <OpenCL/cl.h>
-# else
-	# include <CL/cl.h>
-#endif
+# include <OpenCL/OpenCL.h>
 
 # include <math.h>
 # include <stdint.h>
 
-# define HEIGHT					500u
-# define WIDTH					500u
+# define HEIGHT					400u
+# define WIDTH					400u
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
@@ -141,7 +137,6 @@ typedef struct		s_win
 */
 
 void 				rtv1(t_win *win);
-void 				init_seed(t_algo *rt);
 
 
 /*
@@ -169,8 +164,7 @@ void				printv(t_vec *v);
 **	radiance.c
 */
 
-void				radiance(t_scene *scene, t_ray *ray, unsigned short xseed[3],
-	 				t_vec *dest);
+void				radiance(t_scene *scene, t_ray *ray, t_algo *rt);
 
 /*
 **	sphere.c
@@ -197,7 +191,7 @@ BOOL 				intersect_sphere(t_sphere *sphere, t_ray *ray);
 
 void				sum(t_vec *v1, t_vec *v2, t_vec *dest);
 void				sub(t_vec *v1, t_vec *v2, t_vec *dest);
-void				multi(t_vec *v1, t_vec *v2, t_vec *dest);
+void				multiplication(t_vec *v1, t_vec *v2, t_vec *dest);
 void				nmulti(t_vec *v1, double n, t_vec *dest);
 void				divide(t_vec *v1, t_vec *v2, t_vec *dest);
 void				ndivide(t_vec *v1, double n, t_vec *dest);
@@ -228,6 +222,12 @@ double				schlick_reflectance(double n1, double n2, double c);
 void				cosine_weighted_sample(double u1, double u2, t_vec *dest);
 
 /*
+**	sample.c
+*/
+
+void				init_seed(t_algo *rt);
+
+/*
 **	specular.c
 */
 
@@ -244,5 +244,11 @@ void				erase(t_win *win);
 int					expose_hook(t_win *win);
 void				put_pixel(t_win *win, int x, int y, t_vec *v);
 int					key(int keycode, t_win *win);
+
+/*
+**	opencl.c
+*/
+
+void 				opencl(void);
 
 #endif

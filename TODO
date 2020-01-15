@@ -1,4 +1,4 @@
-| Algorithm | Object Manager | Math | Kernel
+| Algorithm | Object Manager | Math | Graphic Interaction | Kernel
 
 Algorithm
 	rtv1.c
@@ -20,6 +20,13 @@ Object Manager
 	scene.c
 	camera.c
 
+Graphic Interaction
+	mlx.c
+	gui.c
+	text.c
+	hook.c
+
 Kernel
 	kernel.cl	-> produit scalaire, division vecteur... etc
 	kernel.c	-> #include "kernel.cl.h" prepare et execute sur GPU
+				   organiser le code en array GPU friendly

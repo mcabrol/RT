@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/13 20:09:35 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/15 17:24:12 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		main(int ac, char **av)
 {
 	t_win			win;
 
+	opencl();
 	win.ac = ac;
 	win.av = av;
 	window(&win);
@@ -36,7 +37,7 @@ void 		rtv1(t_win *win)
 	rt.y = 0u;
 	while ((unsigned int)rt.y < HEIGHT)
 	{
-		ft_dprintf(2, "\rRendering (%u spp) %5.2f%%", scene.samples * 4, 100.0 * rt.y / (HEIGHT - 1));
+		ft_dprintf(2, "\r%u samples %5.2f%%", scene.samples * 4, 100.0 * rt.y / (HEIGHT - 1));
 		init_seed(&rt);
 		rt.x = 0u;
 		while ((unsigned int)rt.x < WIDTH)
@@ -54,7 +55,7 @@ void 		rtv1(t_win *win)
 					{
 						prepare_ray(&rt, &target, &cam);
 						ray(target.eye_t, *norm(&target.d), EPSILON_SPHERE, INFINITY, 0, &ry);
-						radiance(&scene, &ry, rt.xseed, &rt.l_t);
+						radiance(&scene, &ry, &rt);
 						ndivide(&rt.l_t, (double)scene.samples, &rt.l);
 						sum_(&rt.m, &rt.l);
 						(rt.s)++;
@@ -72,11 +73,4 @@ void 		rtv1(t_win *win)
 		(rt.y)++;
 	}
 	free(rt.ls);
-}
-
-void		init_seed(t_algo *rt)
-{
-	rt->xseed[0] = 0;
-	rt->xseed[1] = 0;
-	rt->xseed[2] = (unsigned short)(rt->y * rt->y * rt->y);
 }
