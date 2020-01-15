@@ -102,7 +102,7 @@ typedef struct		s_cam
 typedef struct 		s_scene
 {
 	int				samples;
-	t_sphere		obj[11];
+	t_sphere		obj[9];
 }					t_scene;
 
 typedef struct		s_point
@@ -124,6 +124,23 @@ typedef struct		s_win
 	int				size_line;
 	int				endian;
 }					t_win;
+
+typedef struct			s_opencl
+{
+	cl_context			context;
+	cl_command_queue	queue;
+	cl_platform_id		platform_id;
+	cl_uint				ret_num_platforms;
+	cl_uint				ret_num_devices;
+	cl_device_id		device_id;
+	cl_program			program;
+	cl_kernel			kernel;
+	cl_mem				scene;
+	cl_mem				objects;
+	cl_mem				lights;
+	cl_mem				camera;
+	cl_mem				img_data;
+}						t_opencl;
 
 /*
 **	rtv1.c
