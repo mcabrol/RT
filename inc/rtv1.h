@@ -110,7 +110,7 @@ typedef struct		s_cam
 typedef struct 		s_scene
 {
 	int				samples;
-	t_sphere		obj[11];
+	t_sphere		obj[12];
 }					t_scene;
 
 typedef struct		s_point

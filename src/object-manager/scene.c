@@ -90,6 +90,11 @@ void 	init_scene(t_scene *scene, t_win *win)
 					vecp(12.0, 12.0, 12.0),
 					vecp(0.75, 0.25, 0.25),
 					DIFF); // Sphere diff
+	scene->obj[11] = sphere(20.0,
+					vecp(50.0, 130.0, 30.0),
+					vecp(18.0, 18.0, 18.0),
+					vecp(0.75, 0.25, 0.25),
+					DIFF); // Mirror red
 	// scene->obj[10] = sphere(600,
 	// 				vecp(50.0, 681.6 - .27, 50.0),
 	// 				vecp(12.0, 12.0, 12.0),
