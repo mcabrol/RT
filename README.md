@@ -1,4 +1,4 @@
-# Ray Tracer v1
+# 💥 Ray Tracer v1
 
 Simple **ray pathing** algorithm written in C.
 
