@@ -11,38 +11,30 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#define SIZE 3000
+#define FILE_SIZE 200
 
-char 	**kernel_dot(void)
+void 	kernel_src(t_opencl *cl)
 {
-	char **k;
+	int fd;
+	int rt;
 
-	k = NULL;
-	k[0] = "__kernel void		dot(global t_vec *v1, global t_vec *v2, global double *out)\n";
-	k[0] = "{																			   \n";
-	k[1] = "	size_t i = 0;															   \n";
-	k[2] = "	i = get_global_id(0);													   \n";
-	k[3] = "	out[i] = (v1[i]->x + v2[i]->x * v1[i]->y + v2[i]->y * v1[i]->z + v2[i]->z) \n";
-	k[4] = "}																			   \n";
-	return (k);
+	cl->kernel_src = NULL;
+	fd = open("/Users/Martin/Documents/rtv1/src/kernel/kernel.cl", O_RDONLY);
+	rt = read(fd, cl->kernel_src, FILE_SIZE);
+	ft_dprintf(1, "%d> %d> %s\n", fd, rt, cl->kernel_src);
+	close(fd);
 }
 
 void 	opencl(void)
 {
-	char *k[5];
-	dispatch_queue_t queue;
-	// cl_program kernelProgram;
-	char name[128];
-	// double *mem_in;
-	// double *mem_out;
+	t_opencl			cl;
+	dispatch_queue_t 	queue;
+	// cl_program 		kernelProgram;
+	char 				name[128];
+	// double 			*mem_in;
+	// double 			*mem_out;
 
-	k[0] = "__kernel void		dot(global t_vec *v1, global t_vec *v2, global double *out)\n";
-	k[0] = "{																			   \n";
-	k[1] = "	size_t i = 0;															   \n";
-	k[2] = "	i = get_global_id(0);													   \n";
-	k[3] = "	out[i] = (v1[i]->x + v2[i]->x * v1[i]->y + v2[i]->y * v1[i]->z + v2[i]->z) \n";
-	k[4] = "}																			   \n";
-
+	kernel_src(&cl);
 	queue = gcl_create_dispatch_queue(CL_DEVICE_TYPE_GPU, NULL);
 	if (queue == NULL) {
 		ft_dprintf(2, "openCL GPU desactivé -> utilise openCL CPU\n");

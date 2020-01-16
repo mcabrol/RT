@@ -20,6 +20,7 @@
 
 # include <math.h>
 # include <stdint.h>
+# include <fcntl.h>
 
 # define HEIGHT					400u
 # define WIDTH					400u
@@ -109,7 +110,7 @@ typedef struct		s_cam
 typedef struct 		s_scene
 {
 	int				samples;
-	t_sphere		obj[9];
+	t_sphere		obj[11];
 }					t_scene;
 
 typedef struct		s_point
@@ -142,6 +143,7 @@ typedef struct			s_opencl
 	cl_device_id		device_id;
 	cl_program			program;
 	cl_kernel			kernel;
+	char				*kernel_src;
 	cl_mem				scene;
 	cl_mem				objects;
 	cl_mem				lights;
