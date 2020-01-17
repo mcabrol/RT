@@ -32,7 +32,7 @@ _file.c_ todo
 
 # Options
 
-| Select object |
+| Select object |               |               |
 | ------------- | -------------   -------------
 | x             | y             | z             |
 
