@@ -32,6 +32,14 @@ _file.c_ todo
 
 # Options
 
-| ---------------------- | ------------- | ------------- |
-| x                      | y             | z             |
-| move on the **x** axis | move on the **y** axis | move on the **z** axis |
+## Object
+
+When your click on object:
+
+**g**: for moving
+
+or **g** and
+
+| x                      | y                      | z                      |
+| ---------------------- | ---------------------- | ---------------------- |
+| for move object on the **x** axis | for move object on the **y** axis | for move object on the **z** axis |
