@@ -6,22 +6,11 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/15 17:24:12 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/17 21:46:14 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-int		main(int ac, char **av)
-{
-	t_win			win;
-
-	opencl();
-	win.ac = ac;
-	win.av = av;
-	window(&win);
-	return (0);
-}
 
 void 		rtv1(t_win *win)
 {
@@ -31,7 +20,6 @@ void 		rtv1(t_win *win)
 	t_target		target;
 	t_algo			rt;
 
-	init_scene(&scene, win);
 	init_cam(&cam);
 	rt.ls = (t_vec *)malloc(WIDTH * HEIGHT * sizeof(t_vec));
 	rt.y = 0u;
