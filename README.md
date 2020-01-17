@@ -1,6 +1,6 @@
 # 💥 Ray Tracer v1
 
-Simple **ray pathing** algorithm written in C for _os X_ distribution.
+Simple **ray pathing** algorithm written in C for _OS X_ distribution.
 
 ## Install
 
