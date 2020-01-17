@@ -36,17 +36,17 @@ _file.c_ todo
 
 When your **right-click** on object:
 
-**g**: for moving hasardly
+**g**: for hasardly moving
 
-| x                      | y                      | z                      |
+| g -> x                 | g -> y                 | g -> z                 |
 | ---------------------- | ---------------------- | ---------------------- |
 | move on the **x** axis | move on the **y** axis | move on the **z** axis |
 
 **s** for scaling
 
-**r** for rotation
+**r** for hasardly moving
 
-| x                        | y                        | z                        |
+| r -> x                   | r -> y                   | r -> z                   |
 | ------------------------ | ------------------------ | ------------------------ |
 | rotate on the **x** axis | rotate on the **y** axis | rotate on the **z** axis |
 
