@@ -38,7 +38,7 @@ When your **right-click** on object:
 
 **g**: for hasardly moving
 
-| g -> x                 | g -> y                 | g -> z                 |
+| g > x                  | g > y                  | g > z                  |
 | ---------------------- | ---------------------- | ---------------------- |
 | move on the **x** axis | move on the **y** axis | move on the **z** axis |
 
@@ -46,7 +46,7 @@ When your **right-click** on object:
 
 **r** for hasardly moving
 
-| r -> x                   | r -> y                   | r -> z                   |
+| r > x                    | r > y                    | r > z                    |
 | ------------------------ | ------------------------ | ------------------------ |
 | rotate on the **x** axis | rotate on the **y** axis | rotate on the **z** axis |
 
