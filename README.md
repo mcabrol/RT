@@ -34,12 +34,26 @@ _file.c_ todo
 
 ## Object
 
-When your click on object:
+When your **right-click** on object:
 
-**g**: for moving
-
-or **g** and
+**g**: for moving hasardly
 
 | x                      | y                      | z                      |
 | ---------------------- | ---------------------- | ---------------------- |
-| for move object on the **x** axis | for move object on the **y** axis | for move object on the **z** axis |
+| move on the **x** axis | move on the **y** axis | move on the **z** axis |
+
+**s** for scaling
+
+**r** for rotation
+
+| x                        | y                        | z                        |
+| ------------------------ | ------------------------ | ------------------------ |
+| rotate on the **x** axis | rotate on the **y** axis | rotate on the **z** axis |
+
+## Camera
+
+**middle-click** for rotate scene
+
+**scroll** for zoom into scene
+
+
