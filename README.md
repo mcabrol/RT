@@ -1,6 +1,6 @@
 # 💥 Ray Tracer v1
 
-Simple **ray pathing** algorithm written in C.
+Simple **ray pathing** algorithm written in C for _os X_ distribution.
 
 ## Install
 
@@ -29,3 +29,9 @@ _file.c_ todo
 | rtv1.c        | _cylinder.c_      | sample.c     |           |            |
 | specular.c    | _cube.c_          |              |           |            |
 | srand48.c     | _plan.c_          |              |           |            |
+
+# Options
+
+| Select object |
+| ------------- |
+| x  |  y  | z  |
