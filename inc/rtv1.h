@@ -22,8 +22,8 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# define HEIGHT					400u
-# define WIDTH					400u
+# define HEIGHT					920u
+# define WIDTH					1080u
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1

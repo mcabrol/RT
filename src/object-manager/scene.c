@@ -76,17 +76,17 @@ void 	init_scene(t_scene *scene, t_win *win)
 					vecp(0.75, 0.55, 0.15),
 					DIFF); // Sphere diff
 	scene->obj[8] = sphere(10.00,
-					vecp(-20.0, 16.5, 80.0),
+					vecp(-50.0, 16.5, 80.0),
 					vecp(12.0, 12.0, 12.0),
 					vecp(0.75, 0.55, 0.15),
 					DIFF); // Sphere diff
 	scene->obj[9] = sphere(10.00,
-					vecp(135.0, 16.5, 20.0),
+					vecp(150.0, 16.5, 20.0),
 					vecp(12.0, 12.0, 12.0),
 					vecp(0.75, 0.25, 0.25),
 					DIFF); // Sphere diff
 	scene->obj[10] = sphere(10.00,
-					vecp(-35.0, 16.5, 20.0),
+					vecp(-50.0, 16.5, 20.0),
 					vecp(12.0, 12.0, 12.0),
 					vecp(0.75, 0.25, 0.25),
 					DIFF); // Sphere diff
