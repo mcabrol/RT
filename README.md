@@ -32,7 +32,7 @@ _file.c_ todo
 
 # Options
 
-| Select object |               |               |
-| ------------- | ------------- | ------------- |
-| x             | y             | z             |
-
+| Select object          |               |               |
+| ---------------------- | ------------- | ------------- |
+| x                      | y             | z             |
+| move on the **x** axis | move on the **y** axis | move on the **z** axis |
