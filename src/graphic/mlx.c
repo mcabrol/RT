@@ -6,63 +6,63 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 22:07:15 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/20 14:43:07 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		init_window(char **av, t_win *win)
+int		init_window(char **av, t_rtv1 *rtv1)
 {
-	win->mlx_ptr = mlx_init();
-	if (!(win->win_ptr = mlx_new_window(win->mlx_ptr, WIDTH, HEIGHT, av[1])))
+	rtv1->win.mlx_ptr = mlx_init();
+	if (!(rtv1->win.win_ptr = mlx_new_window(rtv1->win.mlx_ptr, WIDTH, HEIGHT, av[0])))
 		return (EXIT_FAILURE);
-	win->img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
-	win->data_ptr = mlx_get_data_addr(win->img_ptr,
-			&(win->bits_per_pixel),
-			&(win->size_line),
-			&(win->endian));
-	mlx_hook(win->win_ptr, 2, 1L << 2, key, win);
-	mlx_expose_hook(win->win_ptr, expose_hook, win);
-	mlx_loop(win->mlx_ptr);
+	rtv1->win.img_ptr = mlx_new_image(rtv1->win.mlx_ptr, WIDTH, HEIGHT);
+	rtv1->win.data_ptr = mlx_get_data_addr(rtv1->win.img_ptr,
+			&(rtv1->win.bits_per_pixel),
+			&(rtv1->win.size_line),
+			&(rtv1->win.endian));
+	mlx_hook(rtv1->win.win_ptr, 2, 1L << 2, key, rtv1);
+	mlx_expose_hook(rtv1->win.win_ptr, expose_hook, rtv1);
+	mlx_loop(rtv1->win.mlx_ptr);
 	return (EXIT_SUCCESS);
 }
 
-int		key(int keycode, t_win *win)
+int		key(int keycode, t_rtv1 *rtv1)
 {
 	if (keycode == 53)
 	{
-		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
+		mlx_destroy_window(rtv1->win.mlx_ptr, rtv1->win.win_ptr);
 		exit(0);
 	}
-	erase(win);
+	erase(rtv1);
 	return (EXIT_SUCCESS);
 }
 
-void	erase(t_win *win)
+void	erase(t_rtv1 *rtv1)
 {
-	ft_bzero(win->data_ptr, HEIGHT * WIDTH * 4);
-	expose_hook(win);
+	ft_bzero(rtv1->win.data_ptr, HEIGHT * WIDTH * 4);
+	expose_hook(rtv1);
 }
 
-int		expose_hook(t_win *win)
+int		expose_hook(t_rtv1 *rtv1)
 {
-	rtv1(win);
-	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
+	rt(rtv1);
+	mlx_put_image_to_window(rtv1->win.mlx_ptr, rtv1->win.win_ptr, rtv1->win.img_ptr, 0, 0);
 	return (EXIT_SUCCESS);
 }
 
-void	put_pixel(t_win *win, int x, int y, t_vec *v)
+void	put_pixel(t_rtv1 *rtv1, int x, int y, t_vec *v)
 {
 	unsigned int i;
 
-	i = (int)(x * 4 + win->size_line * y);
+	i = (int)(x * 4 + rtv1->win.size_line * y);
 	if ((unsigned int)x < WIDTH && (unsigned int)x > 0)
 		if ((unsigned int)y < HEIGHT && (unsigned int)y > 0)
 		{
 			//ft_printf("%d %d %d\n", to_byte(v->x, GAMMA), to_byte(v->y, GAMMA), to_byte(v->z, GAMMA));
-			win->data_ptr[i] = (char)to_byte(v->x, GAMMA);
-			win->data_ptr[i + 1] = (char)to_byte(v->y, GAMMA);
-			win->data_ptr[i + 2] = (char)to_byte(v->z, GAMMA);
+			rtv1->win.data_ptr[i] = (char)to_byte(v->x, GAMMA);
+			rtv1->win.data_ptr[i + 1] = (char)to_byte(v->y, GAMMA);
+			rtv1->win.data_ptr[i + 2] = (char)to_byte(v->z, GAMMA);
 		}
 }

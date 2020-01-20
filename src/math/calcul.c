@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:55:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/15 09:44:22 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/20 19:02:06 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 double		dot(t_vec *v1, t_vec *v2)
 {
 	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+}
+
+double		ndot(t_vec *v1, double n)
+{
+	return (v1->x * n + v1->y * n + v1->z * n);
 }
 
 double		max(t_vec *v)
@@ -50,6 +55,11 @@ void		clamp3(t_vec *v, double low, double high, t_vec *dest)
 uint8_t		to_byte(double x, double gamma)
 {
 	return ((uint8_t)clamp(255.0 * pow(x, 1.0 / gamma), 0.0, 255.0));
+}
+
+double		to_vec(int x, double gamma)
+{
+	return (pow((double)x, 1.0 / gamma) / 255.0);
 }
 
 double		reflectance(double n1, double n2)

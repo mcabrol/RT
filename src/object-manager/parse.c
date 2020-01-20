@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/10 22:49:10 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/01/20 17:25:01 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/01/20 19:09:38 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_sphere		sphere(double r, t_vec p, t_vec e, t_vec f, int reflect)
+int		parse(char **av, t_rtv1 *rtv1)
 {
-	t_sphere sphere;
+	int fd;
 
-	sphere.r = r;
-	sphere.p = p;
-	sphere.e = e;
-	sphere.f = f;
-	sphere.reflect = reflect;
-	return (sphere);
+	fd = open(av[1], O_RDONLY);
+	
+	return (EXIT_SUCCESS);
 }

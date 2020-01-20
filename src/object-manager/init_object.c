@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   srand48.c                                          :+:      :+:    :+:   */
+/*   init_object.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 09:31:16 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/20 14:37:09 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/01/20 15:21:35 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		init_seed(t_rtv1 *rtv1)
+t_obj		obj(double r, t_vec p, t_vec e, t_vec f, int reflect)
 {
-	rtv1->rt.xseed[0] = 0;
-	rtv1->rt.xseed[1] = 0;
-	rtv1->rt.xseed[2] = (unsigned short)(rtv1->rt.y * rtv1->rt.y * rtv1->rt.y);
+	t_obj obj;
+
+	obj.r = r;
+	obj.p = p;
+	obj.e = e;
+	obj.f = f;
+	obj.reflect = reflect;
+	return (obj);
 }

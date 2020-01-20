@@ -6,97 +6,97 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 22:11:32 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/20 15:25:24 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	init_scene(char **av, t_scene *scene)
+void 	init_scene(char **av, t_rtv1 *rtv1)
 {
-	scene->samples = 8;
+	rtv1->scene.samples = 10;
 	ft_printf("av[1] = %s\n", av[1]);
-	// scene->obj[0] = sphere(1e5,
+	// rtv1->scene.obj[0] = obj(1e5,
 	// 				vecp(1e5 + 1.0, 40.8, 81.6),
 	// 				vecp(0.0, 0.0, 0.0),
 	// 				vecp(0.75, 0.25, 0.25),
 	// 				DIFF); // Left
-	// scene->obj[1] = sphere(1e5,
+	// rtv1->scene.obj[1] = obj(1e5,
 	// 				vecp(-1e5 + 99.0, 40.8, 81.6),
 	// 				vecp(0.0, 0.0, 0.0),
 	// 				vecp(0.25, 0.25, 0.75),
 	// 				DIFF); // Right
-	scene->obj[0] = sphere(1e5,
+	rtv1->scene.obj[0] = obj(1e5,
 					vecp(50.0, 40.8, 1e5),
 					vecp(0.0, 0.0, 0.0),
 					vecp(0.75, 0.75, 0.75),
 					DIFF); //Back
-	scene->obj[1] = sphere(1e5,
+	rtv1->scene.obj[1] = obj(1e5,
 					vecp(50.0, 40.8, -1e5 + 170.0),
 					vecp(0.0, 0.0, 0.0),
 					vecp(0.0, 0.0, 0.0),
 					DIFF); //Front
-	scene->obj[2] = sphere(1e5,
+	rtv1->scene.obj[2] = obj(1e5,
 					vecp(50.0, 1e5, 81.6),
 					vecp(0.0, 0.0, 0.0),
 					vecp(0.75, 0.75, 0.75),
 					DIFF); //Bottom
-	// scene->obj[5] = sphere(1e5,
+	// rtv1->scene.obj[5] = obj(1e5,
 	// 				vecp(50.0, -1e5 + 81.6, 81.6),
 	// 				vecp(0.0, 0.0, 0.0),
 	// 				vecp(0.75, 0.75, 0.75),
 	// 				DIFF); //Top
-	scene->obj[3] = sphere(16.5,
+	rtv1->scene.obj[3] = obj(16.5,
 					vecp(27.0, 16.5, 47.0),
 					vecp(0.0, 0.0, 0.0),
 					vecp(0.999, 0.999, 0.999),
 					SPEC); //Mirror
-	// scene->obj[7] = sphere(16.5,
+	// rtv1->scene.obj[7] = obj(16.5,
 	// 				vecp(73.0, 16.5, 78.0),
 	// 				vecp(0.0, 0.0, 0.0),
 	// 				vecp(0.999, 0.999, 0.999),
 	// 				REFR); // Glass
-	scene->obj[4] = sphere(16.5,
+	rtv1->scene.obj[4] = obj(16.5,
 					vecp(73.0, 16.5, 78.0),
 					vecp(0.0, 0.0, 0.0),
 					vecp(0.75, 0.90, 0.12),
-					DIFF); // Sphere diff
-	scene->obj[5] = sphere(16.5,
+					DIFF); // obj diff
+	rtv1->scene.obj[5] = obj(16.5,
 					vecp(50.0, 56.0, 30.0),
 					vecp(0.0, 0.0, 0.0),
 					vecp(0.25, 0.25, 0.75),
 					DIFF); // Mirror red
-	scene->obj[6] = sphere(5.00,
+	rtv1->scene.obj[6] = obj(5.00,
 					vecp(80.0, 16.5, 20.0),
 					vecp(12.0, 12.0, 12.0),
 					vecp(0.75, 0.75, 0.25),
-					DIFF); // Sphere diff
-	scene->obj[7] = sphere(10.00,
+					DIFF); // obj diff
+	rtv1->scene.obj[7] = obj(10.00,
 					vecp(130.0, 16.5, 80.0),
 					vecp(12.0, 12.0, 12.0),
 					vecp(0.75, 0.55, 0.15),
-					DIFF); // Sphere diff
-	scene->obj[8] = sphere(10.00,
+					DIFF); // obj diff
+	rtv1->scene.obj[8] = obj(10.00,
 					vecp(-50.0, 16.5, 80.0),
 					vecp(12.0, 12.0, 12.0),
 					vecp(0.75, 0.55, 0.15),
-					DIFF); // Sphere diff
-	scene->obj[9] = sphere(10.00,
+					DIFF); // obj diff
+	rtv1->scene.obj[9] = obj(10.00,
 					vecp(150.0, 16.5, 20.0),
 					vecp(12.0, 12.0, 12.0),
 					vecp(0.75, 0.25, 0.25),
-					DIFF); // Sphere diff
-	scene->obj[10] = sphere(10.00,
+					DIFF); // obj diff
+	rtv1->scene.obj[10] = obj(10.00,
 					vecp(-50.0, 16.5, 20.0),
 					vecp(12.0, 12.0, 12.0),
 					vecp(0.75, 0.25, 0.25),
-					DIFF); // Sphere diff
-	scene->obj[11] = sphere(20.0,
+					DIFF); // obj diff
+	rtv1->scene.obj[11] = obj(20.0,
 					vecp(50.0, 130.0, 30.0),
 					vecp(18.0, 18.0, 18.0),
 					vecp(0.75, 0.25, 0.25),
 					DIFF); // Mirror red
-	// scene->obj[10] = sphere(600,
+	// rtv1->scene.obj[10] = obj(600,
 	// 				vecp(50.0, 681.6 - .27, 50.0),
 	// 				vecp(12.0, 12.0, 12.0),
 	// 				vecp(0.0, 0.0, 0.0),

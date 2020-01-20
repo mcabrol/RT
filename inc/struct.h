@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 21:28:39 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/20 15:35:59 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,20 @@ typedef struct			s_ray
 	int					depth;
 }						t_ray;
 
-typedef struct			s_sphere
+typedef struct			s_obj
 {
+	int					type;		// object type
 	double				r;			// radius
 	t_vec				p;			// position
 	t_vec				e;			// emission
 	t_vec				f;			// reflection
 	int					reflect;	// material type
-}						t_sphere;
+}						t_obj;
 
 typedef struct			s_cam
 {
-	double				fov;
-	t_vec				gaze;
+	double				fov;		// Field-of-view
+	t_vec				gaze;		// Gaze angle
 	t_vec				eye;
 	t_vec				cx;
 	t_vec				cy;
@@ -75,7 +76,8 @@ typedef struct			s_cam
 typedef struct 			s_scene
 {
 	int					samples;
-	t_sphere			obj[12];
+	t_cam				*camera;
+	t_obj				obj[12];
 }						t_scene;
 
 typedef struct			s_point
@@ -115,5 +117,14 @@ typedef struct			s_opencl
 	cl_mem				camera;
 	cl_mem				img_data;
 }						t_opencl;
+
+typedef struct			s_rtv1
+{
+	t_win				win;
+	t_cam				camera;
+	t_scene				scene;
+	t_algo				rt;
+	t_opencl 			kernel;
+}						t_rtv1;
 
 #endif

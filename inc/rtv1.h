@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 22:22:41 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/20 18:34:08 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
+
+# define PLAN 					0
+# define SPHERE					1
+# define CUBE					2
+# define CYLINDER				3
+# define CONE					4
+# define TONUS 					5
 
 # define DIFF					0
 # define SPEC					1
@@ -53,7 +60,7 @@ typedef int 		BOOL;
 **	rtv1.c
 */
 
-void 			rtv1(t_win *win);
+void 			rt(t_rtv1 *rtv1);
 int				check(int ac, char **av);
 int				error(char *strerror);
 
@@ -74,8 +81,8 @@ double 			norm_s(t_vec *v);
 
 void			ray(t_vec o, t_vec d, double tmin, double tmax, int depth,
 				t_ray *dest);
-void 			prepare_ray(t_algo *rt, t_target *target, t_cam *cam);
-void			init_cam(t_cam *cam);
+void 			prepare_ray(t_rtv1 *rtv1, t_target *target);
+void			init_cam(t_rtv1 *rtv1);
 void			eval(t_ray *r, double t, t_vec *dest);
 void			printr(t_ray *r);
 void			printv(t_vec *v);
@@ -84,26 +91,29 @@ void			printv(t_vec *v);
 **	radiance.c
 */
 
-void			radiance(t_scene *scene, t_ray *ray, t_algo *rt);
+void            radiance(t_rtv1 *rtv1, t_ray *ray);
 
 /*
 **	sphere.c
 */
 
-t_sphere		sphere(double r, t_vec p, t_vec e, t_vec f, int reflect);
+t_obj			obj(double r, t_vec p, t_vec e, t_vec f, int reflect);
+
 
 /*
 **	sphere.c
 */
 
-void 			init_scene(char **av, t_scene *scene);
+void 			init_scene(char **av, t_rtv1 *rtv1);
 
 /*
 **	intersect.c
 */
 
 BOOL 			intersect(t_ray *ray, size_t *id, t_scene *scene);
-BOOL 			intersect_sphere(t_sphere *sphere, t_ray *ray);
+BOOL 			intersect_sphere(t_obj *sphere, t_ray *ray);
+BOOL			interset_plan(t_obj *plan, t_ray *ray);
+
 
 /*
 **	operator.c
@@ -122,16 +132,21 @@ void			sum_(t_vec *v1, t_vec *v2);
 void			multi_(t_vec *v1, t_vec *v2);
 void			nmulti_(t_vec *v1, double n);
 void			ndivide_(t_vec *v1, double n);
+void			norm_(t_vec *v, t_vec *dest);
+
+
 
 /*
 **	calcul.c
 */
 
 double			dot(t_vec *v1, t_vec *v2);
+double			ndot(t_vec *v1, double n);
 double			max(t_vec *v);
 double			clamp(double x, double low, double high);
 void			clamp3(t_vec *v, double low, double high, t_vec *dest);
 uint8_t			to_byte(double x, double gamma);
+double			to_vec(int x, double gamma);
 double			reflectance(double n1, double n2);
 double			schlick_reflectance(double n1, double n2, double c);
 
@@ -145,7 +160,7 @@ void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 **	sample.c
 */
 
-void			init_seed(t_algo *rt);
+void			init_seed(t_rtv1 *rtv1);
 
 /*
 **	specular.c
@@ -159,11 +174,11 @@ t_vec			specular_transmit(t_vec *d, t_vec *n, double n_out,
 **	mlx.c
 */
 
-int				init_window(char **av, t_win *win);
-void			erase(t_win *win);
-int				expose_hook(t_win *win);
-void			put_pixel(t_win *win, int x, int y, t_vec *v);
-int				key(int keycode, t_win *win);
+int				init_window(char **av, t_rtv1 *rtv1);
+void			erase(t_rtv1 *rtv1);
+int				expose_hook(t_rtv1 *rtv1);
+void			put_pixel(t_rtv1 *rtv1, int x, int y, t_vec *v);
+int				key(int keycode, t_rtv1 *rtv1);
 
 /*
 **	opencl.c

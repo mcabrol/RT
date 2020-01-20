@@ -6,59 +6,56 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 21:46:14 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/20 16:16:34 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 		rtv1(t_win *win)
+void 		rt(t_rtv1 *rtv1)
 {
-	t_ray			ry;
-	t_cam 			cam;
-	t_scene 		scene;
 	t_target		target;
-	t_algo			rt;
+	t_ray			ry;
 
-	init_cam(&cam);
-	rt.ls = (t_vec *)malloc(WIDTH * HEIGHT * sizeof(t_vec));
-	rt.y = 0u;
-	while ((unsigned int)rt.y < HEIGHT)
+	init_cam(rtv1);
+	rtv1->rt.ls = (t_vec *)malloc(WIDTH * HEIGHT * sizeof(t_vec));
+	rtv1->rt.y = 0u;
+	while ((unsigned int)rtv1->rt.y < HEIGHT)
 	{
-		ft_dprintf(2, "\r%u samples %5.2f%%", scene.samples * 4, 100.0 * rt.y / (HEIGHT - 1));
-		init_seed(&rt);
-		rt.x = 0u;
-		while ((unsigned int)rt.x < WIDTH)
+		ft_dprintf(2, "\r%u samples %5.2f%%", rtv1->scene.samples, 100.0 * rtv1->rt.y / (HEIGHT - 1));
+		init_seed(rtv1);
+		rtv1->rt.x = 0u;
+		while ((unsigned int)rtv1->rt.x < WIDTH)
 		{
-			rt.sy = 0u;
-			rt.i = (HEIGHT - 1u - rt.y) * WIDTH + rt.x;
-			while (rt.sy < 2u)
+			rtv1->rt.sy = 0u;
+			rtv1->rt.i = (HEIGHT - 1u - rtv1->rt.y) * WIDTH + rtv1->rt.x;
+			while (rtv1->rt.sy < 2u)
 			{
-				rt.sx = 0u;
-				while (rt.sx < 2u)
+				rtv1->rt.sx = 0u;
+				while (rtv1->rt.sx < 2u)
 				{
-					vec(0.0, 0.0, 0.0, &rt.m);
-					rt.s = 0u;
-					while (rt.s < scene.samples)
+					vec(0.0, 0.0, 0.0, &rtv1->rt.m);
+					rtv1->rt.s = 0u;
+					while (rtv1->rt.s < rtv1->scene.samples)
 					{
-						prepare_ray(&rt, &target, &cam);
+						prepare_ray(rtv1, &target);
 						ray(target.eye_t, *norm(&target.d), EPSILON_SPHERE, INFINITY, 0, &ry);
-						radiance(&scene, &ry, &rt);
-						ndivide(&rt.l_t, (double)scene.samples, &rt.l);
-						sum_(&rt.m, &rt.l);
-						(rt.s)++;
+						radiance(rtv1, &ry);
+						ndivide(&rtv1->rt.l_t, (double)rtv1->scene.samples, &rtv1->rt.l);
+						sum_(&rtv1->rt.m, &rtv1->rt.l);
+						(rtv1->rt.s)++;
 					}
-					clamp3(&rt.m, 0.0, 1.0, &rt.l_t);
-					nmulti(&rt.l_t, 0.25, &rt.l);
-					sum_(&rt.ls[rt.i], &rt.l);
-					put_pixel(win, (WIDTH - rt.x), (HEIGHT - rt.y), &rt.ls[rt.i]);
-					(rt.sx)++;
+					clamp3(&rtv1->rt.m, 0.0, 1.0, &rtv1->rt.l_t);
+					nmulti(&rtv1->rt.l_t, 0.25, &rtv1->rt.l);
+					sum_(&rtv1->rt.ls[rtv1->rt.i], &rtv1->rt.l);
+					put_pixel(rtv1, (WIDTH - rtv1->rt.x), (HEIGHT - rtv1->rt.y), &rtv1->rt.ls[rtv1->rt.i]);
+					(rtv1->rt.sx)++;
 				}
-				(rt.sy)++;
+				(rtv1->rt.sy)++;
 			}
-			(rt.x)++;
+			(rtv1->rt.x)++;
 		}
-		(rt.y)++;
+		(rtv1->rt.y)++;
 	}
-	free(rt.ls);
+	free(rtv1->rt.ls);
 }
