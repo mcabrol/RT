@@ -12,9 +12,9 @@
 
 #include "rtv1.h"
 
-void		init_seed(t_rtv1 *rtv1)
+void		init_seed(t_algo *rt)
 {
-	rtv1->rt.xseed[0] = 0;
-	rtv1->rt.xseed[1] = 0;
-	rtv1->rt.xseed[2] = (unsigned short)(rtv1->rt.y * rtv1->rt.y * rtv1->rt.y);
+	rt->xseed[0] = 0;
+	rt->xseed[1] = 0;
+	rt->xseed[2] = (unsigned short)(rt->y * rt->y * rt->y);
 }

@@ -15,6 +15,7 @@
 BOOL 	intersect(t_ray *ray, size_t *id, t_scene *scene)
 {
 	BOOL		hit;
+	int 		type;
 	size_t		n;
 	size_t		i;
 
@@ -23,8 +24,8 @@ BOOL 	intersect(t_ray *ray, size_t *id, t_scene *scene)
 	i = 0u;
 	while (i < n)
 	{
-		if (intersect_sphere(&scene->obj[i], ray)
-		|| interset_plan(&scene->obj[i], ray))
+		type = scene->obj[i].t;
+		if (type == SPHERE ? intersect_sphere(&scene->obj[i], ray) : intersect_plan(&scene->obj[i], ray))
 		{
 			hit = TRUE;
 			*id = i;
@@ -64,20 +65,20 @@ BOOL 	intersect_sphere(t_obj *sphere, t_ray *ray)
 	return (FALSE);
 }
 
-BOOL	interset_plan(t_obj *plan, t_ray *ray)
+BOOL	intersect_plan(t_obj *plan, t_ray *ray)
 {
-	t_vec op;
-	t_vec norm;
-	double denom;
-	double dist;
+	t_vec n;
+	t_vec pl;
+	float t;
+	float denom;
 
-	norm_(&plan->p, &norm);
-	denom = dot(&norm, &ray->d);
-	if (fabs(denom) > EPSILON_SPHERE)
+	norm_(&plan->p, &n);
+	denom = dot(&n, &ray->d);
+	if (denom > 1e-4)
 	{
-		sub(&plan->p, &ray->o, &op);
-		dist = dot(&op, &plan->p) / denom;
-		return ((dist >= 0) ? TRUE : FALSE);
+		sub(&plan->p, &ray->o, &pl);
+		t = dot(&pl, &n) / denom;
+		return (t >= 0 ? TRUE : FALSE);
 	}
 	return (FALSE);
 }

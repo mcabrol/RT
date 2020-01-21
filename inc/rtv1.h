@@ -21,10 +21,13 @@
 # include <math.h>
 # include <stdint.h>
 # include <fcntl.h>
+# include <pthread.h>
 # include "struct.h"
 
-# define HEIGHT					300u
-# define WIDTH					300u
+# define THREAD 				32
+
+# define HEIGHT					400u
+# define WIDTH					400u
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
@@ -63,6 +66,8 @@ typedef int 		BOOL;
 void 			rt(t_rtv1 *rtv1);
 int				check(int ac, char **av);
 int				error(char *strerror);
+void 			thrtv1(t_rtv1 *rtv1, int x, int max);
+
 
 
 /*
@@ -81,7 +86,7 @@ double 			norm_s(t_vec *v);
 
 void			ray(t_vec o, t_vec d, double tmin, double tmax, int depth,
 				t_ray *dest);
-void 			prepare_ray(t_rtv1 *rtv1, t_target *target);
+void 			prepare_ray(t_rtv1 *rtv1, t_algo *rt, t_target *target);
 void			init_cam(t_rtv1 *rtv1);
 void			eval(t_ray *r, double t, t_vec *dest);
 void			printr(t_ray *r);
@@ -91,14 +96,13 @@ void			printv(t_vec *v);
 **	radiance.c
 */
 
-void            radiance(t_rtv1 *rtv1, t_ray *ray);
+void			radiance(t_rtv1 *rtv1, t_algo *rt, t_ray *ray);
 
 /*
 **	sphere.c
 */
 
-t_obj			obj(double r, t_vec p, t_vec e, t_vec f, int reflect);
-
+t_obj			obj(int t, double r, t_vec p, t_vec e, t_vec f, int reflect);
 
 /*
 **	sphere.c
@@ -112,7 +116,7 @@ void 			init_scene(char **av, t_rtv1 *rtv1);
 
 BOOL 			intersect(t_ray *ray, size_t *id, t_scene *scene);
 BOOL 			intersect_sphere(t_obj *sphere, t_ray *ray);
-BOOL			interset_plan(t_obj *plan, t_ray *ray);
+BOOL			intersect_plan(t_obj *plan, t_ray *ray);
 
 
 /*
@@ -160,7 +164,7 @@ void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 **	sample.c
 */
 
-void			init_seed(t_rtv1 *rtv1);
+void			init_seed(t_algo *rt);
 
 /*
 **	specular.c
@@ -185,5 +189,13 @@ int				key(int keycode, t_rtv1 *rtv1);
 */
 
 void 			init_opencl(t_opencl *cl);
+
+/*
+**	multithread.c
+*/
+
+int				multithread(t_rtv1 *rtv1);
+void			*dispatcher(void *var);
+
 
 #endif

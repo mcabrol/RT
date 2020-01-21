@@ -47,7 +47,8 @@ void	erase(t_rtv1 *rtv1)
 
 int		expose_hook(t_rtv1 *rtv1)
 {
-	rt(rtv1);
+	// rt(rtv1);
+	multithread(rtv1);
 	mlx_put_image_to_window(rtv1->win.mlx_ptr, rtv1->win.win_ptr, rtv1->win.img_ptr, 0, 0);
 	return (EXIT_SUCCESS);
 }

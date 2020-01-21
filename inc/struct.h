@@ -56,11 +56,15 @@ typedef struct			s_ray
 
 typedef struct			s_obj
 {
-	int					type;		// object type
+	int					t;			// object type
 	double				r;			// radius
 	t_vec				p;			// position
 	t_vec				e;			// emission
+	t_vec				n;			// normal
+	t_vec				c;			// center
 	t_vec				f;			// reflection
+	t_vec				a;			// axis
+	float				an;			// angle
 	int					reflect;	// material type
 }						t_obj;
 
@@ -77,7 +81,7 @@ typedef struct 			s_scene
 {
 	int					samples;
 	t_cam				*camera;
-	t_obj				obj[12];
+	t_obj				obj[18];
 }						t_scene;
 
 typedef struct			s_point
@@ -126,5 +130,13 @@ typedef struct			s_rtv1
 	t_algo				rt;
 	t_opencl 			kernel;
 }						t_rtv1;
+
+typedef struct			s_thread
+{
+	pthread_t			thread;
+	unsigned int 		x;
+	unsigned int 		max;
+	t_rtv1				*rtv1;
+}						t_thread;
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-void		radiance(t_rtv1 *rtv1, t_ray *ray)
+void		radiance(t_rtv1 *rtv1, t_algo *rt, t_ray *ray)
 {
 	t_ray		*r;
 	size_t		id;
@@ -38,7 +38,7 @@ void		radiance(t_rtv1 *rtv1, t_ray *ray)
 	vec(1.0, 1.0, 1.0, &roll);
 	while (TRUE) {
 		if (!intersect(r, &id, &rtv1->scene)) {
-			veccp(&blank, &rtv1->rt.l_t);
+			veccp(&blank, &rt->l_t);
 			return ;
 		}
 		shape = &rtv1->scene.obj[id];
@@ -52,8 +52,8 @@ void		radiance(t_rtv1 *rtv1, t_ray *ray)
 		// Russian roulette
 		if (4u < (unsigned int)r->depth) {
 			double continue_probability = max(&shape->f);
-			if (erand48(rtv1->rt.xseed) >= continue_probability) {
-				veccp(&blank, &rtv1->rt.l_t);
+			if (erand48(rt->xseed) >= continue_probability) {
+				veccp(&blank, &rt->l_t);
 				return ;
 			}
 			ndivide_(&roll, continue_probability);
@@ -73,7 +73,7 @@ void		radiance(t_rtv1 *rtv1, t_ray *ray)
 
 		case REFR: {
 			r->o = p;
-			r->d = specular_transmit(&r->d, &n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, rtv1->rt.xseed);
+			r->d = specular_transmit(&r->d, &n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, rt->xseed);
 			nmulti_(&roll, pr);
 			r->tmin = EPSILON_SPHERE;
 			r->tmax = INFINITY;
@@ -96,7 +96,7 @@ void		radiance(t_rtv1 *rtv1, t_ray *ray)
 			cross(&_u, &w, &u);
 			norm(&u);
 			cross(&w, &u, &v);
-			cosine_weighted_sample(erand48(rtv1->rt.xseed), erand48(rtv1->rt.xseed), &sample_d);
+			cosine_weighted_sample(erand48(rt->xseed), erand48(rt->xseed), &sample_d);
 			nmulti(&u, sample_d.x, &_x);
 			nmulti(&v, sample_d.y, &_y);
 			nmulti(&w, sample_d.z, &_z);

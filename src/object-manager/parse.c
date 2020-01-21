@@ -12,11 +12,11 @@
 
 #include "rtv1.h"
 
-int		parse(char **av, t_rtv1 *rtv1)
-{
-	int fd;
-
-	fd = open(av[1], O_RDONLY);
-	
-	return (EXIT_SUCCESS);
-}
+// int		parse(char **av, t_rtv1 *rtv1)
+// {
+// 	int fd;
+//
+// 	fd = open(av[1], O_RDONLY);
+//
+// 	return (EXIT_SUCCESS);
+// }
