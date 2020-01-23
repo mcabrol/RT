@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/20 15:25:24 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/22 16:06:29 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void 	init_scene(char **av, t_rtv1 *rtv1)
 {
-	rtv1->scene.samples = 12;
+	rtv1->scene.samples = 200;
 	ft_printf("av[1] = %s\n", av[1]);
 	rtv1->scene.obj[0] = obj(SPHERE, 1e5,
 					vecp(1e5 + 1.0, 40.8, 81.6),
@@ -82,10 +82,10 @@ void 	init_scene(char **av, t_rtv1 *rtv1)
 					vecp(0.75, 0.25, 0.25),
 					DIFF); // obj diff
 	rtv1->scene.obj[13] = obj(PLAN, 0.0,
-					vecp(40.0, 5.0, 40.0),
-					vecp(0.1, 0.1, 0.1),
+					vecp(10.0, 0.0, 40.0),
+					vecp(10.0, 10.0, 10.0),
 					vecp(0.40, 0.75, 0.75),
-					DIFFUSE); // plan
+					DIFF); // plan
 	rtv1->scene.obj[14] = obj(SPHERE, 10.00,
 					vecp(-50.0, 16.5, 20.0),
 					vecp(12.0, 12.0, 12.0),

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/20 15:35:59 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/22 14:02:46 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct			s_opencl
 
 typedef struct			s_rtv1
 {
+	char				*program;
 	t_win				win;
 	t_cam				camera;
 	t_scene				scene;

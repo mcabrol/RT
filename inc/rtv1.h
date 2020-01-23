@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/20 18:34:08 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/22 15:50:58 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "struct.h"
 
 # define THREAD 				32
+# define OPT					9
 
 # define HEIGHT					400u
 # define WIDTH					400u
@@ -42,6 +43,16 @@
 # define DIFF					0
 # define SPEC					1
 # define REFR					2
+
+# define TYPE					0
+# define RADIUS 				1
+# define X						2
+# define Y						3
+# define Z						4
+# define LIGHT 					5
+# define R						6
+# define G						7
+# define B						8
 
 # define REFRACTIVE_INDEX_OUT	1.0
 # define REFRACTIVE_INDEX_IN	1.5
@@ -197,5 +208,12 @@ void 			init_opencl(t_opencl *cl);
 int				multithread(t_rtv1 *rtv1);
 void			*dispatcher(void *var);
 
+/*
+**	parse.c
+*/
+
+char 			**file(char **av);
+int				parse(char **av, t_rtv1 *rtv1);
+int				size(char **av);
 
 #endif

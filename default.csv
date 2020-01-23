@@ -1,2 +1,2 @@
-Type,Radius,X,Y,Z,Light,R,G,B
+TYPE,RADIUS,X,Y,Z,LIGHT,R,G,B
 SPHERE,1e5,50,40.8,1e5,0,0.75,0.75,0.75
