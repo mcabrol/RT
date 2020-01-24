@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/23 16:41:25 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/24 14:39:03 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct 			s_scene
 {
 	int					samples;
 	t_cam				*camera;
-	t_obj				obj[8];
+	t_obj				obj[11];
 }						t_scene;
 
 typedef struct			s_point

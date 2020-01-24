@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/22 15:50:58 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/24 17:10:48 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ void			*dispatcher(void *var);
 
 char 			**file(char **av);
 int				parse(char **av, t_rtv1 *rtv1);
+int				data(char *line);
 int				size(char **av);
 
 #endif
