@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/24 14:39:03 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/28 18:56:32 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct			s_vec
 
 typedef struct			s_algo
 {
+	t_vec				ray[2];
 	int					x;			// Screen x counter
 	int					y;			// Screen y counter
 	int					s;			// Sample counter
@@ -49,6 +50,7 @@ typedef struct			s_ray
 {
 	t_vec				o; 			// Origin
 	t_vec				d;			// Direction
+	double				distance; 	// Distance
 	double				tmin;
 	double				tmax;
 	int					depth;
@@ -59,6 +61,7 @@ typedef struct			s_obj
 	int					t;			// object type
 	double				r;			// radius
 	t_vec				p;			// position
+	t_vec 				d;			// direction
 	t_vec				e;			// emission
 	t_vec				n;			// normal
 	t_vec				c;			// center
@@ -77,11 +80,28 @@ typedef struct			s_cam
 	t_vec				cy;
 }						t_cam;
 
+typedef struct			s_radiance
+{
+	t_obj				elena;
+	t_vec				x;
+	t_vec				n;
+	t_vec				nl;
+	t_vec				f;
+	t_vec				res;
+	double				distance;
+	double				type_inter;
+	double				p;
+	double				pdf;
+	int					id;
+	int					l_id;
+	int					neg;
+}						t_radiance;
+
 typedef struct 			s_scene
 {
 	int					samples;
 	t_cam				*camera;
-	t_obj				obj[11];
+	t_obj				obj[3];
 }						t_scene;
 
 typedef struct			s_point

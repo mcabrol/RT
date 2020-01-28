@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/24 17:10:48 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/28 18:54:46 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@
 # include <pthread.h>
 # include "struct.h"
 
-# define THREAD 				32
+# define THREAD 				16
 # define OPT					9
 
-# define HEIGHT					400u
-# define WIDTH					400u
+# define T_MIN					0.01
+# define T_MAX 					1e20
+
+# define HEIGHT					300u
+# define WIDTH					300u
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
@@ -40,9 +43,9 @@
 # define CONE					4
 # define TONUS 					5
 
-# define DIFF					0
-# define SPEC					1
-# define REFR					2
+# define DIFFUSE				0
+# define SPECULAR				1
+# define REFRACT				2
 
 # define TYPE					0
 # define RADIUS 				1
@@ -79,8 +82,6 @@ int				check(int ac, char **av);
 int				error(char *strerror);
 void 			thrtv1(t_rtv1 *rtv1, int x, int max);
 
-
-
 /*
 **	vector.c
 */
@@ -113,7 +114,7 @@ void			radiance(t_rtv1 *rtv1, t_algo *rt, t_ray *ray);
 **	sphere.c
 */
 
-t_obj			obj(int t, double r, t_vec p, t_vec e, t_vec f, int reflect);
+t_obj			obj(int t, double r, t_vec p, t_vec d, t_vec e, t_vec f, int reflect);
 
 /*
 **	sphere.c
@@ -125,10 +126,9 @@ void 			init_scene(char **av, t_rtv1 *rtv1);
 **	intersect.c
 */
 
-BOOL 			intersect(t_ray *ray, size_t *id, t_scene *scene);
-BOOL 			intersect_sphere(t_obj *sphere, t_ray *ray);
-BOOL			intersect_plan(t_obj *plan, t_ray *ray);
-
+void 			intersect(t_ray *ray, t_radiance *radiance, int *id, t_scene *scene);
+double 			intersect_sphere(t_obj *sphere, t_ray *ray);
+double			intersect_plan(t_obj *plan, t_ray *ray);
 
 /*
 **	operator.c
@@ -149,8 +149,6 @@ void			nmulti_(t_vec *v1, double n);
 void			ndivide_(t_vec *v1, double n);
 void			norm_(t_vec *v, t_vec *dest);
 
-
-
 /*
 **	calcul.c
 */
@@ -164,6 +162,14 @@ uint8_t			to_byte(double x, double gamma);
 double			to_vec(int x, double gamma);
 double			reflectance(double n1, double n2);
 double			schlick_reflectance(double n1, double n2, double c);
+double			quadratic(double k1, double k2, double k3);
+
+/*
+**	normal.c
+*/
+
+void			plane_normal(t_ray *r, t_radiance *radiance, t_obj *obj);
+void			sphere_normal(t_ray *r, t_radiance *radiance, t_obj *obj);
 
 /*
 **	sample.c
@@ -181,6 +187,7 @@ void			init_seed(t_algo *rt);
 **	specular.c
 */
 
+t_vec			hemisphere_ray(t_radiance *radiance, t_vec w, unsigned short seed[3], float alpha);
 void			specular_reflect(t_vec *d, t_vec *n, t_vec *dest);
 t_vec			specular_transmit(t_vec *d, t_vec *n, double n_out,
 				double n_in, double *pr, unsigned short xseed[3]);

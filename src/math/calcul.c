@@ -6,11 +6,31 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:55:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/20 19:02:06 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/28 14:15:52 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+double		quadratic(double k1, double k2, double k3)
+{
+	double	des;
+	double	t1;
+	double	t2;
+	double	t_min;
+
+	t_min = T_MAX;
+	if ((des = k2 * k2 - 4 * k1 * k3) >= 0)
+	{
+		t1 = (-k2 + sqrt(des)) / (2 * k1);
+		t2 = (-k2 - sqrt(des)) / (2 * k1);
+		if (t1 >= T_MIN && t1 < T_MAX && t1 < t_min)
+			t_min = t1;
+		if (t2 >= T_MIN && t2 < T_MAX && t2 < t_min)
+			t_min = t2;
+	}
+	return (t_min);
+}
 
 double		dot(t_vec *v1, t_vec *v2)
 {

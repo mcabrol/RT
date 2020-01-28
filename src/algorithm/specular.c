@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/13 18:01:40 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/28 18:53:15 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,49 @@ t_vec		specular_transmit(t_vec *d, t_vec *n, double n_out, double n_in, double *
 		*pr = (tr / p_tr);
 		return (d_tr);
 	}
+}
+
+t_vec	hemisphere_ray(t_radiance *radiance, t_vec w, unsigned short seed, float alpha)
+{
+	double	phi;
+	double	sint;
+	double	cost;
+	t_vec	u;
+	t_vec	v;
+	t_vec 	d;
+	t_vec 	z;
+	t_vec	tmp;
+	t_vec	a;
+	t_vec	b;
+	t_vec	c;
+	t_vec	ep;
+	t_vec	res;
+
+	z = vecp(0.00424, 1, 0.00764);
+	phi = 2.0 * M_PI_F * rand_ri(&seed);
+	cost = pow((1.0 - rand_ri(&seed)), 1.0 / (alpha + 1.0));
+	sint = sqrt(1.0 - cost * cost);
+	cross(&z, &w, &tmp);
+	u = *norm(&tmp);
+	cross(&w, &u, &v);
+	nmulti(&u, sint, &a);
+	nmulti_(&a, cos(phi));
+	nmulti(&v, sin(phi), &b);
+	nmulti_(&b, sint);
+	nmulti(&w, cost, &c);
+	sum(&a, &b, &ep);
+	sum(&ep, &c, &res);
+	d = *norm(&res);
+	if (dot(radiance->n, &d) < 0.0)
+	{
+		nmulti(&u, -(sint * cos(phi)), &a);
+		nmulti_(&a, cos(phi));
+		nmulti(&v, sin(phi), &b);
+		nmulti_(&b, sint);
+		nmulti(&w, cost, &c);
+		sub(&a, &b, &ep);
+		sum(&ep, &c, &res);
+		d = *norm(&res);
+	}
+	return (d);
 }
