@@ -6,54 +6,52 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/28 17:07:54 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/29 19:42:02 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	intersect(t_ray *ray, t_radiance *radiance, int *id, t_scene *scene)
+void		intersect(t_vec *origin, t_vec *direction, t_radiance *radiance, t_render *render)
 {
-	BOOL		hit;
 	double		distance;
-	size_t		n;
-	size_t		i;
+	int			n;
+	int			i;
 
-	hit = FALSE;
-	n = sizeof(scene->obj) / sizeof(t_obj);
-	i = 0u;
-	*id = -1;
+	n = sizeof(obj) / sizeof(t_object);
+	i = 0;
+	radiance->id = -1;
 	while (i < n)
 	{
-		if (scene->obj[i].t == SPHERE)
-			distance = intersect_sphere(&scene->obj[i], ray);
-		else if (scene->obj[i].t == PLAN)
-			distance = intersect_plan(&scene->obj[i], ray);
+		if (render->object[i].type == SPHERE)
+			distance = intersect_sphere(&render->object[i], origin, direction);
+		else if (render->object[i].type == PLANE)
+			distance = intersect_plane(&render->object[i], origin, direction);
 		if (distance >= T_MIN && distance < radiance->distance)
 		{
 			radiance->distance = distance;
-			*id = i;
+			radiance->id = i;
 		}
 		i++;
 	}
 }
 
-double 	intersect_sphere(t_obj *sphere, t_ray *ray)
+double		intersect_sphere(t_object *obj, t_vec *origin, t_vec *direction)
 {
 	t_vec	oc;
 	t_vec	k;
 	double	tmin;
 
-	sub(&ray->o, &sphere->p, &oc);
-	k.x = dot(&ray->d, &ray->d);
-	k.y = 2 * dot(&oc, &ray->d);
-	k.z = dot(&oc, &oc) - sphere->r * sphere->r;
+	sub(origin, &obj->position, &oc);
+	k.x = dot(direction, direction);
+	k.y = 2 * dot(&oc, direction);
+	k.z = dot(&oc, &oc) - obj->radius * obj->radius;
 	// Need to check if neg
 	tmin = quadratic(k.x, k.y, k.z);
 	return (tmin);
 }
 
-double	intersect_plan(t_obj *plan, t_ray *ray)
+double		intersect_plane(t_object *obj, t_vec *origin, t_vec *direction)
 {
 	// ov		Direction
 	// point	Origin
@@ -63,12 +61,12 @@ double	intersect_plan(t_obj *plan, t_ray *ray)
 	double		koef;
 	double		t;
 
-	sub(&ray->o, &plan->p, &oc);
+	sub(origin, &obj->position, &oc);
 	koef = 1;
 	t = T_MAX;
-	if ((k1 = dot(&ray->d, &plan->d)) == 0)
+	if ((k1 = dot(direction, &obj->direction)) == 0)
 		return (t);
-	k2 = dot(&oc, &plan->d);
+	k2 = dot(&oc, &obj->direction);
 	if (k1 == k2)
 		koef = -1;
 	t = -k2 / k1 * koef;

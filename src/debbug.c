@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_object.c                                      :+:      :+:    :+:   */
+/*   debbug.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 20:07:05 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/01/29 15:58:19 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/01/29 20:10:52 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	obj(int t, double r, t_vec p, t_vec d, t_vec e, t_vec f, int reflect)
+void 	loading_text(t_render *render)
 {
-	t_object obj;
-
-	obj.type = t;
-	obj.radius = r;
-	obj.position = p;
-	obj.direction = d;
-	obj.emission = e;
-	obj.reflection = f;
-	obj.reflect = reflect;
-	return (obj);
+	ft_printf("\r%u samples %5.1f%%",
+	render->samples, 100.0 * render->y / (HEIGHT - 1));
 }

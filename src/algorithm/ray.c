@@ -6,64 +6,84 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/20 14:56:31 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/29 20:40:33 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	ray(t_vec o, t_vec d, double tmin, double tmax, int depth, t_ray *dest)
+void	init_camera(t_render *render)
 {
-	dest->o = o;
-	dest->d = d;
-	dest->tmin = tmin;
-	dest->tmax = tmax;
-	dest->depth = depth;
+	t_vec	direction;
+	double	half_width;
+	double	half_height;
+	double	aspect_ratio;
+	t_vec	c1;
+	t_vec	c2;
+	t_vec	coef;
+	t_vec	d1;
+	t_vec	d2;
+	t_vec	t;
+	t_vec	v1;
+	t_vec	v2;
+
+	vec(0.0, 0.0, 800.0, &render->camera.position);
+	vec(0.0, 0.0, -1.0, &render->camera.direction);
+	norm(&render->camera.direction);
+
+	half_width = tan(0.261799f);
+	aspect_ratio = HEIGHT / WIDTH;
+	half_height = aspect_ratio * half_width;
+	vec(0.0, 0.0, 0.0, &render->cx);
+	vec(0.0, 1.0, 0.0, &direction);
+	cross(&render->camera.direction, &direction, &c1);
+	cross(&render->cx, &render->camera.direction, &c2);
+	render->cx = *norm(&c1);
+	render->cy = *norm(&c2);
+	minus_(&render->cy);
+
+	sub(&render->camera.position, &render->camera.direction, &coef);
+	nmulti(&render->cy, half_height, &d1);
+	nmulti(&render->cx, half_width, &d2);
+	sub(&coef, &d1, &t);
+	sub(&t, &d2, &render->bottom_left);
+
+	nmulti(&render->cx, 2 * half_width, &v1);
+	nmulti(&render->cy, 2 * half_height, &v2);
+
+	ndivide(&v1, WIDTH, &render->cx);
+	ndivide(&v2, HEIGHT, &render->cy);
 }
 
-void 	prepare_ray(t_rtv1 *rtv1, t_algo *rt, t_target *target, unsigned int seed)
+void 	prepare_ray(t_render *render, unsigned int seed)
 {
-	double u1;
-	double u2;
-	double dx;
-	double dy;
+	double d1;
+	double d2;
+	t_vec m1;
+	t_vec m2;
+	t_vec p1;
+	t_vec p2;
 
-	u1 = 2 * rand_ri(&seed);
-	u2 = 2 * rand_ri(&seed);
-	dx = (u1 < 1) ? sqrt(u1) - 1 : 1 - sqrt(2 - u1);
-	dy = (u2 < 1) ? sqrt(u2) - 1 : 1 - sqrt(2 - u2);
-	nmulti(&rtv1->camera.cx, (((rt->sx + 0.5 + dx) / 2.0 + rt->x) / WIDTH - 0.5), &target->a);
-	nmulti(&rtv1->camera.cy, (((rt->sy + 0.5 + dy) / 2.0 + rt->y) / HEIGHT - 0.5), &target->b);
-	sum(&target->a, &target->b, &target->ab);
-	sum(&target->ab, &rtv1->camera.gaze, &target->d);
-	nmulti(&target->d, 130.0, &target->d_t);
-	sum(&rtv1->camera.eye, &target->d_t, &target->eye_t);
+	render->rand = 2 * rand_ri(&seed);
+	render->dx = render->rand < 1 ? (sqrt(render->rand) - 1) : (1 - sqrt(2 - render->rand));
+	render->rand = 2 * rand_ri(&seed);
+	render->dy = render->rand < 1 ? (sqrt(render->rand) - 1) : (1 - sqrt(2 - render->rand));
+
+	d1 = render->x + render->dx;
+	d2 = render->y + render->dy;
+	nmulti(&render->cx, d1, &m1);
+	nmulti(&render->cy, d2, &m2);
+	sum(&m1, &m2, &p1);
+	sum(&render->bottom_left, &p1, &p2);
+	sub(&p2, &render->camera.position, &render->ray[1]);
+	norm(&render->ray[1]);
+	render->ray[0] = render->camera.position;
 }
 
-void	init_cam(t_rtv1 *rtv1)
-{
-	vec(50, 52, 295.6, &rtv1->camera.eye);
-	vec(0, -0.042612, -1, &rtv1->camera.gaze);
-	norm(&rtv1->camera.gaze);
-	rtv1->camera.fov = 0.5135;
-	vec(WIDTH * rtv1->camera.fov / HEIGHT, 0.0, 0.0, &rtv1->camera.cx);
-	cross(&rtv1->camera.cx, &rtv1->camera.gaze, &rtv1->camera.cy);
-	norm(&rtv1->camera.cy);
-	nmulti_(&rtv1->camera.cy, rtv1->camera.fov);
-}
-
-void	eval(t_ray *r, double t, t_vec *dest)
-{
-	t_vec dt;
-
-	nmulti(&r->d, t, &dt);
-	sum(&r->o, &dt, dest);
-}
-
-void	printr(t_ray *r)
+void	printr(t_vec origin, t_vec direction)
 {
 	ft_printf("o: [%f %f %f]\nd: [%f %f %f]\n",
-	r->o.x, r->o.y, r->o.z, r->d.x, r->d.y, r->d.z);
+	origin.x, origin.y, origin.z, direction.x, direction.y, direction.z);
 }
 
 void	printv(t_vec *v)

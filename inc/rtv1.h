@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/28 18:54:46 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/29 20:09:37 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@
 # define T_MIN					0.01
 # define T_MAX 					1e20
 
-# define HEIGHT					500u
-# define WIDTH					500u
+# define HEIGHT					600
+# define WIDTH					600
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
 
-# define PLAN 					0
+# define PLANE 					0
 # define SPHERE					1
 # define CUBE					2
 # define CYLINDER				3
@@ -63,24 +63,16 @@
 # define EPSILON_SPHERE			1e-4
 # define GAMMA 					2.2
 
-# define RAND48_SEED_0			(0x330e)
-# define RAND48_SEED_1			(0xabcd)
-# define RAND48_SEED_2			(0x1234)
-# define RAND48_MULT_0			(0xe66d)
-# define RAND48_MULT_1			(0xdeec)
-# define RAND48_MULT_2			(0x0005)
-# define RAND48_ADD   			(0x000b)
-
 typedef int 		BOOL;
 
 /*
 **	rtv1.c
 */
 
-void 			rt(t_rtv1 *rtv1);
+void 			rtv1(t_render *render);
 int				check(int ac, char **av);
 int				error(char *strerror);
-void 			thrtv1(t_rtv1 *rtv1, int x, int max);
+// void 			thrtv1(t_render *rtv1, int x, int max);
 
 /*
 **	vector.c
@@ -96,39 +88,36 @@ double 			norm_s(t_vec *v);
 **	ray.c
 */
 
-void			ray(t_vec o, t_vec d, double tmin, double tmax, int depth,
-				t_ray *dest);
-void 			prepare_ray(t_rtv1 *rtv1, t_algo *rt, t_target *target, unsigned int seed);
-void			init_cam(t_rtv1 *rtv1);
-void			eval(t_ray *r, double t, t_vec *dest);
-void			printr(t_ray *r);
+void			prepare_ray(t_render *render, unsigned int seed);
+void			init_camera(t_render *render);
+void			printr(t_vec origin, t_vec direction);
 void			printv(t_vec *v);
 
 /*
 **	radiance.c
 */
 
-t_vec			radiance(t_rtv1 *rtv1, t_ray *ray, unsigned int seed);
+t_vec			radiance(t_render *render, t_vec origin, t_vec direction, unsigned int seed);
 
 /*
 **	sphere.c
 */
 
-t_obj			obj(int t, double r, t_vec p, t_vec d, t_vec e, t_vec f, int reflect);
+t_object		obj(int t, double r, t_vec p, t_vec d, t_vec e, t_vec f, int reflect);
 
 /*
-**	sphere.c
+**	scene.c
 */
 
-void 			init_scene(char **av, t_rtv1 *rtv1);
+void 			init_scene(t_render *render);
 
 /*
 **	intersect.c
 */
 
-void 			intersect(t_ray *ray, t_radiance *radiance, int *id, t_scene *scene);
-double 			intersect_sphere(t_obj *sphere, t_ray *ray);
-double			intersect_plan(t_obj *plan, t_ray *ray);
+void 			intersect(t_vec *origin, t_vec *direction, t_radiance *radiance, t_render *render);
+double 			intersect_sphere(t_object *obj, t_vec *origin, t_vec *directon);
+double			intersect_plane(t_object *obj, t_vec *origin, t_vec *directon);
 
 /*
 **	operator.c
@@ -136,12 +125,13 @@ double			intersect_plan(t_obj *plan, t_ray *ray);
 
 void			sum(t_vec *v1, t_vec *v2, t_vec *dest);
 void			sub(t_vec *v1, t_vec *v2, t_vec *dest);
-void			multiplication(t_vec *v1, t_vec *v2, t_vec *dest);
+void			multi(t_vec *v1, t_vec *v2, t_vec *dest);
 void			nmulti(t_vec *v1, double n, t_vec *dest);
 void			divide(t_vec *v1, t_vec *v2, t_vec *dest);
 void			ndivide(t_vec *v1, double n, t_vec *dest);
 void			divide3(double a, t_vec *v, t_vec *dest);
 void			minus(t_vec *v, t_vec *dest);
+void			minus_(t_vec *v);
 void			cross(t_vec *v1, t_vec *v2, t_vec *dest);
 void			sum_(t_vec *v1, t_vec *v2);
 void			multi_(t_vec *v1, t_vec *v2);
@@ -168,8 +158,8 @@ double			quadratic(double k1, double k2, double k3);
 **	normal.c
 */
 
-void			plane_normal(t_ray *r, t_radiance *radiance, t_obj *obj);
-void			sphere_normal(t_ray *r, t_radiance *radiance, t_obj *obj);
+void			plane_normal(t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj);
+void			sphere_normal( t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj);
 
 /*
 **	sample.c
@@ -178,33 +168,31 @@ void			sphere_normal(t_ray *r, t_radiance *radiance, t_obj *obj);
 void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 
 /*
-**	sample.c
+**	srand48.c
 */
 
-void			init_seed(t_algo *rt);
 double			rand_ri(unsigned int *seed);
 unsigned int	generate(unsigned int x);
 unsigned int	generate3(unsigned int x, unsigned int y, unsigned int z);
-
 
 /*
 **	specular.c
 */
 
 t_vec			hemisphere_ray(t_radiance *radiance, t_vec w, unsigned int seed, float alpha);
-void			specular_reflect(t_vec *d, t_vec *n, t_vec *dest);
-t_vec			specular_transmit(t_vec *d, t_vec *n, double n_out,
-				double n_in, double *pr, unsigned short xseed[3]);
+// void			specular_reflect(t_vec *d, t_vec *n, t_vec *dest);
+// t_vec			specular_transmit(t_vec *d, t_vec *n, double n_out,
+// 				double n_in, double *pr, unsigned short xseed[3]);
 
 /*
 **	mlx.c
 */
 
-int				init_window(char **av, t_rtv1 *rtv1);
-void			erase(t_rtv1 *rtv1);
-int				expose_hook(t_rtv1 *rtv1);
-void			put_pixel(t_rtv1 *rtv1, int x, int y, t_vec *v);
-int				key(int keycode, t_rtv1 *rtv1);
+int				init_window(char **av, t_render *rtv1);
+void			erase(t_render *rtv1);
+int				expose_hook(t_render *rtv1);
+void			put_pixel(t_render *rtv1, int x, int y, t_vec *v);
+int				key(int keycode, t_render *rtv1);
 
 /*
 **	opencl.c
@@ -216,7 +204,7 @@ void 			init_opencl(t_opencl *cl);
 **	multithread.c
 */
 
-int				multithread(t_rtv1 *rtv1);
+int				multithread(t_render *rtv1);
 void			*dispatcher(void *var);
 
 /*
@@ -224,8 +212,14 @@ void			*dispatcher(void *var);
 */
 
 char 			**file(char **av);
-int				parse(char **av, t_rtv1 *rtv1);
+int				parse(char **av, t_render *rtv1);
 int				data(char *line);
 int				size(char **av);
+
+/*
+**	debbug.c
+*/
+
+void 			loading_text(t_render *render);
 
 #endif

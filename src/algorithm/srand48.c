@@ -6,18 +6,11 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 09:31:16 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/20 14:37:09 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/29 20:00:14 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-void		init_seed(t_algo *rt)
-{
-	rt->xseed[0] = 0;
-	rt->xseed[1] = 0;
-	rt->xseed[2] = (unsigned short)(rt->y * rt->y * rt->y);
-}
 
 double		rand_ri(unsigned int *seed)
 {

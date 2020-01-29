@@ -6,29 +6,15 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/28 18:56:07 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/29 20:15:10 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vec		radiance(t_rtv1 *rtv1, t_ray *ray, unsigned int seed)
+t_vec		radiance(t_render *render, t_vec origin, t_vec direction, unsigned int seed)
 {
 	t_radiance	radiance;
-	t_ray		*r;
-	int			id;
-	// double		pr;
-	// t_vec		p;
-	// t_vec		n;
-	// t_vec		u;
-	// t_vec		v;
-	// t_vec		sample_d;
-	// t_vec		_x;
-	// t_vec		_y;
-	// t_vec		_z;
-	// t_vec		_xy;
-	// t_vec		d;
-	// t_vec		w;
 	t_vec		blank;
 	t_vec		mask;
 	t_vec		accucolor;
@@ -36,11 +22,10 @@ t_vec		radiance(t_rtv1 *rtv1, t_ray *ray, unsigned int seed)
 	t_vec		nextdir;
 	t_vec		tmp;
 	t_vec 		ntmp;
-	t_obj		*shape;
+	t_object	*shape;
 	int			ddd;
 	int			depth;
 
-	r = ray;
 	depth = 0;
 	vec(0.0, 0.0, 0.0, &blank);
 	vec(0.0, 0.0, 0.0, &hitpoint);
@@ -51,14 +36,14 @@ t_vec		radiance(t_rtv1 *rtv1, t_ray *ray, unsigned int seed)
 	while (depth < ddd)
 	{
 		radiance.distance = T_MAX;
-		intersect(r, &radiance, &id, &rtv1->scene);
-		if (id < 0)
+		intersect(&origin, &direction, &radiance, render);
+		if (radiance.id < 0)
 			break ;
-		shape = &rtv1->scene.obj[id];
-		if (shape->t == PLAN)
-			plane_normal(r, &radiance, shape);
-		else if (shape->t == SPHERE)
-			sphere_normal(r, &radiance, shape);
+		shape = &render->object[radiance.id];
+		if (shape->type == PLANE)
+			plane_normal(&radiance, &origin, &direction, shape);
+		else if (shape->type == SPHERE)
+			sphere_normal(&radiance, &origin, &direction, shape);
 
 		// eval(r, r->tmax, &p);
 		// sub(&p, &shape->p, &n);
@@ -78,7 +63,7 @@ t_vec		radiance(t_rtv1 *rtv1, t_ray *ray, unsigned int seed)
 		// }
 
 
-		multiplication(&mask, &shape->e, &tmp);
+		multi(&mask, &shape->emission, &tmp);
 		sum_(&accucolor, &tmp);
 
 		if (shape->reflect == DIFFUSE)
@@ -88,8 +73,8 @@ t_vec		radiance(t_rtv1 *rtv1, t_ray *ray, unsigned int seed)
 			nextdir = hemisphere_ray(&radiance, radiance.n, seed, 1);
 			multi_(&mask, &radiance.f);
 		}
-		ray->o = hitpoint;
-		ray->d = nextdir;
+		origin = hitpoint;
+		direction = nextdir;
 		depth++;
 	}
 	return (accucolor);
