@@ -72,7 +72,7 @@ t_vec		specular_transmit(t_vec *d, t_vec *n, double n_out, double n_in, double *
 	}
 }
 
-t_vec	hemisphere_ray(t_radiance *radiance, t_vec w, unsigned short seed, float alpha)
+t_vec	hemisphere_ray(t_radiance *radiance, t_vec w, unsigned int seed, float alpha)
 {
 	double	phi;
 	double	sint;
@@ -89,7 +89,7 @@ t_vec	hemisphere_ray(t_radiance *radiance, t_vec w, unsigned short seed, float a
 	t_vec	res;
 
 	z = vecp(0.00424, 1, 0.00764);
-	phi = 2.0 * M_PI_F * rand_ri(&seed);
+	phi = 2.0 * M_PI * rand_ri(&seed);
 	cost = pow((1.0 - rand_ri(&seed)), 1.0 / (alpha + 1.0));
 	sint = sqrt(1.0 - cost * cost);
 	cross(&z, &w, &tmp);
@@ -103,7 +103,7 @@ t_vec	hemisphere_ray(t_radiance *radiance, t_vec w, unsigned short seed, float a
 	sum(&a, &b, &ep);
 	sum(&ep, &c, &res);
 	d = *norm(&res);
-	if (dot(radiance->n, &d) < 0.0)
+	if (dot(&radiance->n, &d) < 0.0)
 	{
 		nmulti(&u, -(sint * cos(phi)), &a);
 		nmulti_(&a, cos(phi));

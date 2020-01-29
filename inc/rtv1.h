@@ -30,8 +30,8 @@
 # define T_MIN					0.01
 # define T_MAX 					1e20
 
-# define HEIGHT					300u
-# define WIDTH					300u
+# define HEIGHT					500u
+# define WIDTH					500u
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
@@ -98,7 +98,7 @@ double 			norm_s(t_vec *v);
 
 void			ray(t_vec o, t_vec d, double tmin, double tmax, int depth,
 				t_ray *dest);
-void 			prepare_ray(t_rtv1 *rtv1, t_algo *rt, t_target *target);
+void 			prepare_ray(t_rtv1 *rtv1, t_algo *rt, t_target *target, unsigned int seed);
 void			init_cam(t_rtv1 *rtv1);
 void			eval(t_ray *r, double t, t_vec *dest);
 void			printr(t_ray *r);
@@ -108,7 +108,7 @@ void			printv(t_vec *v);
 **	radiance.c
 */
 
-void			radiance(t_rtv1 *rtv1, t_algo *rt, t_ray *ray);
+t_vec			radiance(t_rtv1 *rtv1, t_ray *ray, unsigned int seed);
 
 /*
 **	sphere.c
@@ -182,12 +182,16 @@ void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 */
 
 void			init_seed(t_algo *rt);
+double			rand_ri(unsigned int *seed);
+unsigned int	generate(unsigned int x);
+unsigned int	generate3(unsigned int x, unsigned int y, unsigned int z);
+
 
 /*
 **	specular.c
 */
 
-t_vec			hemisphere_ray(t_radiance *radiance, t_vec w, unsigned short seed[3], float alpha);
+t_vec			hemisphere_ray(t_radiance *radiance, t_vec w, unsigned int seed, float alpha);
 void			specular_reflect(t_vec *d, t_vec *n, t_vec *dest);
 t_vec			specular_transmit(t_vec *d, t_vec *n, double n_out,
 				double n_in, double *pr, unsigned short xseed[3]);

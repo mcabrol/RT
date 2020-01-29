@@ -21,17 +21,17 @@ void 	init_scene(char **av, t_rtv1 *rtv1)
 						 vecp(0.0, 1.0, 0.0),
 						 vecp(0.0, 0.0, 0.0),
 						 vecp(0.0, 0.0, 0.0),
-						 SPEC);
+						 DIFFUSE);
 	rtv1->scene.obj[1] = obj(PLAN, 16.5,
-						 vecp(50.0, 45.0, 50.0),
+						 vecp(50.0, 20.0, 50.0),
 						 vecp(1.0, 1.0, 0.0),
 						 vecp(0.0, 0.0, 0.0),
 						 vecp(0.69, 0.69, 0.69),
-						 DIFF);
-	rtv1->scene.obj[2] = obj(SPHERE, 600,
-						 vecp(50.0,  681.6 - .27, 50.0),
+						 DIFFUSE);
+	rtv1->scene.obj[2] = obj(SPHERE, 200,
+						 vecp(50.0,  300, 50.0),
 						 vecp(0.0, 1.0, 0.0),
 						 vecp(12.0, 12.0, 12.0),
 						 vecp(0.0, 0.0, 0.0),
-						 DIFF);
+						 DIFFUSE);
 }

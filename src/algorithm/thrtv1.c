@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.c                                             :+:      :+:    :+:   */
+/*   render.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,50 +14,48 @@
 
 void 		thrtv1(t_rtv1 *rtv1, int x, int max)
 {
-	t_algo			rt;
+	t_algo			render;
 	t_target		target;
 	t_ray			ry;
+	t_cam			cam;
+	unsigned int 	seed;
+	int				num;
 
-	init_cam(rtv1);
-	rt.ls = (t_vec *)malloc((max - x + 1) * HEIGHT * sizeof(t_vec));
-	rt.y = 0u;
-	while ((unsigned int)rt.y < HEIGHT)
+	init_cam(cam);
+	num = rand();
+	render.ls = (t_vec *)malloc((max - x + 1) * HEIGHT * sizeof(t_vec));
+	render.y = 0u;
+	while ((unsigned int)render.y < HEIGHT)
 	{
-		ft_dprintf(2, "\r%u samples %5.1f%%", rtv1->scene.samples, 100.0 * rt.y / (HEIGHT - 1));
-		init_seed(&rt);
-		rt.x = x;
-		while (rt.x < max)
+		ft_dprintf(2, "\r%u samples %5.1f%%", rtv1->scene.samples, 100.0 * render.y / (HEIGHT - 1));
+		render.x = x;
+		seed = generate3((unsigned int)render.x * (unsigned int)num, (unsigned int)render.y * (unsigned int)num, (unsigned int)num);
+		while (render.x < max)
 		{
-			rt.sy = 0u;
-			rt.i = (HEIGHT - 1u - rt.y) * (max - x) + rt.x;
-			while (rt.sy < 2u)
+			render.sy = 0u;
+			while (render.sy < 2u)
 			{
-				rt.sx = 0u;
-				while (rt.sx < 2u)
+				render.sx = 0u;
+				while (render.sx < 2u)
 				{
-					vec(0.0, 0.0, 0.0, &rt.m);
-					rt.s = 0u;
-					while (rt.s < rtv1->scene.samples)
+					vec(0.0, 0.0, 0.0, &render.color);
+					render.s = 0u;
+					while (render.s < rtv1->scene.samples)
 					{
-						prepare_ray(rtv1, &rt, &target);
+						prepare_ray(rtv1, &render, &target, seed);
 						ray(target.eye_t, *norm(&target.d), EPSILON_SPHERE,
 						INFINITY, 0, &ry);
-						radiance(rtv1, &rt, &ry);
-						ndivide(&rt.l_t, (double)rtv1->scene.samples, &rt.l);
-						sum_(&rt.m, &rt.l);
-						(rt.s)++;
+						render.color = radiance(rtv1, &ry, seed);
+						(render.s)++;
 					}
-					clamp3(&rt.m, 0.0, 1.0, &rt.l_t);
-					nmulti(&rt.l_t, 0.25, &rt.l);
-					sum_(&rt.ls[rt.i], &rt.l);
-					put_pixel(rtv1, WIDTH - rt.x, HEIGHT - rt.y, &rt.ls[rt.i]);
-					(rt.sx)++;
+					put_pixel(rtv1, WIDTH - render.x, HEIGHT - render.y, &render.color);
+					(render.sx)++;
 				}
-				(rt.sy)++;
+				(render.sy)++;
 			}
-			(rt.x)++;
+			(render.x)++;
 		}
-		(rt.y)++;
+		(render.y)++;
 	}
-	free(rt.ls);
+	free(render.ls);
 }

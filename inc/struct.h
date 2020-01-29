@@ -33,6 +33,7 @@ typedef struct			s_algo
 	t_vec				m;
 	t_vec				l_t;
 	unsigned short		xseed[3];	// Generate random float
+	t_vec				color;
 	t_vec				*ls;		// Result
 }						t_algo;
 
