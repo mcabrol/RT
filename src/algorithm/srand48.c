@@ -58,3 +58,10 @@ unsigned int generate3(unsigned int x, unsigned int y, unsigned int z)
     value = generate(z ^ value);
     return (value);
 }
+
+void 	init_seed(t_render *render)
+{
+	render->xseed[0] = 0;
+	render->xseed[1] = 0;
+	render->xseed[2] = (unsigned short)(render->y * render->y * render->y);
+}

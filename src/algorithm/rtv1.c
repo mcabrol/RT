@@ -14,8 +14,11 @@
 
 void 		rtv1(t_render *render)
 {
-	unsigned int 	seed;
+	unsigned short	xseed[3];
 	int				num;
+	t_vec			l;
+	t_vec			u;
+	// t_vec			cl;
 
 	num = rand();
 	init_scene(render);
@@ -23,21 +26,35 @@ void 		rtv1(t_render *render)
 	render->y = 0;
 	while (render->y < HEIGHT)
 	{
-		// loading_text(render);
+		loading_text(render);
+		init_seed(render);
 		render->x = 0;
 		while (render->x < WIDTH)
 		{
-			seed = generate3((unsigned int)render->x * (unsigned int)num, (unsigned int)render->y * (unsigned int)num, (unsigned int)num);
-			vec(0.0, 0.0, 0.0, &render->color);
-			render->s = 0;
-			while (render->s < render->samples)
+			render->sy = 0;
+			while (render->sy < 2)
 			{
-				prepare_ray(render, seed);
-				printr(render->ray[0], render->ray[1]);
-				render->color = radiance(render, render->ray[0], render->ray[1], seed);
-				(render->s)++;
+				render->sx = 0;
+				while (render->sx < 2)
+				{
+					vec(0.0, 0.0, 0.0, &render->color);
+					render->s = 0;
+					while (render->s < render->samples)
+					{
+						prepare_ray(render);
+						render->color = radiance(render, render->ray[0], render->ray[1], xseed);
+						ndivide(&render->color, (double)render->samples, &l);
+						// printv(&render->color);
+						sum_(&render->color, &l);
+						(render->s)++;
+					}
+					clamp3(&render->color, 0.0, 1.0, &u);
+					nmulti(&u, 0.25, &render->color);
+					put_pixel(render, WIDTH - render->x, HEIGHT - render->y, &render->color);
+					(render->sx)++;
+				}
+				(render->sy)++;
 			}
-			put_pixel(render, WIDTH - render->x, HEIGHT - render->y, &render->color);
 			(render->x)++;
 		}
 		(render->y)++;

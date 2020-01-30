@@ -36,14 +36,21 @@ void		veccp(t_vec *v, t_vec *dest)
 	dest->z = v->z;
 }
 
+double		len(t_vec *v)
+{
+	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));
+}
+
 t_vec		*norm(t_vec *v)
 {
-	double a;
+	double l;
 
-	a = 1 / sqrt(norm_s(v));
-	v->x *= a;
-	v->y *= a;
-	v->z *= a;
+	if (v->x == 0 && v->y == 0 && v->z == 0)
+		return (v);
+	l = len(v);
+	v->x /= l;
+	v->y /= l;
+	v->z /= l;
 	return (v);
 }
 

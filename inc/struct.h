@@ -31,6 +31,10 @@ typedef struct			s_object
 	t_vec				normal;			// normal
 	t_vec				center;			// center
 	t_vec				reflection;		// reflection
+	int 				cut;
+	t_vec				cut_shift;
+	t_vec				cut_dir;
+	double 				height;
 	t_vec				axis;			// axis
 	float				angle;			// angle
 	int					reflect;		// material type
@@ -104,11 +108,14 @@ typedef struct			s_render
 	t_vec 				bottom_left;// View plane bottom left point
 	int					x;			// Screen x counter
 	int					y;			// Screen y counter
+	int					sx;
+	int					sy;
 	int					s;			// Samples counter
 	int 				num;		// Random start number
+	unsigned short		xseed[3];
 	int 				samples;
 	t_camera 			camera;
-	t_object			object[3];
+	t_object			object[11];
 	t_win				win;
 }						t_render;
 

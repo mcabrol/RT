@@ -72,7 +72,42 @@ t_vec		specular_transmit(t_vec *d, t_vec *n, double n_out, double n_in, double *
 	}
 }
 
-t_vec	hemisphere_ray(t_radiance *radiance, t_vec w, unsigned int seed, float alpha)
+t_vec	ideal_diffuse(t_radiance *radiance, t_vec direction, unsigned short xseed[3])
+{
+	t_vec w;
+	t_vec u1;
+	t_vec u;
+	t_vec v;
+	t_vec d;
+	t_vec x;
+	t_vec y;
+	t_vec z;
+	t_vec xy;
+
+	vec(0.0, 0.0, 0.0, &u1);
+	if (0.0 > dot(&radiance->n, &direction))
+		w = radiance->n;
+	else
+		minus_(&radiance->n);
+	if (fabs(w.x) > 0.1)
+		u1.y = 1.0;
+	else
+		u1.x = 1.0;
+	cross(&u1, &w, &u);
+	norm(&u);
+
+	cross(&w, &u, &v);
+	cosine_weighted_sample(erand48(xseed), erand48(xseed), &d);
+	multi(&u, &u, &x);
+	multi(&v, &v, &y);
+	multi(&w, &w, &z);
+	sum(&x, &y, &xy);
+	sum(&xy, &z, &d);
+	norm(&d);
+	return (d);
+}
+
+t_vec	hemisphere_ray(t_radiance *radiance, t_vec w, unsigned short xseed[3], float alpha)
 {
 	double	phi;
 	double	sint;
@@ -88,9 +123,9 @@ t_vec	hemisphere_ray(t_radiance *radiance, t_vec w, unsigned int seed, float alp
 	t_vec	ep;
 	t_vec	res;
 
-	z = vecp(0.00424, 1, 0.00764);
-	phi = 2.0 * M_PI * rand_ri(&seed);
-	cost = pow((1.0 - rand_ri(&seed)), 1.0 / (alpha + 1.0));
+	z = vecp(0.00424, 1.0, 0.00764);
+	phi = 2.0 * M_PI * erand48(xseed);
+	cost = pow((1.0 - erand48(xseed)), 1.0 / (alpha + 1.0));
 	sint = sqrt(1.0 - cost * cost);
 	cross(&z, &w, &tmp);
 	u = *norm(&tmp);

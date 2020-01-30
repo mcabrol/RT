@@ -29,7 +29,7 @@ void	plane_normal(t_radiance *radiance, t_vec *origin, t_vec *direction, t_objec
 		minus(&radiance->nl, &radiance->n);
 }
 
-void	sphere_normal( t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj)
+void	sphere_normal(t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj)
 {
 	t_vec 	tmp;
 
@@ -41,4 +41,29 @@ void	sphere_normal( t_radiance *radiance, t_vec *origin, t_vec *direction, t_obj
 		radiance->n = radiance->nl;
 	else
 		minus(&radiance->nl, &radiance->n);
+}
+
+void 	cylinder_normal(t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj)
+{
+	double	m;
+	t_vec 	tmp;
+	t_vec	oc;
+	t_vec	a;
+	t_vec	b;
+
+	nmulti(direction, radiance->distance, &tmp);
+	sum(origin, &tmp, &radiance->x);
+
+	sub(origin, &obj->position, &oc);
+
+	m = (dot(direction, &obj->direction) * radiance->distance) + dot(&oc, &obj->direction);
+
+	nmulti(&obj->direction, m, &a);
+	sub(&radiance->x, &obj->position, &b);
+	sub(&a, &b, &radiance->n);
+	radiance->nl = *norm(&radiance->n);
+	if (dot(&radiance->nl, direction) < 0)
+		radiance->n = radiance->nl;
+	else
+		minus_(&radiance->nl);
 }

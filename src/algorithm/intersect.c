@@ -18,7 +18,7 @@ void		intersect(t_vec *origin, t_vec *direction, t_radiance *radiance, t_render 
 	int			n;
 	int			i;
 
-	n = sizeof(obj) / sizeof(t_object);
+	n = sizeof(render->object) / sizeof(t_object);
 	i = 0;
 	radiance->id = -1;
 	while (i < n)
@@ -27,6 +27,8 @@ void		intersect(t_vec *origin, t_vec *direction, t_radiance *radiance, t_render 
 			distance = intersect_sphere(&render->object[i], origin, direction);
 		else if (render->object[i].type == PLANE)
 			distance = intersect_plane(&render->object[i], origin, direction);
+		else if (render->object[i].type == CYLINDER)
+			distance = intersect_cylinder(&render->object[i], origin, direction);
 		if (distance >= T_MIN && distance < radiance->distance)
 		{
 			radiance->distance = distance;
@@ -71,4 +73,18 @@ double		intersect_plane(t_object *obj, t_vec *origin, t_vec *direction)
 		koef = -1;
 	t = -k2 / k1 * koef;
 	return (t);
+}
+
+double		intersect_cylinder(t_object *obj, t_vec *origin, t_vec *direction)
+{
+	t_vec	oc;
+	t_vec	k;
+	double	t_min;
+
+	sub(origin, &obj->position, &oc);
+	k.x = dot(direction, direction) - pow(dot(direction, &obj->direction), 2);
+	k.y = 2 * (dot(direction, &oc) - dot(direction, &obj->direction) * dot(&oc, &obj->direction));
+	k.z = dot(&oc, &oc) - pow(dot(&oc, &obj->direction), 2) - obj->radius * obj->radius;
+	t_min = check_pnt(&k, direction, origin, obj);
+	return (t_min);
 }

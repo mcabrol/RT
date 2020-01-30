@@ -29,6 +29,13 @@ void		sub(t_vec *v1, t_vec *v2, t_vec *dest)
 	vec(v1->x - v2->x, v1->y - v2->y, v1->z - v2->z, dest);
 }
 
+void		sub_(t_vec *v1, t_vec *v2)
+{
+	v1->x -= v2->x;
+	v1->y -= v2->y;
+	v1->z -= v2->z;
+}
+
 void		multi(t_vec *v1, t_vec *v2, t_vec *dest)
 {
 	vec(v1->x * v2->x, v1->y * v2->y, v1->z * v2->z, dest);
@@ -95,7 +102,7 @@ void		minus_(t_vec *v)
 
 void		cross(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	vec(v1->y * v2->z - v1->z * v2->y,
-				v1->z * v2->x - v1->x * v2->z,
-				v1->x * v2->y - v1->y * v2->x, dest);
+	vec((v1->y * v2->z) - (v1->z * v2->y),
+		(v1->z * v2->x) - (v1->x * v2->z),
+		(v1->x * v2->y) - (v1->y * v2->x), dest);
 }

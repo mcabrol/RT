@@ -27,11 +27,13 @@
 # define THREAD 				16
 # define OPT					9
 
+# define SAMPLES 				16
+
 # define T_MIN					0.01
 # define T_MAX 					1e20
 
-# define HEIGHT					600
-# define WIDTH					600
+# define HEIGHT					350
+# define WIDTH					500
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
@@ -83,12 +85,14 @@ t_vec			vecp(double a, double b, double c);
 void			veccp(t_vec *v, t_vec *dest);
 t_vec			*norm(t_vec *v);
 double 			norm_s(t_vec *v);
+double			len(t_vec *v);
+
 
 /*
 **	ray.c
 */
 
-void			prepare_ray(t_render *render, unsigned int seed);
+void			prepare_ray(t_render *render);
 void			init_camera(t_render *render);
 void			printr(t_vec origin, t_vec direction);
 void			printv(t_vec *v);
@@ -97,13 +101,15 @@ void			printv(t_vec *v);
 **	radiance.c
 */
 
-t_vec			radiance(t_render *render, t_vec origin, t_vec direction, unsigned int seed);
+t_vec			radiance(t_render *render, t_vec origin, t_vec direction,
+				unsigned short xseed[3]);
 
 /*
 **	sphere.c
 */
 
-t_object		obj(int t, double r, t_vec p, t_vec d, t_vec e, t_vec f, int reflect);
+t_object		obj(int t, double r, double h, t_vec p, t_vec d, t_vec e,
+				t_vec f, int reflect);
 
 /*
 **	scene.c
@@ -116,8 +122,10 @@ void 			init_scene(t_render *render);
 */
 
 void 			intersect(t_vec *origin, t_vec *direction, t_radiance *radiance, t_render *render);
-double 			intersect_sphere(t_object *obj, t_vec *origin, t_vec *directon);
-double			intersect_plane(t_object *obj, t_vec *origin, t_vec *directon);
+double 			intersect_sphere(t_object *obj, t_vec *origin, t_vec *direction);
+double			intersect_plane(t_object *obj, t_vec *origin, t_vec *direction);
+double			intersect_cylinder(t_object *obj, t_vec *origin, t_vec *direction);
+
 
 /*
 **	operator.c
@@ -125,6 +133,7 @@ double			intersect_plane(t_object *obj, t_vec *origin, t_vec *directon);
 
 void			sum(t_vec *v1, t_vec *v2, t_vec *dest);
 void			sub(t_vec *v1, t_vec *v2, t_vec *dest);
+void			sub_(t_vec *v1, t_vec *v2);
 void			multi(t_vec *v1, t_vec *v2, t_vec *dest);
 void			nmulti(t_vec *v1, double n, t_vec *dest);
 void			divide(t_vec *v1, t_vec *v2, t_vec *dest);
@@ -149,17 +158,30 @@ double			max(t_vec *v);
 double			clamp(double x, double low, double high);
 void			clamp3(t_vec *v, double low, double high, t_vec *dest);
 uint8_t			to_byte(double x, double gamma);
+double			to_int(double x);
 double			to_vec(int x, double gamma);
 double			reflectance(double n1, double n2);
 double			schlick_reflectance(double n1, double n2, double c);
 double			quadratic(double k1, double k2, double k3);
+void   			quadratic_base(t_vec k, t_vec *t);
+double			check_cut(double t_min,  t_object *obj, t_vec *p);
+double			define_tmin(t_vec t);
+t_vec			mirror_refl(t_vec *n, t_vec *direction);
+double 			check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_object *obj);
+
+
 
 /*
 **	normal.c
 */
 
-void			plane_normal(t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj);
-void			sphere_normal( t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj);
+void			plane_normal(t_radiance *radiance, t_vec *origin,
+				t_vec *direction, t_object *obj);
+void			sphere_normal( t_radiance *radiance, t_vec *origin,
+				t_vec *direction, t_object *obj);
+void 			cylinder_normal(t_radiance *radiance, t_vec *origin,
+				t_vec *direction, t_object *obj);
+
 
 /*
 **	sample.c
@@ -171,6 +193,7 @@ void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 **	srand48.c
 */
 
+void 			init_seed(t_render *render);
 double			rand_ri(unsigned int *seed);
 unsigned int	generate(unsigned int x);
 unsigned int	generate3(unsigned int x, unsigned int y, unsigned int z);
@@ -179,7 +202,9 @@ unsigned int	generate3(unsigned int x, unsigned int y, unsigned int z);
 **	specular.c
 */
 
-t_vec			hemisphere_ray(t_radiance *radiance, t_vec w, unsigned int seed, float alpha);
+t_vec			hemisphere_ray(t_radiance *radiance, t_vec w, unsigned short xseed[3], float alpha);
+t_vec			ideal_diffuse(t_radiance *radiance, t_vec w, unsigned short xseed[3]);
+
 // void			specular_reflect(t_vec *d, t_vec *n, t_vec *dest);
 // t_vec			specular_transmit(t_vec *d, t_vec *n, double n_out,
 // 				double n_in, double *pr, unsigned short xseed[3]);

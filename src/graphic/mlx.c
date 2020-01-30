@@ -61,7 +61,6 @@ void	put_pixel(t_render *render, int x, int y, t_vec *v)
 	if ((unsigned int)x < WIDTH && (unsigned int)x > 0)
 		if ((unsigned int)y < HEIGHT && (unsigned int)y > 0)
 		{
-			//ft_printf("%d %d %d\n", to_byte(v->x, GAMMA), to_byte(v->y, GAMMA), to_byte(v->z, GAMMA));
 			render->win.data_ptr[i] = (char)to_byte(v->x, GAMMA);
 			render->win.data_ptr[i + 1] = (char)to_byte(v->y, GAMMA);
 			render->win.data_ptr[i + 2] = (char)to_byte(v->z, GAMMA);
