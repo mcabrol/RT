@@ -27,7 +27,7 @@
 # define THREAD 				16
 # define OPT					9
 
-# define SAMPLES 				16
+# define SAMPLES 				1000
 
 # define T_MIN					0.01
 # define T_MAX 					1e20
