@@ -115,7 +115,7 @@ typedef struct			s_render
 	unsigned short		xseed[3];
 	int 				samples;
 	t_camera 			camera;
-	t_object			object[11];
+	t_object			object[12];
 	t_win				win;
 }						t_render;
 
