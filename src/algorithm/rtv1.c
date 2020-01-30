@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 20:32:47 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/30 19:53:55 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 void 		rtv1(t_render *render)
 {
 	unsigned short	xseed[3];
-	int				num;
-	t_vec			l;
+	double 			samp;
 	t_vec			u;
 	// t_vec			cl;
 
-	num = rand();
 	init_scene(render);
 	init_camera(render);
+	samp = 1.0f / render->samples;
+	ft_printf("samp> %f\n", samp);
 	render->y = 0;
 	while (render->y < HEIGHT)
 	{
 		loading_text(render);
-		init_seed(render);
+		init_seed(xseed, render->y);
 		render->x = 0;
 		while (render->x < WIDTH)
 		{
@@ -43,14 +43,11 @@ void 		rtv1(t_render *render)
 					{
 						prepare_ray(render);
 						render->color = radiance(render, render->ray[0], render->ray[1], xseed);
-						ndivide(&render->color, (double)render->samples, &l);
-						// printv(&render->color);
-						sum_(&render->color, &l);
+						nmulti_(&render->color, samp);
 						(render->s)++;
 					}
 					clamp3(&render->color, 0.0, 1.0, &u);
-					nmulti(&u, 0.25, &render->color);
-					put_pixel(render, WIDTH - render->x, HEIGHT - render->y, &render->color);
+					put_pixel(render, WIDTH - render->x, HEIGHT - render->y, &u);
 					(render->sx)++;
 				}
 				(render->sy)++;

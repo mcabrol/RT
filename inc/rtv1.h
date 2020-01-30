@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 20:09:37 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/30 19:49:22 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define THREAD 				16
 # define OPT					9
 
-# define SAMPLES 				1000
+# define SAMPLES 				100
 
 # define T_MIN					0.01
 # define T_MAX 					1e20
@@ -193,7 +193,7 @@ void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 **	srand48.c
 */
 
-void 			init_seed(t_render *render);
+void 			init_seed(unsigned short *xseed, int y);
 double			rand_ri(unsigned int *seed);
 unsigned int	generate(unsigned int x);
 unsigned int	generate3(unsigned int x, unsigned int y, unsigned int z);

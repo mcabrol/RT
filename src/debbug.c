@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:58:19 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 20:10:52 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/30 19:08:19 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void 	loading_text(t_render *render)
 {
-	ft_printf("\r%u samples %5.1f%%",
+	ft_printf("\r%us %5.1f%%",
 	render->samples, 100.0 * render->y / (HEIGHT - 1));
 }

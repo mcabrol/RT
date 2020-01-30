@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 20:15:10 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/30 20:13:23 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vec		radiance(t_render *render, t_vec origin, t_vec direction, unsigned short 
 	t_object	*shape;
 	int			depth;
 	t_vec		light;
+	t_vec		l;
 	// t_vec		q;
 
 	depth = 0;
@@ -67,25 +68,46 @@ t_vec		radiance(t_render *render, t_vec origin, t_vec direction, unsigned short 
 		// 	ndivide_(&mask, continue_probability);
 		// }
 
-		// Light
-
-		// sum(&shape->emission, &shape->reflection, &q);
-		multi(&mask, &shape->emission, &light);
-		sum_(&accucolor, &light);
 
 		// Texture
-		sub(&mask, &shape->reflection, &radiance.f);
+		radiance.f = shape->reflection;
+
+		// Light
 
 		if (shape->reflect == DIFFUSE)
 		{
-			nmulti(&radiance.n, 0.001f, &hit);
+			sum(&shape->emission, &radiance.f, &l);
+			multi(&mask, &l, &light);
+			sum_(&accucolor, &light);
+		}
+		else
+		{
+			multi(&mask, &l, &light);
+			sum_(&accucolor, &light);
+		}
+
+		// if (4 < depth) {
+		// 	double continue_probability = max(&shape->reflection);
+		// 	if (erand48(xseed) >= continue_probability) {
+		// 		veccp(&blank, &accucolor);
+		// 		return (accucolor);
+		// 	}
+		// 	ndivide_(&mask, continue_probability);
+		// }
+
+		sub(&mask, &shape->reflection, &radiance.f);
+
+
+		if (shape->reflect == DIFFUSE)
+		{
+			nmulti(&radiance.n, 0.001, &hit);
 			sum(&radiance.x, &hit, &hitpoint);
 			nextdir = hemisphere_ray(&radiance, radiance.n, xseed, 1);
 			multi_(&mask, &radiance.f);
 		}
 		else if (shape->reflect == SPECULAR)
 		{
-			nmulti(&radiance.n, 0.001f, &hit);
+			nmulti(&radiance.n, 0.001, &hit);
 			sum(&radiance.x, &hit, &hitpoint);
 			nextdir = mirror_refl(&radiance.n, &direction);
 			multi_(&mask, &radiance.f);

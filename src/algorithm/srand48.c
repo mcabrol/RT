@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 09:31:16 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 20:00:14 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/30 19:49:33 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ unsigned int generate3(unsigned int x, unsigned int y, unsigned int z)
     return (value);
 }
 
-void 	init_seed(t_render *render)
+void 	init_seed(unsigned short *xseed, int y)
 {
-	render->xseed[0] = 0;
-	render->xseed[1] = 0;
-	render->xseed[2] = (unsigned short)(render->y * render->y * render->y);
+	xseed[0] = 0;
+	xseed[1] = 0;
+	xseed[2] = (unsigned short)(y * y * y);
 }

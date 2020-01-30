@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 20:01:01 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/30 19:35:01 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	put_pixel(t_render *render, int x, int y, t_vec *v)
 	unsigned int i;
 
 	i = (int)(x * 4 + render->win.size_line * y);
-	if ((unsigned int)x < WIDTH && (unsigned int)x > 0)
-		if ((unsigned int)y < HEIGHT && (unsigned int)y > 0)
+	if (x < WIDTH && x > 0)
+		if (y < HEIGHT && y > 0)
 		{
 			render->win.data_ptr[i] = (char)to_byte(v->x, GAMMA);
 			render->win.data_ptr[i + 1] = (char)to_byte(v->y, GAMMA);

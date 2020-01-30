@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 18:15:33 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/30 18:09:53 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct			s_radiance
 	int					id;
 	int					l_id;
 	int					neg;
+	int					depth;
 }						t_radiance;
 
 typedef struct			s_win
@@ -115,7 +116,7 @@ typedef struct			s_render
 	unsigned short		xseed[3];
 	int 				samples;
 	t_camera 			camera;
-	t_object			object[12];
+	t_object			object[8];
 	t_win				win;
 }						t_render;
 
