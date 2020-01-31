@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debbug.c                                           :+:      :+:    :+:   */
+/*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/29 15:58:19 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/31 19:50:40 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/01/31 19:10:38 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/01/31 19:56:01 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	loading_text(t_render *render)
+void 	image(t_render *render)
 {
-	float 	pourcent;
-	char 	*s;
+	int x;
+	int y;
 
-	pourcent = 100 * render->y / (HEIGHT - 1);
-	ft_printf("\r%us %d%%", render->samples, (int)pourcent);
-	s = ft_itoa((int)pourcent);
-	mlx_string_put(render->win.mlx_ptr, render->win.win_ptr, 10, 4, F_BLACK, s);
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			put_pixel_vector(render, WIDTH - x, HEIGHT - y,
+				&render->screen[(HEIGHT - 1 - y) * WIDTH + x]);
+		}
+	}
+	mlx_put_image_to_window(render->win.mlx_ptr, render->win.win_ptr,
+							render->win.img_ptr, 0, 0);
 }

@@ -6,13 +6,13 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/30 20:13:23 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/31 20:12:22 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vec		radiance(t_render *render, t_vec origin, t_vec direction, unsigned short xseed[3])
+t_vec		radiance(t_render *render, t_vec origin, t_vec direction)
 {
 	t_radiance	radiance;
 	t_vec		ambient;
@@ -34,6 +34,7 @@ t_vec		radiance(t_render *render, t_vec origin, t_vec direction, unsigned short 
 	vec(0.0, 0.0, 0.0, &hitpoint);
 	vec(0.0, 0.0, 0.0, &nextdir);
 	vec(0.0, 0.0, 0.0, &accucolor);
+	vec(0.0, 0.0, 0.0, &l);
 	vec(1.0, 1.0, 1.0, &mask);
 	while (depth < 5)
 	{
@@ -102,7 +103,7 @@ t_vec		radiance(t_render *render, t_vec origin, t_vec direction, unsigned short 
 		{
 			nmulti(&radiance.n, 0.001, &hit);
 			sum(&radiance.x, &hit, &hitpoint);
-			nextdir = hemisphere_ray(&radiance, radiance.n, xseed, 1);
+			nextdir = hemisphere_ray(&radiance, radiance.n, render->xseed, 1);
 			multi_(&mask, &radiance.f);
 		}
 		else if (shape->reflect == SPECULAR)

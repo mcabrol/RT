@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/30 18:09:53 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/31 20:13:43 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct			s_win
 	void				*mlx_ptr;
 	void				*win_ptr;
 	void				*img_ptr;
+	void 				*img_logo;
 	char				*data_ptr;
 	char				*tmp_data_ptr;
 	int					bits_per_pixel;
@@ -116,8 +117,9 @@ typedef struct			s_render
 	unsigned short		xseed[3];
 	int 				samples;
 	t_camera 			camera;
-	t_object			object[8];
+	t_object			object[9];
 	t_win				win;
+	t_vec				*screen;
 }						t_render;
 
 typedef struct			s_thread

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/30 19:49:22 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/31 20:15:02 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,27 @@
 # define THREAD 				16
 # define OPT					9
 
-# define SAMPLES 				100
+# define SAMPLES 				220
 
 # define T_MIN					0.01
 # define T_MAX 					1e20
 
-# define HEIGHT					350
-# define WIDTH					500
+# define HEIGHT					650
+# define WIDTH					800
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
+
+/*
+** Color
+*/
+
+# define F_GREY					0xd1d1d1
+# define F_BLUE					0x0000FF
+# define F_RED					0xFF0000
+# define F_GREEN				0x00FF00
+# define F_WHITE				0xFFFFFF
+# define F_BLACK				0x000000
 
 # define PLANE 					0
 # define SPHERE					1
@@ -92,7 +103,7 @@ double			len(t_vec *v);
 **	ray.c
 */
 
-void			prepare_ray(t_render *render);
+void 			prepare_ray(t_render *render);
 void			init_camera(t_render *render);
 void			printr(t_vec origin, t_vec direction);
 void			printv(t_vec *v);
@@ -101,8 +112,7 @@ void			printv(t_vec *v);
 **	radiance.c
 */
 
-t_vec			radiance(t_render *render, t_vec origin, t_vec direction,
-				unsigned short xseed[3]);
+t_vec			radiance(t_render *render, t_vec origin, t_vec direction);
 
 /*
 **	sphere.c
@@ -193,7 +203,7 @@ void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 **	srand48.c
 */
 
-void 			init_seed(unsigned short *xseed, int y);
+void 			init_seed(t_render *render);
 double			rand_ri(unsigned int *seed);
 unsigned int	generate(unsigned int x);
 unsigned int	generate3(unsigned int x, unsigned int y, unsigned int z);
@@ -216,7 +226,8 @@ t_vec			ideal_diffuse(t_radiance *radiance, t_vec w, unsigned short xseed[3]);
 int				init_window(char **av, t_render *rtv1);
 void			erase(t_render *rtv1);
 int				expose_hook(t_render *rtv1);
-void			put_pixel(t_render *rtv1, int x, int y, t_vec *v);
+void			put_pixel_vector(t_render *rtv1, int x, int y, t_vec *v);
+void			put_pixel(t_render *rtv1, int x, int y, int color);
 int				key(int keycode, t_render *rtv1);
 
 /*
@@ -246,5 +257,18 @@ int				size(char **av);
 */
 
 void 			loading_text(t_render *render);
+
+/*
+**	gui.c
+*/
+
+void 			bg_gradient(t_render *render);
+void 			logo_center(t_render *render);
+
+/*
+**	image.c
+*/
+
+void 			image(t_render *render);
 
 #endif

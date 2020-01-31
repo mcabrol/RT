@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 20:40:33 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/31 17:50:19 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ void 	prepare_ray(t_render *render)
 	sum(&ab, &render->camera.direction, &d);
 	nmulti(&d, 130.0, &d130);
 	sum(&render->camera.position, &d130, &n);
+	norm(&d);
 
 	render->ray[0] = n;
-	render->ray[1] = *norm(&d);
+	render->ray[1] = d;
 }
 
 void	printr(t_vec origin, t_vec direction)

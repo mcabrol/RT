@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:55:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/28 14:15:52 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/31 13:59:59 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ double		quadratic(double k1, double k2, double k3)
 	return (t_min);
 }
 
-void    quadratic_base(t_vec k, t_vec *t)
+void    	quadratic_base(t_vec k, t_vec *t)
 {
     double        des;
 
@@ -49,7 +49,7 @@ void    quadratic_base(t_vec k, t_vec *t)
     }
 }
 
-t_vec	mirror_refl(t_vec *n, t_vec *direction)
+t_vec		mirror_refl(t_vec *n, t_vec *direction)
 {
 	t_vec a;
 	t_vec b;
@@ -73,7 +73,7 @@ double		check_cut(double t_min,  t_object *obj, t_vec *p)
     return (t_min);
 }
 
-double	define_tmin(t_vec t)
+double		define_tmin(t_vec t)
 {
 	if (t.x >= T_MIN && t.x < T_MAX && t.x < t.z)
 		t.z = t.x;
