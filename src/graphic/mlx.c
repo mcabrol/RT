@@ -22,8 +22,8 @@ int		init_window(char **av, t_render *render)
 			&(render->win.bits_per_pixel),
 			&(render->win.size_line),
 			&(render->win.endian));
-	bg_gradient(render);
-	logo_center(render);
+	// bg_gradient(render);
+	// logo_center(render);
 	mlx_hook(render->win.win_ptr, 2, 1L << 2, key, render);
 	mlx_loop(render->win.mlx_ptr);
 	return (EXIT_SUCCESS);
@@ -55,8 +55,8 @@ void	put_pixel_vector(t_render *render, int x, int y, t_vec *v)
 	unsigned int i;
 
 	i = (int)(x * 4 + render->win.size_line * y);
-	if (x < WIDTH && x > 0)
-		if (y < HEIGHT && y > 0)
+	if (x <= WIDTH && x >= 0)
+		if (y <= HEIGHT && y >= 0)
 		{
 			render->win.data_ptr[i] = (char)to_byte(v->x, GAMMA);
 			render->win.data_ptr[i + 1] = (char)to_byte(v->y, GAMMA);
@@ -69,8 +69,8 @@ void	put_pixel(t_render *render, int x, int y, int color)
 	unsigned int i;
 
 	i = (int)(x * 4 + render->win.size_line * y);
-	if (x < WIDTH && x > 0)
-		if (y < HEIGHT && y > 0)
+	if (x <= WIDTH && x >= 0)
+		if (y <= HEIGHT && y >= 0)
 		{
 			render->win.data_ptr[i] = (char)color & 0xFF;
 			render->win.data_ptr[i + 1] = (char)(color >> 8) & 0xFF;

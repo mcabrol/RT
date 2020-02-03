@@ -49,6 +49,8 @@ typedef struct			s_camera
 
 typedef struct			s_radiance
 {
+	t_vec				direction;
+	t_vec				origin;
 	t_object			elena;
 	t_vec				x;
 	t_vec				n;
@@ -63,6 +65,8 @@ typedef struct			s_radiance
 	int					l_id;
 	int					neg;
 	int					depth;
+	t_vec 				accucolor;
+	t_vec				pos;
 }						t_radiance;
 
 typedef struct			s_win
@@ -101,6 +105,7 @@ typedef struct			s_opencl
 typedef struct			s_render
 {
 	t_vec				ray[2];		// Ray[0] = origin Ray[1] = direction
+	t_vec 				l_t;
 	t_vec				cx;
 	t_vec				cy;
 	t_vec				color;
@@ -117,7 +122,7 @@ typedef struct			s_render
 	unsigned short		xseed[3];
 	int 				samples;
 	t_camera 			camera;
-	t_object			object[9];
+	t_object			object[8];
 	t_win				win;
 	t_vec				*screen;
 }						t_render;

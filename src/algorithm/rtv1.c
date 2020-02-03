@@ -45,15 +45,14 @@ void 		rtv1(t_render *render)
 					while (render->s < render->samples)
 					{
 						prepare_ray(render);
-						color = radiance(render, render->ray[0], render->ray[1]);
+						radiance(render, render->ray[0], render->ray[1], &color);
 						ndivide(&color, (double)render->samples, &samp);
 						sum_(&color, &samp);
 						(render->s)++;
 					}
-					clamp3(&samp, 0.0, 1.0, &u);
-					nmulti(&u, 0.25, &render->color);
-					sum_(&render->screen[i], &render->color);
-					// put_pixel(render, WIDTH - render->x, HEIGHT - render->y, &render->color);
+					clamp3(&samp, 0.0, 1.0, &color);
+					nmulti(&color, 0.25, &u);
+					sum_(&render->screen[i], &color);
 					(render->sx)++;
 				}
 				(render->sy)++;

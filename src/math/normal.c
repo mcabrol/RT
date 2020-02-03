@@ -12,6 +12,14 @@
 
 #include "rtv1.h"
 
+void	eval(t_vec *origin, t_vec *direction, double t, t_vec *dest)
+{
+	t_vec dt;
+
+	nmulti(direction, t, &dt);
+	sum(origin, &dt, dest);
+}
+
 void	plane_normal(t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj)
 {
 	t_vec 	tmp;

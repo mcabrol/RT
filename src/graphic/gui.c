@@ -12,20 +12,21 @@
 
 #include "rtv1.h"
 
-void 		bg_gradient(t_render *render)
+void 		bg_gradient(t_win *render)
 {
 	int x;
 	int y;
-	int color;
+	int c1;
+	// int c2;
 
 	y = 0;
-	color = F_GREY;
+	c1 = F_GREY;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			put_pixel(render, x, y, color);
+			put_pixel(render, x, y, c1);
 			x++;
 		}
 		y++;
@@ -34,7 +35,7 @@ void 		bg_gradient(t_render *render)
 							render->win.img_ptr, 0, 0);
 }
 
-void 		logo_center(t_render *render)
+void 		logo_center(t_win *render)
 {
 	int 	height;
 	int 	width;

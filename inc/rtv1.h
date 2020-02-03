@@ -27,7 +27,7 @@
 # define THREAD 				16
 # define OPT					9
 
-# define SAMPLES 				220
+# define SAMPLES 				8
 
 # define T_MIN					0.01
 # define T_MAX 					1e20
@@ -112,8 +112,7 @@ void			printv(t_vec *v);
 **	radiance.c
 */
 
-t_vec			radiance(t_render *render, t_vec origin, t_vec direction);
-
+void			radiance(t_render *render, t_vec origin, t_vec direction, t_vec *color);
 /*
 **	sphere.c
 */
@@ -178,6 +177,7 @@ double			check_cut(double t_min,  t_object *obj, t_vec *p);
 double			define_tmin(t_vec t);
 t_vec			mirror_refl(t_vec *n, t_vec *direction);
 double 			check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_object *obj);
+void			eval(t_vec *origin, t_vec *direction, double t, t_vec *dest);
 
 
 
@@ -214,6 +214,7 @@ unsigned int	generate3(unsigned int x, unsigned int y, unsigned int z);
 
 t_vec			hemisphere_ray(t_radiance *radiance, t_vec w, unsigned short xseed[3], float alpha);
 t_vec			ideal_diffuse(t_radiance *radiance, t_vec w, unsigned short xseed[3]);
+t_vec			specular_reflect(t_vec *d, t_vec *n);
 
 // void			specular_reflect(t_vec *d, t_vec *n, t_vec *dest);
 // t_vec			specular_transmit(t_vec *d, t_vec *n, double n_out,

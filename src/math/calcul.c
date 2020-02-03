@@ -182,14 +182,14 @@ double		to_int(double x)
 {
 	double	c;
 
-	if (x < 0)
-		x = 0;
+	if (x < 0.0)
+		x = 0.0;
 	else
 	{
-		if (x > 1)
-			x = 1;
+		if (x > 1.0)
+			x = 1.0;
 	}
-	c = (pow(x, 1 / 2.2) * 255 + 0.5);
+	c = (pow(x, 1.0 / 2.2) * 255 + 0.5);
 	return (c);
 }
 
