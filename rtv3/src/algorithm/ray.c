@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/10 22:49:10 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:51:52 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	ray(t_vec o, t_vec d, double tmin, double tmax, int depth, t_ray *dest)
+void	init_ray(t_vec o, t_vec d, double tmin, double tmax, int depth, t_ray *dest)
 {
 	dest->o = o;
 	dest->d = d;

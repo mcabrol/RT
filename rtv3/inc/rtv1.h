@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 22:22:41 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:49:22 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define RTV1_H
 
 # include "../libft/inc/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "../minilibx/mlx.h"
 
 # include <math.h>
 # include <stdint.h>
@@ -22,8 +22,8 @@
 
 # define SAMPLES 				8
 
-# define HEIGHT					650u
-# define WIDTH					700u
+# define HEIGHT					650
+# define WIDTH					700
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
@@ -65,10 +65,9 @@ typedef int 		BOOL;
 **	rtv1.c
 */
 
-void 			rtv1(t_win *win);
+void 			pathtracer(t_rtv1 *rtv1);
 int				check(int ac, char **av);
 int				error(char *strerror);
-
 
 /*
 **	vector.c
@@ -84,7 +83,7 @@ double 			norm_s(t_vec *v);
 **	ray.c
 */
 
-void			ray(t_vec o, t_vec d, double tmin, double tmax, int depth,
+void			init_ray(t_vec o, t_vec d, double tmin, double tmax, int depth,
 				t_ray *dest);
 void 			prepare_ray(t_render *rt, t_radiance *target, t_cam *cam);
 void			init_cam(t_cam *cam);
@@ -99,24 +98,31 @@ void			printv(t_vec *v);
 void			radiance(t_scene *scene, t_ray *ray, t_render *rt);
 
 /*
-**	sphere.c
+**	object.c
 */
 
-t_sphere		sphere(int t, double r, t_vec p, t_vec d, t_vec e, t_vec f, int reflect);
+t_obj			sphere(int t, double r, t_vec p, t_vec d, t_vec e, t_vec c, int reflect);
 
 /*
-**	sphere.c
+**	scene.c
 */
 
-void 			init_scene(t_scene *scene);
+void 			init_scene(t_rtv1 *rtv1);
+
+/*
+**	normal.c
+*/
+
+void 			sphere_normal(t_obj *sphere, t_ray *ray);
+void 			plane_normal(t_obj *plane, t_ray *ray);
 
 /*
 **	intersect.c
 */
 
 BOOL 			intersect(t_ray *ray, size_t *id, t_scene *scene);
-BOOL 			intersect_sphere(t_sphere *sphere, t_ray *ray);
-BOOL			intersect_plane(t_sphere *sphere, t_ray *ray);
+BOOL 			intersect_sphere(t_obj *sphere, t_ray *ray);
+BOOL			intersect_plane(t_obj *sphere, t_ray *ray);
 
 
 /*
@@ -173,12 +179,12 @@ t_vec			specular_transmit(t_vec *d, t_vec *n, double n_out,
 **	mlx.c
 */
 
-int				init_window(char **av, t_win *win);
+int				init_window(char **av, t_rtv1 *rtv1);
 void			erase(t_win *win);
 int				expose_hook(t_win *win);
 void			put_pixel(t_win *win, int x, int y, int color);
 void			put_pixel_vector(t_win *win, int x, int y, t_vec *v);
-int				key(int keycode, t_win *win);
+int				key(int keycode, t_rtv1 *rtv1);
 
 /*
 **	gui.c
@@ -194,6 +200,12 @@ void 			logo_center(t_win *win);
 */
 
 void 	 		loading_text(int samples, int y);
+
+/*
+**	image.c
+*/
+
+void 			image(t_rtv1 *rtv1);
 
 
 #endif

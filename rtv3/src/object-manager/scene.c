@@ -6,14 +6,17 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 22:11:32 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:14:08 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	init_scene(t_scene *scene)
+void 	init_scene(t_rtv1 *rtv1)
 {
+	t_scene *scene;
+
+	scene = &rtv1->scene;
 	scene->samples = SAMPLES / 4;
 	// scene->obj[0] = sphere(1e5,
 	// 				vecp(1e5 + 1.0, 40.8, 81.6),
@@ -107,12 +110,12 @@ void 	init_scene(t_scene *scene)
 					vecp(18.0, 18.0, 18.0),
 					vecp(0.75, 0.25, 0.25),
 					DIFF); // Mirror red
-	// scene->obj[12] = sphere(PLANE, 1e5,					// type // radius // RIGHT
-	// 					 vecp(1.0, 40.8, 81.6), 			// position
-	// 					 vecp(15.0, 0.0, 0.0), 				// direction
-	// 					 vecp(0.0, 0.0, 0.0),			// emission
-	// 					 vecp(0.0, 0.0, 0.0),			// emission
-	// 					 DIFF);
+	scene->obj[12] = sphere(PLANE, 1e5,					// type // radius // RIGHT
+						 vecp(1.0, 40.8, 81.6), 			// position
+						 vecp(15.0, 0.0, 0.0), 				// direction
+						 vecp(0.0, 0.0, 0.0),			// emission
+						 vecp(0.0, 0.0, 0.0),			// emission
+						 DIFF);
 	// scene->obj[10] = sphere(600,
 	// 				vecp(50.0, 681.6 - .27, 50.0),
 	// 				vecp(12.0, 12.0, 12.0),

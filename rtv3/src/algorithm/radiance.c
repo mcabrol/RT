@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/15 09:44:04 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:45:46 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 	t_ray		*r;
 	size_t		id;
 	double		pr;
-	t_vec		p;
 	t_vec		n;
 	t_vec		light;
 	t_vec		u;
@@ -33,7 +32,7 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 	t_vec		blank;
 	t_vec		mask;
 	double 		continue_probability;
-	t_sphere	*shape;
+	t_obj		*shape;
 
 	r = ray;
 	vec(0.0, 0.0, 0.0, &blank);
@@ -46,23 +45,25 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 		shape = &scene->obj[id];
 
 		// Next point
-		eval(r, r->tmax, &p);
+		eval(r, r->tmax, &r->p);
 
 		// Norm object
-		sub(&p, &shape->p, &n);
-		norm(&n);
+		if (shape->t == SPHERE)
+			sphere_normal(shape, r);
+		else if (shape->t == PLANE)
+			sphere_normal(shape, r);
 
 		// Light
 		multiplication(&mask, &shape->e, &light);
 		sum_(&blank, &light);
 
 		// Textures
-		multi_(&mask, &shape->f);
+		multi_(&mask, &shape->c);
 
 		// Russian roulette
 		if (4u < (unsigned int)r->depth)
 		{
-			continue_probability = max(&shape->f);
+			continue_probability = max(&shape->c);
 			if (erand48(rt->xseed) >= continue_probability)
 			{
 				veccp(&blank, &rt->color);
@@ -75,7 +76,7 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 		switch (shape->reflect) {
 
 		case SPEC: {
-			r->o = p;
+			r->o = r->p;
 			specular_reflect(&r->d, &n, &r->d);
 			r->tmin = EPSILON_SPHERE;
 			r->tmax = INFINITY;
@@ -84,7 +85,7 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 		}
 
 		case REFR: {
-			r->o = p;
+			r->o = r->p;
 			r->d = specular_transmit(&r->d, &n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, rt->xseed);
 			nmulti_(&mask, pr);
 			r->tmin = EPSILON_SPHERE;
@@ -114,7 +115,7 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 			nmulti(&w, sample_d.z, &_z);
 			sum(&_x, &_y, &_xy);
 			sum(&_xy, &_z, &d);
-			r->o = p;
+			r->o = r->p;
 			r->d = *norm(&d);;
 			r->tmin = EPSILON_SPHERE;
 			r->tmax = INFINITY;

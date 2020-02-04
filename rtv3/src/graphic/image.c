@@ -5,28 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/31 19:10:38 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/04 18:10:13 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/02/04 18:00:01 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	image(t_render *render)
+void 		image(t_rtv1 *rtv1)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
+	int		i;
 
-	y = -1;
-	while (++y < HEIGHT)
+	y = 0;
+	while (y <= HEIGHT)
 	{
-		x = -1;
-		while (++x < WIDTH)
+		x = 0;
+		while (x <= WIDTH)
 		{
-			put_pixel_vector(render, WIDTH - x, HEIGHT - y,
-				&render->screen[(HEIGHT - 1 - y) * WIDTH + x]);
+			i = (HEIGHT - 1 - y) * WIDTH + x - 1;
+			put_pixel_vector(&rtv1->win,
+							 WIDTH - x, HEIGHT - y,
+							 &rtv1->render.screen[i]);
+			x++;
 		}
+		y++;
 	}
-	mlx_put_image_to_window(render->win.mlx_ptr, render->win.win_ptr,
-							render->win.img_ptr, 0, 0);
+	free(rtv1->render.screen);
 }

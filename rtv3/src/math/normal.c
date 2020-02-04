@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/10 22:49:10 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/01/13 17:55:37 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/02/04 18:58:00 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_sphere		sphere(int t, double r, t_vec p, t_vec d, t_vec e, t_vec f, int reflect)
+void 	sphere_normal(t_obj *sphere, t_ray *ray)
 {
-	t_sphere sphere;
+	sub(&ray->p, &sphere->p, &ray->n);
+	norm(&ray->n);
+	radiance->nl = *norm(&r->n)
+	if (dot(&r->nl))
+}
 
-	sphere.t = t;
-	sphere.r = r;
-	sphere.p = p;
-	sphere.d = d;
-	sphere.e = e;
-	sphere.f = f;
-	sphere.reflect = reflect;
-	return (sphere);
+void 	plane_normal(t_obj *plane, t_ray *ray)
+{
+	sub(&ray->p, &plane->p, &ray->n);
+	norm(&ray->n);
 }

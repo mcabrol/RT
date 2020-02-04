@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 21:28:39 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:52:59 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ typedef struct			s_render
 	int					y;			// Screen y counter
 	int					s;			// Sample counter
 	unsigned int		i;			// Cursor
-	unsigned int		sx;			// Zone render x
-	unsigned int		sy;			// Zone render y
+	int					sx;			// Zone render x
+	int					sy;			// Zone render y
 	t_vec				l;
-	t_vec				m;
-	t_vec				color;
+	t_vec				accucolor;  // Color accumulation
+	t_vec				color;		// Color calculated
 	unsigned short		xseed[3];	// Generate random float
 	t_vec				*screen;	// Result
 }						t_render;
@@ -49,21 +49,25 @@ typedef struct			s_ray
 {
 	t_vec				o; 			// Origin
 	t_vec				d;			// Direction
-	double				tmin;
-	double				tmax;
-	int					depth;
+	int					dist;		// Distance
+	double				tmin;		// Distance min
+	double				tmax;		// Distance max
+	int					depth;		// Depth
+	t_vec				p;			// Point intersect
+	t_vec				n;			// Norm obj
+	t_vec				nl;			// Norm obj
 }						t_ray;
 
-typedef struct			s_sphere
+typedef struct			s_obj
 {
 	int 				t;			// type
 	double				r;			// radius
 	t_vec				p;			// position
 	t_vec				d;			// direction
 	t_vec				e;			// emission
-	t_vec				f;			// reflection
+	t_vec				c;			// color
 	int					reflect;	// material type
-}						t_sphere;
+}						t_obj;
 
 typedef struct			s_cam
 {
@@ -77,7 +81,7 @@ typedef struct			s_cam
 typedef struct 			s_scene
 {
 	int					samples;
-	t_sphere			obj[12];
+	t_obj				obj[13];
 }						t_scene;
 
 typedef struct			s_point

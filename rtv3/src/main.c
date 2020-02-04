@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 23:00:45 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/04 16:30:05 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int		main(int ac, char **av)
 {
-	t_win			win;
 	t_rtv1			rtv1;
 
-	if (ac > 1 && check(ac, av))
-		return (error("usage: ./rtv1 [file.csv]"));
-	else if (ac == 1)
-		av[1] = "default.csv";
-	init_scene(av, &rtv1.scene);
-	init_window(av, &rtv1.win);
+	ac = 0;
+	// if (ac > 1 && check(ac, av))
+	// 	return (error("usage: ./rtv1 [file.csv]"));
+	// else if (ac == 1)
+	// 	av[1] = "default.csv";
+	init_scene(&rtv1);
+	init_window(av, &rtv1);
 	//init_opencl(&cl);
 	return (0);
 }
