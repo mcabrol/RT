@@ -16,50 +16,50 @@ void 		rtv1(t_win *win)
 {
 	t_ray			ry;
 	t_cam 			cam;
-	t_target		target;
-	t_algo			rt;
+	t_radiance		target;
+	t_render		render;
 	t_scene 		scene;
 
 	init_scene(&scene);
 	init_cam(&cam);
-	rt.ls = (t_vec *)malloc(WIDTH * HEIGHT * sizeof(t_vec));
-	rt.y = 0u;
-	while ((unsigned int)rt.y < HEIGHT)
+	render.screen = (t_vec *)malloc(WIDTH * HEIGHT * sizeof(t_vec));
+	render.y = 0u;
+	while ((unsigned int)render.y < HEIGHT)
 	{
-		ft_dprintf(2, "\r%u samples %5.2f%%", scene.samples * 4, 100.0 * rt.y / (HEIGHT - 1));
-		init_seed(&rt);
-		rt.x = 0u;
-		while ((unsigned int)rt.x < WIDTH)
+		loading_text(scene.samples, render.y);
+		init_seed(&render);
+		render.x = 0u;
+		while ((unsigned int)render.x < WIDTH)
 		{
-			rt.sy = 0u;
-			rt.i = (HEIGHT - 1u - rt.y) * WIDTH + rt.x;
-			while (rt.sy < 2u)
+			render.sy = 0u;
+			render.i = (HEIGHT - 1u - render.y) * WIDTH + render.x;
+			while (render.sy < 2u)
 			{
-				rt.sx = 0u;
-				while (rt.sx < 2u)
+				render.sx = 0u;
+				while (render.sx < 2u)
 				{
-					vec(0.0, 0.0, 0.0, &rt.m);
-					rt.s = 0u;
-					while (rt.s < scene.samples)
+					vec(0.0, 0.0, 0.0, &render.m);
+					render.s = 0u;
+					while (render.s < scene.samples)
 					{
-						prepare_ray(&rt, &target, &cam);
+						prepare_ray(&render, &target, &cam);
 						ray(target.eye_t, *norm(&target.d), EPSILON_SPHERE, INFINITY, 0, &ry);
-						radiance(&scene, &ry, &rt);
-						ndivide(&rt.color, (double)scene.samples, &rt.l);
-						sum_(&rt.m, &rt.l);
-						(rt.s)++;
+						radiance(&scene, &ry, &render);
+						ndivide(&render.color, (double)scene.samples, &render.l);
+						sum_(&render.m, &render.l);
+						(render.s)++;
 					}
-					clamp3(&rt.m, 0.0, 1.0, &rt.color);
-					nmulti(&rt.color, 0.25, &rt.l);
-					sum_(&rt.ls[rt.i], &rt.l);
-					put_pixel_vector(win, (WIDTH - rt.x), (HEIGHT - rt.y), &rt.ls[rt.i]);
-					(rt.sx)++;
+					clamp3(&render.m, 0.0, 1.0, &render.color);
+					nmulti(&render.color, 0.25, &render.l);
+					sum_(&render.screen[render.i], &render.l);
+					put_pixel_vector(win, (WIDTH - render.x), (HEIGHT - render.y), &render.screen[render.i]);
+					(render.sx)++;
 				}
-				(rt.sy)++;
+				(render.sy)++;
 			}
-			(rt.x)++;
+			(render.x)++;
 		}
-		(rt.y)++;
+		(render.y)++;
 	}
-	free(rt.ls);
+	free(render.screen);
 }

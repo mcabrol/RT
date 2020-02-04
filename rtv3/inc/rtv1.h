@@ -14,15 +14,13 @@
 # define RTV1_H
 
 # include "../libft/inc/libft.h"
-# include "../minilibx/mlx.h"
-
-// # include <OpenCL/OpenCL.h>
+# include "../minilibx-linux/mlx.h"
 
 # include <math.h>
 # include <stdint.h>
 # include <fcntl.h>
 
-# define SAMPLES 				20
+# define SAMPLES 				8
 
 # define HEIGHT					650u
 # define WIDTH					700u
@@ -88,7 +86,7 @@ double 			norm_s(t_vec *v);
 
 void			ray(t_vec o, t_vec d, double tmin, double tmax, int depth,
 				t_ray *dest);
-void 			prepare_ray(t_algo *rt, t_target *target, t_cam *cam);
+void 			prepare_ray(t_render *rt, t_radiance *target, t_cam *cam);
 void			init_cam(t_cam *cam);
 void			eval(t_ray *r, double t, t_vec *dest);
 void			printr(t_ray *r);
@@ -98,7 +96,7 @@ void			printv(t_vec *v);
 **	radiance.c
 */
 
-void			radiance(t_scene *scene, t_ray *ray, t_algo *rt);
+void			radiance(t_scene *scene, t_ray *ray, t_render *rt);
 
 /*
 **	sphere.c
@@ -161,7 +159,7 @@ void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 **	sample.c
 */
 
-void			init_seed(t_algo *rt);
+void			init_seed(t_render *rt);
 
 /*
 **	specular.c
@@ -190,5 +188,12 @@ void 			bg_gradient(t_win *win);
 void 			logo_center(t_win *win);
 
 // void 			init_opencl(t_opencl *cl);
+
+/*
+**	debbug.c
+*/
+
+void 	 		loading_text(int samples, int y);
+
 
 #endif

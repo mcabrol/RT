@@ -20,7 +20,7 @@ typedef struct			s_vec
 	double 				z;
 }						t_vec;
 
-typedef struct			s_algo
+typedef struct			s_render
 {
 	int					x;			// Screen x counter
 	int					y;			// Screen y counter
@@ -32,10 +32,10 @@ typedef struct			s_algo
 	t_vec				m;
 	t_vec				color;
 	unsigned short		xseed[3];	// Generate random float
-	t_vec				*ls;		// Result
-}						t_algo;
+	t_vec				*screen;	// Result
+}						t_render;
 
-typedef struct			s_target
+typedef struct			s_radiance
 {
 	t_vec				a;
 	t_vec				b;
@@ -43,7 +43,7 @@ typedef struct			s_target
 	t_vec				d_t;		// Directon tmp
 	t_vec				eye_t;		// Eye tmp
 	t_vec				d;			// Vector for ray
-}						t_target;
+}						t_radiance;
 
 typedef struct			s_ray
 {
@@ -105,6 +105,7 @@ typedef struct			s_rtv1
 {
 	t_win 				win;
 	t_scene				scene;
+	t_render 			render;
 }						t_rtv1;
 
 // typedef struct			s_opencl

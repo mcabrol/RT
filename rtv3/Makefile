@@ -12,10 +12,10 @@
 
 NAME = rtv1
 CFLAGS = -O3 -Wall -Wextra -Werror
-INC = -Iinc -Iminilibx
+INC = -Iinc -Iminilibx-linux
 SRC := $(shell find src -type f -regex ".*\.c")
-LIB = libft/libft.a minilibx/libmlx.a # -lm -lmlx -lXext -lX11
-FRAMEWORK = -framework OpenCL -framework OpenGL -framework AppKit
+LIB = libft/libft.a minilibx-linux/libmlx_Linux.a -lm -lmlx -lXext -lX11
+FRAMEWORK = # -framework OpenGL -framework AppKit
 SANATIZE = -fsanitize=address
 
 COMPILE.c = $(CC) $(CFLAGS) $(INC) $(TARGET_ARCH) -c
@@ -25,17 +25,17 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	@make -C minilibx
-	@gcc $(CFLAGS) $(INC) $? $(LIB) $(FRAMEWORK) -o $(NAME)
+	# @make -C minilibx-linux
+	@gcc $(CFLAGS) $(INC) $? $(LIB) -o $(NAME)
 
 clean:
 	@make clean -C libft
-	@make clean -C minilibx
+	# @make clean -C minilibx-linux
 	@$(RM) -f $(OBJ)
 
 fclean: clean
 	@make fclean -C libft
-	@make fclean -C minilibx
+	# @make fclean -C minilibx-linux
 	@$(RM) -f $(NAME)
 
 re: fclean all

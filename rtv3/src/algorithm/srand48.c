@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-void		init_seed(t_algo *rt)
+void		init_seed(t_render *rt)
 {
 	rt->xseed[0] = 0;
 	rt->xseed[1] = 0;

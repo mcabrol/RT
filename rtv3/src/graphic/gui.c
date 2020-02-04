@@ -35,17 +35,17 @@ void 		bg_gradient(t_win *win)
 							win->img_ptr, 0, 0);
 }
 
-void 		logo_center(t_win *win)
-{
-	int 	height;
-	int 	width;
-	int		x;
-	int		y;
-
-	win->img_logo = mlx_xpm_file_to_image(win->mlx_ptr, "19.xpm",
-						   &width, &height);
-	x = (WIDTH / 2) - (width / 2);
-	y = (HEIGHT / 2) - (height / 2);
-	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
-							win->img_logo, x, y);
-}
+// void 		logo_center(t_win *win)
+// {
+// 	int 	height;
+// 	int 	width;
+// 	int		x;
+// 	int		y;
+//
+// 	// win->img_logo = mlx_xpm_file_to_image(win->mlx_ptr, "19.xpm",
+// 						   // &width, &height);
+// 	x = (WIDTH / 2) - (width / 2);
+// 	y = (HEIGHT / 2) - (height / 2);
+// 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
+// 							win->img_logo, x, y);
+// }

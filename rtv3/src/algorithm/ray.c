@@ -21,7 +21,7 @@ void	ray(t_vec o, t_vec d, double tmin, double tmax, int depth, t_ray *dest)
 	dest->depth = depth;
 }
 
-void 	prepare_ray(t_algo *rt, t_target *target, t_cam *cam)
+void 	prepare_ray(t_render *rt, t_radiance *target, t_cam *cam)
 {
 	double u1;
 	double u2;

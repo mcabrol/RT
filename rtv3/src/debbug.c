@@ -12,39 +12,7 @@
 
 #include "rtv1.h"
 
-int		main(int ac, char **av)
+void 	 	loading_text(int samples, int y)
 {
-	t_win			win;
-	t_rtv1			rtv1;
-
-	if (ac > 1 && check(ac, av))
-		return (error("usage: ./rtv1 [file.csv]"));
-	else if (ac == 1)
-		av[1] = "default.csv";
-	init_scene(av, &rtv1.scene);
-	init_window(av, &rtv1.win);
-	//init_opencl(&cl);
-	return (0);
-}
-
-int		check(int ac, char **av)
-{
-	int i;
-
-	i = ft_strlen(av[1]);
-	if (ac && ac != 2)
-		return (EXIT_FAILURE);
-	if (i < 5 ||
-		av[1][i - 4] != '.' ||
-		av[1][i - 3] != 'c' ||
-		av[1][i - 2] != 's' ||
-		av[1][i - 1] != 'v')
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
-int		error(char *strerror)
-{
-	ft_dprintf(2, "%s\n", strerror);
-	return (EXIT_FAILURE);
+	ft_dprintf(2, "\r%u samples %5.2f%%", samples * 4, 100.0 * y / (HEIGHT - 1));
 }

@@ -13,7 +13,7 @@
 #include "rtv1.h"
 
 
-void		radiance(t_scene *scene, t_ray *ray, t_algo *rt)
+void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 {
 	t_ray		*r;
 	size_t		id;

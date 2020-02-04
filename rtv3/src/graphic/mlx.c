@@ -22,8 +22,12 @@ int		init_window(char **av, t_win *win)
 			&(win->bits_per_pixel),
 			&(win->size_line),
 			&(win->endian));
-	bg_gradient(win);
-	logo_center(win);
+	// bg_gradient(win);
+	// logo_center(win);
+	rtv1(win);
+
+	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
+
 	mlx_hook(win->win_ptr, 2, 1L << 2, key, win);
 	mlx_loop(win->mlx_ptr);
 	return (EXIT_SUCCESS);
@@ -31,6 +35,7 @@ int		init_window(char **av, t_win *win)
 
 int		key(int keycode, t_win *win)
 {
+	ft_printf("%d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
