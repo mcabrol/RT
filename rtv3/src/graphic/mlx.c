@@ -46,8 +46,7 @@ int		key(int keycode, t_rtv1 *rtv1)
 	{
 		pathtracer(rtv1);
 		bg_gradient(win);
-		mlx_string_put(win->mlx_ptr, win->win_ptr, (WIDTH / 2) - (400 / 2), (HEIGHT / 2), F_BLACK,
-			"Render ok. Press SPACE to display it :)");
+		finish_center(win);
 	}
 	if (keycode == 49)
 	{

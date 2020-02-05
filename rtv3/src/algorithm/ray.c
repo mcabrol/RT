@@ -12,12 +12,10 @@
 
 #include "rtv1.h"
 
-void	init_ray(t_vec o, t_vec d, double tmin, double tmax, int depth, t_ray *dest)
+void	init_ray(t_vec o, t_vec d, int depth, t_ray *dest)
 {
 	dest->o = o;
 	dest->d = d;
-	dest->tmin = tmin;
-	dest->tmax = tmax;
 	dest->depth = depth;
 }
 

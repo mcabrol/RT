@@ -12,6 +12,11 @@
 
 #include "rtv1.h"
 
+double		len(t_vec *v)
+{
+	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));
+}
+
 double		quadratic(double k1, double k2, double k3)
 {
 	double	des;
@@ -211,4 +216,54 @@ double		schlick_reflectance(double n1, double n2, double c)
 	double ro;
 	ro = reflectance(n1, n2);
 	return (ro + (1 - ro) * c * c * c * c * c);
+}
+
+double 		check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_object *obj)
+{
+	t_vec 	t;
+	t_vec 	ac;
+	t_vec	a;
+	t_vec	b;
+	t_vec	o;
+	t_vec	p;
+
+	t_vec 	oc;
+	double 	len_ac;
+	double	m[2];
+
+	t.z = T_MAX;
+	sub(origin, &obj->p, &oc);
+	quadratic_base(*k, &t);
+	if (t.x == T_MAX && t.y == T_MAX && t.z == T_MAX)
+        return (T_MAX);
+
+	m[0] = (dot(direction, &obj->d) * t.x) + dot(&oc, &obj->d);
+	nmulti(&obj->d, m[0], &a);
+	sub(&obj->p, &obj->p, &b);
+	sum(&a, &b, &ac);
+	len_ac = len(&ac);
+	if (obj->h != 0 && (len_ac > obj->h || dot(&ac, &obj->d) < 0))
+        t.x = T_MAX;
+	if (t.x != T_MAX && obj->cut != 0)
+	{
+		nmulti(direction, t.x, &o);
+		sum(origin, &o, &p);
+		t.x = check_cut(t.x, obj, &p);
+	}
+
+	m[1] = (dot(direction, &obj->d) * t.y) + dot(&oc, &obj->d);
+	nmulti(&obj->d, m[1], &a);
+	sub(&obj->p, &obj->p, &b);
+	sum(&a, &b, &ac);
+	len_ac = len(&ac);
+	if (obj->h != 0 && (len_ac > obj->h || dot(&ac, &obj->d) < 0))
+        t.y = T_MAX;
+	if (t.y != T_MAX && obj->cut != 0)
+	{
+		nmulti(direction, t.y, &o);
+		sum(origin, &o, &p);
+		t.y = check_cut(t.y, obj, &p);
+	}
+	t.z = define_tmin(t);
+	return (t.z);
 }

@@ -18,7 +18,6 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 	t_ray		*r;
 	size_t		id;
 	double		pr;
-	t_vec		n;
 	t_vec		light;
 	t_vec		u;
 	t_vec		v;
@@ -45,13 +44,15 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 		shape = &scene->obj[id];
 
 		// Next point
-		eval(r, r->tmax, &r->p);
+		eval(r, r->dist, &r->x);
 
 		// Norm object
 		if (shape->t == SPHERE)
 			sphere_normal(shape, r);
 		else if (shape->t == PLANE)
-			sphere_normal(shape, r);
+			plane_normal(shape, r);
+		else if (shape->t == CYLINDER)
+			cylinder_normal(shape, r);
 
 		// Light
 		multiplication(&mask, &shape->e, &light);
@@ -76,29 +77,25 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 		switch (shape->reflect) {
 
 		case SPEC: {
-			r->o = r->p;
-			specular_reflect(&r->d, &n, &r->d);
-			r->tmin = EPSILON_SPHERE;
-			r->tmax = INFINITY;
+			r->o = r->x;
+			specular_reflect(&r->d, &r->n, &r->d);
 			r->depth++;
 			break;
 		}
 
 		case REFR: {
-			r->o = r->p;
-			r->d = specular_transmit(&r->d, &n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, rt->xseed);
+			r->o = r->x;
+			r->d = specular_transmit(&r->d, &r->n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, rt->xseed);
 			nmulti_(&mask, pr);
-			r->tmin = EPSILON_SPHERE;
-			r->tmax = INFINITY;
 			r->depth++;
 			break;
 		}
 
 		default: {
-			 if (0.0 > dot(&n, &r->d))
-			 	w = n;
+			 if (0.0 > dot(&r->n, &r->d))
+			 	w = r->n;
 			else
-				minus(&n, &w);
+				minus(&r->n, &w);
 			t_vec _u = { 0.0, 0.0, 0.0 };
 			if (fabs(w.x) > 0.1) {
 				_u.y = 1.0;
@@ -115,10 +112,8 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 			nmulti(&w, sample_d.z, &_z);
 			sum(&_x, &_y, &_xy);
 			sum(&_xy, &_z, &d);
-			r->o = r->p;
+			r->o = r->x;
 			r->d = *norm(&d);;
-			r->tmin = EPSILON_SPHERE;
-			r->tmax = INFINITY;
 			r->depth++;
 		}
 		}

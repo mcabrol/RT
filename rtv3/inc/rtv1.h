@@ -20,7 +20,7 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# define SAMPLES 				8
+# define SAMPLES 				2000
 
 # define HEIGHT					650
 # define WIDTH					700
@@ -30,6 +30,7 @@
 
 # define SPHERE					0
 # define PLANE					1
+# define CYLINDER				2
 
 # define DIFF					0
 # define SPEC					1
@@ -47,6 +48,8 @@
 # define PI 					3.14159265358979323846
 # define EPSILON_SPHERE			1e-4
 # define GAMMA 					2.2
+# define T_MIN					0.01
+# define T_MAX 					1e20
 
 # define RAND48_SEED_0			(0x330e)
 # define RAND48_SEED_1			(0xabcd)
@@ -83,8 +86,8 @@ double 			norm_s(t_vec *v);
 **	ray.c
 */
 
-void			init_ray(t_vec o, t_vec d, double tmin, double tmax, int depth,
-				t_ray *dest);
+void			init_ray(t_vec o, t_vec d, int depth, t_ray *dest);
+
 void 			prepare_ray(t_render *rt, t_radiance *target, t_cam *cam);
 void			init_cam(t_cam *cam);
 void			eval(t_ray *r, double t, t_vec *dest);
@@ -101,7 +104,15 @@ void			radiance(t_scene *scene, t_ray *ray, t_render *rt);
 **	object.c
 */
 
-t_obj			sphere(int t, double r, t_vec p, t_vec d, t_vec e, t_vec c, int reflect);
+t_obj			sphere(int t,
+				   	   double r,
+				   	   double h,
+				   	   t_vec p,
+				   	   t_vec d,
+				   	   t_vec e,
+				   	   t_vec c,
+				   	   int cut,
+				   	   int reflect);
 
 /*
 **	scene.c
@@ -115,14 +126,18 @@ void 			init_scene(t_rtv1 *rtv1);
 
 void 			sphere_normal(t_obj *sphere, t_ray *ray);
 void 			plane_normal(t_obj *plane, t_ray *ray);
+void 			cylinder_normal(t_obj *cylinder, t_ray *ray);
+
 
 /*
 **	intersect.c
 */
 
 BOOL 			intersect(t_ray *ray, size_t *id, t_scene *scene);
-BOOL 			intersect_sphere(t_obj *sphere, t_ray *ray);
-BOOL			intersect_plane(t_obj *sphere, t_ray *ray);
+double 			intersect_sphere(t_obj *sphere, t_ray *ray);
+double			intersect_plane(t_obj *sphere, t_ray *ray);
+double			intersect_cylinder(t_obj *cylinder, t_ray *ray);
+
 
 
 /*
@@ -147,6 +162,7 @@ void			ndivide_(t_vec *v1, double n);
 **	calcul.c
 */
 
+double			len(t_vec *v);
 double			dot(t_vec *v1, t_vec *v2);
 double			max(t_vec *v);
 double			clamp(double x, double low, double high);
@@ -154,6 +170,11 @@ void			clamp3(t_vec *v, double low, double high, t_vec *dest);
 uint8_t			to_byte(double x, double gamma);
 double			reflectance(double n1, double n2);
 double			schlick_reflectance(double n1, double n2, double c);
+double			quadratic(double k1, double k2, double k3);
+void    		quadratic_base(t_vec k, t_vec *t);
+double			check_cut(double t_min, t_obj *obj, t_vec *p);
+double			define_tmin(t_vec t);
+double 			check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_obj *obj);
 
 /*
 **	sample.c
@@ -162,7 +183,7 @@ double			schlick_reflectance(double n1, double n2, double c);
 void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 
 /*
-**	sample.c
+**	srand48.c
 */
 
 void			init_seed(t_render *rt);
@@ -192,6 +213,8 @@ int				key(int keycode, t_rtv1 *rtv1);
 
 void 			bg_gradient(t_win *win);
 void 			logo_center(t_win *win);
+void 			finish_center(t_win *win);
+
 
 // void 			init_opencl(t_opencl *cl);
 

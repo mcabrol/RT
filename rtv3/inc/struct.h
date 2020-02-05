@@ -49,23 +49,24 @@ typedef struct			s_ray
 {
 	t_vec				o; 			// Origin
 	t_vec				d;			// Direction
-	int					dist;		// Distance
-	double				tmin;		// Distance min
-	double				tmax;		// Distance max
+	double				dist;		// Distance
 	int					depth;		// Depth
-	t_vec				p;			// Point intersect
+	t_vec				x;			// Point intersect
 	t_vec				n;			// Norm obj
-	t_vec				nl;			// Norm obj
 }						t_ray;
 
 typedef struct			s_obj
 {
 	int 				t;			// type
 	double				r;			// radius
+	double 				h; 			// height
 	t_vec				p;			// position
 	t_vec				d;			// direction
 	t_vec				e;			// emission
 	t_vec				c;			// color
+	int					cut;
+	t_vec 				cut_dir;
+	t_vec 				cut_shift;
 	int					reflect;	// material type
 }						t_obj;
 
@@ -81,7 +82,7 @@ typedef struct			s_cam
 typedef struct 			s_scene
 {
 	int					samples;
-	t_obj				obj[13];
+	t_obj				obj[11];
 }						t_scene;
 
 typedef struct			s_point
@@ -98,6 +99,7 @@ typedef struct			s_win
 	void				*win_ptr;
 	void				*img_ptr;
 	void 				*img_logo;
+	void 				*img_finish;
 	char				*data_ptr;
 	char				*tmp_data_ptr;
 	int					bits_per_pixel;

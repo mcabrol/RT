@@ -12,7 +12,14 @@
 
 #include "rtv1.h"
 
-t_object	obj(int t, double r, double h, t_vec p, t_vec d, t_vec e, t_vec f, int reflect)
+t_object	obj(int t,
+				double r,
+				double h,
+				t_vec p,
+				t_vec d,
+				t_vec e,
+				t_vec f,
+				int reflect)
 {
 	t_object obj;
 

@@ -161,6 +161,7 @@ void			norm_(t_vec *v, t_vec *dest);
 **	calcul.c
 */
 
+double			len(t_vec *v);
 double			dot(t_vec *v1, t_vec *v2);
 double			ndot(t_vec *v1, double n);
 double			max(t_vec *v);

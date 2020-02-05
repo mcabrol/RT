@@ -44,7 +44,7 @@ void 		pathtracer(t_rtv1 *rtv1)
 					while (++(render->s) < scene->samples)
 					{
 						prepare_ray(render, &target, &cam);
-						init_ray(target.eye_t, *norm(&target.d), EPSILON_SPHERE, INFINITY, 0, &ray);
+						init_ray(target.eye_t, *norm(&target.d), 0, &ray);
 						radiance(scene, &ray, render);
 						ndivide(&render->color, (double)scene->samples, &render->l);
 						sum_(&render->accucolor, &render->l);
