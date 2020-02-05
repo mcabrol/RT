@@ -19,6 +19,7 @@ t_obj		sphere(int t,
 				   t_vec d,
 				   t_vec e,
 				   t_vec c,
+				   double a,
 				   int cut,
 				   int reflect)
 {
@@ -31,6 +32,7 @@ t_obj		sphere(int t,
 	sphere.d = d;
 	sphere.e = e;
 	sphere.c = c;
+	sphere.a = a;
 	sphere.cut = cut;
 	sphere.reflect = reflect;
 	return (sphere);

@@ -114,7 +114,7 @@ double		check_cut(double t_min, t_obj *obj, t_vec *p)
     t_vec		pc;
 
 	vec(0.0, 0.0, 0.0, &obj->cut_shift);
-	vec(0.0, 1.0, 0.0, &obj->cut_shift);
+	vec(1.0, 1.0, 2.0, &obj->cut_dir);
 	sum(&obj->p, &obj->cut_shift, &cut_plane_pos);
 	sub(p, &cut_plane_pos, &pc);
     if (dot(&obj->cut_dir, &pc) >= 0)

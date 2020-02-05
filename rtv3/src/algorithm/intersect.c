@@ -33,6 +33,8 @@ BOOL 	intersect(t_ray *ray, size_t *id, t_scene *scene)
 			distance = intersect_plane(obj, ray);
 		else if (obj->t == CYLINDER)
 			distance = intersect_cylinder(obj, ray);
+		else if (obj->t == CONE)
+			distance = intersect_cone(obj, ray);
 		if (distance >= T_MIN && distance < ray->dist)
 		{
 			hit = TRUE;
@@ -90,5 +92,21 @@ double		intersect_cylinder(t_obj *cylinder, t_ray *ray)
 	k.y = 2 * (dot(&ray->d, &oc) - dot(&ray->d, &cylinder->d) * dot(&oc, &cylinder->d));
 	k.z = dot(&oc, &oc) - pow(dot(&oc, &cylinder->d), 2) - cylinder->r * cylinder->r;
 	t_min = check_pnt(&k, &ray->d, &ray->o, cylinder);
+	return (t_min);
+}
+
+double		intersect_cone(t_obj *cone, t_ray *ray)
+{
+	t_vec		oc;
+	t_vec		k;
+	double		a;
+	double		t_min;
+
+	sub(&ray->o, &cone->p, &oc);
+	a = 1 + cone->a * cone->a;
+	k.x = dot(&ray->d, &ray->d) - a * pow(dot(&ray->d, &cone->d), 2);
+	k.y = 2 * (dot(&ray->d, &oc) - a * dot(&ray->d, &cone->d) * dot(&oc, &cone->d));
+	k.z = dot(&oc, &oc) - a * pow(dot(&oc, &cone->d), 2);
+	t_min = check_pnt(&k, &ray->d, &ray->o, cone);
 	return (t_min);
 }

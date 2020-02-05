@@ -52,3 +52,37 @@ void 	cylinder_normal(t_obj *cylinder, t_ray *ray)
 	else
 		minus(&nl, &ray->n);
 }
+
+void 	cone_normal(t_obj *cone, t_ray *ray)
+{
+	t_vec		nl;
+	t_vec   	ac;
+	t_vec   	a;
+	t_vec 		b;
+	t_vec		oc;
+	double		m;
+	t_vec		c;
+	t_vec		d;
+	double 		len_ac;
+	double		radius;
+	double		koef;
+	double		k;
+
+	sub(&ray->o, &cone->p, &oc);
+	m = (dot(&ray->d, &cone->d) * ray->dist) + dot(&oc, &cone->d);
+	nmulti(&cone->d, m, &a);
+	sub(&cone->p, &cone->p, &b);
+	sum(&a, &b, &ac);
+	len_ac = len(&ac);
+	radius = len_ac * cone->a;
+	k = radius / m;
+	koef = (1 + k * k) * m;
+	nmulti(&cone->d, koef, &d);
+	sub(&ray->x, &cone->p, &c);
+	sub(&c, &d, &ray->n);
+	nl = *norm(&ray->n);
+	if (dot(&nl, &ray->d) < 0)
+		ray->n = nl;
+	else
+		minus(&nl, &ray->n);
+}

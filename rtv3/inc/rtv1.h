@@ -20,7 +20,7 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# define SAMPLES 				2000
+# define SAMPLES 				3000
 
 # define HEIGHT					650
 # define WIDTH					700
@@ -31,6 +31,7 @@
 # define SPHERE					0
 # define PLANE					1
 # define CYLINDER				2
+# define CONE					3
 
 # define DIFF					0
 # define SPEC					1
@@ -105,14 +106,15 @@ void			radiance(t_scene *scene, t_ray *ray, t_render *rt);
 */
 
 t_obj			sphere(int t,
-				   	   double r,
-				   	   double h,
-				   	   t_vec p,
-				   	   t_vec d,
-				   	   t_vec e,
-				   	   t_vec c,
-				   	   int cut,
-				   	   int reflect);
+					   double r,
+					   double h,
+					   t_vec p,
+					   t_vec d,
+					   t_vec e,
+					   t_vec c,
+					   double a,
+					   int cut,
+					   int reflect);
 
 /*
 **	scene.c
@@ -127,6 +129,8 @@ void 			init_scene(t_rtv1 *rtv1);
 void 			sphere_normal(t_obj *sphere, t_ray *ray);
 void 			plane_normal(t_obj *plane, t_ray *ray);
 void 			cylinder_normal(t_obj *cylinder, t_ray *ray);
+void 			cone_normal(t_obj *cone, t_ray *ray);
+
 
 
 /*
@@ -137,6 +141,8 @@ BOOL 			intersect(t_ray *ray, size_t *id, t_scene *scene);
 double 			intersect_sphere(t_obj *sphere, t_ray *ray);
 double			intersect_plane(t_obj *sphere, t_ray *ray);
 double			intersect_cylinder(t_obj *cylinder, t_ray *ray);
+double			intersect_cone(t_obj *cone, t_ray *ray);
+
 
 
 

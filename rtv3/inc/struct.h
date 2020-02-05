@@ -64,6 +64,7 @@ typedef struct			s_obj
 	t_vec				d;			// direction
 	t_vec				e;			// emission
 	t_vec				c;			// color
+	double				a;			// angle
 	int					cut;
 	t_vec 				cut_dir;
 	t_vec 				cut_shift;
