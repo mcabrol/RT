@@ -6,85 +6,107 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 19:42:02 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:41:05 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		intersect(t_vec *origin, t_vec *direction, t_radiance *radiance, t_render *render)
+BOOL 	intersect(t_ray *ray, size_t *id, t_scene *scene)
 {
-	double		distance;
-	int			n;
-	int			i;
+	BOOL		hit;
+	double 		distance;
+	t_obj		*obj;
+	size_t		n;
+	size_t		i;
 
-	n = sizeof(render->object) / sizeof(t_object);
-	i = 0;
-	radiance->id = -1;
+	hit = FALSE;
+	n = sizeof(scene->obj) / sizeof(t_obj);
+	i = 0u;
+	ray->dist = T_MAX;
 	while (i < n)
 	{
-		if (render->object[i].type == SPHERE)
-			distance = intersect_sphere(&render->object[i], origin, direction);
-		else if (render->object[i].type == PLANE)
-			distance = intersect_plane(&render->object[i], origin, direction);
-		else if (render->object[i].type == CYLINDER)
-			distance = intersect_cylinder(&render->object[i], origin, direction);
-		if (distance >= T_MIN && distance < radiance->distance)
+		obj = &scene->obj[i];
+		if (obj->t == SPHERE)
+			distance = intersect_sphere(obj, ray);
+		else if (obj->t == PLANE)
+			distance = intersect_plane(obj, ray);
+		else if (obj->t == CYLINDER)
+			distance = intersect_cylinder(obj, ray);
+		else if (obj->t == CONE)
+			distance = intersect_cone(obj, ray);
+		if (distance >= T_MIN && distance < ray->dist)
 		{
-			radiance->distance = distance;
-			radiance->id = i;
+			hit = TRUE;
+			ray->dist = distance;
+			*id = i;
 		}
 		i++;
 	}
+	return (hit);
 }
 
-double		intersect_sphere(t_object *obj, t_vec *origin, t_vec *direction)
+double 	intersect_sphere(t_obj *sphere, t_ray *ray)
 {
 	t_vec	oc;
 	t_vec	k;
 	double	tmin;
 
-	sub(origin, &obj->position, &oc);
-	k.x = dot(direction, direction);
-	k.y = 2 * dot(&oc, direction);
-	k.z = dot(&oc, &oc) - obj->radius * obj->radius;
+	sub(&ray->o, &sphere->p, &oc);
+	k.x = dot(&ray->d, &ray->d);
+	k.y = 2 * dot(&oc, &ray->d);
+	k.z = dot(&oc, &oc) - sphere->r * sphere->r;
 	// Need to check if neg
 	tmin = quadratic(k.x, k.y, k.z);
 	return (tmin);
 }
 
-double		intersect_plane(t_object *obj, t_vec *origin, t_vec *direction)
+double	intersect_plane(t_obj *plane, t_ray *ray)
 {
-	// ov		Direction
-	// point	Origin
 	t_vec		oc;
 	double		k1;
 	double		k2;
 	double		koef;
 	double		t;
 
-	sub(origin, &obj->position, &oc);
+	sub(&ray->o, &plane->p, &oc);
 	koef = 1;
 	t = T_MAX;
-	if ((k1 = dot(direction, &obj->direction)) == 0)
-		return (t);
-	k2 = dot(&oc, &obj->direction);
+	if ((k1 = dot(&ray->d, &plane->d)) == 0)
+		return (FALSE);
+	k2 = dot(&oc, &plane->d);
 	if (k1 == k2)
 		koef = -1;
 	t = -k2 / k1 * koef;
 	return (t);
 }
 
-double		intersect_cylinder(t_object *obj, t_vec *origin, t_vec *direction)
+double		intersect_cylinder(t_obj *cylinder, t_ray *ray)
 {
 	t_vec	oc;
 	t_vec	k;
 	double	t_min;
 
-	sub(origin, &obj->position, &oc);
-	k.x = dot(direction, direction) - pow(dot(direction, &obj->direction), 2);
-	k.y = 2 * (dot(direction, &oc) - dot(direction, &obj->direction) * dot(&oc, &obj->direction));
-	k.z = dot(&oc, &oc) - pow(dot(&oc, &obj->direction), 2) - obj->radius * obj->radius;
-	t_min = check_pnt(&k, direction, origin, obj);
+	sub(&ray->o, &cylinder->p, &oc);
+	k.x = dot(&ray->d, &ray->d) - pow(dot(&ray->d, &cylinder->d), 2);
+	k.y = 2 * (dot(&ray->d, &oc) - dot(&ray->d, &cylinder->d) * dot(&oc, &cylinder->d));
+	k.z = dot(&oc, &oc) - pow(dot(&oc, &cylinder->d), 2) - cylinder->r * cylinder->r;
+	t_min = check_pnt(&k, &ray->d, &ray->o, cylinder);
+	return (t_min);
+}
+
+double		intersect_cone(t_obj *cone, t_ray *ray)
+{
+	t_vec		oc;
+	t_vec		k;
+	double		a;
+	double		t_min;
+
+	sub(&ray->o, &cone->p, &oc);
+	a = 1 + cone->a * cone->a;
+	k.x = dot(&ray->d, &ray->d) - a * pow(dot(&ray->d, &cone->d), 2);
+	k.y = 2 * (dot(&ray->d, &oc) - a * dot(&ray->d, &cone->d) * dot(&oc, &cone->d));
+	k.z = dot(&oc, &oc) - a * pow(dot(&oc, &cone->d), 2);
+	t_min = check_pnt(&k, &ray->d, &ray->o, cone);
 	return (t_min);
 }

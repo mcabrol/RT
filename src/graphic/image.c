@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 23:00:45 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/02/06 20:24:07 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	 	loading_text(int samples, int y)
+void 		image(t_rtv1 *rtv1)
 {
-	ft_dprintf(2, "\r%u samples %5.2f%%", samples * 4, 100.0 * y / (HEIGHT - 1));
+	int		x;
+	int		y;
+	int		i;
+
+	y = 0;
+	while (y <= HEIGHT)
+	{
+		x = 0;
+		while (x <= WIDTH)
+		{
+			i = (HEIGHT - 1 - y) * WIDTH + x - 1;
+			put_pixel_vector(&rtv1->win,
+							 WIDTH - x, HEIGHT - y,
+							 &rtv1->render.screen[i]);
+			x++;
+		}
+		y++;
+	}
+	free(rtv1->render.screen);
 }

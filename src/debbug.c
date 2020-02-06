@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debbug.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/29 15:58:19 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/31 19:50:40 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/01/17 23:00:45 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	loading_text(t_render *render)
+void 	 	loading_text(int samples, int y)
 {
-	float 	pourcent;
-	char 	*s;
-
-	pourcent = 100 * render->y / (HEIGHT - 1);
-	ft_printf("\r%us %d%%", render->samples, (int)pourcent);
-	s = ft_itoa((int)pourcent);
-	mlx_string_put(render->win.mlx_ptr, render->win.win_ptr, 10, 4, F_BLACK, s);
+	ft_dprintf(2, "\r%u samples %5.2f%%", samples * 4, 100.0 * y / (HEIGHT - 1));
 }

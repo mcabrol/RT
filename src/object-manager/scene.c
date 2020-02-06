@@ -6,121 +6,88 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/31 20:13:39 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/06 19:37:11 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	init_scene(t_render *render)
+void 	init_scene(t_rtv1 *rtv1)
 {
-	render->samples = SAMPLES / 4;
-	// render->object[0] = obj(PLANE, 1e5, 0,					// type // radius // RIGHT
-	// 					 vecp(1.0, 40.8, 81.6), 			// position
-	// 					 vecp(15.0, 0.0, 0.0), 				// direction
-	// 					 vecp(0.0, 0.0, 0.0),			// emission
-	// 					 vecp(0.0, 0.0, 0.0),				// color
-	// 					 DIFFUSE);							// material
-	// render->object[1] = obj(PLANE, 1e5, 0,								// LEFT
-	// 					 vecp(99.0, 40.8, 81.6),
-	// 					 vecp(15.0, 0.0, 0.0),
-	// 					 vecp(0.0, 0.0, 0.0),
-	// 					 vecp(0.0, 0.0, 0.0),
-	// 					 DIFFUSE);
-	// render->object[2] = obj(PLANE, 1e5, 0,								// TOP
-	// 					vecp(50.0, 82.0, 1e5),
-	// 					vecp(0.0, 1.0, 0.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 				 	DIFFUSE);
-	// render->object[3] = obj(PLANE, 1e5, 0,								// FLOOR
-	// 					vecp(0.0, 0.0, 0.0),
-	// 					vecp(0.0, 1.0, 0.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 				 	DIFFUSE);
-	// render->object[4] = obj(PLANE, 1e5, 0,										// BACK
-	// 					vecp(73.0, 16.5, 0.0),
-	// 					vecp(0.0, 0.0, -15.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 				 	DIFFUSE);
-	render->object[0] = obj(SPHERE, 1e5, 0,					// type // radius // RIGHT
-						 vecp(-1e5 + 99.0, 40.8, 81.6), 			// position
-						 vecp(15.0, 0.0, 0.0), 				// direction
-						 vecp(0.0, 0.0, 0.0),			// emission
-						 vecp(0.75, 0.25, 0.25),				// color
-						 DIFFUSE);							// material
-	render->object[1] = obj(SPHERE, 1e5, 0,								// LEFT
-						 vecp(1e5 + 1.0, 40.8, 81.6),
-						 vecp(15.0, 0.0, 0.0),
-						 vecp(0.0, 0.0, 0.0),
-						 vecp(0.0, 0.0, 0.0),
-						 DIFFUSE);
-	render->object[2] = obj(SPHERE, 1e5, 0,								// TOP
-						vecp(50.0, 40.8, -1e5 + 170.0),
-						vecp(0.0, 1.0, 0.0),
-						vecp(0.0, 0.0, 0.0),
-						vecp(0.0, 0.0, 0.0),
-					 	DIFFUSE);
-	render->object[3] = obj(SPHERE, 1e5, 0,								// FLOOR
-						vecp(50.0, 1e5, 81.6),
-						vecp(0.0, 1.0, 0.0),
-						vecp(0.0, 0.0, 0.0),
-						vecp(0.0, 0.0, 0.0),
-					 	DIFFUSE);
-	render->object[4] = obj(SPHERE, 1e5, 0,										// BACK
-						vecp(73.0, 16.5, 0.0),
-						vecp(0.0, 0.0, -15.0),
-						vecp(0.0, 0.0, 0.0),
-						vecp(0.0, 0.0, 0.0),
-					 	DIFFUSE);
-	// render->object[5] = obj(SPHERE, 5.0, 0,										// LIGHT BACK LEFT
-	// 					vecp(100.0 - 10.0, 0.0 + 10.0, 0.0 + 10.0),
-	// 					vecp(0.0, 1.0, 0.0),
-	// 					vecp(15.0, 15.0, 15.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 				 	DIFFUSE);
-	// render->object[6] = obj(SPHERE, 5.0, 0.0,									// LIGHT BACK RIGHT
-	// 					vecp(0.0 + 10.0, 0.0 + 10.0, 0.0 + 10.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 					vecp(12.0, 12.0, 12.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 					DIFFUSE);
-	render->object[5] = obj(SPHERE, 600.0, 0.0,									// LIGHT TOP
-						vecp(50.0, 681.6 - .27, 81.6),
-						vecp(0.0, 0.0, 0.0),
-						vecp(12.0, 12.0, 12.0),
-						vecp(0.0, 0.0, 0.0),
-						DIFFUSE);
-	// render->object[8] = obj(SPHERE, 5.0, 0,										// LIGHT FRONT LEFT
-	// 					vecp(100.0 - 10.0, 0.0 + 10.0, 120.0 + 10.0),
-	// 					vecp(0.0, 1.0, 0.0),
-	// 					vecp(15.0, 15.0, 15.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 				 	DIFFUSE);
-	// render->object[9] = obj(SPHERE, 5.0, 0.0,									// LIGHT FRONT RIGHT
-	// 					vecp(0.0 + 10.0, 0.0 + 10.0, 120.0 + 10.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 					vecp(12.0, 12.0, 12.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 					DIFFUSE);
-	// render->object[7] = obj(CYLINDER, 50.0, 0.0,								// CYLINDER
-	// 					vecp(72.0, 16.5, 50.0),
-	// 					vecp(0.0, 1.0, 0.0),
-	// 					vecp(0.0, 0.0, 0.0),
-	// 					vecp(25.0, 25.0, 80.0),
-	// 					DIFFUSE);
-	render->object[6] = obj(SPHERE, 16.5, 0,									// SPHERE
-						vecp(73.0, 16.5, 78.0),
-						vecp(0.0, 0.0, 0.0),
-						vecp(0.0, 0.0, 0.0),
-						vecp(0.75, 0.25, 0.25),
-						DIFFUSE);
-	render->object[7] = obj(SPHERE, 16.5, 0,									// SPHERE SPEC
-						vecp(30.0, 16.5, 78.0),
-						vecp(0.0, 0.0, 0.0),
-						vecp(0.0, 0.0, 0.0),
-						vecp(0.0, 0.0, 0.0),
-						SPECULAR);
+	t_scene *scene;
+
+	scene = &rtv1->scene;
+	scene->samples = SAMPLES / 4;
+	scene->obj[0] = sphere(PLANE, 1e5, 0.0,					// type // radius 		// RIGHT
+					vecp(1.0, 40.8, 81.6), 				// position
+					vecp(15.0, 0.0, 0.0), 				// direction
+					vecp(0.0, 0.0, 0.0),				// emission
+					vecp(0.40, 0.40, 0.40),				// color
+					0, 0, SPEC);								// material
+	scene->obj[1] = sphere(PLANE, 1e5, 0.0,											// LEFT
+					vecp(99.0, 40.8, 81.6),
+					vecp(15.0, 0.0, 0.0),
+					vecp(0.0, 0.0, 0.0),
+					vecp(0.40, 0.40, 0.40),
+					0, 0, SPEC);
+	scene->obj[2] = sphere(PLANE, 1e5, 0.0,											// TOP
+					vecp(50.0, 82.0, 1e5),
+					vecp(0.0, 1.0, 0.0),
+					vecp(0.0, 0.0, 0.0),
+					vecp(0.5, 0.5, 0.5),
+					0, 0, SPEC);
+	scene->obj[3] = sphere(PLANE, 1e5, 0.0,											// FLOOR
+					vecp(0.0, 0.0, 0.0),
+					vecp(0.0, 1.0, 0.0),
+					vecp(0.0, 0.0, 0.0),
+					vecp(0.5, 0.5, 0.5),
+					0, 0, SPEC);
+	scene->obj[4] = sphere(PLANE, 1e5, 0.0,											// BACK
+					vecp(73.0, 16.5, 0.0),
+					vecp(0.0, 0.0, -15.0),
+					vecp(0.0, 0.0, 0.0),
+					vecp(0.75,0.25,0.25),
+					0, 0, DIFF);
+	scene->obj[5] = sphere(PLANE, 1e5, 0.0,											// FRONT
+					vecp(73.0, 16.5, 180.0),
+					vecp(0.0, 0.0, -15.0),
+					vecp(0.0, 0.0, 0.0),
+					vecp(0.25,0.25,0.75),
+					0, 0, DIFF);
+	scene->obj[6] = sphere(SPHERE, 35.0, 50.0,										// SPHERE
+					vecp(50.0, 35.0, 47.0),
+					vecp(1.0, 1.0, 4.0),
+					vecp(0.0, 0.0, 0.0),
+					vecp(0.25,0.25,0.75),
+					25.0, 1, DIFF);
+	scene->obj[7] = sphere(CYLINDER, 5.0, 0.0,									// CYLINDER LEFT TOP
+					vecp(99.0, 82.0, 0.0),
+					vecp(0.0, 0.0, 1.0),
+					vecp(12.0, 12.0, 12.0),
+					vecp(0.0, 0.0, 0.0),
+					0, 0, DIFF);
+	scene->obj[8] = sphere(CYLINDER, 5.0, 0.0,									// CYLINDER RIGHT TOP
+					vecp(0.0, 82.0, 0.0),
+					vecp(0.0, 0.0, 1.0),
+					vecp(12.0, 12.0, 12.0),
+					vecp(0.25, 0.25, 0.25),
+					0, 0, DIFF);
+	scene->obj[9] = sphere(CYLINDER, 5.0, 0.0,									// CYLINDER LEFT BOTTOM
+					vecp(99.0, 0.0, 0.0),
+					vecp(0.0, 0.0, 1.0),
+					vecp(12.0, 12.0, 12.0),
+					vecp(0.0, 0.0, 0.0),
+					0, 0, DIFF);
+	scene->obj[10] = sphere(CYLINDER, 5.0, 0.0,									// CYLINDER RIGHT BOTTOM
+					vecp(0.0, 0.0, 0.0),
+					vecp(0.0, 0.0, 1.0),
+					vecp(12.0, 12.0, 12.0),
+					vecp(0.25, 0.25, 0.25),
+					0, 0, DIFF);
+	// scene->obj[8] = sphere(SPHERE, 600, 0.0,
+	// 				vecp(50.0, 681.6 - .27, 50.0),
+	// 				vecp(0.0, 0.0, 0.0),
+	// 				vecp(12.0, 12.0, 12.0),
+	// 				vecp(0.0, 0.0, 0.0),
+	// 				0, DIFF); 														// LIGHT
 }

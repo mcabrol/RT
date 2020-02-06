@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/31 20:13:43 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/06 19:06:12 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,54 +20,77 @@ typedef struct			s_vec
 	double 				z;
 }						t_vec;
 
-typedef struct			s_object
+typedef struct			s_render
 {
-	int					type;			// object type
-	double				radius;			// radius
-	t_vec				position;		// position
-	t_vec 				direction;		// direction
-	t_vec				emission;		// emission
-	t_vec				color;			// color
-	t_vec				normal;			// normal
-	t_vec				center;			// center
-	t_vec				reflection;		// reflection
-	int 				cut;
-	t_vec				cut_shift;
-	t_vec				cut_dir;
-	double 				height;
-	t_vec				axis;			// axis
-	float				angle;			// angle
-	int					reflect;		// material type
-}						t_object;
-
-typedef struct			s_camera
-{
-	t_vec				position;
-	t_vec				direction;
-	int					i;
-}						t_camera;
+	int					x;			// Screen x counter
+	int					y;			// Screen y counter
+	int					s;			// Sample counter
+	unsigned int		i;			// Cursor
+	int					sx;			// Zone render x
+	int					sy;			// Zone render y
+	t_vec				l;
+	t_vec				accucolor;  // Color accumulation
+	t_vec				color;		// Color calculated
+	unsigned short		xseed[3];	// Generate random float
+	t_vec				*screen;	// Result
+}						t_render;
 
 typedef struct			s_radiance
 {
-	t_vec				direction;
-	t_vec				origin;
-	t_object			elena;
-	t_vec				x;
-	t_vec				n;
-	t_vec				nl;
-	t_vec				f;
-	t_vec				res;
-	double				distance;
-	double				type_inter;
-	double				p;
-	double				pdf;
-	int					id;
-	int					l_id;
-	int					neg;
-	int					depth;
-	t_vec 				accucolor;
-	t_vec				pos;
+	t_vec				a;
+	t_vec				b;
+	t_vec				ab;
+	t_vec				d_t;		// Directon tmp
+	t_vec				eye_t;		// Eye tmp
+	t_vec				d;			// Vector for ray
 }						t_radiance;
+
+typedef struct			s_ray
+{
+	t_vec				o; 			// Origin
+	t_vec				d;			// Direction
+	double				dist;		// Distance
+	int					depth;		// Depth
+	t_vec				x;			// Point intersect
+	t_vec				n;			// Norm obj
+}						t_ray;
+
+typedef struct			s_obj
+{
+	int 				t;			// type
+	double				r;			// radius
+	double 				h; 			// height
+	t_vec				p;			// position
+	t_vec				d;			// direction
+	t_vec				e;			// emission
+	t_vec				c;			// color
+	double				a;			// angle
+	int					cut;
+	t_vec 				cut_dir;
+	t_vec 				cut_shift;
+	int					reflect;	// material type
+}						t_obj;
+
+typedef struct			s_cam
+{
+	double				fov;
+	t_vec				gaze;
+	t_vec				eye;
+	t_vec				cx;
+	t_vec				cy;
+}						t_cam;
+
+typedef struct 			s_scene
+{
+	int					samples;
+	t_obj				obj[11];
+}						t_scene;
+
+typedef struct			s_point
+{
+	int					x;
+	int					y;
+}						t_point;
 
 typedef struct			s_win
 {
@@ -77,6 +100,7 @@ typedef struct			s_win
 	void				*win_ptr;
 	void				*img_ptr;
 	void 				*img_logo;
+	void 				*img_finish;
 	char				*data_ptr;
 	char				*tmp_data_ptr;
 	int					bits_per_pixel;
@@ -84,55 +108,31 @@ typedef struct			s_win
 	int					endian;
 }						t_win;
 
-typedef struct			s_opencl
+typedef struct			s_rtv1
 {
-	cl_context			context;
-	cl_command_queue	queue;
-	cl_platform_id		platform_id;
-	cl_uint				ret_num_platforms;
-	cl_uint				ret_num_devices;
-	cl_device_id		device_id;
-	cl_program			program;
-	cl_kernel			kernel;
-	char				**kernel_src;
-	cl_mem				scene;
-	cl_mem				objects;
-	cl_mem				lights;
-	cl_mem				camera;
-	cl_mem				img_data;
-}						t_opencl;
+	int					ac;
+	char 				**av;
+	t_win 				win;
+	t_scene				scene;
+	t_render 			render;
+}						t_rtv1;
 
-typedef struct			s_render
-{
-	t_vec				ray[2];		// Ray[0] = origin Ray[1] = direction
-	t_vec 				l_t;
-	t_vec				cx;
-	t_vec				cy;
-	t_vec				color;
-	double				dx;
-	double				dy;
-	double				rand;
-	t_vec 				bottom_left;// View plane bottom left point
-	int					x;			// Screen x counter
-	int					y;			// Screen y counter
-	int					sx;
-	int					sy;
-	int					s;			// Samples counter
-	int 				num;		// Random start number
-	unsigned short		xseed[3];
-	int 				samples;
-	t_camera 			camera;
-	t_object			object[8];
-	t_win				win;
-	t_vec				*screen;
-}						t_render;
-
-typedef struct			s_thread
-{
-	pthread_t			thread;
-	unsigned int 		x;
-	unsigned int 		max;
-	t_render			*render;
-}						t_thread;
+// typedef struct			s_opencl
+// {
+// 	cl_context			context;
+// 	cl_command_queue	queue;
+// 	cl_platform_id		platform_id;
+// 	cl_uint				ret_num_platforms;
+// 	cl_uint				ret_num_devices;
+// 	cl_device_id		device_id;
+// 	cl_program			program;
+// 	cl_kernel			kernel;
+// 	char				**kernel_src;
+// 	cl_mem				scene;
+// 	cl_mem				objects;
+// 	cl_mem				lights;
+// 	cl_mem				camera;
+// 	cl_mem				img_data;
+// }						t_opencl;
 
 #endif

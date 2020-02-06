@@ -5,73 +5,84 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 16:54:01 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 20:03:29 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/01/13 17:55:37 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/02/04 18:58:00 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	eval(t_vec *origin, t_vec *direction, double t, t_vec *dest)
+void 	sphere_normal(t_obj *sphere, t_ray *ray)
 {
-	t_vec dt;
-
-	nmulti(direction, t, &dt);
-	sum(origin, &dt, dest);
+	sub(&ray->x, &sphere->p, &ray->n);
+	norm(&ray->n);
 }
 
-void	plane_normal(t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj)
+void 	plane_normal(t_obj *plane, t_ray *ray)
 {
-	t_vec 	tmp;
+	t_vec nl;
 
-	nmulti(direction, radiance->distance, &tmp);
-	sum(origin, &tmp, &radiance->x);
-	if (dot(direction,direction) > 0)
-		minus(&obj->direction, &radiance->n);
+	if (dot(&ray->d, &ray->d) > 0)
+		minus(&plane->d, &ray->n);
 	else
-		radiance->n = obj->direction;
-	radiance->nl = *norm(&radiance->n);
-	if (dot(&radiance->nl, direction) < 0)
-		radiance->n = radiance->nl;
+		ray->n = plane->d;
+	nl = *norm(&ray->n);
+	if (dot(&nl, &ray->d) < 0)
+		ray->n = nl;
 	else
-		minus(&radiance->nl, &radiance->n);
+		minus(&nl, &ray->n);
 }
 
-void	sphere_normal(t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj)
-{
-	t_vec 	tmp;
-
-	nmulti(direction, radiance->distance, &tmp);
-	sum(origin, &tmp, &radiance->x);
-	sub(&radiance->x, &obj->position, &radiance->n);
-	radiance->nl = *norm(&radiance->n);
-	if (dot(&radiance->nl, direction) < 0)
-		radiance->n = radiance->nl;
-	else
-		minus(&radiance->nl, &radiance->n);
-}
-
-void 	cylinder_normal(t_radiance *radiance, t_vec *origin, t_vec *direction, t_object *obj)
+void 	cylinder_normal(t_obj *cylinder, t_ray *ray)
 {
 	double	m;
-	t_vec 	tmp;
 	t_vec	oc;
 	t_vec	a;
 	t_vec	b;
+	t_vec	nl;
 
-	nmulti(direction, radiance->distance, &tmp);
-	sum(origin, &tmp, &radiance->x);
-
-	sub(origin, &obj->position, &oc);
-
-	m = (dot(direction, &obj->direction) * radiance->distance) + dot(&oc, &obj->direction);
-
-	nmulti(&obj->direction, m, &a);
-	sub(&radiance->x, &obj->position, &b);
-	sub(&a, &b, &radiance->n);
-	radiance->nl = *norm(&radiance->n);
-	if (dot(&radiance->nl, direction) < 0)
-		radiance->n = radiance->nl;
+	sub(&ray->o, &cylinder->p, &oc);
+	m = (dot(&ray->d, &cylinder->d) * ray->dist) + dot(&oc, &cylinder->d);
+	nmulti(&cylinder->d, m, &a);
+	sub(&ray->x, &cylinder->p, &b);
+	sub(&a, &b, &ray->n);
+	nl = *norm(&ray->n);
+	if (dot(&nl, &ray->d) < 0)
+		ray->n = nl;
 	else
-		minus_(&radiance->nl);
+		minus(&nl, &ray->n);
+}
+
+void 	cone_normal(t_obj *cone, t_ray *ray)
+{
+	t_vec		nl;
+	t_vec   	ac;
+	t_vec   	a;
+	t_vec 		b;
+	t_vec		oc;
+	double		m;
+	t_vec		c;
+	t_vec		d;
+	double 		len_ac;
+	double		radius;
+	double		koef;
+	double		k;
+
+	sub(&ray->o, &cone->p, &oc);
+	m = (dot(&ray->d, &cone->d) * ray->dist) + dot(&oc, &cone->d);
+	nmulti(&cone->d, m, &a);
+	sub(&cone->p, &cone->p, &b);
+	sum(&a, &b, &ac);
+	len_ac = len(&ac);
+	radius = len_ac * cone->a;
+	k = radius / m;
+	koef = (1 + k * k) * m;
+	nmulti(&cone->d, koef, &d);
+	sub(&ray->x, &cone->p, &c);
+	sub(&c, &d, &ray->n);
+	nl = *norm(&ray->n);
+	if (dot(&nl, &ray->d) < 0)
+		ray->n = nl;
+	else
+		minus(&nl, &ray->n);
 }

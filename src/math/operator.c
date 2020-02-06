@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/29 16:37:41 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:43:39 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,7 @@ void		sub(t_vec *v1, t_vec *v2, t_vec *dest)
 	vec(v1->x - v2->x, v1->y - v2->y, v1->z - v2->z, dest);
 }
 
-void		sub_(t_vec *v1, t_vec *v2)
-{
-	v1->x -= v2->x;
-	v1->y -= v2->y;
-	v1->z -= v2->z;
-}
-
-void		multi(t_vec *v1, t_vec *v2, t_vec *dest)
+void		multiplication(t_vec *v1, t_vec *v2, t_vec *dest)
 {
 	vec(v1->x * v2->x, v1->y * v2->y, v1->z * v2->z, dest);
 }
@@ -93,16 +86,9 @@ void		minus(t_vec *v, t_vec *dest)
 	vec(-v->x, -v->y, -v->z, dest);
 }
 
-void		minus_(t_vec *v)
-{
-	v->x = -v->x;
-	v->y = -v->y;
-	v->z = -v->z;
-}
-
 void		cross(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	vec((v1->y * v2->z) - (v1->z * v2->y),
-		(v1->z * v2->x) - (v1->x * v2->z),
-		(v1->x * v2->y) - (v1->y * v2->x), dest);
+	vec(v1->y * v2->z - v1->z * v2->y,
+				v1->z * v2->x - v1->x * v2->z,
+				v1->x * v2->y - v1->y * v2->x, dest);
 }

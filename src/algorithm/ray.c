@@ -6,58 +6,62 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/31 17:50:19 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:51:52 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	init_camera(t_render *render)
+void	init_ray(t_vec o, t_vec d, int depth, t_ray *dest)
 {
-	double 	fov;
-	t_vec	c1;
-
-	fov = 0.5135;
-	vec(50, 52, 295.6, &render->camera.position);
-	vec(0.0, -0.042612, -1.0, &render->camera.direction);
-	norm(&render->camera.direction);
-	vec(WIDTH * fov / HEIGHT, 0.0, 0.0, &render->cx);
-	cross(&render->cx, &render->camera.direction, &c1);
-	norm(&c1);
-	nmulti(&c1, fov, &render->cy);
+	dest->o = o;
+	dest->d = d;
+	dest->depth = depth;
 }
 
-void 	prepare_ray(t_render *render)
+void 	prepare_ray(t_render *rt, t_radiance *target, t_cam *cam)
 {
-	t_vec 	d;
-	t_vec 	d130;
-	t_vec	n;
-	t_vec 	a;
-	t_vec 	b;
-	t_vec 	ab;
+	double u1;
+	double u2;
+	double dx;
+	double dy;
 
-	render->rand = 2.0 * erand48(render->xseed);
-	render->dx = render->rand < 1.0f ? (sqrt(render->rand) - 1.0) : (1.0 - sqrt(2.0 - render->rand));
-	render->rand = 2.0 * erand48(render->xseed);
-	render->dy = render->rand < 1.0f ? (sqrt(render->rand) - 1.0) : (1.0 - sqrt(2.0 - render->rand));
-
-	nmulti(&render->cx, (((render->sx + 0.5 + render->dx) / 2.0 + render->x) / WIDTH - 0.5), &a);
-	nmulti(&render->cy, (((render->sy + 0.5 + render->dy) / 2.0 + render->y) / HEIGHT - 0.5), &b);
-
-	sum(&a, &b, &ab);
-	sum(&ab, &render->camera.direction, &d);
-	nmulti(&d, 130.0, &d130);
-	sum(&render->camera.position, &d130, &n);
-	norm(&d);
-
-	render->ray[0] = n;
-	render->ray[1] = d;
+	u1 = 2.0 * erand48(rt->xseed);
+	u2 = 2.0 * erand48(rt->xseed);
+	dx = (u1 < 1.0f) ? sqrt(u1) - 1.0 : 1.0 - sqrt(2.0 - u1);
+	dy = (u2 < 1.0f) ? sqrt(u2) - 1.0 : 1.0 - sqrt(2.0 - u2);
+	nmulti(&cam->cx, (((rt->sx + 0.5 + dx) / 2.0 + rt->x) / WIDTH - 0.5), &target->a);
+	nmulti(&cam->cy, (((rt->sy + 0.5 + dy) / 2.0 + rt->y) / HEIGHT - 0.5), &target->b);
+	sum(&target->a, &target->b, &target->ab);
+	sum(&target->ab, &cam->gaze, &target->d);
+	nmulti(&target->d, 130.0, &target->d_t);
+	sum(&cam->eye, &target->d_t, &target->eye_t);
 }
 
-void	printr(t_vec origin, t_vec direction)
+void	init_cam(t_cam *cam)
 {
-	ft_printf("o: [%+f %+f %+f]\nd: [%+f %+f %+f]\n",
-	origin.x, origin.y, origin.z, direction.x, direction.y, direction.z);
+	vec(50, 52, 295.6, &cam->eye);
+	vec(0, -0.042612, -1, &cam->gaze);
+	norm(&cam->gaze);
+	cam->fov = 0.5135;
+	vec(WIDTH * cam->fov / HEIGHT, 0.0, 0.0, &cam->cx);
+	cross(&cam->cx, &cam->gaze, &cam->cy);
+	norm(&cam->cy);
+	nmulti_(&cam->cy, cam->fov);
+}
+
+void	eval(t_ray *r, double t, t_vec *dest)
+{
+	t_vec dt;
+
+	nmulti(&r->d, t, &dt);
+	sum(&r->o, &dt, dest);
+}
+
+void	printr(t_ray *r)
+{
+	ft_printf("o: [%f %f %f]\nd: [%f %f %f]\n",
+	r->o.x, r->o.y, r->o.z, r->d.x, r->d.y, r->d.z);
 }
 
 void	printv(t_vec *v)
