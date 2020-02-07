@@ -65,6 +65,7 @@ typedef struct			s_obj
 	t_vec				e;			// emission
 	t_vec				c;			// color
 	double				a;			// angle
+	t_vec				rot;			// rotation
 	int					cut;
 	t_vec 				cut_dir;
 	t_vec 				cut_shift;
@@ -83,7 +84,7 @@ typedef struct			s_cam
 typedef struct 			s_scene
 {
 	int					samples;
-	t_obj				obj[11];
+	t_obj				obj[10];
 }						t_scene;
 
 typedef struct			s_point

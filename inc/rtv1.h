@@ -37,6 +37,13 @@
 # define SPEC					1
 # define REFR					2
 
+# define PLUS_X 				1
+# define MINUS_X 				-1
+# define PLUS_Y 				2
+# define MINUS_Y 				-2
+# define PLUS_Z 				3
+# define MINUS_Z 				-3
+
 # define F_GREY					0xd1d1d1
 # define F_BLUE					0x0000FF
 # define F_RED					0xFF0000
@@ -82,6 +89,8 @@ t_vec			vecp(double a, double b, double c);
 void			veccp(t_vec *v, t_vec *dest);
 t_vec			*norm(t_vec *v);
 double 			norm_s(t_vec *v);
+t_vec			rotate_vector(t_vec obj_rotation, t_vec dir);
+
 
 /*
 **	ray.c
@@ -112,9 +121,12 @@ t_obj			sphere(int t,
 					   t_vec d,
 					   t_vec e,
 					   t_vec c,
+					   t_vec rot,
 					   double a,
 					   int cut,
 					   int reflect);
+void			cut_direction(t_obj *obj);
+void			prepare_obj(t_obj *obj);
 
 /*
 **	scene.c
