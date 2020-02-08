@@ -178,3 +178,92 @@ double 		check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_obj *obj)
 	t.z = define_tmin(t);
 	return (t.z);
 }
+
+double		ft_check_pnt_box(double min[3], double max[3])
+{
+	double		t[2];
+
+	if (min[0] > min[1])
+		t[0] = min[0];
+	else
+		t[0] = min[1];
+	if (min[2] > t[0])
+		t[0] = min[2];
+
+	if (max[0] < max[1])
+		t[1] = max[0];
+	else
+		t[1] = max[1];
+	if (max[2] < t[1])
+		t[1] = max[2];
+	if (t[0] < t[1] && t[1] > T_MIN && t[1] < T_MAX)
+	{
+		if (t[0] > T_MIN && t[0] < T_MAX)
+			min[0] = t[0];
+		else
+			min[0] = t[1];
+		return (min[0]);
+	}
+	return (T_MAX);
+}
+
+void	define_norm(t_ray *ray, int face)
+{
+	if (face == 0)
+		vec(-1.0, 0.0, 0.0, &ray->n);
+	else if (face == 1)
+		vec(0.0, -1.0, 0.0, &ray->n);
+	else if (face == 2)
+		vec(0.0, 0.0, -1.0, &ray->n);
+	else if (face == 3)
+		vec(1.0, 0.0, 0.0, &ray->n);
+	else if (face == 4)
+		vec(0.0, 1.0, 0.0, &ray->n);
+	else
+		vec(0.0, 0.0, 1.0, &ray->n);
+}
+
+void 		check_box(t_ray *ray, double min[3], double max[3], t_vec rev_ov)
+{
+	double		t[2];
+	int			face_in;
+	int			face_out;
+
+	if (min[0] > min[1])
+	{
+		t[0] = min[0];
+		face_in = (rev_ov.x >= 0.0) ? 0 : 3;
+	}
+	else
+	{
+		t[0] = min[1];
+		face_in = (rev_ov.y >= 0.0) ? 1 : 4;
+	}
+	if (min[2] > t[0])
+	{
+		t[0] = min[2];
+		face_in = (rev_ov.z >= 0.0) ? 2 : 5;
+	}
+	if (max[0] < max[1])
+	{
+		t[1] = max[0];
+		face_out = (rev_ov.x >= 0.0) ? 3 : 0;
+	}
+	else
+	{
+		t[1] = max[1];
+		face_out = (rev_ov.y >= 0.0) ? 4 : 1;
+	}
+	if (max[2] < t[1])
+	{
+		t[1] = max[2];
+		face_out = (rev_ov.z >= 0.0) ? 5 : 2;
+	}
+	if (t[0] < t[1] && t[1] > T_MIN && t[1] < T_MAX)
+	{
+		if (t[0] > T_MIN && t[0] < T_MAX)
+			define_norm(ray, face_in);
+		else
+			define_norm(ray, face_out);
+	}
+}

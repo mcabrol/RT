@@ -22,6 +22,9 @@ t_obj		sphere(int t,
 				   t_vec rot,
 				   double a,
 				   int cut,
+				   double ca,
+				   double cb,
+				   double cc,
 				   int reflect)
 {
 	t_obj sphere;
@@ -36,6 +39,9 @@ t_obj		sphere(int t,
 	sphere.a = a;
 	sphere.rot = rot;
 	sphere.cut = cut;
+	sphere.ca = ca,
+	sphere.cb = cb,
+	sphere.cc = cc,
 	sphere.reflect = reflect;
 	return (sphere);
 }

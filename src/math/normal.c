@@ -86,3 +86,45 @@ void 	cone_normal(t_obj *cone, t_ray *ray)
 	else
 		minus(&nl, &ray->n);
 }
+
+void		box_normal(t_obj *box, t_ray *ray)
+{
+	double			min[3];
+	double			max[3];
+	t_vec			rev_o;
+	t_vec			p;
+
+	divide3(1, &ray->d, &rev_o);
+	vec(box->p.x + box->ca, box->p.y + box->cb, box->p.z + box->cc, &p);
+	if (rev_o.x >= 0)
+	{
+		min[0] = (box->p.x - ray->o.x) * rev_o.x;
+		max[0] = (p.x - ray->o.x) * rev_o.x;
+	}
+	else
+	{
+		min[0] = (p.x - ray->o.x) * rev_o.x;
+		max[0] = (box->p.x - ray->o.x) * rev_o.x;
+	}
+	if (rev_o.y >= 0)
+	{
+		min[1] = (box->p.y - ray->o.y) * rev_o.y;
+		max[1] = (p.y - ray->o.y) * rev_o.y;
+	}
+	else
+	{
+		min[1] = (p.y - ray->o.y) * rev_o.y;
+		max[1] = (box->p.y - ray->o.y) * rev_o.y;
+	}
+	if (rev_o.z >= 0)
+	{
+		min[2] = (box->p.z - ray->o.z) * rev_o.z;
+		max[2] = (p.z - ray->o.z) * rev_o.z;
+	}
+	else
+	{
+		min[2] = (p.z - ray->o.z) * rev_o.z;
+		max[2] = (box->p.z - ray->o.z) * rev_o.z;
+	}
+	check_box(ray, min, max, rev_o);
+}

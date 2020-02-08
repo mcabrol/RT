@@ -55,6 +55,8 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 			cylinder_normal(shape, r);
 		else if (shape->t == CONE)
 			cone_normal(shape, r);
+		else if (shape->t == BOX)
+			box_normal(shape, r);
 
 		// Light
 		multiplication(&mask, &shape->e, &light);

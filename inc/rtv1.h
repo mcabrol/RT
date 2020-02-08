@@ -20,7 +20,7 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# define SAMPLES 				1000
+# define SAMPLES 				8
 
 # define HEIGHT					650
 # define WIDTH					700
@@ -32,6 +32,7 @@
 # define PLANE					1
 # define CYLINDER				2
 # define CONE					3
+# define BOX					4
 
 # define DIFF					0
 # define SPEC					1
@@ -114,17 +115,20 @@ void			radiance(t_scene *scene, t_ray *ray, t_render *rt);
 **	object.c
 */
 
-t_obj			sphere(int t,
-					   double r,
-					   double h,
-					   t_vec p,
-					   t_vec d,
-					   t_vec e,
-					   t_vec c,
-					   t_vec rot,
-					   double a,
-					   int cut,
-					   int reflect);
+t_obj		sphere(int t,
+				   double r,
+				   double h,
+				   t_vec p,
+				   t_vec d,
+				   t_vec e,
+				   t_vec c,
+				   t_vec rot,
+				   double a,
+				   int cut,
+				   double ca,
+				   double cb,
+				   double cc,
+				   int reflect);
 void			cut_direction(t_obj *obj);
 void			prepare_obj(t_obj *obj);
 
@@ -142,7 +146,7 @@ void 			sphere_normal(t_obj *sphere, t_ray *ray);
 void 			plane_normal(t_obj *plane, t_ray *ray);
 void 			cylinder_normal(t_obj *cylinder, t_ray *ray);
 void 			cone_normal(t_obj *cone, t_ray *ray);
-
+void			box_normal(t_obj *box, t_ray *ray);
 
 
 /*
@@ -154,9 +158,8 @@ double 			intersect_sphere(t_obj *sphere, t_ray *ray);
 double			intersect_plane(t_obj *sphere, t_ray *ray);
 double			intersect_cylinder(t_obj *cylinder, t_ray *ray);
 double			intersect_cone(t_obj *cone, t_ray *ray);
-
-
-
+double			intersect_box(t_obj *box, t_ray *ray);
+double			intersect_disk(t_obj *disk, t_ray *ray);
 
 /*
 **	operator.c
@@ -193,6 +196,11 @@ void    		quadratic_base(t_vec k, t_vec *t);
 double			check_cut(double t_min, t_obj *obj, t_vec *p);
 double			define_tmin(t_vec t);
 double 			check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_obj *obj);
+double			ft_check_pnt_box(double min[3], double max[3]);
+void			define_norm(t_ray *ray, int face);
+void 			check_box(t_ray *ray, double min[3], double max[3], t_vec rev_ov);
+
+
 
 /*
 **	sample.c

@@ -65,10 +65,13 @@ typedef struct			s_obj
 	t_vec				e;			// emission
 	t_vec				c;			// color
 	double				a;			// angle
-	t_vec				rot;			// rotation
-	int					cut;
-	t_vec 				cut_dir;
-	t_vec 				cut_shift;
+	t_vec				rot;		// rotation
+	int					cut;		// type of cut
+	t_vec 				cut_dir;	// cut direction
+	t_vec 				cut_shift;	// cut shift
+	double 				ca;			// box a
+	double 				cb;			// box b
+	double 				cc;			// box c
 	int					reflect;	// material type
 }						t_obj;
 

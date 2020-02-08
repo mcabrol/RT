@@ -35,6 +35,8 @@ BOOL 	intersect(t_ray *ray, size_t *id, t_scene *scene)
 			distance = intersect_cylinder(obj, ray);
 		else if (obj->t == CONE)
 			distance = intersect_cone(obj, ray);
+		else if (obj->t == BOX)
+			distance = intersect_box(obj, ray);
 		if (distance >= T_MIN && distance < ray->dist)
 		{
 			hit = TRUE;
@@ -109,4 +111,48 @@ double		intersect_cone(t_obj *cone, t_ray *ray)
 	k.z = dot(&oc, &oc) - a * pow(dot(&oc, &cone->d), 2);
 	t_min = check_pnt(&k, &ray->d, &ray->o, cone);
 	return (t_min);
+}
+
+double		intersect_box(t_obj *box, t_ray *ray)
+{
+	// ray->o ray->o
+	// ov    ray->d
+	double		min[3];
+	double		max[3];
+	t_vec		rev_ov;
+	t_vec		pos;
+
+	divide3(1, &ray->d, &rev_ov);
+	vec(box->p.x + box->ca, box->p.y + box->cb, box->p.z + box->cc, &pos);
+	if (rev_ov.x >= 0)
+	{
+		min[0] = (box->p.x - ray->o.x) * rev_ov.x;
+		max[0] = (pos.x - ray->o.x) * rev_ov.x;
+	}
+	else
+	{
+		min[0] = (pos.x - ray->o.x) * rev_ov.x;
+		max[0] = (box->p.x - ray->o.x) * rev_ov.x;
+	}
+	if (rev_ov.y >= 0)
+	{
+		min[1] = (box->p.y - ray->o.y) * rev_ov.y;
+		max[1] = (pos.y - ray->o.y) * rev_ov.y;
+	}
+	else
+	{
+		min[1] = (pos.y - ray->o.y) * rev_ov.y;
+		max[1] = (box->p.y - ray->o.y) * rev_ov.y;
+	}
+	if (rev_ov.z >= 0)
+	{
+		min[2] = (box->p.z - ray->o.z) * rev_ov.z;
+		max[2] = (pos.z - ray->o.z) * rev_ov.z;
+	}
+	else
+	{
+		min[2] = (pos.z - ray->o.z) * rev_ov.z;
+		max[2] = (box->p.z - ray->o.z) * rev_ov.z;
+	}
+	return (ft_check_pnt_box(min, max));
 }
