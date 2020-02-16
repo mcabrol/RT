@@ -20,6 +20,8 @@ void		specular_reflect(t_vec *d, t_vec *n, t_vec *dest)
 	sub(d, &a, dest);
 }
 
+void  		
+
 t_vec		specular_transmit(t_vec *d, t_vec *n, double n_out, double n_in, double *pr, unsigned short xseed[3])
 {
 	t_vec	d_re;

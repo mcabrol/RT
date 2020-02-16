@@ -47,32 +47,32 @@ typedef struct			s_radiance
 
 typedef struct			s_ray
 {
-	t_vec				o; 			// Origin
-	t_vec				d;			// Direction
-	double				dist;		// Distance
-	int					depth;		// Depth
-	t_vec				x;			// Point intersect
-	t_vec				n;			// Norm obj
+	t_vec				origin; 		// Origin
+	t_vec				direction;		// Direction
+	double				distance;		// Distance
+	int					depth;			// Depth
+	t_vec				x;				// Point intersect
+	t_vec				n;				// Norm obj
 }						t_ray;
 
 typedef struct			s_obj
 {
-	int 				t;			// type
-	double				r;			// radius
-	double 				h; 			// height
-	t_vec				p;			// position
-	t_vec				d;			// direction
-	t_vec				e;			// emission
-	t_vec				c;			// color
-	double				a;			// angle
-	t_vec				rot;		// rotation
-	int					cut;		// type of cut
-	t_vec 				cut_dir;	// cut direction
-	t_vec 				cut_shift;	// cut shift
-	double 				ca;			// box a
-	double 				cb;			// box b
-	double 				cc;			// box c
-	int					reflect;	// material type
+	int 				type;			// type
+	double				radius;			// radius
+	double 				height; 		// height
+	t_vec				position;		// position
+	t_vec				direction;		// direction
+	t_vec				emission;		// emission
+	t_vec				color;			// color
+	double				angle;			// angle
+	t_vec				rotation;		// rotation
+	int					cut;			// type of cut
+	t_vec 				cut_direction;	// cut direction
+	t_vec 				cut_shift;		// cut shift
+	double 				a;				// box a
+	double 				b;				// box b
+	double 				c;				// box c
+	int					reflect;		// material type
 }						t_obj;
 
 typedef struct			s_cam

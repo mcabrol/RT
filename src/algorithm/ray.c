@@ -14,8 +14,8 @@
 
 void	init_ray(t_vec o, t_vec d, int depth, t_ray *dest)
 {
-	dest->o = o;
-	dest->d = d;
+	dest->origin = o;
+	dest->direction = d;
 	dest->depth = depth;
 }
 
@@ -54,14 +54,14 @@ void	eval(t_ray *r, double t, t_vec *dest)
 {
 	t_vec dt;
 
-	nmulti(&r->d, t, &dt);
-	sum(&r->o, &dt, dest);
+	nmulti(&r->direction, t, &dt);
+	sum(&r->origin, &dt, dest);
 }
 
 void	printr(t_ray *r)
 {
 	ft_printf("o: [%f %f %f]\nd: [%f %f %f]\n",
-	r->o.x, r->o.y, r->o.z, r->d.x, r->d.y, r->d.z);
+	r->origin.x, r->origin.y, r->origin.z, r->direction.x, r->direction.y, r->direction.z);
 }
 
 void	printv(t_vec *v)

@@ -115,7 +115,7 @@ void			radiance(t_scene *scene, t_ray *ray, t_render *rt);
 **	object.c
 */
 
-t_obj		sphere(int t,
+t_obj		   obj(int t,
 				   double r,
 				   double h,
 				   t_vec p,

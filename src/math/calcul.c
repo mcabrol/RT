@@ -113,9 +113,9 @@ double		check_cut(double t_min, t_obj *obj, t_vec *p)
     t_vec		cut_plane_pos;
     t_vec		pc;
 
-	sum(&obj->p, &obj->cut_shift, &cut_plane_pos);
+	sum(&obj->position, &obj->cut_shift, &cut_plane_pos);
 	sub(p, &cut_plane_pos, &pc);
-    if (dot(&obj->cut_dir, &pc) >= 0)
+    if (dot(&obj->cut_direction, &pc) >= 0)
         t_min = T_MAX;
     return (t_min);
 }
@@ -143,17 +143,17 @@ double 		check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_obj *obj)
 	double	m[2];
 
 	t.z = T_MAX;
-	sub(origin, &obj->p, &oc);
+	sub(origin, &obj->position, &oc);
 	quadratic_base(*k, &t);
 	if (t.x == T_MAX && t.y == T_MAX && t.z == T_MAX)
         return (T_MAX);
 
-	m[0] = (dot(direction, &obj->d) * t.x) + dot(&oc, &obj->d);
-	nmulti(&obj->d, m[0], &a);
-	sub(&obj->p, &obj->p, &b);
+	m[0] = (dot(direction, &obj->direction) * t.x) + dot(&oc, &obj->direction);
+	nmulti(&obj->direction, m[0], &a);
+	sub(&obj->position, &obj->position, &b);
 	sum(&a, &b, &ac);
 	len_ac = len(&ac);
-	if (obj->h != 0 && (len_ac > obj->h || dot(&ac, &obj->d) < 0))
+	if (obj->height != 0 && (len_ac > obj->height || dot(&ac, &obj->direction) < 0))
         t.x = T_MAX;
 	if (t.x != T_MAX && obj->cut != 0)
 	{
@@ -162,12 +162,12 @@ double 		check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_obj *obj)
 		t.x = check_cut(t.x, obj, &p);
 	}
 
-	m[1] = (dot(direction, &obj->d) * t.y) + dot(&oc, &obj->d);
-	nmulti(&obj->d, m[1], &a);
-	sub(&obj->p, &obj->p, &b);
+	m[1] = (dot(direction, &obj->direction) * t.y) + dot(&oc, &obj->direction);
+	nmulti(&obj->direction, m[1], &a);
+	sub(&obj->position, &obj->position, &b);
 	sum(&a, &b, &ac);
 	len_ac = len(&ac);
-	if (obj->h != 0 && (len_ac > obj->h || dot(&ac, &obj->d) < 0))
+	if (obj->height != 0 && (len_ac > obj->height || dot(&ac, &obj->direction) < 0))
         t.y = T_MAX;
 	if (t.y != T_MAX && obj->cut != 0)
 	{

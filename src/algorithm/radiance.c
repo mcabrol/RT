@@ -44,31 +44,31 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 		shape = &scene->obj[id];
 
 		// Next point
-		eval(r, r->dist, &r->x);
+		eval(r, r->distance, &r->x);
 
 		// Norm object
-		if (shape->t == SPHERE)
+		if (shape->type == SPHERE)
 			sphere_normal(shape, r);
-		else if (shape->t == PLANE)
+		else if (shape->type == PLANE)
 			plane_normal(shape, r);
-		else if (shape->t == CYLINDER)
+		else if (shape->type == CYLINDER)
 			cylinder_normal(shape, r);
-		else if (shape->t == CONE)
+		else if (shape->type == CONE)
 			cone_normal(shape, r);
-		else if (shape->t == BOX)
+		else if (shape->type == BOX)
 			box_normal(shape, r);
 
 		// Light
-		multiplication(&mask, &shape->e, &light);
+		multiplication(&mask, &shape->emission, &light);
 		sum_(&blank, &light);
 
 		// Textures
-		multi_(&mask, &shape->c);
+		multi_(&mask, &shape->color);
 
 		// Russian roulette
 		if (4u < (unsigned int)r->depth)
 		{
-			continue_probability = max(&shape->c);
+			continue_probability = max(&shape->color);
 			if (erand48(rt->xseed) >= continue_probability)
 			{
 				veccp(&blank, &rt->color);
@@ -81,22 +81,22 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 		switch (shape->reflect) {
 
 		case SPEC: {
-			r->o = r->x;
-			specular_reflect(&r->d, &r->n, &r->d);
+			r->origin = r->x;
+			specular_reflect(&r->direction, &r->n, &r->direction);
 			r->depth++;
 			break;
 		}
 
 		case REFR: {
-			r->o = r->x;
-			r->d = specular_transmit(&r->d, &r->n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, rt->xseed);
+			r->origin = r->x;
+			r->direction = specular_transmit(&r->direction, &r->n, REFRACTIVE_INDEX_OUT, REFRACTIVE_INDEX_IN, &pr, rt->xseed);
 			nmulti_(&mask, pr);
 			r->depth++;
 			break;
 		}
 
 		default: {
-			 if (0.0 > dot(&r->n, &r->d))
+			 if (0.0 > dot(&r->n, &r->direction))
 			 	w = r->n;
 			else
 				minus(&r->n, &w);
@@ -116,8 +116,8 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *rt)
 			nmulti(&w, sample_d.z, &_z);
 			sum(&_x, &_y, &_xy);
 			sum(&_xy, &_z, &d);
-			r->o = r->x;
-			r->d = *norm(&d);;
+			r->origin = r->x;
+			r->direction = *norm(&d);;
 			r->depth++;
 		}
 		}

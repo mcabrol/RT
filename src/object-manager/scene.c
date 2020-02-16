@@ -18,7 +18,7 @@ void 	init_scene(t_rtv1 *rtv1)
 
 	scene = &rtv1->scene;
 	scene->samples = SAMPLES / 4;
-	scene->obj[0] = sphere(PLANE, 1e5, 15.0,				// type // radius 	// RIGHT
+	scene->obj[0] = obj(PLANE, 1e5, 15.0,				// type // radius 	// RIGHT
 					vecp(0.0, 40.8, 81.6), 				// position
 					vecp(15.0, 0.0, 0.0), 				// direction
 					vecp(0.0, 0.0, 0.0),				// emission
@@ -27,7 +27,7 @@ void 	init_scene(t_rtv1 *rtv1)
 					0, PLUS_X,
 					0, 0, 0,
 					DIFF);					// material
-	scene->obj[1] = sphere(PLANE, 1e5, 0.0,										// LEFT
+	scene->obj[1] = obj(PLANE, 1e5, 0.0,										// LEFT
 					vecp(99.0, 40.8, 81.6),
 					vecp(15.0, 0.0, 0.0),
 					vecp(0.0, 0.0, 0.0),
@@ -36,7 +36,7 @@ void 	init_scene(t_rtv1 *rtv1)
 					0, 0,
 					0, 0, 0,
 					DIFF);
-	scene->obj[2] = sphere(PLANE, 1e5, 0.0,										// TOP
+	scene->obj[2] = obj(PLANE, 1e5, 0.0,										// TOP
 					vecp(50.0, 82.0, 1e5),
 					vecp(0.0, 1.0, 0.0),
 					vecp(0.0, 0.0, 0.0),
@@ -45,7 +45,7 @@ void 	init_scene(t_rtv1 *rtv1)
 					0, 0,
 					0, 0, 0,
 					DIFF);
-	scene->obj[3] = sphere(PLANE, 1e5, 0.0,										// FLOOR
+	scene->obj[3] = obj(PLANE, 1e5, 0.0,										// FLOOR
 					vecp(0.0, 0.0, 0.0),
 					vecp(0.0, 1.0, 0.0),
 					vecp(0.0, 0.0, 0.0),
@@ -54,7 +54,7 @@ void 	init_scene(t_rtv1 *rtv1)
 					0, 0,
 					0, 0, 0,
 					DIFF);
-	scene->obj[4] = sphere(PLANE, 1e5, 0.0,										// BACK
+	scene->obj[4] = obj(PLANE, 1e5, 0.0,										// BACK
 					vecp(73.0, 16.5, 0.0),
 					vecp(0.0, 0.0, -15.0),
 					vecp(0.0, 0.0, 0.0),
@@ -63,7 +63,7 @@ void 	init_scene(t_rtv1 *rtv1)
 					0, 0,
 					0, 0, 0,
 					DIFF);
-	scene->obj[5] = sphere(PLANE, 1e5, 0.0,										// FRONT
+	scene->obj[5] = obj(PLANE, 1e5, 0.0,										// FRONT
 					vecp(73.0, 16.5, 180.0),
 					vecp(0.0, 0.0, -15.0),
 					vecp(0.0, 0.0, 0.0),
@@ -72,7 +72,7 @@ void 	init_scene(t_rtv1 *rtv1)
 					0, 0,
 					0, 0, 0,
 					DIFF);
-	scene->obj[6] = sphere(BOX, 0.0, 40.0,										// BOX
+	scene->obj[6] = obj(BOX, 0.0, 40.0,										// BOX
 					vecp(30.0, 0.0, 50.0),
 					vecp(0.0, 1.0, 0.0),
 					vecp(0.0, 0.0, 0.0),
@@ -97,7 +97,7 @@ void 	init_scene(t_rtv1 *rtv1)
 	// 				vecp(0.999, 0.999, 0.999),
 	// 				vecp(0.0, 0.0, 0.0),
 	// 				0.0, 0.0, SPEC);
-	scene->obj[7] = sphere(CYLINDER, 30.0, 2.0,									// BIG LIGHT CYL
+	scene->obj[7] = obj(CYLINDER, 30.0, 2.0,									// BIG LIGHT CYL
 					vecp(50.0, 81.0, 50.0),
 					vecp(0.0, 1.0, 0.0),
 					vecp(20.0, 20.0, 20.0),
@@ -106,7 +106,7 @@ void 	init_scene(t_rtv1 *rtv1)
 					0.0, 0.0,
 					0, 0, 0,
 					DIFF);
-	scene->obj[8] = sphere(CYLINDER, 15.0, 2.0,									// MIDDLE LIGHT CYL
+	scene->obj[8] = obj(CYLINDER, 15.0, 2.0,									// MIDDLE LIGHT CYL
 					vecp(50.0, 81.0, 50.0),
 					vecp(0.0, 1.0, 0.0),
 					vecp(20.0, 20.0, 20.0),
@@ -115,7 +115,7 @@ void 	init_scene(t_rtv1 *rtv1)
 					0.0, 0.0,
 					10.0, 10.0, 10.0,
 					DIFF);
-	scene->obj[9] = sphere(CYLINDER, 5.0, 2.0,									// LITTLE LIGHT CYL
+	scene->obj[9] = obj(CYLINDER, 5.0, 2.0,									// LITTLE LIGHT CYL
 					vecp(50.0, 81.0, 50.0),
 					vecp(0.0, 1.0, 0.0),
 					vecp(20.0, 20.0, 20.0),
