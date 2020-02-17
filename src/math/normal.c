@@ -6,11 +6,25 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:55:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/04 18:58:00 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/17 18:25:09 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void 	normal(t_ray *ray, t_obj *shape)
+{
+	if (shape->type == SPHERE)
+		sphere_normal(shape, ray);
+	else if (shape->type == PLANE)
+		plane_normal(shape, ray);
+	else if (shape->type == CYLINDER)
+		cylinder_normal(shape, ray);
+	else if (shape->type == CONE)
+		cone_normal(shape, ray);
+	else if (shape->type == BOX)
+		box_normal(shape, ray);
+}
 
 void 	sphere_normal(t_obj *sphere, t_ray *ray)
 {

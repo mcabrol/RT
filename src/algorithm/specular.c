@@ -6,70 +6,64 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/13 18:01:40 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/17 18:57:22 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		specular_reflect(t_vec *d, t_vec *n, t_vec *dest)
+void 		specular(t_ray *ray, t_render *render, t_obj *shape)
+{
+	if (shape->reflect == SPEC) {
+		ray->origin = ray->x;
+		specular_reflect(&ray->direction, &ray->n);
+		ray->depth++;
+	}
+	else
+	{
+		ray->origin = ray->x;
+		specular_diffuse(&ray->direction, &ray->n, render->xseed);
+		ray->depth++;
+	}
+}
+
+void		specular_reflect(t_vec *d, t_vec *n)
 {
 	t_vec a;
 
 	nmulti(n, 2.0 * dot(n, d), &a);
-	sub(d, &a, dest);
+	sub_(d, &a);
 }
 
-void  		
-
-t_vec		specular_transmit(t_vec *d, t_vec *n, double n_out, double n_in, double *pr, unsigned short xseed[3])
+void 		specular_diffuse(t_vec *d, t_vec *n, unsigned short xseed[3])
 {
-	t_vec	d_re;
-	BOOL	out_to_in;
-	t_vec	nl;
-	double	nn;
-	double	cos_theta;
-	double	cos2_phi;
-	t_vec 	a;
-	t_vec	b;
-	t_vec	d_tr;
-	double 	c;
-	double	re;
-	double	p_re;
-	double	tr;
-	double	p_tr;
+	t_vec _u;
+	t_vec u;
+	t_vec w;
+	t_vec v;
+	t_vec _x;
+	t_vec _y;
+	t_vec _z;
+	t_vec _xy;
+	t_vec sample_d;
 
-	specular_reflect(d, n, &d_re);
-	out_to_in = (dot(n, d) < 0) ? TRUE : FALSE;
-	if (out_to_in)
-		nl = *n;
+	vec(0.0, 0.0, 0.0, &_u);
+	if (0.0 > dot(n, d))
+		w = *n;
 	else
-		minus(n, &nl);
-	nn = out_to_in ? n_out / n_in : n_in / n_out;
-	cos_theta = dot(d, &nl);
-	cos2_phi = 1.0 - nn * nn * (1.0 - cos_theta * cos_theta);
-	if (0.0 > cos2_phi)
-	{
-		*pr = 1.0;
-		return (d_re);
-	}
-	nmulti(d, nn, &a);
-	nmulti(&nl, (nn * cos_theta + sqrt(cos2_phi)), &a);
-	sub(&a, &b, &d_tr);
-	norm(&d_tr);
-	c = 1.0 - (out_to_in ? -cos_theta : dot(&d_tr, n));
-	re = schlick_reflectance(n_out, n_in, c);
-	p_re = 0.25 + 0.5 * re;
-	if (erand48(xseed) < p_re)
-	{
-		*pr = (re / p_re);
-		return (d_re);
-	}
+	 	minus(n, &w);
+	if (fabs(w.x) > 0.1)
+	   _u.y = 1.0;
 	else
-	{
-		tr = 1.0 - re;
-		p_tr = 1.0 - p_re;
-		*pr = (tr / p_tr);
-		return (d_tr);
-	}
+	   _u.x = 1.0;
+   cross(&_u, &w, &u);
+   norm(&u);
+   cross(&w, &u, &v);
+   cosine_weighted_sample(erand48(xseed), erand48(xseed), &sample_d);
+   nmulti(&u, sample_d.x, &_x);
+   nmulti(&v, sample_d.y, &_y);
+   nmulti(&w, sample_d.z, &_z);
+   sum(&_x, &_y, &_xy);
+   sum(&_xy, &_z, d);
+   norm(d);
 }

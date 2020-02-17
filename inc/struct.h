@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/06 19:06:12 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/17 18:36:14 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ typedef struct			s_ray
 	int					depth;			// Depth
 	t_vec				x;				// Point intersect
 	t_vec				n;				// Norm obj
+	t_vec 				mask;			// Mask
+	t_vec				light;			// Light
+	t_vec				blank;			// Blank
 }						t_ray;
 
 typedef struct			s_obj

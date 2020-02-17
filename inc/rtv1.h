@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/06 20:29:40 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/17 18:57:16 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# define SAMPLES 				8
+# define SAMPLES 				20
 
-# define HEIGHT					650
-# define WIDTH					700
+# define HEIGHT					550
+# define WIDTH					600
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
+# define CONTINUE				0
+# define STOP					1
 
 # define SPHERE					0
 # define PLANE					1
@@ -109,13 +111,13 @@ void			printv(t_vec *v);
 **	radiance.c
 */
 
-void			radiance(t_scene *scene, t_ray *ray, t_render *rt);
+void			radiance(t_scene *scene, t_ray *ray, t_render *render);
 
 /*
 **	object.c
 */
 
-t_obj		   obj(int t,
+t_obj		   	obj(int t,
 				   double r,
 				   double h,
 				   t_vec p,
@@ -139,15 +141,21 @@ void			prepare_obj(t_obj *obj);
 void 			init_scene(t_rtv1 *rtv1);
 
 /*
+**	light.c
+*/
+
+void 			lighting(t_obj *shape, t_ray *ray);
+
+/*
 **	normal.c
 */
 
+void 			normal(t_ray *ray, t_obj *shape);
 void 			sphere_normal(t_obj *sphere, t_ray *ray);
 void 			plane_normal(t_obj *plane, t_ray *ray);
 void 			cylinder_normal(t_obj *cylinder, t_ray *ray);
 void 			cone_normal(t_obj *cone, t_ray *ray);
 void			box_normal(t_obj *box, t_ray *ray);
-
 
 /*
 **	intersect.c
@@ -167,6 +175,7 @@ double			intersect_disk(t_obj *disk, t_ray *ray);
 
 void			sum(t_vec *v1, t_vec *v2, t_vec *dest);
 void			sub(t_vec *v1, t_vec *v2, t_vec *dest);
+void			sub_(t_vec *v1, t_vec *v2);
 void			multiplication(t_vec *v1, t_vec *v2, t_vec *dest);
 void			nmulti(t_vec *v1, double n, t_vec *dest);
 void			divide(t_vec *v1, t_vec *v2, t_vec *dest);
@@ -213,14 +222,16 @@ void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 */
 
 void			init_seed(t_render *rt);
+int 			russian_roulette(t_ray *ray, t_obj *shape, t_render *render);
+
 
 /*
 **	specular.c
 */
 
-void			specular_reflect(t_vec *d, t_vec *n, t_vec *dest);
-t_vec			specular_transmit(t_vec *d, t_vec *n, double n_out,
-				double n_in, double *pr, unsigned short xseed[3]);
+void 			specular(t_ray *ray, t_render *render, t_obj *shape);
+void			specular_reflect(t_vec *d, t_vec *n);
+void 			specular_diffuse(t_vec *d, t_vec *n, unsigned short xseed[3]);
 
 /*
 **	mlx.c

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/15 09:43:39 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/17 16:36:02 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void		sum_(t_vec *v1, t_vec *v2)
 void		sub(t_vec *v1, t_vec *v2, t_vec *dest)
 {
 	vec(v1->x - v2->x, v1->y - v2->y, v1->z - v2->z, dest);
+}
+
+void		sub_(t_vec *v1, t_vec *v2)
+{
+	v1->x -= v2->x;
+	v1->y -= v2->y;
+	v1->z -= v2->z;
 }
 
 void		multiplication(t_vec *v1, t_vec *v2, t_vec *dest)
