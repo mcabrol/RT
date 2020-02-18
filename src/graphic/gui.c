@@ -53,7 +53,7 @@ void 		finish_center(t_win *win)
 	int		x;
 	int		y;
 
-	win->img_finish = mlx_xpm_file_to_image(win->mlx_ptr, "finish.xpm",
+	win->img_finish = mlx_xpm_file_to_image(win->mlx_ptr, "terminated.xpm",
 						   &width, &height);
 	x = (WIDTH / 2) - (width / 2) + 1;
 	y = (HEIGHT / 2) - (height / 2) + 1;

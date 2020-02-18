@@ -17,14 +17,12 @@ BOOL 	intersect(t_ray *ray, size_t *id, t_scene *scene)
 	BOOL		hit;
 	double 		distance;
 	t_obj		*obj;
-	size_t		n;
-	size_t		i;
+	int			i;
 
 	hit = FALSE;
-	n = sizeof(scene->obj) / sizeof(t_obj);
-	i = 0u;
+	i = -1;
 	ray->distance = T_MAX;
-	while (i < n)
+	while (++i < scene->n)
 	{
 		obj = &scene->obj[i];
 		if (obj->type == SPHERE)
@@ -43,7 +41,6 @@ BOOL 	intersect(t_ray *ray, size_t *id, t_scene *scene)
 			ray->distance = distance;
 			*id = i;
 		}
-		i++;
 	}
 	return (hit);
 }

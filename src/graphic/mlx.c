@@ -70,7 +70,6 @@ void	put_pixel(t_win *win, int x, int y, int color)
 	if (x <= WIDTH)
 		if (y <= HEIGHT)
 		{
-			//ft_printf("%d %d %d\n", to_byte(v->x, GAMMA), to_byte(v->y, GAMMA), to_byte(v->z, GAMMA));
 			win->data_ptr[i] = (char)color & 0xFF;
 			win->data_ptr[i + 1] = (char)(color >> 8) & 0xFF;
 			win->data_ptr[i + 2] = (char)(color >> 16) & 0xFF;

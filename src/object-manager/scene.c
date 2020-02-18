@@ -18,120 +18,34 @@ void 	init_scene(t_rtv1 *rtv1)
 
 	scene = &rtv1->scene;
 	scene->samples = SAMPLES / 4;
-	scene->obj[0] = obj(PLANE, 1e5, 15.0,				// type // radius 	// RIGHT
-					vecp(0.0, 40.8, 81.6), 				// position
-					vecp(15.0, 0.0, 0.0), 				// direction
-					vecp(0.0, 0.0, 0.0),				// emission
-					vecp(0.75, 0.25, 0.25),				// color
+	scene->n = sizeof(scene->obj) / sizeof(t_obj);
+
+	scene->obj[0] = obj(SPHERE,							// type
+					30.0,								// radius
+					0.0,								// height
+					vecp(50.0, 30.0, 50.0), 			// position
+					vecp(0.0, 1.0, 0.0), 				// direction
+					vecp(12.0, 12.0, 12.0),				// emission
+					vecp(0.0, 0.0, 1.0),				// color
 					vecp(0.0, 0.0, 0.0),				// rotation
-					0, PLUS_X,
-					0, 0, 0,
-					DIFF);					// material
-	scene->obj[1] = obj(PLANE, 1e5, 0.0,										// LEFT
-					vecp(99.0, 40.8, 81.6),
-					vecp(15.0, 0.0, 0.0),
-					vecp(0.0, 0.0, 0.0),
-					vecp(0.25, 0.75, 0.25),
-					vecp(0.0, 0.0, 0.0),
-					0, 0,
-					0, 0, 0,
-					DIFF);
-	scene->obj[2] = obj(PLANE, 1e5, 0.0,										// TOP
-					vecp(50.0, 82.0, 1e5),
-					vecp(0.0, 1.0, 0.0),
-					vecp(0.0, 0.0, 0.0),
-					vecp(0.25, 0.25, 0.75),
-					vecp(0.0, 0.0, 0.0),
-					0, 0,
-					0, 0, 0,
-					DIFF);
-	scene->obj[3] = obj(PLANE, 1e5, 0.0,										// FLOOR
-					vecp(0.0, 0.0, 0.0),
-					vecp(0.0, 1.0, 0.0),
-					vecp(0.0, 0.0, 0.0),
-					vecp(0.75, 0.25, 0.75),
-					vecp(0.0, 0.0, 0.0),
-					0, 0,
-					0, 0, 0,
-					DIFF);
-	scene->obj[4] = obj(PLANE, 1e5, 0.0,										// BACK
-					vecp(73.0, 16.5, 0.0),
-					vecp(0.0, 0.0, -15.0),
-					vecp(0.0, 0.0, 0.0),
-					vecp(0.75, 0.75, 0.25),
-					vecp(0.0, 0.0, 0.0),
-					0, 0,
-					0, 0, 0,
-					DIFF);
-	scene->obj[5] = obj(PLANE, 1e5, 0.0,										// FRONT
-					vecp(73.0, 16.5, 180.0),
-					vecp(0.0, 0.0, -15.0),
-					vecp(0.0, 0.0, 0.0),
-					vecp(0.25, 0.75, 0.75),
-					vecp(0.0, 0.0, 0.0),
-					0, 0,
-					0, 0, 0,
-					DIFF);
-	scene->obj[6] = obj(BOX, 0.0, 40.0,										// BOX
-					vecp(30.0, 0.0, 50.0),
-					vecp(0.0, 1.0, 0.0),
-					vecp(0.0, 0.0, 0.0),
-					vecp(0.999, 0.999, 0.999),
-					vecp(45.0, 20.0, 0.0),
-					0.5, 0.0,
-					40.0, 40.0, 40.0,
-					DIFF);
-	// scene->obj[6] = sphere(CONE, 0.0, 40.0,										// CONE
-	// 				vecp(50.0, 40.0, 50.0),
-	// 				vecp(0.0, -1.0, 0.0),
-	// 				vecp(0.0, 0.0, 0.0),
-	// 				vecp(0.999, 0.999, 0.999),
-	// 				vecp(0.0, 0.0, 0.0),
-	// 				0.5, 0.0,
-	// 				0, 0, 0,
-	// 				SPEC);
-	// scene->obj[7] = sphere(SPHERE, 30.0, 2.0,								// SPHERE
-	// 				vecp(50.0, 30.0, 50.0),
-	// 				vecp(0.0, 1.0, 0.0),
-	// 				vecp(0.0, 0.0, 0.0),
-	// 				vecp(0.999, 0.999, 0.999),
-	// 				vecp(0.0, 0.0, 0.0),
-	// 				0.0, 0.0, SPEC);
-	scene->obj[7] = obj(CYLINDER, 30.0, 2.0,									// BIG LIGHT CYL
-					vecp(50.0, 81.0, 50.0),
-					vecp(0.0, 1.0, 0.0),
-					vecp(20.0, 20.0, 20.0),
-					vecp(0.5, 0.5, 0.5),
-					vecp(0.0, 0.0, 0.0),
-					0.0, 0.0,
-					0, 0, 0,
-					DIFF);
-	scene->obj[8] = obj(CYLINDER, 15.0, 2.0,									// MIDDLE LIGHT CYL
-					vecp(50.0, 81.0, 50.0),
-					vecp(0.0, 1.0, 0.0),
-					vecp(20.0, 20.0, 20.0),
-					vecp(0.5, 0.5, 0.5),
-					vecp(0.0, 0.0, 0.0),
-					0.0, 0.0,
-					10.0, 10.0, 10.0,
-					DIFF);
-	scene->obj[9] = obj(CYLINDER, 5.0, 2.0,									// LITTLE LIGHT CYL
-					vecp(50.0, 81.0, 50.0),
-					vecp(0.0, 1.0, 0.0),
-					vecp(20.0, 20.0, 20.0),
-					vecp(0.5, 0.5, 0.5),
-					vecp(0.0, 0.0, 0.0),
-					0.0, 0.0,
-					0, 0, 0,
-					DIFF);
+					0,									// Angle
+					0,									// Cut direction
+					0, 0, 0,							// Box rect
+					DIFF);								// material
 
-	// scene->obj[15] = sphere(SPHERE, 600, 0.0,
-	// 				vecp(50.0, 681.6 - .27, 50.0),
-	// 				vecp(0.0, 0.0, 0.0),
-	// 				vecp(12.0, 12.0, 12.0),
-	// 				vecp(0.0, 0.0, 0.0),
-	// 				0, DIFF);													// LIGHT
+	scene->obj[1] = obj(BOX,							// type
+					0.0,								// radius
+					0.0,								// height
+					vecp(0.0, 0.0, 0.0), 				// position
+					vecp(0.0, 1.0, 0.0), 				// direction
+					vecp(0.0, 0.0, 0.0),				// emission
+					vecp(0.999, 0.999, 0.999),			// color
+					vecp(0.0, 0.0, 0.0),				// rotation
+					0,									// Angle
+					0,									// Cut direction
+					100.0, 100.0, 300.0,				// Box rect
+					DIFF);								// material
 
-	// prepare_obj(&scene->obj[0]);
-	prepare_obj(&scene->obj[6]);
+	prepare_obj(&scene->obj[0]);
+	prepare_obj(&scene->obj[1]);
 }
