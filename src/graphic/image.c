@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2020/02/19 18:04:48 by mcabrol          ###   ########.fr       */
+=======
+/*   Updated: 2020/02/19 17:27:34 by judrion          ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +37,13 @@ void 		image(t_rtv1 *rtv1)
 		while (x <= WIDTH)
 		{
 			i = (HEIGHT - 1 - y) * WIDTH + x - 1;
+<<<<<<< Updated upstream
 			put_pixel_vector(win,
 							 WIDTH - x, HEIGHT - y,
+=======
+			put_pixel_vector(&rtv1->win,
+							x, HEIGHT - y,
+>>>>>>> Stashed changes
 							 &rtv1->render.screen[i]);
 			x++;
 		}

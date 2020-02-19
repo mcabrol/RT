@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/04 18:51:52 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:03:21 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ void 	prepare_ray(t_render *rt, t_radiance *target, t_cam *cam)
 	nmulti(&cam->cy, (((rt->sy + 0.5 + dy) / 2.0 + rt->y) / HEIGHT - 0.5), &target->b);
 	sum(&target->a, &target->b, &target->ab);
 	sum(&target->ab, &cam->gaze, &target->d);
-	nmulti(&target->d, 130.0, &target->d_t);
-	sum(&cam->eye, &target->d_t, &target->eye_t);
+	// nmulti(&target->d, 130.0, &target->d_t);
+	veccp(&cam->eye, &target->eye_t);
+	// sum(&cam->eye, &target->d, &target->eye_t);
 }
 
 void	init_cam(t_cam *cam)
 {
-	vec(50, 52, 295.6, &cam->eye);
-	vec(0, -0.042612, -1, &cam->gaze);
+	vec(25, 25, 0, &cam->eye);
+	vec(0, 0, -1, &cam->gaze);
 	norm(&cam->gaze);
-	cam->fov = 0.5135;
+	cam->fov = 60 * M_PI / 180;
 	vec(WIDTH * cam->fov / HEIGHT, 0.0, 0.0, &cam->cx);
 	cross(&cam->cx, &cam->gaze, &cam->cy);
 	norm(&cam->cy);

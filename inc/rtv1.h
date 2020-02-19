@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2020/02/19 17:22:20 by mcabrol          ###   ########.fr       */
+=======
+/*   Updated: 2020/02/19 18:04:10 by judrion          ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +24,7 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# define SAMPLES 				20
+# define SAMPLES 				4000
 
 # define HEIGHT					550
 # define WIDTH					600
