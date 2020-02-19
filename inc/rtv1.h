@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/17 18:57:16 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/19 17:22:20 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define TRUE					1
 # define CONTINUE				0
 # define STOP					1
+
+# define MAIN					0
+# define RENDER 				1
 
 # define SPHERE					0
 # define PLANE					1

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/04 18:02:42 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:05:22 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int		key(int keycode, t_rtv1 *rtv1)
 	if (keycode == 49)
 	{
 		image(rtv1);
-		mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
-								win->img_ptr, 0, 0);
+		mlx_put_image_to_window(win->mlx_ptr, win->render_win_ptr,
+								win->render_img_ptr, 0, 0);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -84,8 +84,8 @@ void	put_pixel_vector(t_win *win, int x, int y, t_vec *v)
 	if (x <= WIDTH)
 		if (y <= HEIGHT)
 		{
-			win->data_ptr[i] = (char)to_byte(v->x, GAMMA);
-			win->data_ptr[i + 1] = (char)to_byte(v->y, GAMMA);
-			win->data_ptr[i + 2] = (char)to_byte(v->z, GAMMA);
+			win->render_data_ptr[i] = (char)to_byte(v->x, GAMMA);
+			win->render_data_ptr[i + 1] = (char)to_byte(v->y, GAMMA);
+			win->render_data_ptr[i + 2] = (char)to_byte(v->z, GAMMA);
 		}
 }
