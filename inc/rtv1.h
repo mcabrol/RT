@@ -6,11 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2020/02/19 17:22:20 by mcabrol          ###   ########.fr       */
-=======
 /*   Updated: 2020/02/19 18:04:10 by judrion          ###   ########.fr       */
->>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +20,14 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# define SAMPLES 				4000
+# define SAMPLES 				20
 
 # define HEIGHT					550
 # define WIDTH					600
+
+# define M_HEIGHT				600
+# define M_WIDTH				400
+
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1

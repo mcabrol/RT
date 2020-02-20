@@ -18,9 +18,9 @@ int		init_window(char **av, t_rtv1 *rtv1)
 
 	win = &rtv1->win;
 	win->mlx_ptr = mlx_init();
-	if (!(win->win_ptr = mlx_new_window(win->mlx_ptr, WIDTH, HEIGHT, av[0])))
+	if (!(win->win_ptr = mlx_new_window(win->mlx_ptr, M_WIDTH, M_HEIGHT, av[0])))
 		return (EXIT_FAILURE);
-	win->img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
+	win->img_ptr = mlx_new_image(win->mlx_ptr, M_WIDTH, M_HEIGHT);
 	win->data_ptr = mlx_get_data_addr(win->img_ptr,
 			&(win->bits_per_pixel),
 			&(win->size_line),
@@ -67,8 +67,8 @@ void	put_pixel(t_win *win, int x, int y, int color)
 	unsigned int i;
 
 	i = (int)(x * 4 + win->size_line * y);
-	if (x <= WIDTH)
-		if (y <= HEIGHT)
+	if (x <= M_WIDTH)
+		if (y <= M_HEIGHT)
 		{
 			win->data_ptr[i] = (char)color & 0xFF;
 			win->data_ptr[i + 1] = (char)(color >> 8) & 0xFF;

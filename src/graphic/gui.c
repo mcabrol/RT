@@ -21,10 +21,10 @@ void 		bg_gradient(t_win *win)
 
 	y = -1;
 	c1 = F_GREY;
-	while (++y <= HEIGHT)
+	while (++y <= M_HEIGHT)
 	{
 		x = -1;
-		while (++x <= WIDTH)
+		while (++x <= M_WIDTH)
 			put_pixel(win, x, y, c1);
 	}
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
@@ -35,28 +35,20 @@ void 		logo_center(t_win *win)
 {
 	int 	height;
 	int 	width;
-	int		x;
-	int		y;
 
-	win->img_logo = mlx_png_file_to_image(win->mlx_ptr, "sun.png",
+	win->img_logo = mlx_png_file_to_image(win->mlx_ptr, "img/startup.png",
 						   &width, &height);
-	x = (WIDTH / 2) - (width / 2);
-	y = (HEIGHT / 2) - (height / 2);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
-							win->img_logo, x, y);
+							win->img_logo, 0, 0);
 }
 
 void 		finish_center(t_win *win)
 {
 	int 	height;
 	int 	width;
-	int		x;
-	int		y;
 
-	win->img_finish = mlx_xpm_file_to_image(win->mlx_ptr, "terminated.xpm",
+	win->img_logo = mlx_png_file_to_image(win->mlx_ptr, "img/success.png",
 						   &width, &height);
-	x = (WIDTH / 2) - (width / 2) + 1;
-	y = (HEIGHT / 2) - (height / 2) + 1;
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
-							win->img_finish, x, y);
+							win->img_logo, 0, 0);
 }

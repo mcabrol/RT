@@ -41,10 +41,10 @@ void 	prepare_ray(t_render *rt, t_radiance *target, t_cam *cam)
 
 void	init_cam(t_cam *cam)
 {
-	vec(25, 25, 0, &cam->eye);
+	vec(0, 0, 0, &cam->eye);
 	vec(0, 0, -1, &cam->gaze);
 	norm(&cam->gaze);
-	cam->fov = 60 * M_PI / 180;
+	cam->fov = 30 * M_PI / 180;
 	vec(WIDTH * cam->fov / HEIGHT, 0.0, 0.0, &cam->cx);
 	cross(&cam->cx, &cam->gaze, &cam->cy);
 	norm(&cam->cy);

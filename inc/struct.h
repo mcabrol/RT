@@ -6,11 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2020/02/19 17:48:26 by mcabrol          ###   ########.fr       */
-=======
 /*   Updated: 2020/02/19 15:57:52 by judrion          ###   ########.fr       */
->>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +90,7 @@ typedef struct			s_cam
 typedef struct 			s_scene
 {
 	int					samples;
-	t_obj				obj[5];
+	t_obj				obj[3];
 	int					n;			// Number of object
 }						t_scene;
 
