@@ -90,7 +90,7 @@ typedef struct			s_cam
 typedef struct 			s_scene
 {
 	int					samples;
-	t_obj				obj[3];
+	t_obj				obj[4];
 	int					n;			// Number of object
 }						t_scene;
 

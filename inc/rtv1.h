@@ -20,7 +20,7 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# define SAMPLES 				20
+# define SAMPLES 				2000
 
 # define HEIGHT					550
 # define WIDTH					600
