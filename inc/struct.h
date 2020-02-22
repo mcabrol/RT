@@ -89,6 +89,8 @@ typedef struct			s_cam
 
 typedef struct 			s_scene
 {
+	int 				width;
+	int					height;
 	int					samples;
 	t_obj				obj[4];
 	int					n;			// Number of object
@@ -102,47 +104,46 @@ typedef struct			s_point
 
 typedef struct			s_win
 {
-	int 				ac;
-	char				**av;
-	void				*mlx_ptr;
 	void				*win_ptr;
-	void				*render_win_ptr;
 	void				*img_ptr;
-	void				*render_img_ptr;
-	void 				*img_logo;
-	void 				*img_finish;
 	char				*data_ptr;
-	char				*render_data_ptr;
 	int					bits_per_pixel;
 	int					size_line;
 	int					endian;
 }						t_win;
 
+typedef struct 			s_png
+{
+	void 				*background;
+	void 				*success;
+	void 				*failure;
+	void 				*f480;
+	void 				*f720;
+	void 				*f1080;
+	void 				*s8;
+	void 				*s40;
+	void 				*s200;
+	void 				*s500;
+	void 				*s1000;
+	int 				format1;
+	int 				format2;
+	int 				format3;
+	int 				sample1;
+	int 				sample2;
+	int 				sample3;
+	int 				sample4;
+	int 				sample5;
+}						t_png;
+
 typedef struct			s_rtv1
 {
-	int					ac;
-	char 				**av;
-	t_win 				win;
+	t_png 				png;
+	int 				state;
+	void				*mlx_ptr;
+	t_win 				main;
+	t_win 				image;
 	t_scene				scene;
 	t_render 			render;
 }						t_rtv1;
-
-// typedef struct			s_opencl
-// {
-// 	cl_context			context;
-// 	cl_command_queue	queue;
-// 	cl_platform_id		platform_id;
-// 	cl_uint				ret_num_platforms;
-// 	cl_uint				ret_num_devices;
-// 	cl_device_id		device_id;
-// 	cl_program			program;
-// 	cl_kernel			kernel;
-// 	char				**kernel_src;
-// 	cl_mem				scene;
-// 	cl_mem				objects;
-// 	cl_mem				lights;
-// 	cl_mem				camera;
-// 	cl_mem				img_data;
-// }						t_opencl;
 
 #endif

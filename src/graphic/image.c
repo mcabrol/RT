@@ -17,27 +17,42 @@ void 		image(t_rtv1 *rtv1)
 	int		x;
 	int		y;
 	int		i;
+	t_vec	*screen;
 	t_win	*win;
 
-	win = &rtv1->win;
-	win->render_win_ptr = mlx_new_window(win->mlx_ptr, WIDTH, HEIGHT, "render");
-	win->render_img_ptr = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
-	win->render_data_ptr = mlx_get_data_addr(win->render_img_ptr,
-			&(win->bits_per_pixel),
-			&(win->size_line),
-			&(win->endian));
+	win = &rtv1->image;
+	screen = rtv1->render.screen;
 	y = 0;
-	while (y <= HEIGHT)
+	while (y <= rtv1->scene.height)
 	{
 		x = 0;
-		while (x <= WIDTH)
+		while (x <= rtv1->scene.width)
 		{
-			i = (HEIGHT - 1 - y) * WIDTH + x - 1;
-			put_pixel_vector(&rtv1->win,
-							x, HEIGHT - y,
-							 &rtv1->render.screen[i]);
+			i = (rtv1->scene.height - 1 - y) * rtv1->scene.width + x - 1;
+			put_pixel_vector(rtv1, x, rtv1->scene.height - y, &screen[i]);
 			x++;
 		}
 		y++;
 	}
+	mlx_put_image_to_window(rtv1->mlx_ptr, win->win_ptr,
+							win->img_ptr, 0, 0);
+}
+
+void 	write_ppm(t_rtv1 *rtv1)
+{
+	int 	fd;
+	t_vec	*screen;
+	char 	*name;
+
+	screen = rtv1->render.screen;
+	name = ft_strcat(ft_itoa(rand()), ".ppm");
+	fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	ft_dprintf(fd, "P3\n%d %d\n%d\n", rtv1->scene.width, rtv1->scene.height, 255);
+	for (int i = 0; i < rtv1->scene.width * rtv1->scene.height; ++i)
+	{
+		ft_dprintf(fd, "%d %d %d ", to_byte(screen[i].x, GAMMA),
+			                     	to_byte(screen[i].y, GAMMA),
+			                     	to_byte(screen[i].z, GAMMA));
+	}
+	close(fd);
 }

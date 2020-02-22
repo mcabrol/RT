@@ -20,19 +20,22 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# define SAMPLES 				2000
+# define SAMPLES 				8
 
 # define HEIGHT					550
 # define WIDTH					600
 
-# define M_HEIGHT				600
-# define M_WIDTH				400
+# define H_MAIN					600
+# define W_MAIN					400
 
 # define ZERO					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
 # define CONTINUE				0
 # define STOP					1
+
+# define SETUP					0
+# define RENDER					1
 
 # define MAIN					0
 # define RENDER 				1
@@ -101,13 +104,11 @@ t_vec			*norm(t_vec *v);
 double 			norm_s(t_vec *v);
 t_vec			rotate_vector(t_vec obj_rotation, t_vec dir);
 
-
 /*
 **	ray.c
 */
 
 void			init_ray(t_vec o, t_vec d, int depth, t_ray *dest);
-
 void 			prepare_ray(t_render *rt, t_radiance *target, t_cam *cam);
 void			init_cam(t_cam *cam);
 void			eval(t_ray *r, double t, t_vec *dest);
@@ -241,26 +242,42 @@ void			specular_reflect(t_vec *d, t_vec *n);
 void 			specular_diffuse(t_vec *d, t_vec *n, unsigned short xseed[3]);
 
 /*
-**	mlx.c
+**	window.c
 */
 
-int				init_window(char **av, t_rtv1 *rtv1);
-void			erase(t_win *win);
-int				expose_hook(t_win *win);
-void			put_pixel(t_win *win, int x, int y, int color);
-void			put_pixel_vector(t_win *win, int x, int y, t_vec *v);
+t_win			window(void *mlx_ptr, int width, int height, char *name);
+
+/*
+**	pixel.c
+*/
+
+void			put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v);
+
+/*
+**	hook.c
+*/
+
+void 			hook(t_rtv1 *rtv1);
+
+/*
+**	key.c
+*/
+
 int				key(int keycode, t_rtv1 *rtv1);
+
+/*
+**	mouse.c
+*/
+
+int				mouse(int button, int x, int y, t_rtv1 *rtv1);
 
 /*
 **	gui.c
 */
 
-void 			bg_gradient(t_win *win);
-void 			logo_center(t_win *win);
-void 			finish_center(t_win *win);
+t_png 			init_png(void *mlx_ptr);
+void 			put_setup(t_rtv1 *rtv1);
 
-
-// void 			init_opencl(t_opencl *cl);
 
 /*
 **	debbug.c
@@ -273,6 +290,7 @@ void 	 		loading_text(int samples, int y);
 */
 
 void 			image(t_rtv1 *rtv1);
+void 			write_ppm(t_rtv1 *rtv1);
 
 
 #endif

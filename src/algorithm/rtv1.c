@@ -23,17 +23,17 @@ void 		pathtracer(t_rtv1 *rtv1)
 	scene = &rtv1->scene;
 	render = &rtv1->render;
 	init_cam(&cam);
-	render->screen = (t_vec *)malloc(WIDTH * HEIGHT * sizeof(t_vec));
+	render->screen = (t_vec *)malloc(rtv1->scene.width * rtv1->scene.height * sizeof(t_vec));
 	render->y = -1;
-	while (++(render->y) < HEIGHT)
+	while (++(render->y) < rtv1->scene.height)
 	{
 		loading_text(scene->samples, render->y);
 		init_seed(render);
 		render->x = -1;
-		while (++(render->x) < WIDTH)
+		while (++(render->x) < rtv1->scene.width)
 		{
 			render->sy = -1;
-			render->i = (HEIGHT - 1 - render->y) * WIDTH + render->x;
+			render->i = (rtv1->scene.height - 1 - render->y) * rtv1->scene.width + render->x;
 			while (++(render->sy) < 2)
 			{
 				render->sx = -1;

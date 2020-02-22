@@ -12,43 +12,43 @@
 
 #include "rtv1.h"
 
-void 		bg_gradient(t_win *win)
+t_png 		init_png(void *mlx_ptr)
 {
-	int x;
-	int y;
-	int c1;
-	// int c2;
+	t_png png;
+	int width;
+	int height;
 
-	y = -1;
-	c1 = F_GREY;
-	while (++y <= M_HEIGHT)
-	{
-		x = -1;
-		while (++x <= M_WIDTH)
-			put_pixel(win, x, y, c1);
-	}
-	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
-							win->img_ptr, 0, 0);
+	png.background = mlx_png_file_to_image(mlx_ptr, "img/background.png", &width, &height);
+	png.success = mlx_png_file_to_image(mlx_ptr, "img/success.png", &width, &height);
+	png.failure = mlx_png_file_to_image(mlx_ptr, "img/failure.png", &width, &height);
+	png.f480 = mlx_png_file_to_image(mlx_ptr, "img/480p.png", &width, &height);
+	png.f720 = mlx_png_file_to_image(mlx_ptr, "img/720p.png", &width, &height);
+	png.f1080 = mlx_png_file_to_image(mlx_ptr, "img/1080p.png", &width, &height);
+	png.s8 = mlx_png_file_to_image(mlx_ptr, "img/8s.png", &width, &height);
+	png.s40 = mlx_png_file_to_image(mlx_ptr, "img/40s.png", &width, &height);
+	png.s200 = mlx_png_file_to_image(mlx_ptr, "img/200s.png", &width, &height);
+	png.s500 = mlx_png_file_to_image(mlx_ptr, "img/500s.png", &width, &height);
+	png.s1000 = mlx_png_file_to_image(mlx_ptr, "img/1000s.png", &width, &height);
+	return (png);
 }
 
-void 		logo_center(t_win *win)
+void 		put_setup(t_rtv1 *rtv1)
 {
-	int 	height;
-	int 	width;
-
-	win->img_logo = mlx_png_file_to_image(win->mlx_ptr, "img/startup.png",
-						   &width, &height);
-	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
-							win->img_logo, 0, 0);
-}
-
-void 		finish_center(t_win *win)
-{
-	int 	height;
-	int 	width;
-
-	win->img_logo = mlx_png_file_to_image(win->mlx_ptr, "img/success.png",
-						   &width, &height);
-	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
-							win->img_logo, 0, 0);
+	mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.background, 0, 0);
+	if (rtv1->scene.width == 640 && rtv1->scene.height == 480)
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.f480, 0, 0);
+	else if (rtv1->scene.width == 1280 && rtv1->scene.height == 720)
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.f720, 0, 0);
+	else if (rtv1->scene.width == 1920 && rtv1->scene.height == 1080)
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.f1080, 0, 0);
+	if (rtv1->scene.samples == 8)
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.s8, 0, 0);
+	else if (rtv1->scene.samples == 40)
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.s40, 0, 0);
+	else if (rtv1->scene.samples == 200)
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.s200, 0, 0);
+	else if (rtv1->scene.samples == 500)
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.s500, 0, 0);
+	else if (rtv1->scene.samples == 1000)
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.s1000, 0, 0);
 }
