@@ -27,7 +27,7 @@ void 		pathtracer(t_rtv1 *rtv1)
 	render->y = -1;
 	while (++(render->y) < rtv1->scene.height)
 	{
-		loading_text(scene->samples, render->y);
+		// loading_text(scene->samples, render->y);
 		init_seed(render);
 		render->x = -1;
 		while (++(render->x) < rtv1->scene.width)

@@ -61,5 +61,17 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		}
 		put_setup(rtv1);
 	}
+	if (rtv1->state == RENDER)
+	{
+		if (button == 1 && x > 102 && x < 189 && y > 528 && y < 569)
+		{
+			write_ppm(rtv1);
+		}
+		if (button == 1 && x > 211 && x < 298 && y > 528 && y < 569)
+		{
+			rtv1->state = SETUP;
+			put_setup(rtv1);
+		}
+	}
 	return (EXIT_SUCCESS);
 }

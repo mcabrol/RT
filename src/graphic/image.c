@@ -42,11 +42,9 @@ void 	write_ppm(t_rtv1 *rtv1)
 {
 	int 	fd;
 	t_vec	*screen;
-	char 	*name;
 
 	screen = rtv1->render.screen;
-	name = ft_strcat(ft_itoa(rand()), ".ppm");
-	fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	fd = open(ft_strcat(ft_itoa(rand()), ".ppm"), O_WRONLY | O_APPEND | O_CREAT, 0644);
 	ft_dprintf(fd, "P3\n%d %d\n%d\n", rtv1->scene.width, rtv1->scene.height, 255);
 	for (int i = 0; i < rtv1->scene.width * rtv1->scene.height; ++i)
 	{
