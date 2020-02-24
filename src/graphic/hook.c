@@ -20,6 +20,6 @@ void 	hook(t_rtv1 *rtv1)
 	main = &rtv1->main;
 	image = &rtv1->image;
 	mlx_hook(main->win_ptr, 2, 1L << 2, key, rtv1);
-	mlx_hook(main->win_ptr, 2, 1L << 2, key, rtv1);
+	// mlx_hook(main->win_ptr, 2, 1L << 2, key, rtv1);
 	mlx_mouse_hook(main->win_ptr, mouse, rtv1);
 }

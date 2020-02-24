@@ -25,12 +25,12 @@ void 	init_scene(t_rtv1 *rtv1)
 					vecp(0.0, -3.0, -140.0), 				// position
 					vecp(0.0, 1.0, 0.0), 				// direction
 					vecp(0.0, 0.0, 0.0),				// emission
-					vecp(0.75, 0.25, 0.25),				// color
+					vecp(0.999, 0.999, 0.999),				// color
 					vecp(0.0, 0.0, 0.0),				// rotation
 					0,									// Angle
 					0,									// Cut direction
 					0, 0, 0,							// Box rect
-					DIFF);
+					SPEC);
 
 	scene->obj[1] = obj(BOX,							// type
 					0.0,								// radius
