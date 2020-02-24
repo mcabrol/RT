@@ -29,7 +29,7 @@ void 		image(t_rtv1 *rtv1)
 		while (x <= rtv1->scene.width)
 		{
 			i = (rtv1->scene.height - 1 - y) * rtv1->scene.width + x - 1;
-			put_pixel_vector(rtv1, x, y, &screen[i]);
+			put_pixel_vector(rtv1, x, rtv1->scene.height - y, &screen[i]);
 			x++;
 		}
 		y++;

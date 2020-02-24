@@ -61,14 +61,14 @@ void 	init_scene(t_rtv1 *rtv1)
 	scene->obj[3] = obj(BOX,							// type
 					0.0,								// radius
 					0.0,								// height
-					vecp(-35.0, -20.0, -200.0), 				// position
+					vecp(-35.0, -20.0, -200.0), 		// position
 					vecp(0.0, 1.0, 0.0), 				// direction
 					vecp(0.0, 0.0, 0.0),				// emission
 					vecp(0.999, 0.999, 0.999),			// color
 					vecp(0.0, 0.0, 0.0),				// rotation
 					0,									// Angle
 					0,									// Cut direction
-					70.0, 1.0, 70.0,					// Box rect
+					80.0, 1.0, 80.0,					// Box rect
 					DIFF);								// material
 
 
