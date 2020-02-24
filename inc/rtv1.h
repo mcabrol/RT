@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/19 18:04:10 by judrion          ###   ########.fr       */
+/*   Updated: 2020/02/24 17:22:20 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ t_obj		   	obj(int t,
 				   int reflect);
 void			cut_direction(t_obj *obj);
 void			prepare_obj(t_obj *obj);
+t_vec 			to_vec(int hex);
+
 
 /*
 **	scene.c

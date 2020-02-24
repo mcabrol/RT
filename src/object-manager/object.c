@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/04 16:47:28 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/24 18:41:35 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,20 @@ void		prepare_obj(t_obj *obj)
 	obj->cut_direction = rotate_vector(obj->rotation, obj->cut_direction);
 	obj->cut_direction = *norm(&obj->cut_direction);
 	obj->cut_shift = rotate_vector(obj->rotation, obj->cut_shift);
+}
+
+t_vec 		to_vec(int hex)
+{
+	int r;
+	int g;
+	int b;
+	t_vec res;
+
+	r = (hex >> 16) & 0xFF;
+	g = (hex >> 8) & 0xFF;
+	b = hex & 0xFF;
+
+	ft_printf("%d %d %d\n", r, g, b);
+	vec((double)r / 255 , (double)g / 255, (double)b / 255 , &res);
+	return (res);
 }
