@@ -21,20 +21,20 @@ brew install gcc cmake
 
 The configuration file is in _.rt_ extension.
 
-| Options       	 | Sphere	 | Plane	| Cylinder	| Cone	| Box	| Camera	|
-| ------------------ | --------- | -------- | --------- | ----- | ----- | --------- |
-| radius (_double_)	 | Yes		 | No		| Yes		| No	| No	| No		|
-| height (_double_)	 | No		 | No		| Yes 		| Yes	| No	| No		|
-| position (_t_vec_) | Yes		 | Yes		| Yes		| Yes	| Yes	| Yes 		|
-| direction (_t_vec_)| Yes		 | Yes		| Yes		| Yes	| Yes	| Yes		|
-| emission (_t_vec_) | Yes		 | Yes		| Yes		| Yes	| Yes	| No		|
-| reflect (_int_)    | Yes		 | Yes		| Yes		| Yes	| Yes	| No		|
-| color (_t_vec_)	 | Yes		 | Yes		| Yes		| Yes	| Yes	| No		|
-| angle (_double_)	 | No		 | No		| No		| Yes	| No	| No		|
-| a (_double_)		 | No		 | No		| No		| No	| Yes	| No		|
-| b (_double_)		 | No		 | No		| No		| No	| Yes	| No		|
-| c (_double_)		 | No		 | No		| No		| No	| Yes	| No		|
-| fov (_double_)	 | No		 | No		| No		| No	| No	| Yes		|
+| Options       	   | Sphere 	 | Plane  	| Cylinder	| Cone	| Box	  | Camera	|
+| ------------------ | --------- | -------- | --------- | ----- | ----- | ------- |
+| radius (_double_)	 | ✔️		     | ❌   		| ✔️		    | ❌	  | ❌	  | ❌      |
+| height (_double_)	 | ❌		     | ❌		    | ✔️ 	    	| ✔️  	| ❌  	| ❌  		|
+| position (_t_vec_) | ✔️		     | ✔️		    | ✔️		    | ✔️	  | ✔️	  | ✔️     |
+| direction (_t_vec_)| ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ✔️		|
+| emission (_t_vec_) | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ❌		|
+| reflect (_int_)    | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ❌		|
+| color (_t_vec_)	 | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ❌		|
+| angle (_double_)	 | ❌		 | ❌		| ❌		| ✔️	| ❌	| ❌		|
+| a (_double_)		 | ❌		 | ❌		| ❌		| ❌	| ✔️	| ❌		|
+| b (_double_)		 | ❌		 | ❌		| ❌		| ❌	| ✔️	| ❌		|
+| c (_double_)		 | ❌		 | ❌		| ❌		| ❌	| ✔️	| ❌		|
+| fov (_double_)	 | ❌		 | ❌		| ❌		| ❌	| ❌	| ✔️		|
 
 ## Architecture
 
@@ -43,34 +43,8 @@ _file.c_ todo
 | Algorithm     | Objects Manager   | Math         | Graphic   | Kernel     |
 | ------------- | ----------------- | ------------ | --------- | ---------- |
 | intersect.c   | scene.c           | vetor.c      | mlx.c     | opencl.c   |
-| radiace.c     | sphere.c          | operator.c   | _gui.c_   | kernel.cl  |
+| radiance.c    | sphere.c          | operator.c   | _gui.c_   | kernel.cl  |
 | ray.c         | _cone.c_          | calcul.c     | _text.c_  |            |
 | rtv1.c        | _cylinder.c_      | sample.c     |           |            |
 | specular.c    | _cube.c_          |              |           |            |
 | srand48.c     | _plan.c_          |              |           |            |
-
-# Options
-
-## Object
-
-When your **right-click** on object:
-
-**g**: for hasardly moving
-
-| g > x                  | g > y                  | g > z                  |
-| ---------------------- | ---------------------- | ---------------------- |
-| move on the **x** axis | move on the **y** axis | move on the **z** axis |
-
-**s** for scaling
-
-**r** for hasardly moving
-
-| r > x                    | r > y                    | r > z                    |
-| ------------------------ | ------------------------ | ------------------------ |
-| rotate on the **x** axis | rotate on the **y** axis | rotate on the **z** axis |
-
-## Camera
-
-**middle-click** for rotate scene
-
-**scroll** for zoom into scene
