@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/24 17:22:20 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 17:33:13 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,8 @@ t_vec			rotate_vector(t_vec obj_rotation, t_vec dir);
 */
 
 void			init_ray(t_vec o, t_vec d, int depth, t_ray *dest);
-void 			prepare_ray(t_render *rt, t_radiance *target, t_cam *cam,
-				int width, int height);
-void			init_cam(t_cam *cam, t_scene *scene);
+void 			prepare_ray(t_render *render, t_radiance *target, t_scene *scene);
+void			init_cam(t_scene *scene);
 void			eval(t_ray *r, double t, t_vec *dest);
 void			printr(t_ray *r);
 void			printv(t_vec *v);
@@ -285,7 +284,13 @@ void 			write_ppm(t_rtv1 *rtv1);
 **	file.c
 */
 
-int				file(int ac, char **av);
+int				file(int ac, char **av, t_scene *scene);
 int				check(int ac, char **av);
+
+/*
+**	parse.c
+*/
+
+int 			parse(char *str, t_scene *scene);
 
 #endif

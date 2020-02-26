@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/24 18:53:07 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 17:40:12 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void 	init_scene(t_rtv1 *rtv1)
 	t_scene *scene;
 
 	scene = &rtv1->scene;
-	scene->samples = SAMPLES / 4;
+	init_cam(&rtv1->scene);
 	scene->n = sizeof(scene->obj) / sizeof(t_obj);
 	scene->obj[0] = obj(SPHERE,							// type
 					15.0,								// radius

@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/24 18:53:07 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 17:09:04 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		file(int ac, char **av)
+int		file(int ac, char **av, t_scene *scene)
 {
 	char 	*filename;
+	char	*str;
+	int 	fd;
 	int		size;
 
 	if (ac > 1 && check(ac, av))
@@ -25,7 +27,12 @@ int		file(int ac, char **av)
 		filename = av[1];
 	if ((size = get_file_size(filename)) < 0)
 		return (error("usage: ./rtv1 [file.csv]"));
-	ft_printf("%d octet\n", size);
+	if ((fd = open(filename, O_RDONLY)) < 0)
+		return (error("usage: ./rtv1 [file.csv]"));
+	if ((str = (char *)malloc(sizeof(char) * size)) == NULL)
+		return (error("usage: ./rtv1 [file.csv]"));
+	read(fd, str, size);
+	parse(str, scene);
 	return (EXIT_SUCCESS);
 }
 

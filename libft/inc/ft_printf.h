@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 17:47:49 by mcabrol           #+#    #+#             */
-/*   Updated: 2019/09/18 16:33:40 by bsuarez-         ###   ########.fr       */
+/*   Created: 2020/02/26 15:31:24 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/02/26 15:32:52 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdarg.h>
 # include "colors.h"
 
 # if defined(__linux__)
-    # include <stdint.h>
+#  include <stdint.h>
 # endif
 
 # define BUFFSIZE		300

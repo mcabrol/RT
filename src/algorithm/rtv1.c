@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/19 18:09:14 by judrion          ###   ########.fr       */
+/*   Updated: 2020/02/26 17:32:39 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 void 		pathtracer(t_rtv1 *rtv1)
 {
 	t_ray			ray;
-	t_cam 			cam;
 	t_radiance		target;
 	t_scene 		*scene;
 	t_render 		*render;
 
 	scene = &rtv1->scene;
 	render = &rtv1->render;
-	init_cam(&cam, scene);
 	render->screen = (t_vec *)malloc(rtv1->scene.width * rtv1->scene.height * sizeof(t_vec));
 	render->y = -1;
 	init_seed(render);
@@ -43,7 +41,7 @@ void 		pathtracer(t_rtv1 *rtv1)
 					render->s = -1;
 					while (++(render->s) < scene->samples)
 					{
-						prepare_ray(render, &target, &cam, scene->width, scene->height);
+						prepare_ray(render, &target, scene);
 						init_ray(target.eye_t, *norm(&target.d), 0, &ray);
 						radiance(scene, &ray, render);
 						ndivide(&render->color, (double)scene->samples, &render->l);

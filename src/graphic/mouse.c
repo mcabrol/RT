@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx.c                                              :+:      :+:    :+:   */
+/*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/19 18:05:22 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 16:53:39 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 			rtv1->scene.samples = 1000;
 		else if (button == 1 && x > 156 && x < 243 && y > 527 && y < 558)
 		{
-			pathtracer(rtv1);
 			mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.success, 0, 0);
+			pathtracer(rtv1);
 			rtv1->state = RENDER;
 			return (EXIT_SUCCESS);
 		}

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/24 18:41:35 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 17:39:08 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@ t_obj		obj(int t,
 	obj.c = cc,
 	obj.reflect = reflect;
 	return (obj);
+}
+
+void	init_cam(t_scene *scene)
+{
+	vec(0, 0, 0, &scene->cam.position);
+	vec(0, 0, -1, &scene->cam.direction);
+	norm(&scene->cam.direction);
+	scene->cam.fov = 30 * M_PI / 180;
+	vec(scene->width * scene->cam.fov / scene->height, 0.0, 0.0, &scene->cam.cx);
+	cross(&scene->cam.cx, &scene->cam.direction, &scene->cam.cy);
+	norm(&scene->cam.cy);
+	nmulti_(&scene->cam.cy, scene->cam.fov);
 }
 
 void 		obj_default(t_obj *obj)

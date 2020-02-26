@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/19 15:57:52 by judrion          ###   ########.fr       */
+/*   Updated: 2020/02/26 17:20:03 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ typedef struct			s_obj
 	double 				b;				// box b
 	double 				c;				// box c
 	int					reflect;		// material type
+	double				fov;			// field-of-view
+	t_vec				cx;				// cam_x
+	t_vec				cy;				// cam_y
 }						t_obj;
 
 typedef struct			s_cam
@@ -92,6 +95,7 @@ typedef struct 			s_scene
 	int 				width;
 	int					height;
 	int					samples;
+	t_obj 				cam;
 	t_obj				obj[4];
 	int					n;			// Number of object
 }						t_scene;

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 15:59:23 by mcabrol           #+#    #+#             */
-/*   Updated: 2019/11/08 19:00:30 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/02/26 15:33:42 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/02/26 15:34:19 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRING_H
-# define STRING_H
+#ifndef FT_STRING_H
+# define FT_STRING_H
 
 void				*ft_memalloc(size_t size);
 void				*ft_memset(void *b, int c, size_t len);
@@ -46,6 +46,5 @@ char				**ft_strsplit(char const *s, char c);
 char				*ft_strnew(size_t size);
 void				ft_strclr(char *s);
 void				ft_strdel(char **ap);
-
 
 #endif

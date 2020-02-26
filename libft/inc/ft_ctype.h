@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_ctype.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:59:23 by mcabrol           #+#    #+#             */
-/*   Updated: 2019/11/08 19:00:30 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 15:34:01 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CTYPE_H
-# define CTYPE_H
+#ifndef FT_CTYPE_H
+# define FT_CTYPE_H
 
 int					ft_toupper(int c);
 int					ft_tolower(int c);

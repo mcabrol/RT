@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_stdio.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 15:59:23 by mcabrol           #+#    #+#             */
-/*   Updated: 2019/11/08 19:00:30 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/02/26 15:35:46 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/02/26 15:35:51 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STDIO_H
-# define STDIO_H
+#ifndef FT_STDIO_H
+# define FT_STDIO_H
 
 void				ft_putchar(char c);
 void				ft_putstr(const char *s);
