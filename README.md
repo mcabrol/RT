@@ -23,7 +23,7 @@ The configuration file is in _.rt_ extension.
 
 | Options       	   | Sphere 	 | Plane  	| Cylinder	| Cone	| Box	  | Camera	|
 | ------------------ | --------- | -------- | --------- | ----- | ----- | ------- |
-| radius (_double_)	 | ✔️		     | No   		| ✔️		    | No	  | No	  | No      |
+| radius (_double_)	 | ✔️		     | ❌   		| ✔️		    | No	  | No	  | No      |
 | height (_double_)	 | No		     | No		    | ✔️ 	    	| ✔️  	| No  	| No  		|
 | position (_t_vec_) | ✔️		     | ✔️		    | ✔️		    | ✔️	  | ✔️	  | ✔️     |
 | direction (_t_vec_)| ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ✔️		|
