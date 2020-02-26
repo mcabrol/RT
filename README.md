@@ -17,6 +17,25 @@ brew install gcc cmake
 ./rtv1 [files]
 ```
 
+## File
+
+The configuration file is in _.rt_ extension.
+
+| Options       	 | Sphere	 | Plane	| Cylinder	| Cone	| Box	| Camera	|
+| ------------------ | --------- | -------- | --------- | ----- | ----- | --------- |
+| radius (_double_)	 | Yes		 | No		| Yes		| No	| No	| No		|
+| height (_double_)	 | No		 | No		| Yes 		| Yes	| No	| No		|
+| position (_t_vec_) | Yes		 | Yes		| Yes		| Yes	| Yes	| Yes 		|
+| direction (_t_vec_)| Yes		 | Yes		| Yes		| Yes	| Yes	| Yes		|
+| emission (_t_vec_) | Yes		 | Yes		| Yes		| Yes	| Yes	| No		|
+| reflect (_int_)    | Yes		 | Yes		| Yes		| Yes	| Yes	| No		|
+| color (_t_vec_)	 | Yes		 | Yes		| Yes		| Yes	| Yes	| No		|
+| angle (_double_)	 | No		 | No		| No		| Yes	| No	| No		|
+| a (_double_)		 | No		 | No		| No		| No	| Yes	| No		|
+| b (_double_)		 | No		 | No		| No		| No	| Yes	| No		|
+| c (_double_)		 | No		 | No		| No		| No	| Yes	| No		|
+| fov (_double_)	 | No		 | No		| No		| No	| No	| Yes		|
+
 ## Architecture
 
 _file.c_ todo
@@ -55,5 +74,3 @@ When your **right-click** on object:
 **middle-click** for rotate scene
 
 **scroll** for zoom into scene
-
-
