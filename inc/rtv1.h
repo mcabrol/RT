@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 17:33:13 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 18:37:56 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ void			put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v);
 */
 
 void 			hook(t_rtv1 *rtv1);
+int 			hover(int x, int y, t_rtv1 *rtv1);
 
 /*
 **	key.c

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 18:04:46 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 18:40:29 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct			s_win
 
 typedef struct 			s_png
 {
+	int 				hover;
 	void 				*background;
 	void 				*success;
 	void 				*failure;
@@ -129,14 +130,6 @@ typedef struct 			s_png
 	void 				*s200;
 	void 				*s500;
 	void 				*s1000;
-	int 				format1;
-	int 				format2;
-	int 				format3;
-	int 				sample1;
-	int 				sample2;
-	int 				sample3;
-	int 				sample4;
-	int 				sample5;
 }						t_png;
 
 typedef struct			s_rtv1

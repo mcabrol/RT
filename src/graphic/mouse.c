@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 16:53:39 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 18:47:20 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 {
-	// ft_dprintf(1, "%d, %d, %d\n", button, x, y);
 	if (rtv1->state == SETUP)
 	{
 		if (button == 1 && x > 148 && x < 217 && y > 325 && y < 339)

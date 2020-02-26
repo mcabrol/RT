@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 17:45:45 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/26 18:52:28 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		main(int ac, char **av)
 	rtv1.main = window(rtv1.mlx_ptr, W_MAIN, H_MAIN, "Raytracer");
 	rtv1.png = init_png(rtv1.mlx_ptr);
 	rtv1.state = SETUP;
+	rtv1.png.hover = FALSE;
 	put_setup(&rtv1);
 	hook(&rtv1);
 	mlx_loop(rtv1.mlx_ptr);
