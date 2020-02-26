@@ -43,7 +43,7 @@ _file.c_ todo
 | Algorithm     | Objects Manager   | Math         | Graphic   | Kernel     |
 | ------------- | ----------------- | ------------ | --------- | ---------- |
 | intersect.c   | scene.c           | vetor.c      | mlx.c     | opencl.c   |
-| radiace.c     | sphere.c          | operator.c   | _gui.c_   | kernel.cl  |
+| radiance.c    | sphere.c          | operator.c   | _gui.c_   | kernel.cl  |
 | ray.c         | _cone.c_          | calcul.c     | _text.c_  |            |
 | rtv1.c        | _cylinder.c_      | sample.c     |           |            |
 | specular.c    | _cube.c_          |              |           |            |
