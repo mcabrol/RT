@@ -23,18 +23,18 @@ The configuration file is in _.rt_ extension.
 
 | Options       	   | Sphere 	 | Plane  	| Cylinder	| Cone	| Box	  | Camera	|
 | ------------------ | --------- | -------- | --------- | ----- | ----- | ------- |
-| radius (_double_)	 | ✔️		     | ❌   		| ✔️		    | No	  | No	  | No      |
-| height (_double_)	 | No		     | No		    | ✔️ 	    	| ✔️  	| No  	| No  		|
+| radius (_double_)	 | ✔️		     | ❌   		| ✔️		    | ❌	  | ❌	  | ❌      |
+| height (_double_)	 | ❌		     | ❌		    | ✔️ 	    	| ✔️  	| ❌  	| ❌  		|
 | position (_t_vec_) | ✔️		     | ✔️		    | ✔️		    | ✔️	  | ✔️	  | ✔️     |
 | direction (_t_vec_)| ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ✔️		|
-| emission (_t_vec_) | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| No		|
-| reflect (_int_)    | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| No		|
-| color (_t_vec_)	 | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| No		|
-| angle (_double_)	 | No		 | No		| No		| ✔️	| No	| No		|
-| a (_double_)		 | No		 | No		| No		| No	| ✔️	| No		|
-| b (_double_)		 | No		 | No		| No		| No	| Yes	| No		|
-| c (_double_)		 | No		 | No		| No		| No	| Yes	| No		|
-| fov (_double_)	 | No		 | No		| No		| No	| No	| Yes		|
+| emission (_t_vec_) | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ❌		|
+| reflect (_int_)    | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ❌		|
+| color (_t_vec_)	 | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ❌		|
+| angle (_double_)	 | ❌		 | ❌		| ❌		| ✔️	| ❌	| ❌		|
+| a (_double_)		 | ❌		 | ❌		| ❌		| ❌	| ✔️	| ❌		|
+| b (_double_)		 | ❌		 | ❌		| ❌		| ❌	| ✔️	| ❌		|
+| c (_double_)		 | ❌		 | ❌		| ❌		| ❌	| ✔️	| ❌		|
+| fov (_double_)	 | ❌		 | ❌		| ❌		| ❌	| ❌	| ✔️		|
 
 ## Architecture
 
