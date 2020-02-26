@@ -1,18 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/01/17 23:00:45 by mcabrol          ###   ########.fr       */
+/*   Created: 2018/11/27 14:12:54 by mcabrol           #+#    #+#             */
+/*   Updated: 2019/10/22 17:26:50 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "libft.h"
 
-void 	 	loading_text(int samples, int y, int height)
+int			get_file_size(const char *filename)
 {
-	ft_dprintf(2, "\r%u samples %5.2f%%", samples * 4, 100.0 * y / (height - 1));
+	int			i;
+	int 		a;
+	char		buffer[BUFF_SIZE];
+	int			fd;
+
+	i = 0;
+	a = 0;
+	if ((fd = open(filename, O_RDONLY)) < 0 || fd > OPEN_MAX)
+		return (-1);
+	while (1)
+	{
+		i = read(fd, buffer, BUFF_SIZE);
+		if (i < BUFF_SIZE)
+		{
+			close(fd);
+			return (a += i);
+		}
+		else if (i == BUFF_SIZE)
+		{
+			a += i;
+			*buffer -= BUFF_SIZE;
+		}
+	}
+	return (0);
 }

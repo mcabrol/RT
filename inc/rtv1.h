@@ -76,13 +76,11 @@ typedef int 		BOOL;
 
 # include "struct.h"
 
-
 /*
 **	rtv1.c
 */
 
 void 			pathtracer(t_rtv1 *rtv1);
-int				check(int ac, char **av);
 int				error(char *strerror);
 
 /*
@@ -101,8 +99,9 @@ t_vec			rotate_vector(t_vec obj_rotation, t_vec dir);
 */
 
 void			init_ray(t_vec o, t_vec d, int depth, t_ray *dest);
-void 			prepare_ray(t_render *rt, t_radiance *target, t_cam *cam);
-void			init_cam(t_cam *cam);
+void 			prepare_ray(t_render *rt, t_radiance *target, t_cam *cam,
+				int width, int height);
+void			init_cam(t_cam *cam, t_scene *scene);
 void			eval(t_ray *r, double t, t_vec *dest);
 void			printr(t_ray *r);
 void			printv(t_vec *v);
@@ -134,7 +133,6 @@ t_obj		   	obj(int t,
 void			cut_direction(t_obj *obj);
 void			prepare_obj(t_obj *obj);
 t_vec 			to_vec(int hex);
-
 
 /*
 **	scene.c
@@ -211,8 +209,6 @@ double			ft_check_pnt_box(double min[3], double max[3]);
 void			define_norm(t_ray *ray, int face);
 void 			check_box(t_ray *ray, double min[3], double max[3], t_vec rev_ov);
 
-
-
 /*
 **	sample.c
 */
@@ -225,7 +221,6 @@ void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
 
 void			init_seed(t_render *rt);
 int 			russian_roulette(t_ray *ray, t_obj *shape, t_render *render);
-
 
 /*
 **	specular.c
@@ -277,7 +272,7 @@ void 			put_setup(t_rtv1 *rtv1);
 **	debbug.c
 */
 
-void 	 		loading_text(int samples, int y);
+void 	 		loading_text(int samples, int y, int height);
 
 /*
 **	image.c
@@ -286,5 +281,11 @@ void 	 		loading_text(int samples, int y);
 void 			image(t_rtv1 *rtv1);
 void 			write_ppm(t_rtv1 *rtv1);
 
+/*
+**	file.c
+*/
+
+int				file(int ac, char **av);
+int				check(int ac, char **av);
 
 #endif

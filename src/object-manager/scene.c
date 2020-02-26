@@ -25,7 +25,7 @@ void 	init_scene(t_rtv1 *rtv1)
 					vecp(0.0, -3.0, -140.0), 			// position
 					vecp(0.0, 1.0, 0.0), 				// direction
 					vecp(0.0, 0.0, 0.0),				// emission
-					vecp(0.0, 1.0, 0.3), // color (b-g-r)
+					to_vec(0xe31131), 					// color (b-g-r)
 					vecp(0.0, 0.0, 0.0),				// rotation
 					0,									// Angle
 					0,									// Cut direction
@@ -71,13 +71,8 @@ void 	init_scene(t_rtv1 *rtv1)
 					80.0, 1.0, 80.0,					// Box rect
 					DIFF);								// material
 
-
 	prepare_obj(&scene->obj[0]);
 	prepare_obj(&scene->obj[1]);
 	prepare_obj(&scene->obj[2]);
 	prepare_obj(&scene->obj[3]);
-
-	t_vec v = to_vec(0x63ff00);
-
-	printv(&v);
 }

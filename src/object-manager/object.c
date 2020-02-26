@@ -96,13 +96,11 @@ t_vec 		to_vec(int hex)
 	int r;
 	int g;
 	int b;
-	t_vec res;
+	t_vec color;
 
 	r = (hex >> 16) & 0xFF;
 	g = (hex >> 8) & 0xFF;
 	b = hex & 0xFF;
-
-	ft_printf("%d %d %d\n", r, g, b);
-	vec((double)r / 255 , (double)g / 255, (double)b / 255 , &res);
-	return (res);
+	vec((double)b / 255, (double)g / 255, (double)r / 255, &color);
+	return (color);
 }

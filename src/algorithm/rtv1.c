@@ -22,18 +22,18 @@ void 		pathtracer(t_rtv1 *rtv1)
 
 	scene = &rtv1->scene;
 	render = &rtv1->render;
-	init_cam(&cam);
+	init_cam(&cam, scene);
 	render->screen = (t_vec *)malloc(rtv1->scene.width * rtv1->scene.height * sizeof(t_vec));
 	render->y = -1;
 	init_seed(render);
-	while (++(render->y) < rtv1->scene.height)
+	while (++(render->y) < scene->height)
 	{
-		loading_text(scene->samples, render->y);
+		loading_text(scene->samples, render->y, scene->height);
 		render->x = -1;
-		while (++(render->x) < rtv1->scene.width)
+		while (++(render->x) < scene->width)
 		{
 			render->sy = -1;
-			render->i = (rtv1->scene.height - 1 - render->y) * rtv1->scene.width + render->x;
+			render->i = (scene->height - 1 - render->y) * scene->width + render->x;
 			while (++(render->sy) < 3)
 			{
 				render->sx = -1;
@@ -43,7 +43,7 @@ void 		pathtracer(t_rtv1 *rtv1)
 					render->s = -1;
 					while (++(render->s) < scene->samples)
 					{
-						prepare_ray(render, &target, &cam);
+						prepare_ray(render, &target, &cam, scene->width, scene->height);
 						init_ray(target.eye_t, *norm(&target.d), 0, &ray);
 						radiance(scene, &ray, render);
 						ndivide(&render->color, (double)scene->samples, &render->l);

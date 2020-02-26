@@ -1,0 +1,12 @@
+{
+	"type": "sphere",
+	"x": "0",
+	"y": "0",
+	"z": "0",
+	"material": "diffuse",
+	"color": "#AAFBB0"
+},
+{
+	"type": "camera",
+	"fov": "30"
+}

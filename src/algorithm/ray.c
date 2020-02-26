@@ -19,7 +19,7 @@ void	init_ray(t_vec o, t_vec d, int depth, t_ray *dest)
 	dest->depth = depth;
 }
 
-void 	prepare_ray(t_render *rt, t_radiance *target, t_cam *cam)
+void 	prepare_ray(t_render *rt, t_radiance *target, t_cam *cam, int width, int height)
 {
 	double u1;
 	double u2;
@@ -30,23 +30,23 @@ void 	prepare_ray(t_render *rt, t_radiance *target, t_cam *cam)
 	u2 = 2.0 * erand48(rt->xseed);
 	dx = (u1 < 1.0f) ? sqrt(u1) - 1.0 : 1.0 - sqrt(2.0 - u1);
 	dy = (u2 < 1.0f) ? sqrt(u2) - 1.0 : 1.0 - sqrt(2.0 - u2);
-	nmulti(&cam->cx, (((rt->sx + 0.5 + dx) / 2.0 + rt->x) / WIDTH - 0.5), &target->a);
-	nmulti(&cam->cy, (((rt->sy + 0.5 + dy) / 2.0 + rt->y) / HEIGHT - 0.5), &target->b);
+	nmulti(&cam->cx, (((rt->sx + 0.5 + dx) / 2.0 + rt->x) / width - 0.5), &target->a);
+	nmulti(&cam->cy, (((rt->sy + 0.5 + dy) / 2.0 + rt->y) / height - 0.5), &target->b);
 	sum(&target->a, &target->b, &target->ab);
-	sum(&target->ab, &cam->gaze, &target->d);
+	sum(&target->ab, &cam->direction, &target->d);
 	// nmulti(&target->d, 130.0, &target->d_t);
-	veccp(&cam->eye, &target->eye_t);
+	veccp(&cam->position, &target->eye_t);
 	// sum(&cam->eye, &target->d, &target->eye_t);
 }
 
-void	init_cam(t_cam *cam)
+void	init_cam(t_cam *cam, t_scene *scene)
 {
-	vec(0, 0, 0, &cam->eye);
-	vec(0, 0, -1, &cam->gaze);
-	norm(&cam->gaze);
+	vec(0, 0, 0, &cam->position);
+	vec(0, 0, -1, &cam->direction);
+	norm(&cam->direction);
 	cam->fov = 30 * M_PI / 180;
-	vec(WIDTH * cam->fov / HEIGHT, 0.0, 0.0, &cam->cx);
-	cross(&cam->cx, &cam->gaze, &cam->cy);
+	vec(scene->width * cam->fov / scene->height, 0.0, 0.0, &cam->cx);
+	cross(&cam->cx, &cam->direction, &cam->cy);
 	norm(&cam->cy);
 	nmulti_(&cam->cy, cam->fov);
 }

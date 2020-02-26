@@ -22,17 +22,15 @@ void 		image(t_rtv1 *rtv1)
 
 	win = &rtv1->image;
 	screen = rtv1->render.screen;
-	y = 0;
-	while (y <= rtv1->scene.height)
+	y = -1;
+	while (++y <= rtv1->scene.height)
 	{
-		x = 0;
-		while (x <= rtv1->scene.width)
+		x = -1;
+		while (++x <= rtv1->scene.width)
 		{
 			i = (rtv1->scene.height - 1 - y) * rtv1->scene.width + x - 1;
 			put_pixel_vector(rtv1, x, rtv1->scene.height - y, &screen[i]);
-			x++;
 		}
-		y++;
 	}
 	mlx_put_image_to_window(rtv1->mlx_ptr, win->win_ptr,
 							win->img_ptr, 0, 0);

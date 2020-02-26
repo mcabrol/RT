@@ -81,8 +81,8 @@ typedef struct			s_obj
 typedef struct			s_cam
 {
 	double				fov;
-	t_vec				gaze;
-	t_vec				eye;
+	t_vec				direction;
+	t_vec				position;
 	t_vec				cx;
 	t_vec				cy;
 }						t_cam;
