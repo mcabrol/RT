@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 17:39:08 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/27 14:55:26 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,18 @@ t_vec 		to_vec(int hex)
 	b = hex & 0xFF;
 	vec((double)b / 255, (double)g / 255, (double)r / 255, &color);
 	return (color);
+}
+
+void print_obj(t_obj *obj)
+{
+	ft_printf("TYPE : %d\n", obj->type);
+	ft_printf("RADIUS : %f\n", obj->radius);
+	ft_printf("POSITION : ");
+	printv(&obj->position);
+	ft_printf("DIRECTION : ");
+	printv(&obj->direction);
+	ft_printf("COLOR : ");
+	printv(&obj->color);
+	ft_printf("EMISSION : ");
+	printv(&obj->emission);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 18:40:29 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/27 13:54:34 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ typedef struct 			s_scene
 	int					height;
 	int					samples;
 	t_obj 				cam;
-	t_obj				obj[4];
+	char				**obj_type;
+	t_obj				*obj;
 	int					n;			// Number of object
 }						t_scene;
 
