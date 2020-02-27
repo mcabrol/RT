@@ -21,6 +21,7 @@ t_png 		init_png(void *mlx_ptr)
 	png.background = mlx_png_file_to_image(mlx_ptr, "img/background.png", &width, &height);
 	png.success = mlx_png_file_to_image(mlx_ptr, "img/success.png", &width, &height);
 	png.failure = mlx_png_file_to_image(mlx_ptr, "img/failure.png", &width, &height);
+	png.shadow = mlx_png_file_to_image(mlx_ptr, "img/shadow.png", &width, &height);
 	png.f480 = mlx_png_file_to_image(mlx_ptr, "img/480p.png", &width, &height);
 	png.f720 = mlx_png_file_to_image(mlx_ptr, "img/720p.png", &width, &height);
 	png.f1080 = mlx_png_file_to_image(mlx_ptr, "img/1080p.png", &width, &height);
@@ -51,4 +52,6 @@ void 		put_setup(t_rtv1 *rtv1)
 		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.s500, 0, 0);
 	else if (rtv1->scene.samples == 1000)
 		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.s1000, 0, 0);
+	if (rtv1->png.hover == TRUE)
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.shadow, 0, 0);
 }

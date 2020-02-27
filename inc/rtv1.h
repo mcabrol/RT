@@ -251,6 +251,8 @@ void			put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v);
 
 void 			hook(t_rtv1 *rtv1);
 int 			hover(int x, int y, t_rtv1 *rtv1);
+int				exit_hook(int keycode, t_rtv1 *rtv1);
+
 
 /*
 **	key.c

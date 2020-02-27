@@ -123,6 +123,7 @@ typedef struct 			s_png
 	void 				*background;
 	void 				*success;
 	void 				*failure;
+	void 				*shadow;
 	void 				*f480;
 	void 				*f720;
 	void 				*f1080;
@@ -139,7 +140,8 @@ typedef struct			s_rtv1
 	int 				state;
 	void				*mlx_ptr;
 	t_win 				main;
-	t_win 				image;
+	t_win 				image[10];
+	int 				id;
 	t_scene				scene;
 	t_render 			render;
 }						t_rtv1;

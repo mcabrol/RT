@@ -20,7 +20,7 @@ void 		image(t_rtv1 *rtv1)
 	t_vec	*screen;
 	t_win	*win;
 
-	win = &rtv1->image;
+	win = &rtv1->image[rtv1->id];
 	screen = rtv1->render.screen;
 	y = -1;
 	while (++y <= rtv1->scene.height)

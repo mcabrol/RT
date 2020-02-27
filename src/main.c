@@ -34,6 +34,7 @@ int		main(int ac, char **av)
 	rtv1.png = init_png(rtv1.mlx_ptr);
 	rtv1.state = SETUP;
 	rtv1.png.hover = FALSE;
+	rtv1.id = 0;
 	put_setup(&rtv1);
 	hook(&rtv1);
 	mlx_loop(rtv1.mlx_ptr);
