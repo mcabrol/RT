@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 18:47:20 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/28 16:02:26 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,17 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 	}
 	if (rtv1->state == RENDER)
 	{
-		if (button == 1 && x > 102 && x < 189 && y > 528 && y < 569)
+		if (button == 1 && x > 148 && x < 254 && y > 383 && y < 415)
 		{
 			write_ppm(rtv1);
 		}
-		if (button == 1 && x > 211 && x < 298 && y > 528 && y < 569)
+		else if (button == 1 && x > 148 && x < 254 && y > 429 && y < 459)
+		{
+			rtv1->image[rtv1->id] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, "Image");
+			image(rtv1);
+			(rtv1->id++);
+		}
+		else if (button == 1 && x > 156 && x < 243 && y > 527 && y < 558)
 		{
 			rtv1->state = SETUP;
 			put_setup(rtv1);

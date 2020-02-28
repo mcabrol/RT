@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 18:51:38 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/28 16:34:51 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,24 @@ int 	hover(int x, int y, t_rtv1 *rtv1)
 
 	if (rtv1->state == SETUP)
 	{
-		state = rtv1->png.hover;
-		if (x > 156 && x < 243 && y > 527 && y < 558)
-			rtv1->png.hover = TRUE;
-		else
-			rtv1->png.hover = FALSE;
-		if (state != rtv1->png.hover)
+		state = rtv1->png.h_render;
+		rtv1->png.h_render = (x > 156 && x < 243 && y > 527 && y < 558) ? TRUE : FALSE;
+		if (state != rtv1->png.h_render)
+			put_setup(rtv1);
+	}
+	if (rtv1->state == RENDER)
+	{
+		state = rtv1->png.h_cancel;
+		rtv1->png.h_cancel = (x > 156 && x < 243 && y > 527 && y < 558) ? TRUE : FALSE;
+		if (state != rtv1->png.h_cancel)
+			put_setup(rtv1);
+		state = rtv1->png.h_show;
+		rtv1->png.h_show = (x > 148 && x < 254 && y > 429 && y < 459) ? TRUE : FALSE;
+		if (state != rtv1->png.h_show)
+			put_setup(rtv1);
+			state = rtv1->png.h_save;
+		rtv1->png.h_save = (x > 148 && x < 254 && y > 383 && y < 415) ? TRUE : FALSE;
+		if (state != rtv1->png.h_save)
 			put_setup(rtv1);
 	}
 	return (EXIT_SUCCESS);

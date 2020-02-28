@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/27 13:54:34 by judrion          ###   ########.fr       */
+/*   Updated: 2020/02/28 16:30:13 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,17 @@ typedef struct			s_win
 
 typedef struct 			s_png
 {
-	int 				hover;
+	int 				h_render;
+	int 				h_cancel;
+	int 				h_save;
+	int 				h_show;
 	void 				*background;
 	void 				*success;
 	void 				*failure;
-	void 				*shadow;
+	void 				*render;
+	void 				*cancel;
+	void 				*save;
+	void 				*show;
 	void 				*f480;
 	void 				*f720;
 	void 				*f1080;
