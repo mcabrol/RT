@@ -32,23 +32,24 @@ void 		image(t_rtv1 *rtv1)
 			put_pixel_vector(rtv1, x, rtv1->scene.height - y, &screen[i]);
 		}
 	}
-	mlx_put_image_to_window(rtv1->mlx_ptr, win->win_ptr,
-							win->img_ptr, 0, 0);
+	mlx_put_image_to_window(rtv1->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
 }
 
 void 	write_ppm(t_rtv1 *rtv1)
 {
+	time_t	stamp;
+	int 	i;
 	int 	fd;
 	t_vec	*screen;
 
 	screen = rtv1->render.screen;
-	fd = open(ft_strcat(ft_itoa(rand()), ".ppm"), O_WRONLY | O_APPEND | O_CREAT, 0644);
+	stamp = time(NULL);
+	i = -1;
+	fd = open(ft_strcat(ctime(&stamp), ".ppm"), O_WRONLY | O_APPEND | O_CREAT, 0644);
 	ft_dprintf(fd, "P3\n%d %d\n%d\n", rtv1->scene.width, rtv1->scene.height, 255);
-	for (int i = 0; i < rtv1->scene.width * rtv1->scene.height; ++i)
-	{
+	while (++i < rtv1->scene.width * rtv1->scene.height)
 		ft_dprintf(fd, "%d %d %d ", to_byte(screen[i].x, GAMMA),
 			                     	to_byte(screen[i].y, GAMMA),
 			                     	to_byte(screen[i].z, GAMMA));
-	}
 	close(fd);
 }

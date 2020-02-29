@@ -19,6 +19,7 @@
 # include <math.h>
 # include <stdint.h>
 # include <fcntl.h>
+# include <time.h>
 
 # define SAMPLES 				8
 
