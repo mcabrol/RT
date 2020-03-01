@@ -109,7 +109,7 @@ void		box_normal(t_obj *box, t_ray *ray)
 	t_vec			p;
 
 	divide3(1, &ray->direction, &rev_o);
-	vec(box->position.x + box->a, box->position.y + box->b, box->position.z + box->c, &p);
+	vec(box->position.x + box->width, box->position.y + box->height, box->position.z + box->depth, &p);
 	if (rev_o.x >= 0)
 	{
 		min[0] = (box->position.x - ray->origin.x) * rev_o.x;

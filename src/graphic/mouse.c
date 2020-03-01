@@ -59,7 +59,7 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		else if (button == 1 && x > 148 && x < 254 && y > 429 && y < 459)
 		{
 			if (rtv1->id == 0)
-				rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * 10);
+				rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
 			if (rtv1->image)
 				rtv1->image[rtv1->id] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, "Image");
 			image(rtv1);

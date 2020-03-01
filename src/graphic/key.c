@@ -20,7 +20,7 @@ int		key(int keycode, t_rtv1 *rtv1)
 	if (keycode == 53)
 	{
 		//commented to cancel a segfault
-		//mlx_destroy_window(rtv1->mlx_ptr, main->win_ptr);
+		mlx_destroy_window(rtv1->mlx_ptr, main->win_ptr);
 		exit(0);
 	}
 	if (keycode == 36)

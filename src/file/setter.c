@@ -37,6 +37,7 @@ int	set_direction(t_obj *obj, char *value)
 	char	**data;
 	int		i;
 
+
 	data = ft_strsplit(value, ' ');
 	if (!data)
 		return (-1);
@@ -96,7 +97,7 @@ int	set_radius(t_obj *obj, char *value)
 
 int	set_angle(t_obj *obj, char *value)
 {
-	obj->angle = ft_atoi(value);
+	obj->angle = ft_atod(value);
 	return (0);
 }
 

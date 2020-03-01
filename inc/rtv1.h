@@ -53,12 +53,7 @@
 # define SPEC					1
 # define REFR					2
 
-# define PLUS_X 				1
-# define MINUS_X 				-1
-# define PLUS_Y 				2
-# define MINUS_Y 				-2
-# define PLUS_Z 				3
-# define MINUS_Z 				-3
+# define MAX_WIN	 			10
 
 # define F_GREY					0xd1d1d1
 # define F_BLUE					0x0000FF
@@ -307,18 +302,15 @@ int 			hexadecimalToDecimal(char *hexVal);
 **	setter.c
 */
 
-int	set_position(t_obj *obj, char *value);
-int	set_direction(t_obj *obj, char *value);
-int	set_emission(t_obj *obj, char *value);
-int	set_color(t_obj *obj, char *value);
-int	set_reflection(t_obj *obj, char *value);
-int	set_radius(t_obj *obj, char *value);
-int	set_angle(t_obj *obj, char *value);
-int	set_height(t_obj *obj, char *value);
-int	set_width(t_obj *obj, char *value);
-int set_depth(t_obj *obj, char *value);
-
-
-
+int				set_position(t_obj *obj, char *value);
+int				set_direction(t_obj *obj, char *value);
+int				set_emission(t_obj *obj, char *value);
+int				set_color(t_obj *obj, char *value);
+int				set_reflection(t_obj *obj, char *value);
+int				set_radius(t_obj *obj, char *value);
+int				set_angle(t_obj *obj, char *value);
+int				set_height(t_obj *obj, char *value);
+int				set_width(t_obj *obj, char *value);
+int 			set_depth(t_obj *obj, char *value);
 
 #endif
