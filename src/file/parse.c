@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 11:56:37 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 12:14:00 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double		ft_atod(const char *s)
 	point_seen = 0;
 	while (*s)
 	{
-		if (*s == '.')
+		if (*s == '.' || *s == ',')
 			point_seen = 1;
 		else
 		{
@@ -103,8 +103,6 @@ void set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 		if (obj->type == -1)
 			ft_printf("ERROR: bad object type\n");
 	}
-	else if (ft_strcmp(opt, "\tRADIUS") == 0)
-		obj->height = ft_atoi(data);
 	else if ((setter = in_type_array(opt, scene->obj_options)) != -1)
 		scene->obj_setter[setter](obj, data);
 }
@@ -178,6 +176,8 @@ void init_obj_tab(char *str, t_scene *scene)
 		start = end + 4;
 	}
 	scene->obj = (t_obj*)ft_memalloc(sizeof(t_obj) * i);
+	// if (!scene->obj)
+	// 	throw_error();
 	scene->n = i;
 }
 
@@ -189,8 +189,6 @@ int 	parse(char *str, t_scene *scene)
 
 	i = 0;
 	init_obj_tab(str, scene);
-	scene->obj_type = ft_strsplit("SPHERE PLANE CYLINDER CONE BOX CAMERA", ' ');
-	//protect le malloc
 	while (*(str + i) != ':')
 		i = i + 1;
 	if (ft_strncmp(str, "OBJECT:", i) == 0)
@@ -205,7 +203,6 @@ int 	parse(char *str, t_scene *scene)
 			{
 				end = end + 1;
 				setup_obj(start, end, scene);
-				// write(1, start, end - start);
 			}
 		}
 		else
@@ -220,16 +217,11 @@ int 	parse(char *str, t_scene *scene)
 			&& (end = ft_strstr(start, "};")) == NULL)
 				ft_printf("ERROR: can't find object settings.\n");
 			else
-			{
 				end = end + 1;
-				write(1, start, end - start);
-			}
 				// setup_camera(start, end, scene);
 		}
 		else
 			ft_printf("ERROR: can't find CAMERA.\n");
 	}
-	else
-		ft_printf("sample %d octet\n%s\n", scene->samples, str);
 	return (EXIT_SUCCESS);
 }
