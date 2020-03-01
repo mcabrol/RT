@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/28 16:30:13 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/01 10:27:56 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct			s_cam
 	t_vec				cy;
 }						t_cam;
 
+typedef					int (*options_func)(t_obj *obj, char *value);
+
 typedef struct 			s_scene
 {
 	int 				width;
@@ -97,8 +99,10 @@ typedef struct 			s_scene
 	int					samples;
 	t_obj 				cam;
 	char				**obj_type;
+	char				**obj_options;
 	t_obj				*obj;
 	int					n;			// Number of object
+	options_func		*obj_setter;
 }						t_scene;
 
 typedef struct			s_point
@@ -151,5 +155,6 @@ typedef struct			s_rtv1
 	t_scene				scene;
 	t_render 			render;
 }						t_rtv1;
+
 
 #endif

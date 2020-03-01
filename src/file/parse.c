@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/27 14:56:17 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 10:35:26 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,14 @@ int	in_type_array(char *s, char **t)
 	return (-1);
 }
 
-void set_obj(char *opt, char *data, t_obj *obj, char **obj_type)
+void set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 {
-	char **vec_s;
-	t_vec tmp;
+	int		setter;
 
 	// ft_printf("tested opt : -%s-\n", opt);
 	if (ft_strcmp(opt, "\tTYPE") == 0)
 	{
-		obj->type = in_type_array(data, obj_type);
+		obj->type = in_type_array(data, scene->obj_type);
 		if (obj->type == -1)
 			ft_printf("ERROR: bad object type\n");
 	}
@@ -43,25 +42,9 @@ void set_obj(char *opt, char *data, t_obj *obj, char **obj_type)
 	{
 		obj->height = ft_atoi(data);
 	}
-	else if ((ft_strcmp(opt, "\tPOSITION") == 0)
-			|| (ft_strcmp(opt, "\tDIRECTION") == 0)
-			|| (ft_strcmp(opt, "\tEMISSION") == 0)
-			|| (ft_strcmp(opt, "\tCOLOR") == 0))
+	else if ((setter = in_type_array(opt, scene->obj_options)) != -1)
 	{
-		vec_s = ft_strsplit(data, ' ');
-		vec(ft_atoi(vec_s[0]), ft_atoi(vec_s[1]), ft_atoi(vec_s[2]), &tmp);
-		free(vec_s[0]);
-		free(vec_s[1]);
-		free(vec_s[2]);
-		free(vec_s);
-		if ((ft_strcmp(opt, "\tPOSITION") == 0))
-			veccp(&tmp, &obj->position);
-		else if ((ft_strcmp(opt, "\tDIRECTION") == 0))
-			veccp(&tmp, &obj->direction);
-		else if ((ft_strcmp(opt, "\tEMISSION") == 0))
-			veccp(&tmp, &obj->emission);
-		else if ((ft_strcmp(opt, "\tCOLOR") == 0))
-			veccp(&tmp, &obj->color);
+		scene->obj_setter[setter](obj, data);
 	}
 }
 
@@ -80,7 +63,7 @@ void extract_obj_data(char *start, char *end, t_scene *scene, int j)
 	while (data[i])
 	{
 		opt = ft_strsplit(data[i], ':');
-		set_obj(opt[0], opt[1], &scene->obj[j], scene->obj_type);
+		set_obj(opt[0], opt[1], &scene->obj[j], scene);
 		free(data[i]);
 		i = i + 1;
 	}

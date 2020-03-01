@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx.c                                              :+:      :+:    :+:   */
+/*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/19 18:05:22 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/01 10:20:25 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		key(int keycode, t_rtv1 *rtv1)
 	main = &rtv1->main;
 	if (keycode == 53)
 	{
-		mlx_destroy_window(rtv1->mlx_ptr, main->win_ptr);
+		//commented to cancel a segfault
+		//mlx_destroy_window(rtv1->mlx_ptr, main->win_ptr);
 		exit(0);
 	}
 	if (keycode == 36)
