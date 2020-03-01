@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 10:49:37 by judrion           #+#    #+#             */
-/*   Updated: 2020/01/29 18:42:09 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 12:29:32 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,33 @@ void matrix_transpose(t_matrix *a, t_matrix *dst)
 		}
 		i = i + 1;
 	}
+}
+
+t_matrix *matrix_lookat(t_obj *obj, t_vec *from, t_vec *to)
+{
+	t_vec	forward;
+	t_vec	right;
+	t_vec	up;
+	t_vec	orientation;
+	t_matrix	*m;
+
+	m = (t_matrix*)ft_memalloc(sizeof(t_matrix));
+	normal(vec(0, 1, 0, &orientation), orientation);
+	normal(sub(&from, &to, &forward), &forward));
+	cross(&orientation, &forward, &right);
+	cross(&forward, &right, &up);
+	matrix_create(m, 1);
+	m->data[0][0] = right.x;
+	m->data[0][1] = right.y;
+	m->data[0][2] = right.z;
+	m->data[1][0] = up.x;
+	m->data[1][1] = up.y;
+	m->data[1][2] = up.z;
+	m->data[2][0] = forward.x;
+	m->data[2][1] = forward.y;
+	m->data[2][2] = forward.z;
+	m->data[3][0] = from.x;
+	m->data[3][1] = from.y;
+	m->data[3][2] = from.z;
+	return (m);
 }
