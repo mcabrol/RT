@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 10:27:56 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 10:41:59 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,12 +146,12 @@ typedef struct 			s_png
 
 typedef struct			s_rtv1
 {
+	int					id;
 	t_png 				png;
 	int 				state;
 	void				*mlx_ptr;
 	t_win 				main;
-	t_win 				image[10];
-	int 				id;
+	t_win 				*image;
 	t_scene				scene;
 	t_render 			render;
 }						t_rtv1;

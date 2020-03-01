@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 18:11:43 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/02/27 18:04:49 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ int		file(int ac, char **av, t_scene *scene)
 	else
 		filename = av[1];
 	if ((size = get_file_size(filename)) < 0)
-		return (error("usage: ./rtv1 [file.csv]"));
+		return (error("usage: ./rtv1 [file.rt]"));
 	if ((fd = open(filename, O_RDONLY)) < 0)
-		return (error("usage: ./rtv1 [file.csv]"));
+		return (error("usage: ./rtv1 [file.rt]"));
 	if ((str = (char *)malloc(sizeof(char) * size)) == NULL)
-		return (error("usage: ./rtv1 [file.csv]"));
+		return (error("usage: ./rtv1 [file.rt]"));
 	read(fd, str, size);
-	parse(str, scene);
+	// parse(str, scene);
+	ft_printf("sample %d octet\n", scene->samples);
 	return (EXIT_SUCCESS);
 }
 

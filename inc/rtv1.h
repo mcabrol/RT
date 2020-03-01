@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/27 14:19:43 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 10:44:45 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ t_obj		   	obj(int t,
 				   t_vec p,
 				   t_vec d,
 				   t_vec e,
-				   t_vec c,
 				   t_vec rot,
+				   t_vec c,
 				   double a,
 				   int cut,
 				   double ca,
@@ -143,6 +143,8 @@ void 			print_obj(t_obj *obj);
 */
 
 void 			init_scene(t_rtv1 *rtv1);
+options_func 	*setup_obj_setter(void);
+
 
 /*
 **	light.c
@@ -300,5 +302,15 @@ int				check(int ac, char **av);
 */
 
 int 			parse(char *str, t_scene *scene);
+
+/*
+**	setter.c
+*/
+
+int	set_position(t_obj *obj, char *value);
+int	set_direction(t_obj *obj, char *value);
+int	set_emission(t_obj *obj, char *value);
+int	set_color(t_obj *obj, char *value);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/27 14:55:26 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 10:43:07 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_obj		obj(int t,
 				   t_vec p,
 				   t_vec d,
 				   t_vec e,
-				   t_vec c,
 				   t_vec rot,
+				   t_vec c,
 				   double a,
 				   int cut,
 				   double ca,
@@ -35,10 +35,10 @@ t_obj		obj(int t,
 	obj.position = p;
 	obj.direction = d;
 	obj.emission = e;
-	obj.color = c;
 	obj.angle = a;
 	obj.rotation = rot;
 	obj.cut = cut;
+	obj.color = c;
 	obj.a = ca,
 	obj.b = cb,
 	obj.c = cc,
@@ -127,6 +127,7 @@ void print_obj(t_obj *obj)
 	printv(&obj->direction);
 	ft_printf("COLOR : ");
 	printv(&obj->color);
+	// ft_printf("COLOR : %#.8X\n", obj->color);
 	ft_printf("EMISSION : ");
 	printv(&obj->emission);
 }

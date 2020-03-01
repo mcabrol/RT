@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 10:32:38 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 10:46:53 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void 	init_scene(t_rtv1 *rtv1)
 	scene = &rtv1->scene;
 	scene->obj_type = ft_strsplit("SPHERE PLANE CYLINDER CONE BOX CAMERA", ' ');
 	scene->obj_options = ft_strsplit("POSITION DIRECTION EMISSION COLOR", ' ');
-	scene->obj_setter = setup_obj_setter(&scene->obj_setter);
+	scene->obj_setter = setup_obj_setter();
 	if (scene->obj_setter)
 		ft_printf("Alright!\n");
 	if (scene->obj_type)
@@ -27,6 +27,10 @@ void 	init_scene(t_rtv1 *rtv1)
 
 	}
 	init_cam(&rtv1->scene);
+	// prepare_obj(&scene->obj[0]);
+	// prepare_obj(&scene->obj[1]);
+	// prepare_obj(&scene->obj[2]);
+	// prepare_obj(&scene->obj[3]);
 }
 
 options_func *setup_obj_setter(void)
@@ -40,4 +44,5 @@ options_func *setup_obj_setter(void)
 	obj_setter[1] = &set_direction;
 	obj_setter[2] = &set_emission;
 	obj_setter[3] = &set_color;
+	return (obj_setter);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/28 16:31:27 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/01 10:42:08 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 int		main(int ac, char **av)
 {
 	t_rtv1			rtv1;
-
-	// Checker
-	if (file(ac, av, &rtv1.scene))
-		return (EXIT_FAILURE);
-
+	//
+	// // Checker
+	// if (file(ac, av, &rtv1.scene))
+	// 	return (EXIT_FAILURE);
+	if (ac)
+		ft_printf("ac - %s", av[0]);
 	// Default scene
 	rtv1.scene.samples = 8;
 	rtv1.scene.width = 640;

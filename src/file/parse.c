@@ -6,11 +6,78 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 10:35:26 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 10:40:39 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+double		ft_atod(const char *s)
+{
+	double	rez;
+	double	fact;
+	int		d;
+	int		point_seen;
+
+	rez = 0.0;
+	fact = (*s == '-') ? -1.0 : 1.0;
+	s += (fact < 0) ? 1 : 0;
+	point_seen = 0;
+	while (*s)
+	{
+		if (*s == '.')
+			point_seen = 1;
+		else
+		{
+			d = *s - '0';
+			if (d >= 0 && d <= 9)
+			{
+				fact /= (point_seen) ? 10.0f : 1;
+				rez = rez * 10.0f + (double)d;
+			}
+		}
+		s++;
+	}
+	return (rez * fact);
+}
+
+int hexadecimalToDecimal(char *hexVal)
+{
+    int len = strlen(hexVal);
+
+    // Initializing base value to 1, i.e 16^0
+    int base = 1;
+
+    int dec_val = 0;
+
+    // Extracting characters as digits from last character
+    for (int i=len-1; i>=0; i--)
+    {
+        // if character lies in '0'-'9', converting
+        // it to integral 0-9 by subtracting 48 from
+        // ASCII value.
+        if (hexVal[i]>='0' && hexVal[i]<='9')
+        {
+            dec_val += (hexVal[i] - 48)*base;
+
+            // incrementing base by power
+            base = base * 16;
+        }
+
+        // if character lies in 'A'-'F' , converting
+        // it to integral 10 - 15 by subtracting 55
+        // from ASCII value
+        else if (hexVal[i]>='A' && hexVal[i]<='F')
+        {
+            dec_val += (hexVal[i] - 55)*base;
+
+            // incrementing base by power
+            base = base*16;
+        }
+    }
+	ft_printf("\t\t\t%d\n", dec_val);
+    return (dec_val);
+}
 
 
 int	in_type_array(char *s, char **t)
@@ -18,7 +85,7 @@ int	in_type_array(char *s, char **t)
 	int		i;
 
 	i = 0;
-	while (i < OBJ_TYPE)
+	while (t[i])
 	{
 		if (ft_strcmp((s + 1), t[i]) == 0)
 			return (i);
@@ -31,7 +98,6 @@ void set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 {
 	int		setter;
 
-	// ft_printf("tested opt : -%s-\n", opt);
 	if (ft_strcmp(opt, "\tTYPE") == 0)
 	{
 		obj->type = in_type_array(data, scene->obj_type);
