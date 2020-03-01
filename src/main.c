@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 10:42:08 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 11:30:35 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 int		main(int ac, char **av)
 {
 	t_rtv1			rtv1;
-	//
+	char			*file_str;
+
 	// // Checker
-	// if (file(ac, av, &rtv1.scene))
-	// 	return (EXIT_FAILURE);
+	file_str = NULL;
+	if (file(ac, av, &file_str))
+		return (EXIT_FAILURE);
 	if (ac)
 		ft_printf("ac - %s", av[0]);
 	// Default scene
@@ -27,7 +29,7 @@ int		main(int ac, char **av)
 	rtv1.scene.height = 480;
 
 	// Scene
-	init_scene(&rtv1);
+	init_scene(&rtv1, file_str);
 
 	// Window
 	rtv1.mlx_ptr = mlx_init();

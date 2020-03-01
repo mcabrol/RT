@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 10:41:59 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 11:50:12 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct			s_obj
 	int 				type;			// type
 	double				radius;			// radius
 	double 				height; 		// height
+	double				width;
+	double				depth;
 	t_vec				position;		// position
 	t_vec				direction;		// direction
 	t_vec				emission;		// emission
@@ -72,9 +74,9 @@ typedef struct			s_obj
 	int					cut;			// type of cut
 	t_vec 				cut_direction;	// cut direction
 	t_vec 				cut_shift;		// cut shift
-	double 				a;				// box a
-	double 				b;				// box b
-	double 				c;				// box c
+	// double 				a;				// box a
+	// double 				b;				// box b
+	// double 				c;				// box c
 	int					reflect;		// material type
 	double				fov;			// field-of-view
 	t_vec				cx;				// cam_x
@@ -94,6 +96,7 @@ typedef					int (*options_func)(t_obj *obj, char *value);
 
 typedef struct 			s_scene
 {
+	char				*file;
 	int 				width;
 	int					height;
 	int					samples;

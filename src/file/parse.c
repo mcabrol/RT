@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 10:40:39 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 11:56:37 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int hexadecimalToDecimal(char *hexVal)
             base = base*16;
         }
     }
-	ft_printf("\t\t\t%d\n", dec_val);
     return (dec_val);
 }
 
@@ -105,13 +104,9 @@ void set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 			ft_printf("ERROR: bad object type\n");
 	}
 	else if (ft_strcmp(opt, "\tRADIUS") == 0)
-	{
 		obj->height = ft_atoi(data);
-	}
 	else if ((setter = in_type_array(opt, scene->obj_options)) != -1)
-	{
 		scene->obj_setter[setter](obj, data);
-	}
 }
 
 void extract_obj_data(char *start, char *end, t_scene *scene, int j)
@@ -142,7 +137,6 @@ void setup_obj(char *start, char *end, t_scene *scene)
 	int		i;
 	int		j;
 
-	// ft_printf("%s", start);
 	j = 0;
 	while (start < end)
 	{
@@ -160,13 +154,12 @@ void setup_obj(char *start, char *end, t_scene *scene)
 		start = sub + 5;
 		j = j + 1;
  	}
-	ft_printf("scene->n : %d\n", scene->n);
 	i = 0;
 	while (i < scene->n)
 	{
 		ft_printf("obj[%d] :\n", i);
 		print_obj(&scene->obj[i]);
-		ft_printf("\n");
+		ft_printf("\n\n");
 		i = i + 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 10:43:07 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 11:51:00 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_obj		obj(int t,
 				   t_vec c,
 				   double a,
 				   int cut,
-				   double ca,
 				   double cb,
 				   double cc,
 				   int reflect)
@@ -39,9 +38,8 @@ t_obj		obj(int t,
 	obj.rotation = rot;
 	obj.cut = cut;
 	obj.color = c;
-	obj.a = ca,
-	obj.b = cb,
-	obj.c = cc,
+	obj.width = cb,
+	obj.depth = cc,
 	obj.reflect = reflect;
 	return (obj);
 }
@@ -71,9 +69,9 @@ void 		obj_default(t_obj *obj)
 	obj->height = 0.0;
 	obj->angle = 0.0;
 	obj->cut = 0;
-	obj->a = 0.0;
-	obj->b = 0.0;
-	obj->c = 0.0;
+	obj->height = 0.0;
+	obj->width = 0.0;
+	obj->depth = 0.0;
 }
 
 void		cut_direction(t_obj *obj)
@@ -130,4 +128,9 @@ void print_obj(t_obj *obj)
 	// ft_printf("COLOR : %#.8X\n", obj->color);
 	ft_printf("EMISSION : ");
 	printv(&obj->emission);
+	ft_printf("REFLECTION : %d\n", obj->reflect);
+	ft_printf("ANGLE : %f\n", obj->angle);
+	ft_printf("HEIGHT : %f\n", obj->height);
+	ft_printf("WIDTH : %f\n", obj->width);
+	ft_printf("DEPTH : %f\n", obj->depth);
 }

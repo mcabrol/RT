@@ -6,16 +6,15 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/27 18:04:49 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 11:16:10 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		file(int ac, char **av, t_scene *scene)
+int		file(int ac, char **av, char **file_str)
 {
 	char 	*filename;
-	char	*str;
 	int 	fd;
 	int		size;
 
@@ -29,11 +28,9 @@ int		file(int ac, char **av, t_scene *scene)
 		return (error("usage: ./rtv1 [file.rt]"));
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (error("usage: ./rtv1 [file.rt]"));
-	if ((str = (char *)malloc(sizeof(char) * size)) == NULL)
+	if ((*file_str = (char *)malloc(sizeof(char) * (size))) == NULL)
 		return (error("usage: ./rtv1 [file.rt]"));
-	read(fd, str, size);
-	// parse(str, scene);
-	ft_printf("sample %d octet\n", scene->samples);
+	read(fd, *file_str, size);
 	return (EXIT_SUCCESS);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/19 16:09:54 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/01 12:00:22 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ BOOL 	intersect(t_ray *ray, size_t *id, t_scene *scene)
 	t_obj		*obj;
 	int			i;
 
+	// printf("JE PLANTE ICI\n");
 	hit = FALSE;
 	i = -1;
 	ray->distance = T_MAX;
@@ -120,7 +121,7 @@ double		intersect_box(t_obj *box, t_ray *ray)
 	t_vec		pos;
 
 	divide3(1, &ray->direction, &rev_ov);
-	vec(box->position.x + box->a, box->position.y + box->b, box->position.z + box->c, &pos);
+	vec(box->position.x + box->height, box->position.y + box->width, box->position.z + box->depth, &pos);
 	if (rev_ov.x >= 0)
 	{
 		min[0] = (box->position.x - ray->origin.x) * rev_ov.x;

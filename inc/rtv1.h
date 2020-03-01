@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 10:44:45 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/01 11:54:29 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ t_obj		   	obj(int t,
 				   t_vec c,
 				   double a,
 				   int cut,
-				   double ca,
 				   double cb,
 				   double cc,
 				   int reflect);
@@ -142,7 +141,7 @@ void 			print_obj(t_obj *obj);
 **	scene.c
 */
 
-void 			init_scene(t_rtv1 *rtv1);
+void 			init_scene(t_rtv1 *rtv1, char *file);
 options_func 	*setup_obj_setter(void);
 
 
@@ -294,7 +293,7 @@ void 			write_ppm(t_rtv1 *rtv1);
 **	file.c
 */
 
-int				file(int ac, char **av, t_scene *scene);
+int				file(int ac, char **av, char **file);
 int				check(int ac, char **av);
 
 /*
@@ -302,6 +301,7 @@ int				check(int ac, char **av);
 */
 
 int 			parse(char *str, t_scene *scene);
+int 			hexadecimalToDecimal(char *hexVal);
 
 /*
 **	setter.c
@@ -311,6 +311,14 @@ int	set_position(t_obj *obj, char *value);
 int	set_direction(t_obj *obj, char *value);
 int	set_emission(t_obj *obj, char *value);
 int	set_color(t_obj *obj, char *value);
+int	set_reflection(t_obj *obj, char *value);
+int	set_radius(t_obj *obj, char *value);
+int	set_angle(t_obj *obj, char *value);
+int	set_height(t_obj *obj, char *value);
+int	set_width(t_obj *obj, char *value);
+int set_depth(t_obj *obj, char *value);
+
+
 
 
 #endif
