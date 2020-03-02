@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/02 11:17:24 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 11:40:41 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,19 @@ int	in_type_array(char *s, char **t)
 	int		i;
 
 	i = 0;
-	while (t[i])
+	if (s && t && *t)
 	{
-		if (ft_strcmp((s + 1), t[i]) == 0)
-			return (i);
-		i = i + 1;
+		while (t[i])
+		{
+			if (ft_strcmp((s + 1), t[i]) == 0)
+				return (i);
+			i = i + 1;
+		}
 	}
 	return (-1);
 }
 
-void set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
+int set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 {
 	int		setter;
 
@@ -93,12 +96,19 @@ void set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 	{
 		obj->type = in_type_array(data, scene->obj_type);
 		if (obj->type == -1)
-			ft_printf("ERROR: bad object type\n");
+		{
+			throw_error(BAD_TYPE_OBJECT);
+			return (-1);
+		}
 	}
 	else if ((setter = in_type_array(opt, scene->obj_options)) != -1)
-	{
 		scene->obj_setter[setter](obj, data);
+	else
+	{
+		throw_error(BAD_OPTIONS);
+		return (-1);
 	}
+	return (0);
 }
 
 void extract_obj_data(char *start, char *end, t_scene *scene, int j)
@@ -109,14 +119,20 @@ void extract_obj_data(char *start, char *end, t_scene *scene, int j)
 	int		i = 0;
 
 	str = (char*)ft_memalloc(sizeof(char) * (end - start));
-	if (str)
-		ft_memmove(str, start, end - start);
+	if (!str)
+		throw_error_file(EXTRACT_DATA_FAILED, NULL, scene->obj, -1);
+	ft_memmove(str, start, end - start);
 	data = ft_strsplit(str, '\n');
 	free(str);
 	while (data[i])
 	{
 		opt = ft_strsplit(data[i], ':');
-		set_obj(opt[0], opt[1], &scene->obj[j], scene);
+		if (set_obj(opt[0], opt[1], &scene->obj[j], scene) == -1)
+		{
+			clean_opt(opt);
+			throw_error_file(SET_OBJECT_FAILED, data, scene->obj, i);
+		}
+		clean_opt(opt);
 		free(data[i]);
 		i = i + 1;
 	}

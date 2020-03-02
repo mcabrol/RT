@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/02 11:10:54 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 11:40:55 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ typedef enum			e_error
 	INIT_SCENE_OBJ_FAILED,
 	INIT_OBJ_BAD_ARGS,
 	OBJECT_BAD_FORMAT,
+	EXTRACT_DATA_FAILED,
+	BAD_TYPE_OBJECT,
+	SET_OBJECT_FAILED,
+	BAD_OPTIONS,
 }						t_error;
 
 typedef struct			s_vec
