@@ -6,11 +6,12 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 12:14:00 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 11:17:24 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include <stdio.h>
 
 double		ft_atod(const char *s)
 {
@@ -43,37 +44,28 @@ double		ft_atod(const char *s)
 
 int hexadecimalToDecimal(char *hexVal)
 {
-    int len = strlen(hexVal);
+    int len;
+    int base;
+    int dec_val;
+	int	i;
 
-    // Initializing base value to 1, i.e 16^0
-    int base = 1;
-
-    int dec_val = 0;
-
-    // Extracting characters as digits from last character
-    for (int i=len-1; i>=0; i--)
-    {
-        // if character lies in '0'-'9', converting
-        // it to integral 0-9 by subtracting 48 from
-        // ASCII value.
-        if (hexVal[i]>='0' && hexVal[i]<='9')
+	base = 1;
+	dec_val = 0;
+	len = ft_strlen(hexVal);
+	i = len - 1;
+	while (i >= 0)
+	{
+        if (hexVal[i] >= '0' && hexVal[i] <='9')
         {
-            dec_val += (hexVal[i] - 48)*base;
-
-            // incrementing base by power
+            dec_val += (hexVal[i] - 48) * base;
             base = base * 16;
         }
-
-        // if character lies in 'A'-'F' , converting
-        // it to integral 10 - 15 by subtracting 55
-        // from ASCII value
-        else if (hexVal[i]>='A' && hexVal[i]<='F')
+        else if (hexVal[i] >= 'A' && hexVal[i] <= 'F')
         {
-            dec_val += (hexVal[i] - 55)*base;
-
-            // incrementing base by power
-            base = base*16;
+            dec_val += (hexVal[i] - 55) * base;
+            base = base * 16;
         }
+		i = i - 1;
     }
     return (dec_val);
 }
@@ -104,7 +96,9 @@ void set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 			ft_printf("ERROR: bad object type\n");
 	}
 	else if ((setter = in_type_array(opt, scene->obj_options)) != -1)
+	{
 		scene->obj_setter[setter](obj, data);
+	}
 }
 
 void extract_obj_data(char *start, char *end, t_scene *scene, int j)
@@ -143,9 +137,9 @@ void setup_obj(char *start, char *end, t_scene *scene)
 		{
 			sub = ft_strstr(start, "};");
 			if (sub == NULL)
-				ft_printf("ERROR: bad format of object description.");
+				throw_error_file(OBJECT_BAD_FORMAT, NULL, NULL, -1);
 			else
-				extract_obj_data(start, sub, scene, j);
+ 				extract_obj_data(start, sub, scene, j);
 		}
 		else
 			extract_obj_data(start, sub, scene, j);
@@ -168,16 +162,18 @@ void init_obj_tab(char *str, t_scene *scene)
 	char	*end;
 	int		i;
 
-	i = 1;
-	start = str;
+	if (str == NULL || scene == NULL)
+		throw_error_file(INIT_OBJ_BAD_ARGS, NULL, NULL, -1);
+		i = 1;
+ 		start = str;
 	while ((end = ft_strstr(start, "},\n{")) != NULL)
 	{
 		i = i + 1;
 		start = end + 4;
 	}
 	scene->obj = (t_obj*)ft_memalloc(sizeof(t_obj) * i);
-	// if (!scene->obj)
-	// 	throw_error();
+	if (!scene->obj)
+	 	throw_error_file(INIT_SCENE_OBJ_FAILED, NULL, NULL, -1);
 	scene->n = i;
 }
 
@@ -198,7 +194,7 @@ int 	parse(char *str, t_scene *scene)
 			start = str + i + 4;
 			if ((end = ft_strstr(start, "}\nC")) == NULL
 			&& (end = ft_strstr(start, "};")) == NULL)
-				ft_printf("ERROR: can't find camera settings.\n");
+				throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
 			else
 			{
 				end = end + 1;
@@ -206,7 +202,7 @@ int 	parse(char *str, t_scene *scene)
 			}
 		}
 		else
-			ft_printf("ERROR: can't find OBJECT.\n");
+			throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
 	}
 	else if (ft_strncmp(str, "CAMERA", i) == 0)
 	{
@@ -215,13 +211,13 @@ int 	parse(char *str, t_scene *scene)
 			start = str + i + 2;
 			if ((end = ft_strstr(start, "}\nO")) == NULL
 			&& (end = ft_strstr(start, "};")) == NULL)
-				ft_printf("ERROR: can't find object settings.\n");
+				throw_error_file(CAMERA_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
 			else
 				end = end + 1;
 				// setup_camera(start, end, scene);
 		}
 		else
-			ft_printf("ERROR: can't find CAMERA.\n");
+			throw_error_file(CAMERA_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
 	}
 	return (EXIT_SUCCESS);
 }

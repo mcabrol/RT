@@ -6,12 +6,21 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 11:50:12 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 11:10:54 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+typedef enum			e_error
+{
+	OBJECT_SETTINGS_NOT_FOUND_FILE = 1,
+	CAMERA_SETTINGS_NOT_FOUND_FILE,
+	INIT_SCENE_OBJ_FAILED,
+	INIT_OBJ_BAD_ARGS,
+	OBJECT_BAD_FORMAT,
+}						t_error;
 
 typedef struct			s_vec
 {

@@ -6,7 +6,7 @@
 #    By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/10 11:25:08 by mcabrol           #+#    #+#              #
-#    Updated: 2020/02/27 10:54:04 by judrion          ###   ########.fr        #
+#    Updated: 2020/03/02 10:28:57 by judrion          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ = $(SRC:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) lib
-	@gcc $(CFLAGS) $(SANATIZE) $(INC) $(OBJ) $(LIB) $(FRAMEWORK) -o $(NAME)
+	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIB) $(FRAMEWORK) -o $(NAME)
 
 lib:
 	make -C ./libft

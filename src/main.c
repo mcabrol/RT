@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 11:30:35 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 10:57:57 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int		main(int ac, char **av)
 	file_str = NULL;
 	if (file(ac, av, &file_str))
 		return (EXIT_FAILURE);
-	if (ac)
-		ft_printf("ac - %s", av[0]);
 	// Default scene
 	rtv1.scene.samples = 8;
 	rtv1.scene.width = 640;

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 11:54:29 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 11:17:37 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,5 +312,14 @@ int				set_angle(t_obj *obj, char *value);
 int				set_height(t_obj *obj, char *value);
 int				set_width(t_obj *obj, char *value);
 int 			set_depth(t_obj *obj, char *value);
+
+/*
+**	file_error.c
+*/
+
+void		throw_error_file(int errorcode, char **data,
+						t_obj *obj, int d_allocated);
+void throw_error(int errorcode);
+
 
 #endif

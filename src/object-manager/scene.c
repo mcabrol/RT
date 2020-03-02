@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 11:58:10 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 10:24:15 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,13 @@ void 	init_scene(t_rtv1 *rtv1, char *file)
 		prepare_obj(&scene->obj[i]);
 		i = i + 1;
 	}
-	// prepare_obj(&scene->obj[0]);
-	// prepare_obj(&scene->obj[1]);
-	// prepare_obj(&scene->obj[2]);
-	// prepare_obj(&scene->obj[3]);
 }
 
 options_func *setup_obj_setter(void)
 {
 	options_func *obj_setter;
 
-	obj_setter = (options_func*)ft_memalloc(sizeof(options_func) * 6);
+	obj_setter = (options_func*)ft_memalloc(sizeof(options_func) * 10);
 	// if (!obj_setter)
 	// 	throw_error();
 	obj_setter[0] = &set_position;
