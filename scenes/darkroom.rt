@@ -53,10 +53,5 @@ OBJECT:
 	WIDTH: 20
 	DEPTH: 0.5
 	COLOR: #F6B1B1
-};
-camera;
-{
-	POSITION: 0 0 0,
-	DIRECTION: 0 0 -1,
-	FOV: 80
+
 };

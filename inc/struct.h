@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/02 11:40:55 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 11:48:28 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef enum			e_error
 	BAD_TYPE_OBJECT,
 	SET_OBJECT_FAILED,
 	BAD_OPTIONS,
+	SETUP_OBJ_FAILED,
 }						t_error;
 
 typedef struct			s_vec

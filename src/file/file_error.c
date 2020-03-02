@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 10:47:42 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/02 11:41:11 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 11:54:48 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void		throw_error_file(int errorcode, char **data,
 	}
 	if (obj)
 		free(obj);
-	exit(errorcode);
+	if (errorcode != OBJECT_BAD_FORMAT && errorcode != SET_OBJECT_FAILED
+		&& errorcode != EXTRACT_DATA_FAILED)
+		exit(errorcode);
 }
 
 void throw_error(int errorcode)
@@ -50,8 +52,8 @@ void throw_error(int errorcode)
 		ft_printf("ERROR #%.4d - can't set objects.\n", errorcode);
 	else if (errorcode == BAD_OPTIONS)
 		ft_printf("ERROR #%.4d - options not found.\n", errorcode);
-	// else if (errorcode == )
-	// 	ft_printf("ERROR #%.4d - .\n", errorcode);
+	else if (errorcode == SETUP_OBJ_FAILED)
+		ft_printf("ERROR #%.4d - can't setup data.\n", errorcode);
 }
 
 void clean_opt(char **opt)
