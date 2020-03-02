@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/02 11:38:32 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 13:46:24 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,7 +318,7 @@ int 			set_depth(t_obj *obj, char *value);
 */
 
 void		throw_error_file(int errorcode, char **data,
-						t_obj *obj, int d_allocated);
+						t_scene *scene, int d_allocated);
 void throw_error(int errorcode);
 void clean_opt(char **opt);
 

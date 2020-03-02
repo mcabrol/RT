@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 11:51:00 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 15:40:10 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ t_obj		obj(int t,
 
 void	init_cam(t_scene *scene)
 {
-	vec(0, 0, 0, &scene->cam.position);
+	t_vec	v_forward;
+
+	vec(0, 0, 20, &scene->cam.position);
 	vec(0, 0, -1, &scene->cam.direction);
-	norm(&scene->cam.direction);
-	scene->cam.fov = 30 * M_PI / 180;
-	vec(scene->width * scene->cam.fov / scene->height, 0.0, 0.0, &scene->cam.cx);
-	cross(&scene->cam.cx, &scene->cam.direction, &scene->cam.cy);
+	sub(&scene->cam.direction, &scene->cam.position, &v_forward);
+	norm(&v_forward);
+	scene->cam.fov = 70 * M_PI / 180;
+	vec(scene->width * scene->cam.fov / scene->height, 0, 0, &scene->cam.cx);
+	cross(&scene->cam.cx, &v_forward, &scene->cam.cy);
 	norm(&scene->cam.cy);
 	nmulti_(&scene->cam.cy, scene->cam.fov);
 }

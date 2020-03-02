@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/02 11:55:00 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 15:26:16 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 {
 	int		setter;
 
+	setter = 0;
 	if (ft_strcmp(opt, "\tTYPE") == 0)
 	{
 		obj->type = in_type_array(data, scene->obj_type);
@@ -105,6 +106,8 @@ int set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 		scene->obj_setter[setter](obj, data);
 	else
 	{
+		ft_printf("opt -%s\n", opt);
+		ft_printf("data -%s\n", data);
 		throw_error(BAD_OPTIONS);
 		return (-1);
 	}
@@ -118,13 +121,13 @@ int extract_obj_data(char *start, char *end, t_scene *scene, int j)
 	char	**opt;
 	int		i = 0;
 
-	str = (char*)ft_memalloc(sizeof(char) * (end - start));
+	str = ft_strnew(end - start - 2);
 	if (!str)
 	{
-		throw_error_file(EXTRACT_DATA_FAILED, NULL, scene->obj, -1);
+		throw_error_file(EXTRACT_DATA_FAILED, NULL, scene, -1);
 		return (-1);
 	}
-	ft_memmove(str, start, end - start);
+	ft_memmove(str, start + 1, (end - start - 2));
 	data = ft_strsplit(str, '\n');
 	free(str);
 	while (data[i])
@@ -133,7 +136,7 @@ int extract_obj_data(char *start, char *end, t_scene *scene, int j)
 		if (set_obj(opt[0], opt[1], &scene->obj[j], scene) == -1)
 		{
 			clean_opt(opt);
-			throw_error_file(SET_OBJECT_FAILED, data, scene->obj, i);
+			throw_error_file(SET_OBJECT_FAILED, data, scene, i);
 			return (-1);
 		}
 		clean_opt(opt);
@@ -147,7 +150,6 @@ int extract_obj_data(char *start, char *end, t_scene *scene, int j)
 int setup_obj(char *start, char *end, t_scene *scene)
 {
 	char	*sub;
-	int		i;
 	int		j;
 
 	j = 0;
@@ -163,23 +165,17 @@ int setup_obj(char *start, char *end, t_scene *scene)
 				return (-1);
 			}
 			else
+			{
  				if (extract_obj_data(start, sub, scene, j) == -1)
 					return (-1);
+			}
 		}
 		else
 			if (extract_obj_data(start, sub, scene, j) == -1)
 				return (-1);
-		start = sub + 5;
+		start = sub + 3;
 		j = j + 1;
  	}
-	i = 0;
-	while (i < scene->n)
-	{
-		ft_printf("obj[%d] :\n", i);
-		print_obj(&scene->obj[i]);
-		ft_printf("\n\n");
-		i = i + 1;
-	}
 	return (0);
 }
 
@@ -221,9 +217,8 @@ int 	parse(char *str, t_scene *scene)
 	{
 		if (*(str + i + 2) == '{')
 		{
-			start = str + i + 4;
-			if ((end = ft_strstr(start, "}\nC")) == NULL
-			&& (end = ft_strstr(start, "};")) == NULL)
+			start = str + i + 2;
+			if ((end = ft_strstr(start, "};")) == NULL)
 			{
 				free(str);
 				throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
@@ -244,20 +239,10 @@ int 	parse(char *str, t_scene *scene)
 			throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
 		}
 	}
-	else if (ft_strncmp(str, "CAMERA", i) == 0)
+	else
 	{
-		if (*(str + i + 2) == '{')
-		{
-			start = str + i + 2;
-			if ((end = ft_strstr(start, "}\nO")) == NULL
-			&& (end = ft_strstr(start, "};")) == NULL)
-				throw_error_file(CAMERA_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
-			else
-				end = end + 1;
-				// setup_camera(start, end, scene);
-		}
-		else
-			throw_error_file(CAMERA_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
+		free(str);
+		throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
 	}
 	return (EXIT_SUCCESS);
 }

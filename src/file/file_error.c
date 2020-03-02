@@ -6,15 +6,17 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 10:47:42 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/02 11:54:48 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/02 13:50:14 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
 void		throw_error_file(int errorcode, char **data,
-	t_obj *obj, int d_allocated)
+	t_scene *scene, int d_allocated)
 {
+	int		i;
+
 	throw_error(errorcode);
 	if (d_allocated != -1)
 	{
@@ -25,8 +27,25 @@ void		throw_error_file(int errorcode, char **data,
 		}
 		free(data);
 	}
-	if (obj)
-		free(obj);
+	if (scene)
+	{
+		free(scene->obj);
+		i = 0;
+		while (scene->obj_type[i])
+		{
+			free(scene->obj_type[i]);
+			i = i + 1;
+		}
+		free(scene->obj_type);
+		i = 0;
+		while (scene->obj_options[i])
+		{
+			free(scene->obj_options[i]);
+			i = i + 1;
+		}
+		free(scene->obj_options);
+		free(scene->obj_setter);
+	}
 	if (errorcode != OBJECT_BAD_FORMAT && errorcode != SET_OBJECT_FAILED
 		&& errorcode != EXTRACT_DATA_FAILED)
 		exit(errorcode);
