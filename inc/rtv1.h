@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/02 13:46:24 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/03 18:59:05 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ int				mouse(int button, int x, int y, t_rtv1 *rtv1);
 
 t_png 			init_png(void *mlx_ptr);
 void 			put_setup(t_rtv1 *rtv1);
-
+int 			is_hover(int x, int y, int *button, int xmin, int xmax, int ymin, int ymax);
 
 /*
 **	debbug.c
@@ -317,10 +317,10 @@ int 			set_depth(t_obj *obj, char *value);
 **	file_error.c
 */
 
-void		throw_error_file(int errorcode, char **data,
-						t_scene *scene, int d_allocated);
-void throw_error(int errorcode);
-void clean_opt(char **opt);
+void			throw_error_file(int errorcode, char **data,
+				t_scene *scene, int d_allocated);
+void 			throw_error(int errorcode);
+void 			clean_opt(char **opt);
 
 
 

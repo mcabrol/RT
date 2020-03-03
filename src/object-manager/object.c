@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/02 15:40:10 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/03 17:39:00 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,11 @@ t_obj		obj(int t,
 
 void	init_cam(t_scene *scene)
 {
-	t_vec	v_forward;
-
-	vec(0, 0, 20, &scene->cam.position);
-	vec(0, 0, -1, &scene->cam.direction);
-	sub(&scene->cam.direction, &scene->cam.position, &v_forward);
-	norm(&v_forward);
-	scene->cam.fov = 70 * M_PI / 180;
+	vec(20, 5, 0, &scene->cam.position);
+	vec(-0.8, -0.3, -1, &scene->cam.direction);
+	scene->cam.fov = 25 * M_PI / 180;
 	vec(scene->width * scene->cam.fov / scene->height, 0, 0, &scene->cam.cx);
-	cross(&scene->cam.cx, &v_forward, &scene->cam.cy);
+  	cross(&scene->cam.cx, &scene->cam.direction, &scene->cam.cy);
 	norm(&scene->cam.cy);
 	nmulti_(&scene->cam.cy, scene->cam.fov);
 }

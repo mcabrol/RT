@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/02 10:41:32 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/03 19:03:55 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v)
 {
-	t_win *win;
-	int i;
+	t_win 	*win;
+	size_t 	i;
 
 	win = &rtv1->image[rtv1->id];
 	i = (x * 4 + win->size_line * y);
