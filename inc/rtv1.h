@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/03 18:59:05 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/03 20:02:08 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define SPEC					1
 # define REFR					2
 
-# define MAX_WIN	 			10
+# define MAX_WIN	 			5
 
 # define F_GREY					0xd1d1d1
 # define F_BLUE					0x0000FF
@@ -262,6 +262,8 @@ int				key(int keycode, t_rtv1 *rtv1);
 */
 
 int				mouse(int button, int x, int y, t_rtv1 *rtv1);
+void 			setup(int button, int x, int y, t_rtv1 *rtv1);
+void 			render(int button, int x, int y, t_rtv1 *rtv1);
 
 /*
 **	gui.c

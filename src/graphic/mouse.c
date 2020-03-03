@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/03 19:40:39 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/03 20:06:13 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 			if (rtv1->id == 0)
 				rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
 			if (rtv1->image)
-				rtv1->image[rtv1->id] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, "Image");
+				rtv1->image[rtv1->id] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, ft_itoa(rtv1->id + 1));
 			image(rtv1);
 			(rtv1->id++);
 		}
