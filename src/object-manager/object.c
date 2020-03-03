@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/03 17:39:00 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/03 19:36:04 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_vec 		to_vec(int hex)
 	r = (hex >> 16) & 0xFF;
 	g = (hex >> 8) & 0xFF;
 	b = hex & 0xFF;
-	vec((double)b / 255, (double)g / 255, (double)r / 255, &color);
+	vec((double)r / 255, (double)g / 255, (double)b / 255, &color);
 	return (color);
 }
 

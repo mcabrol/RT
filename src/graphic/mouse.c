@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 12:04:34 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/03 19:40:39 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 {
+	char	*file_str;
+
 	if (rtv1->state == SETUP)
 	{
 		if (button == 1 && x > 148 && x < 217 && y > 325 && y < 339)
@@ -53,11 +55,11 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 	if (rtv1->state == RENDER)
 	{
 		if (button == 1 && x > 148 && x < 254 && y > 383 && y < 415)
-		{
 			write_ppm(rtv1);
-		}
 		else if (button == 1 && x > 148 && x < 254 && y > 429 && y < 459)
 		{
+			if (rtv1->id > MAX_WIN)
+				return (EXIT_FAILURE);
 			if (rtv1->id == 0)
 				rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
 			if (rtv1->image)
@@ -67,6 +69,9 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		}
 		else if (button == 1 && x > 156 && x < 243 && y > 527 && y < 558)
 		{
+			if (file(rtv1->ac, rtv1->av, &file_str))
+				return (EXIT_FAILURE);
+			init_scene(rtv1, file_str);
 			rtv1->state = SETUP;
 			put_setup(rtv1);
 		}
