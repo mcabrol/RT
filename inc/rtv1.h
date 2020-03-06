@@ -53,7 +53,7 @@
 # define SPEC					1
 # define REFR					2
 
-# define MAX_WIN	 			5
+# define MAX_WIN	 			50
 
 # define F_GREY					0xd1d1d1
 # define F_BLUE					0x0000FF
@@ -130,6 +130,7 @@ void			cut_direction(t_obj *obj);
 void			prepare_obj(t_obj *obj);
 t_vec 			to_vec(int hex);
 void 			print_obj(t_obj *obj);
+t_vec 			to_vec_(int hex);
 
 
 /*
@@ -285,6 +286,8 @@ void 	 		loading_text(int samples, int y, int height);
 
 void 			image(t_rtv1 *rtv1);
 void 			write_ppm(t_rtv1 *rtv1);
+void 			write_ppm_(t_rtv1 *rtv1);
+
 
 /*
 **	file.c
@@ -323,6 +326,12 @@ void			throw_error_file(int errorcode, char **data,
 				t_scene *scene, int d_allocated);
 void 			throw_error(int errorcode);
 void 			clean_opt(char **opt);
+
+/*
+**	salt-and-pepper.c
+*/
+
+void 			median(t_rtv1 *rtv1);
 
 
 

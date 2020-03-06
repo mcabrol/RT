@@ -46,8 +46,8 @@ t_obj		obj(int t,
 
 void	init_cam(t_scene *scene)
 {
-	vec(20, 5, 0, &scene->cam.position);
-	vec(-0.8, -0.3, -1, &scene->cam.direction);
+	vec(0, 0, 0, &scene->cam.position);
+	vec(0, 0, -1, &scene->cam.direction);
 	scene->cam.fov = 25 * M_PI / 180;
 	vec(scene->width * scene->cam.fov / scene->height, 0, 0, &scene->cam.cx);
   	cross(&scene->cam.cx, &scene->cam.direction, &scene->cam.cy);
@@ -111,6 +111,20 @@ t_vec 		to_vec(int hex)
 	g = (hex >> 8) & 0xFF;
 	b = hex & 0xFF;
 	vec((double)r / 255, (double)g / 255, (double)b / 255, &color);
+	return (color);
+}
+
+t_vec 		to_vec_(int hex)
+{
+	int r;
+	int g;
+	int b;
+	t_vec color;
+
+	r = (hex >> 16) & 0xFF;
+	g = (hex >> 8) & 0xFF;
+	b = hex & 0xFF;
+	vec((double)r / 100, (double)g / 100, (double)b / 100, &color);
 	return (color);
 }
 

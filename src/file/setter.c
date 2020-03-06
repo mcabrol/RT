@@ -54,20 +54,10 @@ int	set_direction(t_obj *obj, char *value)
 
 int	set_emission(t_obj *obj, char *value)
 {
-	char	**data;
-	int		i;
+	int		color;
 
-	data = ft_strsplit(value, ' ');
-	if (!data)
-		return (-1);
-	vec(ft_atod(data[0]), ft_atod(data[1]), ft_atod(data[2]), &obj->emission);
-	i = 0;
-	while (data[i])
-	{
-		free(data[i]);
-		i = i + 1;
-	}
-	free(data);
+	color = hexadecimalToDecimal(&value[1]);
+	obj->emission = to_vec_(color);
 	return (0);
 }
 

@@ -53,3 +53,22 @@ void 	write_ppm(t_rtv1 *rtv1)
 			                     	to_byte(rtv1->render.screen[i].z, GAMMA));
 	close(fd);
 }
+
+void 	write_ppm_(t_rtv1 *rtv1)
+{
+	time_t	stamp;
+	int 	i;
+	int 	fd;
+	t_scene	*scene;
+
+	scene = &rtv1->scene;
+	stamp = time(NULL);
+	i = -1;
+	fd = open(ft_strcat(ctime(&stamp), ".ppm"), O_WRONLY | O_APPEND | O_CREAT, 0644);
+	ft_dprintf(fd, "P3\n%d %d\n%d\n", scene->width, scene->height, 255);
+	while (++i < scene->width * scene->height)
+		ft_dprintf(fd, "%d %d %d ", rtv1->render.screen[i].x,
+			                     	rtv1->render.screen[i].y,
+			                     	rtv1->render.screen[i].z);
+	close(fd);
+}

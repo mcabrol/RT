@@ -37,5 +37,9 @@ int		key(int keycode, t_rtv1 *rtv1)
 	{
 		write_ppm(rtv1);
 	}
+	if (keycode == 2)
+	{
+		median(rtv1);
+	}
 	return (EXIT_SUCCESS);
 }
