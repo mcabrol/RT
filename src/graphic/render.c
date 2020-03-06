@@ -20,10 +20,12 @@ int 	render(t_rtv1 *rtv1)
 	//pathtracer(rtv1);
 	rtv1->screen = (t_vec *)malloc(rtv1->scene.width * rtv1->scene.height * sizeof(t_vec));
 
-	if (multithread(rtv1))
-		return (error("Thread error.\n"));
+	if (tr)
+		if (multithread(rtv1))
+			return (error("Thread error.\n"));
 
 	rtv1->state = RENDER;
+
 	return (EXIT_SUCCESS);
 }
 
@@ -35,10 +37,9 @@ int		multithread(t_rtv1 *rtv1)
 	i = -1;
 	while (++i < THREAD)
 	{
-		thread[i].x = i * rtv1->scene.width / THREAD;
+		thread[i].x = i * (rtv1->scene.width - 1) / THREAD;
 		thread[i].max = (i + 1) * rtv1->scene.width / THREAD;
 		thread[i].rtv1 = rtv1;
-		// ft_printf("x = %d\nmax = %d\n", thread[i].x, thread[i].max);
 		if (pthread_create(&thread[i].thread, NULL, pathtracer, &thread[i]))
 			return (EXIT_FAILURE);
 	}
