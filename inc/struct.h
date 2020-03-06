@@ -46,7 +46,6 @@ typedef struct			s_render
 	t_vec				accucolor;  // Color accumulation
 	t_vec				color;		// Color calculated
 	unsigned short		xseed[3];	// Generate random float
-	t_vec				*screen;	// Result
 }						t_render;
 
 typedef struct			s_radiance
@@ -173,7 +172,17 @@ typedef struct			s_rtv1
 	t_win 				*image;
 	t_scene				scene;
 	t_render 			render;
+	t_vec				*screen;	// Result
 }						t_rtv1;
+
+typedef struct			s_thread
+{
+	pthread_t			thread;
+	int					x;
+	int					max;
+	t_rtv1				*rtv1;
+}						t_thread;
+
 
 
 #endif

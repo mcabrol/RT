@@ -12,48 +12,55 @@
 
 #include "rtv1.h"
 
-void 		pathtracer(t_rtv1 *rtv1)
+void 		*pathtracer(void *var)
+{
+	t_thread		*thread;
+	t_scene 		*scene;
+	t_render 		render;
+
+	thread = (t_thread *)var;
+	scene = &thread->rtv1->scene;
+	init_cam(scene);
+	init_seed(&render);
+	render.y = -1;
+	while (++(render.y) < scene->height)
+	{
+		loading_text(scene->samples, render.y, thread->max);
+		render.x = thread->x;
+		while (++(render.x) < thread->max)
+			sampling(thread->rtv1, &render);
+	}
+	pthread_exit(EXIT_SUCCESS);
+}
+
+void 	sampling(t_rtv1 *rtv1, t_render *render)
 {
 	t_ray			ray;
 	t_radiance		target;
 	t_scene 		*scene;
-	t_render 		*render;
 
 	scene = &rtv1->scene;
-	render = &rtv1->render;
-	render->screen = (t_vec *)malloc(rtv1->scene.width * rtv1->scene.height * sizeof(t_vec));
-	init_cam(scene);
-	render->y = -1;
-	init_seed(render);
-	while (++(render->y) < scene->height)
+	render->i = (scene->height - 1 - render->y) * scene->width + render->x;
+	render->sy = -1;
+	while (++(render->sy) < 3)
 	{
-		loading_text(scene->samples, render->y, scene->height);
-		render->x = -1;
-		while (++(render->x) < scene->width)
+		render->sx = -1;
+		while (++(render->sx) < 3)
 		{
-			render->sy = -1;
-			render->i = (scene->height - 1 - render->y) * scene->width + render->x;
-			while (++(render->sy) < 3)
+			vec(0.0, 0.0, 0.0, &render->accucolor);
+			render->s = -1;
+			while (++(render->s) < scene->samples)
 			{
-				render->sx = -1;
-				while (++(render->sx) < 3)
-				{
-					vec(0.0, 0.0, 0.0, &render->accucolor);
-					render->s = -1;
-					while (++(render->s) < scene->samples)
-					{
-						prepare_ray(render, &target, scene);
-						init_ray(target.eye_t, *norm(&target.d), 0, &ray);
-						radiance(scene, &ray, render);
-						ndivide(&render->color, (double)scene->samples, &render->l);
-						sum_(&render->accucolor, &render->l);
-						(render->s)++;
-					}
-					clamp3(&render->accucolor, 0.0, 1.0, &render->color);
-					nmulti(&render->color, 0.25, &render->l);
-					sum_(&render->screen[render->i], &render->l);
-				}
+				prepare_ray(render, &target, scene);
+				init_ray(target.eye_t, *norm(&target.d), 0, &ray);
+				radiance(scene, &ray, render);
+				ndivide(&render->color, (double)scene->samples, &render->l);
+				sum_(&render->accucolor, &render->l);
+				(render->s)++;
 			}
+			clamp3(&render->accucolor, 0.0, 1.0, &render->color);
+			nmulti(&render->color, 0.25, &render->l);
+			sum_(&rtv1->screen[render->i], &render->l);
 		}
 	}
 }

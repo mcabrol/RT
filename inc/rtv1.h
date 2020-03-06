@@ -20,11 +20,14 @@
 # include <stdint.h>
 # include <fcntl.h>
 # include <time.h>
+# include <pthread.h>
 
 # define SAMPLES 				8
 
 # define HEIGHT					550
 # define WIDTH					600
+
+# define THREAD					32
 
 # define H_MAIN					600
 # define W_MAIN					400
@@ -78,7 +81,8 @@ typedef int 		BOOL;
 **	rtv1.c
 */
 
-void 			pathtracer(t_rtv1 *rtv1);
+void 			*pathtracer(void *var);
+void 			sampling(t_rtv1 *rtv1, t_render *render);
 int				error(char *strerror);
 
 /*
@@ -263,8 +267,8 @@ int				key(int keycode, t_rtv1 *rtv1);
 */
 
 int				mouse(int button, int x, int y, t_rtv1 *rtv1);
-void 			setup(int button, int x, int y, t_rtv1 *rtv1);
-void 			render(int button, int x, int y, t_rtv1 *rtv1);
+void 			format(t_rtv1 *rtv1, int width, int height);
+
 
 /*
 **	gui.c
@@ -285,8 +289,16 @@ void 	 		loading_text(int samples, int y, int height);
 */
 
 void 			image(t_rtv1 *rtv1);
+int				init_image(t_rtv1 *rtv1);
 void 			write_ppm(t_rtv1 *rtv1);
 void 			write_ppm_(t_rtv1 *rtv1);
+
+/*
+**	render.c
+*/
+
+int 			render(t_rtv1 *rtv1);
+int				multithread(t_rtv1 *rtv1);
 
 
 /*

@@ -66,9 +66,9 @@ void 	median(t_rtv1 *rtv1)
 		j = 0;
 		while (j < 9)
 		{
-			red[j] = to_byte(rtv1->render.screen[i + (j * rtv1->scene.width)].x, GAMMA);
-			green[j] = to_byte(rtv1->render.screen[i + (j * rtv1->scene.width)].y, GAMMA);
-			blue[j] = to_byte(rtv1->render.screen[i + (j * rtv1->scene.width)].z, GAMMA);
+			red[j] = to_byte(rtv1->screen[i + (j * rtv1->scene.width)].x, GAMMA);
+			green[j] = to_byte(rtv1->screen[i + (j * rtv1->scene.width)].y, GAMMA);
+			blue[j] = to_byte(rtv1->screen[i + (j * rtv1->scene.width)].z, GAMMA);
 			// ft_printf("red> %d\n", red[j]);
 			// ft_printf("green> %d\n", green[j]);
 			// ft_printf("blue> %d\n", blue[j]);
@@ -78,9 +78,9 @@ void 	median(t_rtv1 *rtv1)
 		sort(green, 9);
 		sort(blue, 9);
 
-		rtv1->render.screen[i].x = red[4];
-		rtv1->render.screen[i].y = green[4];
-		rtv1->render.screen[i].z = blue[4];
+		rtv1->screen[i].x = red[4];
+		rtv1->screen[i].y = green[4];
+		rtv1->screen[i].z = blue[4];
 		i++;
 	}
 }

@@ -29,7 +29,8 @@ int		key(int keycode, t_rtv1 *rtv1)
 	}
 	if (keycode == 49)
 	{
-		rtv1->image[rtv1->id] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, "Image");
+		if (init_image(rtv1))
+			return (EXIT_FAILURE);
 		image(rtv1);
 		(rtv1->id++);
 	}

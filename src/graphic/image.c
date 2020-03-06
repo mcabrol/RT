@@ -21,7 +21,7 @@ void 		image(t_rtv1 *rtv1)
 	t_win	*win;
 
 	win = &rtv1->image[rtv1->id];
-	screen = rtv1->render.screen;
+	screen = rtv1->screen;
 	y = -1;
 	while (++y <= rtv1->scene.height)
 	{
@@ -33,6 +33,17 @@ void 		image(t_rtv1 *rtv1)
 		}
 	}
 	mlx_put_image_to_window(rtv1->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
+}
+
+int		init_image(t_rtv1 *rtv1)
+{
+	if (rtv1->id > MAX_WIN)
+		return (EXIT_FAILURE);
+	if (rtv1->id == 0)
+		rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
+	if (rtv1->image)
+		rtv1->image[rtv1->id] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, ft_itoa(rtv1->id + 1));
+	return (EXIT_SUCCESS);
 }
 
 void 	write_ppm(t_rtv1 *rtv1)
@@ -48,9 +59,9 @@ void 	write_ppm(t_rtv1 *rtv1)
 	fd = open(ft_strcat(ctime(&stamp), ".ppm"), O_WRONLY | O_APPEND | O_CREAT, 0644);
 	ft_dprintf(fd, "P3\n%d %d\n%d\n", scene->width, scene->height, 255);
 	while (++i < scene->width * scene->height)
-		ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->render.screen[i].x, GAMMA),
-			                     	to_byte(rtv1->render.screen[i].y, GAMMA),
-			                     	to_byte(rtv1->render.screen[i].z, GAMMA));
+		ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[i].x, GAMMA),
+			                     	to_byte(rtv1->screen[i].y, GAMMA),
+			                     	to_byte(rtv1->screen[i].z, GAMMA));
 	close(fd);
 }
 
@@ -67,8 +78,8 @@ void 	write_ppm_(t_rtv1 *rtv1)
 	fd = open(ft_strcat(ctime(&stamp), ".ppm"), O_WRONLY | O_APPEND | O_CREAT, 0644);
 	ft_dprintf(fd, "P3\n%d %d\n%d\n", scene->width, scene->height, 255);
 	while (++i < scene->width * scene->height)
-		ft_dprintf(fd, "%d %d %d ", rtv1->render.screen[i].x,
-			                     	rtv1->render.screen[i].y,
-			                     	rtv1->render.screen[i].z);
+		ft_dprintf(fd, "%d %d %d ", rtv1->screen[i].x,
+			                     	rtv1->screen[i].y,
+			                     	rtv1->screen[i].z);
 	close(fd);
 }
