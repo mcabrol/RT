@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 10:47:42 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/02 13:50:14 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/07 12:32:35 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void throw_error(int errorcode)
 		ft_printf("ERROR #%.4d - options not found.\n", errorcode);
 	else if (errorcode == SETUP_OBJ_FAILED)
 		ft_printf("ERROR #%.4d - can't setup data.\n", errorcode);
+	else if (errorcode == VECTOR_BAD_VALUE)
+		ft_printf("ERROR #%.4d - vector value is not a valid value", errorcode);
 }
 
 void clean_opt(char **opt)

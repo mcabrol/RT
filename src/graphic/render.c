@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.c                                            :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/19 18:04:48 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/07 12:28:25 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int 	render(t_rtv1 *rtv1)
 	//pathtracer(rtv1);
 	rtv1->screen = (t_vec *)malloc(rtv1->scene.width * rtv1->scene.height * sizeof(t_vec));
 
-	if (tr)
-		if (multithread(rtv1))
-			return (error("Thread error.\n"));
+	if (multithread(rtv1))
+		return (error("Thread error.\n"));
 
 	rtv1->state = RENDER;
 

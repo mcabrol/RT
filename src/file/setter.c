@@ -6,18 +6,42 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 09:38:01 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/02 14:54:16 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/07 12:31:53 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 double		ft_atod(const char *s);
+int			value_is_vector(const char *str)
+{
+	int		i;
+	int		space;
+
+	i = 0;
+	space = 0;
+	while (*(str + i))
+	{
+		if (!ft_isdigit(*(str + i)) || *(str + i) != '.' || *(str + i) != ',' || *(str + i) != ' ')
+			return (-1);
+		if (*(str + i) == ' ')
+			space = space + 1;
+		i = i + 1;
+	}
+	if (space != 2)
+		return (-1);
+	return (0);
+}
 
 int	set_position(t_obj *obj, char *value)
 {
 	char	**data;
 	int		i;
 
+	if (value_is_vector(value) == -1)
+	{
+		throw_error_file(VECTOR_BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	data = ft_strsplit(value, ' ');
 	if (!data)
 		return (-1);
