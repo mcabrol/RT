@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 10:47:42 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/07 12:32:35 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/07 13:18:35 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		throw_error_file(int errorcode, char **data,
 		free(scene->obj_setter);
 	}
 	if (errorcode != OBJECT_BAD_FORMAT && errorcode != SET_OBJECT_FAILED
-		&& errorcode != EXTRACT_DATA_FAILED)
+		&& errorcode != EXTRACT_DATA_FAILED && errorcode != VECTOR_BAD_VALUE)
 		exit(errorcode);
 }
 
@@ -74,7 +74,7 @@ void throw_error(int errorcode)
 	else if (errorcode == SETUP_OBJ_FAILED)
 		ft_printf("ERROR #%.4d - can't setup data.\n", errorcode);
 	else if (errorcode == VECTOR_BAD_VALUE)
-		ft_printf("ERROR #%.4d - vector value is not a valid value", errorcode);
+		ft_printf("ERROR #%.4d - vector value is not a valid value\n", errorcode);
 }
 
 void clean_opt(char **opt)

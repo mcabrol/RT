@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/02 10:13:59 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/07 13:09:50 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ t_png 		init_png(void *mlx_ptr)
 	int width;
 	int height;
 
-	png.background = mlx_png_file_to_image(mlx_ptr, "img/background.png", &width, &height);
-	png.success = mlx_png_file_to_image(mlx_ptr, "img/success.png", &width, &height);
-	png.failure = mlx_png_file_to_image(mlx_ptr, "img/failure.png", &width, &height);
-	png.render = mlx_png_file_to_image(mlx_ptr, "img/render.png", &width, &height);
-	png.cancel = mlx_png_file_to_image(mlx_ptr, "img/cancel.png", &width, &height);
-	png.save = mlx_png_file_to_image(mlx_ptr, "img/save.png", &width, &height);
-	png.show = mlx_png_file_to_image(mlx_ptr, "img/show.png", &width, &height);
-	png.f480 = mlx_png_file_to_image(mlx_ptr, "img/480p.png", &width, &height);
-	png.f720 = mlx_png_file_to_image(mlx_ptr, "img/720p.png", &width, &height);
-	png.f1080 = mlx_png_file_to_image(mlx_ptr, "img/1080p.png", &width, &height);
-	png.s8 = mlx_png_file_to_image(mlx_ptr, "img/8s.png", &width, &height);
-	png.s40 = mlx_png_file_to_image(mlx_ptr, "img/40s.png", &width, &height);
-	png.s200 = mlx_png_file_to_image(mlx_ptr, "img/200s.png", &width, &height);
-	png.s500 = mlx_png_file_to_image(mlx_ptr, "img/500s.png", &width, &height);
-	png.s1000 = mlx_png_file_to_image(mlx_ptr, "img/1000s.png", &width, &height);
+	png.background = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/background.png", &width, &height);
+	png.success = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/success.png", &width, &height);
+	png.failure = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/failure.png", &width, &height);
+	png.render = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/render.png", &width, &height);
+	png.cancel = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/cancel.png", &width, &height);
+	png.save = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/save.png", &width, &height);
+	png.show = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/show.png", &width, &height);
+	png.f480 = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/480p.png", &width, &height);
+	png.f720 = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/720p.png", &width, &height);
+	png.f1080 = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/1080p.png", &width, &height);
+	png.s8 = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/8s.png", &width, &height);
+	png.s40 = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/40s.png", &width, &height);
+	png.s200 = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/200s.png", &width, &height);
+	png.s500 = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/500s.png", &width, &height);
+	png.s1000 = mlx_png_file_to_image(mlx_ptr, "/Users/judrion/Desktop/martRTV1/img/1000s.png", &width, &height);
 	return (png);
 }
 

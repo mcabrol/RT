@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/03 17:46:01 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/07 13:15:53 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,12 @@ int set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 		}
 	}
 	else if ((setter = in_type_array(opt, scene->obj_options)) != -1)
-		scene->obj_setter[setter](obj, data);
+	{
+		if (scene->obj_setter[setter](obj, data) == -1)
+			return (-1);
+	}
 	else
 	{
-		ft_printf("opt -%s\n", opt);
-		ft_printf("data -%s\n", data);
 		throw_error(BAD_OPTIONS);
 		return (-1);
 	}

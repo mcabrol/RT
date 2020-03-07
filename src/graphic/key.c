@@ -6,20 +6,51 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 10:20:25 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/07 14:23:57 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+// #include "minilibx-linux/mlx_int.h"
 
 int		key(int keycode, t_rtv1 *rtv1)
 {
 	t_win *main;
+	int		i;
 
 	main = &rtv1->main;
 	if (keycode == 53)
 	{
-		//commented to cancel a segfault
+		free(rtv1->scene.obj);
+		i = 0;
+		while(rtv1->scene.obj_type[i])
+		{
+			free(rtv1->scene.obj_type[i]);
+			i = i + 1;
+		}
+		free(rtv1->scene.obj_type);
+		i = 0;
+		while(rtv1->scene.obj_options[i])
+		{
+			free(rtv1->scene.obj_options[i]);
+			i = i + 1;
+		}
+		free(rtv1->scene.obj_options);
+		free(rtv1->scene.obj_setter);
+		i = 0;
+		while (i < MAX_WIN)
+		{
+			if (rtv1->image && rtv1->image[i].img_ptr)
+			{
+				ft_printf("Je bug ici\n");
+				mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
+				mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
+				//peut etre d'autre chose a clean ici
+			}
+			i = i + 1;
+		}
+		free(rtv1->image);
+		 mlx_destroy_image(rtv1->mlx_ptr, rtv1->main.img_ptr);
 		mlx_destroy_window(rtv1->mlx_ptr, main->win_ptr);
 		exit(0);
 	}
