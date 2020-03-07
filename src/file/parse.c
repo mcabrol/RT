@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/07 13:15:53 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/07 14:58:38 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 	if (ft_strcmp(opt, "\tTYPE") == 0)
 	{
 		obj->type = in_type_array(data, scene->obj_type);
+		if (obj->type == CONE || obj->type == CYLINDER || obj->type == PLANE)
+			set_direction(obj, " 0 -1 0");
 		if (obj->type == -1)
 		{
 			throw_error(BAD_TYPE_OBJECT);

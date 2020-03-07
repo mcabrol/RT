@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 09:38:01 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/07 14:56:55 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/07 15:34:33 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,23 @@ int			value_is_vector(const char *str)
 	}
 	if (space != 3)
 		return (-2);
+	return (0);
+}
+
+int			value_is_double(const char *str)
+{
+	int		i;
+
+	i = 0;
+	while (*(str + i))
+	{
+		if (!ft_isdigit(*(str + i)))
+		{
+			if (*(str + i) != '.' && *(str + i) != ',' && *(str + i) != '-')
+				return (-1);
+		}
+		i = i + 1;
+	}
 	return (0);
 }
 
@@ -132,6 +149,11 @@ int	set_radius(t_obj *obj, char *value)
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
 	}
+	if (value_is_double(&value[1]) != 0)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	obj->radius = ft_atod(value);
 	return (0);
 }
@@ -139,6 +161,11 @@ int	set_radius(t_obj *obj, char *value)
 int	set_angle(t_obj *obj, char *value)
 {
 	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
+	if (value_is_double(&value[1]) != 0)
 	{
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
@@ -154,6 +181,11 @@ int	set_height(t_obj *obj, char *value)
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
 	}
+	if (value_is_double(&value[1]) != 0)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	obj->height = ft_atod(value);
 	return (0);
 }
@@ -165,6 +197,11 @@ int	set_width(t_obj *obj, char *value)
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
 	}
+	if (value_is_double(&value[1]) != 0)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	obj->width = ft_atod(value);
 	return (0);
 }
@@ -172,6 +209,11 @@ int	set_width(t_obj *obj, char *value)
 int set_depth(t_obj *obj, char *value)
 {
 	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
+	if (value_is_double(&value[1]) != 0)
 	{
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
