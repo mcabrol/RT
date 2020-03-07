@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 09:38:01 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/07 13:08:53 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/07 14:56:55 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ int	set_position(t_obj *obj, char *value)
 {
 	char	**data;
 	int		i;
-	int		r;
 
-	if ((r = value_is_vector(value)) != 0)
+	if (value_is_vector(value) != 0)
 	{
-		ft_printf("value_is_vector return : %d\n", r);
 		throw_error_file(VECTOR_BAD_VALUE, NULL, NULL, -1);
 		return (-1);
 	}
@@ -66,7 +64,11 @@ int	set_direction(t_obj *obj, char *value)
 	char	**data;
 	int		i;
 
-
+	if (value_is_vector(value) != 0)
+	{
+		throw_error_file(VECTOR_BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	data = ft_strsplit(value, ' ');
 	if (!data)
 		return (-1);
@@ -85,6 +87,11 @@ int	set_emission(t_obj *obj, char *value)
 {
 	int		color;
 
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	color = hexadecimalToDecimal(&value[1]);
 	obj->emission = to_vec_(color);
 	return (0);
@@ -94,6 +101,11 @@ int	set_color(t_obj *obj, char *value)
 {
 	int		color;
 
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	color = hexadecimalToDecimal(&value[1]);
 	obj->color = to_vec(color);
 	return (0);
@@ -101,6 +113,11 @@ int	set_color(t_obj *obj, char *value)
 
 int	set_reflection(t_obj *obj, char *value)
 {
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	if (ft_strcmp(value, " SPECULAR") == 0)
 		obj->reflect = SPEC;
 	else if (ft_strcmp(value, " DIFFUSE") == 0)
@@ -110,30 +127,55 @@ int	set_reflection(t_obj *obj, char *value)
 
 int	set_radius(t_obj *obj, char *value)
 {
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	obj->radius = ft_atod(value);
 	return (0);
 }
 
 int	set_angle(t_obj *obj, char *value)
 {
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	obj->angle = ft_atod(value);
 	return (0);
 }
 
 int	set_height(t_obj *obj, char *value)
 {
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	obj->height = ft_atod(value);
 	return (0);
 }
 
 int	set_width(t_obj *obj, char *value)
 {
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	obj->width = ft_atod(value);
 	return (0);
 }
 
 int set_depth(t_obj *obj, char *value)
 {
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
 	obj->depth = ft_atod(value);
 	return (0);
 }

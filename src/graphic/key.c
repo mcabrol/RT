@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/07 14:23:57 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/07 15:00:21 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		key(int keycode, t_rtv1 *rtv1)
 		free(rtv1->scene.obj_options);
 		free(rtv1->scene.obj_setter);
 		i = 0;
+		//bug si on ouvre une fenetre et la ferme avec la croix, segfault
 		while (i < MAX_WIN)
 		{
 			if (rtv1->image && rtv1->image[i].img_ptr)
