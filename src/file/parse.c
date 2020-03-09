@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/07 14:58:38 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/09 15:05:59 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	in_type_array(char *s, char **t)
 	int		i;
 
 	i = 0;
+	i = 0;
 	if (s && t && *t)
 	{
 		while (t[i])
@@ -95,6 +96,7 @@ int set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 	setter = 0;
 	if (ft_strcmp(opt, "\tTYPE") == 0)
 	{
+		// ft_printf("scene->obj_type : %p\n", scene->obj_type);
 		obj->type = in_type_array(data, scene->obj_type);
 		if (obj->type == CONE || obj->type == CYLINDER || obj->type == PLANE)
 			set_direction(obj, " 0 -1 0");
@@ -124,7 +126,8 @@ int extract_obj_data(char *start, char *end, t_scene *scene, int j)
 	char	**opt;
 	int		i = 0;
 
-	str = ft_strnew(end - start - 2);
+
+	str = ft_strnew((end - start) - 2);
 	if (!str)
 	{
 		throw_error_file(EXTRACT_DATA_FAILED, NULL, scene, -1);
@@ -248,5 +251,6 @@ int 	parse(char *str, t_scene *scene)
 		throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
 	}
 	free(str);
+
 	return (EXIT_SUCCESS);
 }

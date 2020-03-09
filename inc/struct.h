@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/07 14:57:23 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/09 14:16:02 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ typedef enum			e_error
 	VECTOR_BAD_VALUE,
 	BAD_VALUE,
 }						t_error;
-
-typedef struct			s_vec
-{
-	double				x;
-	double				y;
-	double 				z;
-}						t_vec;
 
 typedef struct			s_render
 {
@@ -89,13 +82,11 @@ typedef struct			s_obj
 	int					cut;			// type of cut
 	t_vec 				cut_direction;	// cut direction
 	t_vec 				cut_shift;		// cut shift
-	// double 				a;				// box a
-	// double 				b;				// box b
-	// double 				c;				// box c
 	int					reflect;		// material type
 	double				fov;			// field-of-view
 	t_vec				cx;				// cam_x
 	t_vec				cy;				// cam_y
+
 }						t_obj;
 
 typedef struct			s_cam
@@ -121,6 +112,7 @@ typedef struct 			s_scene
 	t_obj				*obj;
 	int					n;			// Number of object
 	options_func		*obj_setter;
+	t_matrix			*m;
 }						t_scene;
 
 typedef struct			s_point

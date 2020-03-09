@@ -6,12 +6,11 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 17:01:09 by judrion           #+#    #+#             */
-/*   Updated: 2020/01/30 17:45:58 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/09 14:19:44 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmath.h"
-#include "../libft/libft.h"
 
 void vector_matrix_mult(t_vec *src, t_matrix *m, t_vec *dst)
 {
@@ -34,5 +33,5 @@ void vector_matrix_mult(t_vec *src, t_matrix *m, t_vec *dst)
 		i = i + 1;
 	}
 	ft_memcpy(dst, output, sizeof(double) * 4);
-	vector_print(dst, TERM);
+	// vector_print(dst, TERM);
 }

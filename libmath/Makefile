@@ -1,11 +1,10 @@
-SRC_FILE = matrix matrix_2 operator operator_2 point_matrix \
-			vector vector_2 vector_matrix
+SRC_FILE = matrix matrix_2 point_matrix \
+			 vector_matrix operator vector #operator_2 vector vector_2
 SRCS = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(SRCS:.c=.o)
 OBJS = $(SRCS:%.c=%.o)
 NAME = libmath.a
 FLAG = -Wall -Werror -Wextra
-LIBFT=-I../libft
 
 all: $(NAME)
 

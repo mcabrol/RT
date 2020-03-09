@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 10:47:42 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/07 14:58:23 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/09 14:27:53 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,32 @@ void		throw_error_file(int errorcode, char **data,
 	}
 	if (scene)
 	{
-		free(scene->obj);
+		if (scene->obj)
+			free(scene->obj);
 		i = 0;
-		while (scene->obj_type[i])
+		if (scene->obj_type)
 		{
-			free(scene->obj_type[i]);
-			i = i + 1;
+			while (scene->obj_type[i])
+			{
+				free(scene->obj_type[i]);
+				i = i + 1;
+			}
+			free(scene->obj_type);
 		}
-		free(scene->obj_type);
 		i = 0;
-		while (scene->obj_options[i])
+		if (scene->obj_options)
 		{
-			free(scene->obj_options[i]);
-			i = i + 1;
+			while (scene->obj_options[i])
+			{
+				free(scene->obj_options[i]);
+				i = i + 1;
+			}
+			free(scene->obj_options);
 		}
-		free(scene->obj_options);
-		free(scene->obj_setter);
+		if (scene->obj_setter)
+			free(scene->obj_setter);
+		if (scene->m)
+			free(scene->m);
 	}
 	if (errorcode != OBJECT_BAD_FORMAT && errorcode != SET_OBJECT_FAILED
 		&& errorcode != EXTRACT_DATA_FAILED && errorcode != VECTOR_BAD_VALUE

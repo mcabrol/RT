@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 17:32:39 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/09 17:11:41 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void 	sampling(t_rtv1 *rtv1, t_render *render)
 			{
 				prepare_ray(render, &target, scene);
 				init_ray(target.eye_t, *norm(&target.d), 0, &ray);
+				vector_matrix_mult(&ray.direction, rtv1->scene.m, &ray.direction);
 				radiance(scene, &ray, render);
 				ndivide(&render->color, (double)scene->samples, &render->l);
 				sum_(&render->accucolor, &render->l);

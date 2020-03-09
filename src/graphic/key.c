@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/07 15:00:21 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/09 17:07:29 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		key(int keycode, t_rtv1 *rtv1)
 	main = &rtv1->main;
 	if (keycode == 53)
 	{
+		if (rtv1->scene.m != NULL)
+			free(rtv1->scene.m);
 		free(rtv1->scene.obj);
 		i = 0;
 		while(rtv1->scene.obj_type[i])
@@ -43,7 +45,6 @@ int		key(int keycode, t_rtv1 *rtv1)
 		{
 			if (rtv1->image && rtv1->image[i].img_ptr)
 			{
-				ft_printf("Je bug ici\n");
 				mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
 				mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
 				//peut etre d'autre chose a clean ici

@@ -3,51 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 14:05:00 by adefonta          #+#    #+#             */
-/*   Updated: 2020/01/30 18:22:08 by judrion          ###   ########.fr       */
+/*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/03/09 13:45:41 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmath.h"
 
-void		vector_init(t_vec *vec, double x, double y, double z)
+void		vec(double a, double b, double c, t_vec *dest)
 {
-	vec->x = x;
-	vec->y = y;
-	vec->z = z;
-	vec->w = 1;
+	dest->x = a;
+	dest->y = b;
+	dest->z = c;
 }
 
-void		vector_initv(t_vec *dest, t_vec *src)
+t_vec		vecp(double a, double b, double c)
 {
-	dest->x = src->x;
-	dest->y = src->y;
-	dest->z = src->z;
-	dest->w = src->w;
+	t_vec vector;
+
+	vector.x = a;
+	vector.y = b;
+	vector.z = c;
+	return (vector);
 }
 
+void		veccp(t_vec *v, t_vec *dest)
+{
+	dest->x = v->x;
+	dest->y = v->y;
+	dest->z = v->z;
+}
 
+t_vec		*norm(t_vec *v)
+{
+	double a;
 
-//check if p_test is between p_start and p_end
-//
-// int			vector_areInline(t_vec *p_start, t_vec *p_end, t_vec *p_test)
-// {
-// 	t_vec	p_tmp1;
-// 	t_vec	p_tmp2;
-// 	t_vec	v_crossprod;
-// 	double	data;
-//
-// 	data = -200000;
-// 	operator_subv(p_test, p_start, &p_tmp1);
-// 	operator_subv(p_end, p_start, &p_tmp2);
-// 	vector_crossprod(&p_tmp1, &p_tmp2, &v_crossprod);
-// 	if (v_crossprod.x <= 0.00001 && v_crossprod.y <= 0.00001 && v_crossprod.z <= 0.00001)
-// 	{
-// 		operator_subv(p_test, p_start, &p_tmp1);
-// 		operator_subv(p_end, p_test, &p_tmp2);
-// 		data = vector_scalar(&p_tmp1, &p_tmp2);
-// 	}
-// 	return ((data > 0) ? TRUE : FALSE);
-// }
+	a = 1 / sqrt(norm_s(v));
+	v->x *= a;
+	v->y *= a;
+	v->z *= a;
+	return (v);
+}
+
+double 		norm_s(t_vec *v)
+{
+	return (v->x * v->x + v->y * v->y + v->z * v->z);
+}
+
+t_vec		rotate_vector(t_vec obj_rotation, t_vec dir)
+{
+	double	y;
+	double	z;
+	double	x1;
+	double	z1;
+
+	y = (dir.y) * cos(obj_rotation.x) + (dir.z) * sin(obj_rotation.x);
+	z = (dir.z) * cos(obj_rotation.x) - (dir.y) * sin(obj_rotation.x);
+	x1 = (dir.x) * cos(obj_rotation.y) + z * sin(obj_rotation.y);
+	z1 = z * cos(obj_rotation.y) - (dir.x) * sin(obj_rotation.y);
+	(dir.x) = x1 * cos(obj_rotation.z) - y * sin(obj_rotation.z);
+	(dir.y) = x1 * sin(obj_rotation.z) + y * cos(obj_rotation.z);
+	(dir.z) = z1;
+	return (dir);
+}

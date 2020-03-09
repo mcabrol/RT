@@ -6,12 +6,13 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 09:38:01 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/07 15:34:33 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/09 17:13:39 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 double		ft_atod(const char *s);
+
 int			value_is_vector(const char *str)
 {
 	int		i;
@@ -219,5 +220,51 @@ int set_depth(t_obj *obj, char *value)
 		return (-1);
 	}
 	obj->depth = ft_atod(value);
+	return (0);
+}
+
+int set_fov(t_obj *obj, char *value)
+{
+	int		i;
+
+
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
+	i = 0;
+	while (*(value + i))
+	{
+		if (*(value + i) != ' ' && !ft_isdigit(*(value + i)))
+		{
+			throw_error_file(BAD_VALUE, NULL, NULL, -1);
+			return (-1);
+		}
+		i = i + 1;
+	}
+	obj->fov = ft_atoi(value) * M_PI / 180;;
+	return (0);
+}
+
+
+int	set_camera_matrix(t_scene *scene)
+{
+	int		i;
+	t_obj	*obj;
+
+	i = 0;
+	// ft_printf("scene->m : %p\n", scene->m);
+	while (i < scene->n)
+	{
+		if (scene->obj[i].type == CAMERA)
+			obj = &scene->obj[i];
+		i = i + 1;
+	}
+	scene->m = matrix_lookat(&obj->position, &obj->direction);
+	// vec(scene->width * scene->cam.fov / scene->height, 0, 0, &scene->cam.cx);
+	// cross(&scene->cam.cx, &scene->cam.direction, &scene->cam.cy);
+	// norm(&scene->cam.cy);
+	// nmulti_(&scene->cam.cy, scene->cam.fov);
 	return (0);
 }

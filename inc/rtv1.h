@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:42:53 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/07 13:59:06 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/09 13:39:10 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/inc/libft.h"
 # include "../minilibx/mlx.h"
-
+#include "libmath.h"
 # include <math.h>
 # include <stdint.h>
 # include <fcntl.h>
@@ -85,16 +85,7 @@ void 			*pathtracer(void *var);
 void 			sampling(t_rtv1 *rtv1, t_render *render);
 int				error(char *strerror);
 
-/*
-**	vector.c
-*/
 
-void			vec(double a, double b, double c, t_vec *dest);
-t_vec			vecp(double a, double b, double c);
-void			veccp(t_vec *v, t_vec *dest);
-t_vec			*norm(t_vec *v);
-double 			norm_s(t_vec *v);
-t_vec			rotate_vector(t_vec obj_rotation, t_vec dir);
 
 /*
 **	ray.c
@@ -173,25 +164,6 @@ double			intersect_cylinder(t_obj *cylinder, t_ray *ray);
 double			intersect_cone(t_obj *cone, t_ray *ray);
 double			intersect_box(t_obj *box, t_ray *ray);
 double			intersect_disk(t_obj *disk, t_ray *ray);
-
-/*
-**	operator.c
-*/
-
-void			sum(t_vec *v1, t_vec *v2, t_vec *dest);
-void			sub(t_vec *v1, t_vec *v2, t_vec *dest);
-void			sub_(t_vec *v1, t_vec *v2);
-void			multiplication(t_vec *v1, t_vec *v2, t_vec *dest);
-void			nmulti(t_vec *v1, double n, t_vec *dest);
-void			divide(t_vec *v1, t_vec *v2, t_vec *dest);
-void			ndivide(t_vec *v1, double n, t_vec *dest);
-void			divide3(double a, t_vec *v, t_vec *dest);
-void			minus(t_vec *v, t_vec *dest);
-void			cross(t_vec *v1, t_vec *v2, t_vec *dest);
-void			sum_(t_vec *v1, t_vec *v2);
-void			multi_(t_vec *v1, t_vec *v2);
-void			nmulti_(t_vec *v1, double n);
-void			ndivide_(t_vec *v1, double n);
 
 /*
 **	calcul.c
@@ -329,6 +301,8 @@ int				set_angle(t_obj *obj, char *value);
 int				set_height(t_obj *obj, char *value);
 int				set_width(t_obj *obj, char *value);
 int 			set_depth(t_obj *obj, char *value);
+int				set_camera_matrix(t_scene *scene);
+int 			set_fov(t_obj *obj, char *value);
 
 /*
 **	file_error.c

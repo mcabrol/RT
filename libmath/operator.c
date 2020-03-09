@@ -3,49 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 14:37:23 by judrion           #+#    #+#             */
-/*   Updated: 2020/01/21 13:33:12 by judrion          ###   ########.fr       */
+/*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/03/09 13:45:34 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmath.h"
 
-void 		operator_addv(t_vec *src_1, t_vec *src_2, t_vec *dest)
+void		sum(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	dest->x = src_1->x + src_2->x;
-	dest->y = src_1->y + src_2->y;
-	dest->z = src_1->z + src_2->z;
+	vec(v1->x + v2->x, v1->y + v2->y, v1->z + v2->z, dest);
 }
 
-void 		operator_subv(t_vec *src_1, t_vec *src_2, t_vec *dest)
+void		sum_(t_vec *v1, t_vec *v2)
 {
-	dest->x = src_1->x - src_2->x;
-	dest->y = src_1->y - src_2->y;
-	dest->z = src_1->z - src_2->z;
+	v1->x += v2->x;
+	v1->y += v2->y;
+	v1->z += v2->z;
 }
 
-void 		operator_mult(t_vec *src_1, double determinant, t_vec *dest)
+void		sub(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	dest->x = src_1->x * determinant;
-	dest->y = src_1->y * determinant;
-	dest->z = src_1->z * determinant;
+	vec(v1->x - v2->x, v1->y - v2->y, v1->z - v2->z, dest);
 }
 
-void 		operator_multv(t_vec *src_1, t_vec *src_2, t_vec *dest)
+void		sub_(t_vec *v1, t_vec *v2)
 {
-	dest->x = src_1->x * src_2->x;
-	dest->y = src_1->y * src_2->y;
-	dest->z = src_1->z * src_2->z;
+	v1->x -= v2->x;
+	v1->y -= v2->y;
+	v1->z -= v2->z;
 }
 
-void 		operator_div(t_vec *src_1, double determinant, t_vec *dest)
+void		multiplication(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	if (determinant != 0)
-	{
-		dest->x = src_1->x / determinant;
-		dest->y = src_1->y / determinant;
-		dest->z = src_1->z / determinant;
-	}
+	vec(v1->x * v2->x, v1->y * v2->y, v1->z * v2->z, dest);
+}
+
+void		multi_(t_vec *v1, t_vec *v2)
+{
+	v1->x *= v2->x;
+	v1->y *= v2->y;
+	v1->z *= v2->z;
+}
+
+void		nmulti(t_vec *v1, double n, t_vec *dest)
+{
+	vec(v1->x * n, v1->y * n, v1->z * n, dest);
+}
+
+void		nmulti_(t_vec *v1, double n)
+{
+	v1->x *= n;
+	v1->y *= n;
+	v1->z *= n;
+}
+
+void		divide(t_vec *v1, t_vec *v2, t_vec *dest)
+{
+	vec(v1->x / v2->x, v1->y / v2->y, v1->z / v2->z, dest);
+}
+
+void		divide3(double a, t_vec *v, t_vec *dest)
+{
+	vec(a / v->x, a / v->y, a / v->z, dest);
+}
+
+void		ndivide(t_vec *v1, double n, t_vec *dest)
+{
+	double a;
+
+	a = 1.0 / n;
+	vec(v1->x * a, v1->y * a, v1->z * a, dest);
+}
+
+void		ndivide_(t_vec *v1, double n)
+{
+	double a;
+
+	a = 1.0 / n;
+	v1->x *= a;
+	v1->y *= a;
+	v1->z *= a;
+}
+
+void		minus(t_vec *v, t_vec *dest)
+{
+	vec(-v->x, -v->y, -v->z, dest);
+}
+
+void		cross(t_vec *v1, t_vec *v2, t_vec *dest)
+{
+	vec(v1->y * v2->z - v1->z * v2->y,
+				v1->z * v2->x - v1->x * v2->z,
+				v1->x * v2->y - v1->y * v2->x, dest);
 }
