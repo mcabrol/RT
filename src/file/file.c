@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/01 11:16:10 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:14:49 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ int		file(int ac, char **av, char **file_str)
 	else
 		filename = av[1];
 	if ((size = get_file_size(filename)) < 0)
-		return (error("usage: ./rtv1 [file.rt]"));
+		return (error("./rtv1 Open fail"));
 	if ((fd = open(filename, O_RDONLY)) < 0)
-		return (error("usage: ./rtv1 [file.rt]"));
+		return (error("./rtv1 Open fail"));
 	if ((*file_str = (char *)malloc(sizeof(char) * (size))) == NULL)
-		return (error("usage: ./rtv1 [file.rt]"));
-	read(fd, *file_str, size);
+		return (error("./rtv1 Malloc error"));
+	if ((read(fd, *file_str, size)) == 0)
+		return (error("./rtv1: File empty"));
 	return (EXIT_SUCCESS);
 }
 

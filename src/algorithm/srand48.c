@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 09:31:16 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/17 18:57:20 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/10 18:28:26 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		init_seed(t_render *rt)
 	rt->xseed[2] = (unsigned short)(rt->y * rt->y * rt->y);
 }
 
-int 		russian_roulette(t_ray *ray, t_obj *shape, t_render *render)
+int			russian_roulette(t_ray *ray, t_obj *shape, t_render *render)
 {
 	double continue_probability;
 

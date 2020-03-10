@@ -1,12 +1,13 @@
+OBJECT:
 {
-	"type": "sphere",
-	"x": "0",
-	"y": "0",
-	"z": "0",
-	"material": "diffuse",
-	"color": "#AAFBB0"
+	TYPE: SPHERE
+	RADIUS:3
+	POSITION: 0 0 -25
+	EMISSION: #FFFFFF
 },
 {
-	"type": "camera",
-	"fov": "30"
-}
+	TYPE: CAMERA
+	POSITION: 0 0 0
+	DIRECTION: 0 0 -1
+	FOV: 50
+};

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/09 14:16:02 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/10 18:04:09 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,7 @@ typedef struct			s_obj
 	double				fov;			// field-of-view
 	t_vec				cx;				// cam_x
 	t_vec				cy;				// cam_y
-
 }						t_obj;
-
-typedef struct			s_cam
-{
-	double				fov;
-	t_vec				direction;
-	t_vec				position;
-	t_vec				cx;
-	t_vec				cy;
-}						t_cam;
 
 typedef					int (*options_func)(t_obj *obj, char *value);
 
@@ -165,7 +155,6 @@ typedef struct			s_rtv1
 	t_win 				main;
 	t_win 				*image;
 	t_scene				scene;
-	t_render 			render;
 	t_vec				*screen;	// Result
 }						t_rtv1;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/09 17:07:29 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:50:11 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,6 @@ int		key(int keycode, t_rtv1 *rtv1)
 	if (keycode == 1)
 	{
 		write_ppm(rtv1);
-	}
-	if (keycode == 2)
-	{
-		median(rtv1);
 	}
 	return (EXIT_SUCCESS);
 }

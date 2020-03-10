@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/09 17:11:41 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/10 18:30:43 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 		*pathtracer(void *var)
+void		*pathtracer(void *var)
 {
 	t_thread		*thread;
-	t_scene 		*scene;
-	t_render 		render;
+	t_scene			*scene;
+	t_render		render;
 
 	thread = (t_thread *)var;
 	scene = &thread->rtv1->scene;
@@ -25,7 +25,7 @@ void 		*pathtracer(void *var)
 	render.y = -1;
 	while (++(render.y) < scene->height)
 	{
-		loading_text(scene->samples, render.y, thread->max);
+		loading_text(scene->samples, render.y, scene->height);
 		render.x = thread->x;
 		while (++(render.x) < thread->max)
 			sampling(thread->rtv1, &render);
@@ -33,11 +33,11 @@ void 		*pathtracer(void *var)
 	pthread_exit(EXIT_SUCCESS);
 }
 
-void 	sampling(t_rtv1 *rtv1, t_render *render)
+void		sampling(t_rtv1 *rtv1, t_render *render)
 {
 	t_ray			ray;
 	t_radiance		target;
-	t_scene 		*scene;
+	t_scene			*scene;
 
 	scene = &rtv1->scene;
 	render->i = (scene->height - 1 - render->y) * scene->width + render->x;
@@ -53,7 +53,6 @@ void 	sampling(t_rtv1 *rtv1, t_render *render)
 			{
 				prepare_ray(render, &target, scene);
 				init_ray(target.eye_t, *norm(&target.d), 0, &ray);
-				vector_matrix_mult(&ray.direction, rtv1->scene.m, &ray.direction);
 				radiance(scene, &ray, render);
 				ndivide(&render->color, (double)scene->samples, &render->l);
 				sum_(&render->accucolor, &render->l);

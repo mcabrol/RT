@@ -3,46 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/09 16:31:12 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:55:31 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-t_obj		obj(int t,
-				   double r,
-				   double h,
-				   t_vec p,
-				   t_vec d,
-				   t_vec e,
-				   t_vec rot,
-				   t_vec c,
-				   double a,
-				   int cut,
-				   double cb,
-				   double cc,
-				   int reflect)
-{
-	t_obj obj;
-
-	obj.type = t;
-	obj.radius = r;
-	obj.height = h;
-	obj.position = p;
-	obj.direction = d;
-	obj.emission = e;
-	obj.angle = a;
-	obj.rotation = rot;
-	obj.cut = cut;
-	obj.color = c;
-	obj.width = cb,
-	obj.depth = cc,
-	obj.reflect = reflect;
-	return (obj);
-}
 
 void	init_cam(t_scene *scene)
 {
@@ -69,7 +37,6 @@ void	init_cam(t_scene *scene)
 		vec(0, 0, -1, &scene->cam.direction);
 		scene->cam.fov = 30 * M_PI / 180;
 	}
-
 	vec(scene->width * scene->cam.fov / scene->height, obj->position.y, obj->position.z, &scene->cam.cx);
   	cross(&scene->cam.cx, &scene->cam.direction, &scene->cam.cy);
 	norm(&scene->cam.cy);

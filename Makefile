@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+         #
+#    By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/10 11:25:08 by mcabrol           #+#    #+#              #
-#    Updated: 2020/03/09 17:15:16 by judrion          ###   ########.fr        #
+#    Updated: 2020/03/10 17:59:56 by mcabrol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = rtv1
 CFLAGS = -O3 -Wall -Wextra -Werror
-INC = -Iinc -Iminilibx -Ilibmath
+INC = -Iinc -Iminilibx -Ilibft/inc -Ilibmath
 SRC := $(shell find src -type f -regex ".*\.c")
-LIB = libft/libft.a minilibx/libmlx.a libmath/libmath.a # -lm -lmlx -lXext -lX11
+LIB = libft/libft.a minilibx/libmlx.a libmath/libmath.a
 FRAMEWORK = -framework OpenGL -framework AppKit -lz
 SANATIZE = -fsanitize=address
 

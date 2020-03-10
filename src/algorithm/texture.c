@@ -5,9 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/17 17:24:27 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/17 17:25:27 by mcabrol          ###   ########.fr       */
+/*   Created: 2020/02/17 17:25:45 by mcabrol           #+#    #+#             */
+/*   Updated: 2020/03/10 18:38:59 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void		texture(t_ray *ray, t_obj *shape)
+{
+	multi_(&ray->mask, &shape->color);
+}

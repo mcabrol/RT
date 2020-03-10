@@ -6,12 +6,11 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/19 16:28:03 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/10 18:40:07 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
 
 void		radiance(t_scene *scene, t_ray *ray, t_render *render)
 {
@@ -20,25 +19,17 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *render)
 
 	vec(0.0, 0.0, 0.0, &ray->blank);
 	vec(1.0, 1.0, 1.0, &ray->mask);
-	while (TRUE) {
-		// Intersect
+	while (TRUE)
+	{
 		if (!intersect(ray, &id, scene))
-		{
-			veccp(&ray->blank, &render->color);
-			return ;
-		}
+			return (veccp(&ray->blank, &render->color));
 		shape = &scene->obj[id];
-		// Next point
 		eval(ray, ray->distance, &ray->x);
-		// Norm object
 		normal(ray, shape);
-		// Light
-		lighting(shape, ray);
-		// Textures
-		multi_(&ray->mask, &shape->color);
+		lighting(ray, shape);
+		texture(ray, shape);
 		if (russian_roulette(ray, shape, render))
 			return ;
-		// Next path segment
-		specular(ray, render, shape);
+		reflect(ray, render, shape);
 	}
 }
