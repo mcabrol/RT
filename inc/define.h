@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/10 17:57:21 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:17:10 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define RENDER 				1
 
 # define OBJ_TYPE				6
+
 # define SPHERE					0
 # define PLANE					1
 # define CYLINDER				2

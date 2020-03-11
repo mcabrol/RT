@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/10 18:41:08 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/11 18:48:22 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void 			normal(t_ray *ray, t_obj *shape);
 void 			sphere_normal(t_obj *sphere, t_ray *ray);
 void 			plane_normal(t_obj *plane, t_ray *ray);
 void 			cylinder_normal(t_obj *cylinder, t_ray *ray);
+void 			cylinder_normal_closed(t_obj *cylinder, t_ray *ray);
 void 			cone_normal(t_obj *cone, t_ray *ray);
 void			box_normal(t_obj *box, t_ray *ray);
 
@@ -86,6 +87,7 @@ BOOL 			intersect(t_ray *ray, size_t *id, t_scene *scene);
 double 			intersect_sphere(t_obj *sphere, t_ray *ray);
 double			intersect_plane(t_obj *sphere, t_ray *ray);
 double			intersect_cylinder(t_obj *cylinder, t_ray *ray);
+double 			intersect_cylinder_closed(t_obj *cylinder, t_ray *ray);
 double			intersect_cone(t_obj *cone, t_ray *ray);
 double			intersect_box(t_obj *box, t_ray *ray);
 double			intersect_disk(t_obj *disk, t_ray *ray);
@@ -106,6 +108,7 @@ double			quadratic(double k1, double k2, double k3);
 void    		quadratic_base(t_vec k, t_vec *t);
 double			check_cut(double t_min, t_obj *obj, t_vec *p);
 double			define_tmin(t_vec t);
+double			define_ttmin(double t1, double t2);
 double 			check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_obj *obj);
 double			ft_check_pnt_box(double min[3], double max[3]);
 void			define_norm(t_ray *ray, int face);
@@ -179,7 +182,9 @@ int 			is_hover(int x, int y, int *button, int xmin, int xmax, int ymin, int yma
 **	debbug.c
 */
 
-void 	 		loading_text(int samples, int y, int height);
+void 	 		loading_text(int height, int y);
+char 			*stamp(t_rtv1 *rtv1);
+
 
 /*
 **	image.c
@@ -188,7 +193,6 @@ void 	 		loading_text(int samples, int y, int height);
 void 			image(t_rtv1 *rtv1);
 int				init_image(t_rtv1 *rtv1);
 void 			write_ppm(t_rtv1 *rtv1);
-void 			write_ppm_(t_rtv1 *rtv1);
 
 /*
 **	render.c

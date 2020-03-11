@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/10 18:04:09 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/11 18:57:06 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct			s_obj
 	t_vec 				cut_shift;		// cut shift
 	int					reflect;		// material type
 	double				fov;			// field-of-view
+	double				intersect_type; // For closed obj
 	t_vec				cx;				// cam_x
 	t_vec				cy;				// cam_y
 }						t_obj;

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/10 17:55:31 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:19:49 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_cam(t_scene *scene)
 	{
 		veccp(&obj->position, &scene->cam.position);
 		veccp(&obj->direction, &scene->cam.direction);
-			scene->cam.fov = obj->fov;
+		scene->cam.fov = obj->fov;
 	}
 	else
 	{

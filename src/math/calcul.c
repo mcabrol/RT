@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:55:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/06 19:11:31 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:30:34 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,18 @@ double		define_tmin(t_vec t)
 	if (t.y >= T_MIN && t.y < T_MAX && t.y < t.z)
 		t.z = t.y;
 	return (t.z);
+}
+
+double		define_ttmin(double t1, double t2)
+{
+	double 	t_min;
+
+	t_min = T_MAX;
+	if (t1 >= T_MIN && t1 < T_MAX && t1 < t_min)
+		t_min = t1;
+	if (t2 >= T_MIN && t2 < T_MAX && t2 < t_min)
+		t_min = t2;
+	return (t_min);
 }
 
 double 		check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_obj *obj)

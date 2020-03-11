@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/09 17:17:44 by judrion          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:15:05 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void 	init_scene(t_rtv1 *rtv1, char *file)
 	init_cam(&rtv1->scene);
 	// if (scene->m)
 	// 	free(scene->m);
-	set_camera_matrix(scene);
+	// set_camera_matrix(scene);
 	matrix_print(scene->m, WOLFRAM);
 	i = 0;
 	while (i < scene->n)

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:55:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/17 18:25:09 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:27:33 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void 	normal(t_ray *ray, t_obj *shape)
 	else if (shape->type == PLANE)
 		plane_normal(shape, ray);
 	else if (shape->type == CYLINDER)
-		cylinder_normal(shape, ray);
+		cylinder_normal_closed(shape, ray);
 	else if (shape->type == CONE)
 		cone_normal(shape, ray);
 	else if (shape->type == BOX)
@@ -65,6 +65,17 @@ void 	cylinder_normal(t_obj *cylinder, t_ray *ray)
 		ray->n = nl;
 	else
 		minus(&nl, &ray->n);
+}
+
+void 	cylinder_normal_closed(t_obj *cylinder, t_ray *ray)
+{
+	t_vec 	tmp_dir;
+
+	tmp_dir = cylinder->direction;
+	if (cylinder->intersect_type == 1)
+		cylinder_normal(cylinder, ray);
+	else if (cylinder->intersect_type == 2 || cylinder->intersect_type == 3)
+		plane_normal(cylinder, ray);
 }
 
 void 	cone_normal(t_obj *cone, t_ray *ray)

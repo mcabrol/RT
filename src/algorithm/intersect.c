@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/10 18:11:04 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:31:09 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ BOOL		intersect(t_ray *ray, size_t *id, t_scene *scene)
 		else if (obj->type == PLANE)
 			distance = intersect_plane(obj, ray);
 		else if (obj->type == CYLINDER)
-			distance = intersect_cylinder(obj, ray);
+			distance = intersect_cylinder_closed(obj, ray);
 		else if (obj->type == CONE)
 			distance = intersect_cone(obj, ray);
 		else if (obj->type == BOX)
@@ -79,6 +79,24 @@ double		intersect_plane(t_obj *plane, t_ray *ray)
 	return (t);
 }
 
+double		intersect_disk(t_obj *disk, t_ray *ray)
+{
+	t_vec tmp;
+	float t;
+	float lenght;
+	t_vec p;
+	t_vec pc;
+
+	t = intersect_plane(disk, ray);
+	nmulti(&ray->direction, t, &tmp);
+	sum(&ray->origin, &tmp, &p);
+	sub(&p, &disk->position, &pc);
+	lenght = len(&pc);
+	if (lenght > disk->radius || lenght < disk->radius || lenght <= 0)
+		t = T_MAX;
+	return (t);
+}
+
 double		intersect_cylinder(t_obj *cylinder, t_ray *ray)
 {
 	t_vec	oc;
@@ -96,6 +114,33 @@ double		intersect_cylinder(t_obj *cylinder, t_ray *ray)
 		- cylinder->radius
 		* cylinder->radius;
 	t_min = check_pnt(&k, &ray->direction, &ray->origin, cylinder);
+	return (t_min);
+}
+
+double 		intersect_cylinder_closed(t_obj *cylinder, t_ray *ray)
+{
+	double 	t_min;
+	double	t1;
+	double	t2;
+	double	t3;
+	t_vec	height;
+	t_vec	position;
+
+	t_min = T_MAX;
+	t1 = intersect_cylinder(cylinder, ray);
+	position = cylinder->position;
+	t2 = intersect_disk(cylinder, ray);
+	t_min = define_ttmin(t1, t2);
+	nmulti(&cylinder->direction, cylinder->height, &height);
+	sum(&position, &height, &cylinder->position);
+	t3 = intersect_disk(cylinder, ray);
+	cylinder->position = position;
+	if (t_min == t2)
+		cylinder->intersect_type = 2;
+	else if (t_min == t1)
+		cylinder->intersect_type = 1;
+	else
+		cylinder->intersect_type = 0;
 	return (t_min);
 }
 
