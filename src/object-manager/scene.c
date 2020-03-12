@@ -27,7 +27,7 @@ void 	init_scene(t_rtv1 *rtv1, char *file)
 	// if (scene->m)
 	// 	free(scene->m);
 	// set_camera_matrix(scene);
-	matrix_print(scene->m, WOLFRAM);
+	// matrix_print(scene->m, WOLFRAM);
 	i = 0;
 	while (i < scene->n)
 	{

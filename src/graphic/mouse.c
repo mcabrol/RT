@@ -45,13 +45,16 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 	if (rtv1->state == RENDER)
 	{
 		if (button == 1 && x > 148 && x < 254 && y > 383 && y < 415)
+		{
 			write_ppm(rtv1);
+			(rtv1->id_ppm)++;
+		}
 		else if (button == 1 && x > 148 && x < 254 && y > 429 && y < 459)
 		{
 			if (init_image(rtv1))
 				return (EXIT_FAILURE);
 			image(rtv1);
-			(rtv1->id++);
+			(rtv1->id_win)++;
 		}
 		else if (button == 1 && x > 156 && x < 243 && y > 527 && y < 558)
 		{

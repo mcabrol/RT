@@ -149,7 +149,8 @@ typedef struct			s_rtv1
 {
 	int					ac;
 	char				**av;
-	int					id;
+	int					id_win;
+	int					id_ppm;
 	t_png 				png;
 	int 				state;
 	void				*mlx_ptr;
@@ -162,6 +163,7 @@ typedef struct			s_rtv1
 typedef struct			s_thread
 {
 	pthread_t			thread;
+	int 				id;
 	int					x;
 	int					max;
 	t_rtv1				*rtv1;

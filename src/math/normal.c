@@ -19,7 +19,7 @@ void 	normal(t_ray *ray, t_obj *shape)
 	else if (shape->type == PLANE)
 		plane_normal(shape, ray);
 	else if (shape->type == CYLINDER)
-		cylinder_normal_closed(shape, ray);
+		cylinder_normal(shape, ray);
 	else if (shape->type == CONE)
 		cone_normal(shape, ray);
 	else if (shape->type == BOX)
@@ -76,6 +76,7 @@ void 	cylinder_normal_closed(t_obj *cylinder, t_ray *ray)
 		cylinder_normal(cylinder, ray);
 	else if (cylinder->intersect_type == 2 || cylinder->intersect_type == 3)
 		plane_normal(cylinder, ray);
+	cylinder->direction = tmp_dir;
 }
 
 void 	cone_normal(t_obj *cone, t_ray *ray)

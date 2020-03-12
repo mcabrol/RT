@@ -30,7 +30,7 @@ BOOL		intersect(t_ray *ray, size_t *id, t_scene *scene)
 		else if (obj->type == PLANE)
 			distance = intersect_plane(obj, ray);
 		else if (obj->type == CYLINDER)
-			distance = intersect_cylinder_closed(obj, ray);
+			distance = intersect_cylinder(obj, ray);
 		else if (obj->type == CONE)
 			distance = intersect_cone(obj, ray);
 		else if (obj->type == BOX)
@@ -88,8 +88,8 @@ double		intersect_disk(t_obj *disk, t_ray *ray)
 	t_vec pc;
 
 	t = intersect_plane(disk, ray);
-	nmulti(&ray->direction, t, &tmp);
-	sum(&ray->origin, &tmp, &p);
+	nmulti(&ray->origin, t, &tmp);
+	sum(&ray->direction, &tmp, &p);
 	sub(&p, &disk->position, &pc);
 	lenght = len(&pc);
 	if (lenght > disk->radius || lenght < disk->radius || lenght <= 0)
@@ -134,8 +134,11 @@ double 		intersect_cylinder_closed(t_obj *cylinder, t_ray *ray)
 	nmulti(&cylinder->direction, cylinder->height, &height);
 	sum(&position, &height, &cylinder->position);
 	t3 = intersect_disk(cylinder, ray);
+	t_min = define_ttmin(t_min, t3);
 	cylinder->position = position;
-	if (t_min == t2)
+	if (t_min == t3)
+		cylinder->intersect_type = 3;
+	else if (t_min == t2)
 		cylinder->intersect_type = 2;
 	else if (t_min == t1)
 		cylinder->intersect_type = 1;

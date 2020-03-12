@@ -65,7 +65,7 @@ int		key(int keycode, t_rtv1 *rtv1)
 		if (init_image(rtv1))
 			return (EXIT_FAILURE);
 		image(rtv1);
-		(rtv1->id++);
+		(rtv1->id_win++);
 	}
 	if (keycode == 1)
 	{

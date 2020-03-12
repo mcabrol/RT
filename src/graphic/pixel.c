@@ -17,7 +17,7 @@ void	put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v)
 	t_win 	*win;
 	size_t 	i;
 
-	win = &rtv1->image[rtv1->id];
+	win = &rtv1->image[rtv1->id_win];
 	i = (x * 4 + win->size_line * y);
 	if (x < rtv1->scene.width)
 		if (y < rtv1->scene.height)

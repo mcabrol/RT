@@ -20,7 +20,7 @@ void 		image(t_rtv1 *rtv1)
 	t_vec	*screen;
 	t_win	*win;
 
-	win = &rtv1->image[rtv1->id];
+	win = &rtv1->image[rtv1->id_win];
 	screen = rtv1->screen;
 	y = -1;
 	while (++y <= rtv1->scene.height)
@@ -37,12 +37,12 @@ void 		image(t_rtv1 *rtv1)
 
 int		init_image(t_rtv1 *rtv1)
 {
-	if (rtv1->id > MAX_WIN)
+	if (rtv1->id_win > MAX_WIN)
 		return (EXIT_FAILURE);
-	if (rtv1->id == 0)
+	if (rtv1->id_win == 0)
 		rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
 	if (rtv1->image)
-		rtv1->image[rtv1->id] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, ft_itoa(rtv1->id + 1));
+		rtv1->image[rtv1->id_win] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, ft_itoa(rtv1->id_win + 1));
 	return (EXIT_SUCCESS);
 }
 

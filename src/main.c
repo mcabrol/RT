@@ -41,7 +41,8 @@ int		main(int ac, char **av)
 	rtv1.png.h_cancel = FALSE;
 	rtv1.png.h_save = FALSE;
 	rtv1.png.h_show = FALSE;
-	rtv1.id = 0;
+	rtv1.id_win = 0;
+	rtv1.id_ppm = 0;
 	put_setup(&rtv1);
 	hook(&rtv1);
 	mlx_loop(rtv1.mlx_ptr);

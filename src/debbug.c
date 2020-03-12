@@ -14,7 +14,7 @@
 
 void 	 	loading_text(int height, int y)
 {
-	ft_dprintf(1, "\r%5.2f%%", 100.0 * y / (height - 1));
+	ft_dprintf(1, "\r%3.0f%%", 100.0 * y / (height - 1));
 }
 
 char 		*stamp(t_rtv1 *rtv1)
@@ -24,7 +24,7 @@ char 		*stamp(t_rtv1 *rtv1)
 	char 	*sample;
 	char 	*stamp;
 
-	num = ft_strcat(ft_itoa(rtv1->id), " - ");
+	num = ft_strcat(ft_itoa(rtv1->id_ppm), " - ");
 	dimension = ft_strcat(ft_itoa(rtv1->scene.width), "x");
 	dimension = ft_strcat(dimension, ft_itoa(rtv1->scene.height));
 	sample = ft_strcat(dimension, " x");
