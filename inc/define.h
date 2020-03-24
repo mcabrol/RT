@@ -18,7 +18,7 @@
 # define HEIGHT					550
 # define WIDTH					600
 
-# define THREAD					32
+# define THREAD					16
 
 # define H_MAIN					600
 # define W_MAIN					400

@@ -24,9 +24,19 @@ void		sum_(t_vec *v1, t_vec *v2)
 	v1->z += v2->z;
 }
 
+void		sum3(t_vec *v1, t_vec *v2, t_vec *v3, t_vec *dest)
+{
+	vec(v1->x + v2->x + v3->x, v1->y + v2->y + v3->y, v1->z + v2->z + v3->z, dest);
+}
+
 void		sub(t_vec *v1, t_vec *v2, t_vec *dest)
 {
 	vec(v1->x - v2->x, v1->y - v2->y, v1->z - v2->z, dest);
+}
+
+void		sub3(t_vec *v1, t_vec *v2, t_vec *v3, t_vec *dest)
+{
+	vec(v1->x - v2->x - v3->x, v1->y - v2->y - v3->y, v1->z - v2->z - v3->z, dest);
 }
 
 void		sub_(t_vec *v1, t_vec *v2)
@@ -91,6 +101,14 @@ void		ndivide_(t_vec *v1, double n)
 void		minus(t_vec *v, t_vec *dest)
 {
 	vec(-v->x, -v->y, -v->z, dest);
+}
+
+void		minus_(t_vec *v)
+{
+	v->x = -v->x;
+	v->y = -v->y;
+	v->z = -v->z;
+
 }
 
 void		cross(t_vec *v1, t_vec *v2, t_vec *dest)

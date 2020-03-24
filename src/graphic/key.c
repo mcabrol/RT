@@ -21,8 +21,8 @@ int		key(int keycode, t_rtv1 *rtv1)
 	main = &rtv1->main;
 	if (keycode == 53)
 	{
-		if (rtv1->scene.m != NULL)
-			free(rtv1->scene.m);
+		// if (rtv1->scene.m != NULL)
+		// 	free(rtv1->scene.m);
 		free(rtv1->scene.obj);
 		i = 0;
 		while(rtv1->scene.obj_type[i])
@@ -40,7 +40,7 @@ int		key(int keycode, t_rtv1 *rtv1)
 		free(rtv1->scene.obj_options);
 		free(rtv1->scene.obj_setter);
 		i = 0;
-		//bug si on ouvre une fenetre et la ferme avec la croix, segfault
+		// bug si on ouvre une fenetre et la ferme avec la croix, segfault
 		while (i < MAX_WIN)
 		{
 			if (rtv1->image && rtv1->image[i].img_ptr)
@@ -52,7 +52,7 @@ int		key(int keycode, t_rtv1 *rtv1)
 			i = i + 1;
 		}
 		free(rtv1->image);
-		 mlx_destroy_image(rtv1->mlx_ptr, rtv1->main.img_ptr);
+		mlx_destroy_image(rtv1->mlx_ptr, rtv1->main.img_ptr);
 		mlx_destroy_window(rtv1->mlx_ptr, main->win_ptr);
 		exit(0);
 	}

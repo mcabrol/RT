@@ -34,11 +34,14 @@ lib:
 clean:
 	make clean -C libft
 	make clean -C minilibx
+	make clean -C libmath
+
 	$(RM) -f $(OBJ)
 
 fclean: clean
 	make fclean -C libft
 	make fclean -C minilibx
+	make fclean -C libmath
 	$(RM) -f $(NAME)
 
 re: fclean all

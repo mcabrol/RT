@@ -44,9 +44,18 @@ void			radiance(t_scene *scene, t_ray *ray, t_render *render);
 
 void			cut_direction(t_obj *obj);
 void			prepare_obj(t_obj *obj);
-t_vec 			to_vec(int hex);
 void 			print_obj(t_obj *obj);
-t_vec 			to_vec_(int hex);
+
+/*
+**	convert.c
+*/
+
+t_vec 			hex_to_vec(int hex);
+t_vec 			hex_to_light(int hex);
+double 			deg_to_rad(double degree);
+double 			rad_to_deg(double radian);
+int 			hex_to_dec(char *hex);
+
 
 /*
 **	scene.c
@@ -59,7 +68,7 @@ options_func 	*setup_obj_setter(void);
 **	light.c
 */
 
-void 			lighting(t_ray *ray, t_obj *shape);
+void 			lighting(t_scene *scene, t_ray *ray, t_obj *shape);
 
 /*
 **	texture.c
@@ -115,6 +124,17 @@ void			define_norm(t_ray *ray, int face);
 void 			check_box(t_ray *ray, double min[3], double max[3], t_vec rev_ov);
 
 /*
+**	rotate.c
+*/
+
+t_vec			v_matrix_mult(double mat[4][4], t_vec pt);
+t_vec			rotate_x(t_vec pt, double theta);
+t_vec			rotate_y(t_vec pt, double theta);
+t_vec			rotate_z(t_vec pt, double theta);
+t_vec			rotate_point(double alpha, double beta, double gamma, t_vec pt);
+
+
+/*
 **	sample.c
 */
 
@@ -154,7 +174,6 @@ void			put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v);
 void 			hook(t_rtv1 *rtv1);
 int 			hover(int x, int y, t_rtv1 *rtv1);
 int				exit_hook(int keycode, t_rtv1 *rtv1);
-
 
 /*
 **	key.c
@@ -214,7 +233,6 @@ int				check(int ac, char **av);
 */
 
 int 			parse(char *str, t_scene *scene);
-int 			hexadecimalToDecimal(char *hexVal);
 
 /*
 **	setter.c
@@ -232,6 +250,8 @@ int				set_width(t_obj *obj, char *value);
 int 			set_depth(t_obj *obj, char *value);
 int				set_camera_matrix(t_scene *scene);
 int 			set_fov(t_obj *obj, char *value);
+int				set_ambient(t_obj *obj, char *value);
+int				set_rotation(t_obj *obj, char *value);
 
 /*
 **	file_error.c

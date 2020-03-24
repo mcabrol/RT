@@ -20,7 +20,6 @@ void		*pathtracer(void *var)
 
 	thread = (t_thread *)var;
 	scene = &thread->rtv1->scene;
-	init_cam(scene);
 	init_seed(&render);
 	render.y = -1;
 	while (++(render.y) < scene->height)
@@ -52,7 +51,7 @@ void		sampling(t_rtv1 *rtv1, t_render *render)
 			while (++(render->s) < scene->samples)
 			{
 				prepare_ray(render, &target, scene);
-				init_ray(target.eye_t, *norm(&target.d), 0, &ray);
+				init_ray(target.origin, target.direction, 0, &ray);
 				radiance(scene, &ray, render);
 				ndivide(&render->color, (double)scene->samples, &render->l);
 				sum_(&render->accucolor, &render->l);

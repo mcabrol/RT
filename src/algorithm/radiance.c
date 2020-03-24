@@ -26,7 +26,7 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *render)
 		shape = &scene->obj[id];
 		eval(ray, ray->distance, &ray->x);
 		normal(ray, shape);
-		lighting(ray, shape);
+		lighting(scene, ray, shape);
 		texture(ray, shape);
 		if (russian_roulette(ray, shape, render))
 			return ;

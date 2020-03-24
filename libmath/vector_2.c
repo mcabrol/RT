@@ -42,7 +42,7 @@ double		vector_length(t_vec *a)
 	return (sqrtf(a->x * a->x + a->y * a->y + a->z * a->z));
 }
 
-void 	vector_print(t_vec *a, int format)
+void 		vector_print(t_vec *a, int format)
 {
 	if (format == TERM)
 		printf("vector : [%.3f:%.3f:%.3f:%.3f]\n", a->x, a->y, a->z, a->w);

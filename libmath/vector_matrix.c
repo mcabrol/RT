@@ -12,7 +12,7 @@
 
 #include "libmath.h"
 
-void vector_matrix_mult(t_vec *src, t_matrix *m, t_vec *dst)
+void 	vector_matrix_mult(t_vec *src, t_matrix *m, t_vec *dst)
 {
 	int 	i;
 	int		j;

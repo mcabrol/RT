@@ -49,8 +49,9 @@ typedef struct			s_radiance
 	t_vec				b;
 	t_vec				ab;
 	t_vec				d_t;		// Directon tmp
-	t_vec				eye_t;		// Eye tmp
+	t_vec				origin;		// Eye tmp
 	t_vec				d;			// Vector for ray
+	t_vec				direction;
 }						t_radiance;
 
 typedef struct			s_ray
@@ -87,6 +88,8 @@ typedef struct			s_obj
 	double				intersect_type; // For closed obj
 	t_vec				cx;				// cam_x
 	t_vec				cy;				// cam_y
+	t_vec				point;			// Plane bottom left point camera
+	t_vec 				ambient;		// Ambient light
 }						t_obj;
 
 typedef					int (*options_func)(t_obj *obj, char *value);

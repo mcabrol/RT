@@ -12,14 +12,14 @@
 
 #include "libmath.h"
 
-void point_matrix_scaling(t_vec *p, t_matrix *m, t_vec *dst)
+void 	point_matrix_scaling(t_vec *p, t_matrix *m, t_vec *dst)
 {
 	dst->x = p->x * m->data[0][0];
 	dst->y = p->y * m->data[1][1];
 	dst->z = p->z * m->data[2][2];
 }
 
-void point_matrix_rotate(t_vec *p, t_matrix *m, t_vec *dst)
+void 	point_matrix_rotate(t_vec *p, t_matrix *m, t_vec *dst)
 {
 	double	w;
 
@@ -37,7 +37,7 @@ void point_matrix_rotate(t_vec *p, t_matrix *m, t_vec *dst)
 	// 		+ p->z * m->data[2][3];
 }
 
-void point_matrix_mult(t_vec *p, t_matrix *m, t_vec *dst)
+void 	point_matrix_mult(t_vec *p, t_matrix *m, t_vec *dst)
 {
 	double		w;
 	t_vec		tmp;
@@ -67,7 +67,7 @@ void point_matrix_mult(t_vec *p, t_matrix *m, t_vec *dst)
 	}
 }
 
-void point_translate(t_vec *p, t_matrix *m, t_vec *dst)
+void 	point_translate(t_vec *p, t_matrix *m, t_vec *dst)
 {
 	dst->x = p->x * m->data[0][0];
 }

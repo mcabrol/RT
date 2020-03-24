@@ -110,8 +110,8 @@ int	set_emission(t_obj *obj, char *value)
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
 	}
-	color = hexadecimalToDecimal(&value[1]);
-	obj->emission = to_vec_(color);
+	color = hex_to_dec(&value[1]);
+	obj->emission = hex_to_light(color);
 	return (0);
 }
 
@@ -124,8 +124,22 @@ int	set_color(t_obj *obj, char *value)
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
 	}
-	color = hexadecimalToDecimal(&value[1]);
-	obj->color = to_vec(color);
+	color = hex_to_dec(&value[1]);
+	obj->color = hex_to_vec(color);
+	return (0);
+}
+
+int	set_ambient(t_obj *obj, char *value)
+{
+	int		color;
+
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
+	color = hex_to_dec(&value[1]);
+	obj->ambient = hex_to_vec(color);
 	return (0);
 }
 
@@ -247,6 +261,29 @@ int set_fov(t_obj *obj, char *value)
 	return (0);
 }
 
+int	set_rotation(t_obj *obj, char *value)
+{
+	char	**data;
+	int		i;
+
+	if (value_is_vector(value) != 0)
+	{
+		throw_error_file(VECTOR_BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
+	data = ft_strsplit(value, ' ');
+	if (!data)
+		return (-1);
+	vec(ft_atod(data[0]), ft_atod(data[1]), ft_atod(data[2]), &obj->direction);
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i = i + 1;
+	}
+	free(data);
+	return (0);
+}
 
 int	set_camera_matrix(t_scene *scene)
 {

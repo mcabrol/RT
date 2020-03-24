@@ -42,33 +42,6 @@ double		ft_atod(const char *s)
 	return (rez * fact);
 }
 
-int hexadecimalToDecimal(char *hexVal)
-{
-    int len;
-    int base;
-    int dec_val;
-	int	i;
-
-	base = 1;
-	dec_val = 0;
-	len = ft_strlen(hexVal);
-	i = len - 1;
-	while (i >= 0)
-	{
-        if (hexVal[i] >= '0' && hexVal[i] <='9')
-        {
-            dec_val += (hexVal[i] - 48) * base;
-            base = base * 16;
-        }
-        else if (hexVal[i] >= 'A' && hexVal[i] <= 'F')
-        {
-            dec_val += (hexVal[i] - 55) * base;
-            base = base * 16;
-        }
-		i = i - 1;
-    }
-    return (dec_val);
-}
 
 
 int	in_type_array(char *s, char **t)
