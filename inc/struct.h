@@ -54,6 +54,18 @@ typedef struct			s_radiance
 	t_vec				direction;
 }						t_radiance;
 
+typedef struct 			s_texture
+{
+	char 				*path;
+	void				*image;
+	char				*data;
+	int					bits_per_pixel;
+	int					size_line;
+	int					endian;
+	int 				width;
+	int 				height;
+}						t_texture;
+
 typedef struct			s_ray
 {
 	t_vec				origin; 		// Origin
@@ -90,6 +102,7 @@ typedef struct			s_obj
 	t_vec				cy;				// cam_y
 	t_vec				point;			// Plane bottom left point camera
 	t_vec 				ambient;		// Ambient light
+	t_texture 			texture;		// Texture struct
 }						t_obj;
 
 typedef					int (*options_func)(t_obj *obj, char *value);
@@ -125,7 +138,7 @@ typedef struct			s_win
 	int					endian;
 }						t_win;
 
-typedef struct 			s_png
+typedef struct 			t_sprite
 {
 	int 				h_render;
 	int 				h_cancel;
@@ -146,7 +159,7 @@ typedef struct 			s_png
 	void 				*s200;
 	void 				*s500;
 	void 				*s1000;
-}						t_png;
+}						t_sprite;
 
 typedef struct			s_rtv1
 {
@@ -154,7 +167,7 @@ typedef struct			s_rtv1
 	char				**av;
 	int					id_win;
 	int					id_ppm;
-	t_png 				png;
+	t_sprite 			png;
 	int 				state;
 	void				*mlx_ptr;
 	t_win 				main;
@@ -171,7 +184,5 @@ typedef struct			s_thread
 	int					max;
 	t_rtv1				*rtv1;
 }						t_thread;
-
-
 
 #endif

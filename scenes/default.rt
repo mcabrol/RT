@@ -4,18 +4,27 @@ OBJECT:
 	POSITION: 0 0 -10
 	RADIUS: 2
 	COLOR: #FFFFFF
+	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/aluminium.png
 },
 {
 	TYPE: BOX
 	POSITION: -5 5 -5
 	HEIGHT: 0.1
-	WIDTH: 5
-	DEPTH: 5
+	WIDTH: 10
+	DEPTH: 10
+	EMISSION: #FFFFFF
+},
+{
+	TYPE: BOX
+	POSITION: -5 -5 1
+	HEIGHT: 10
+	WIDTH: 10
+	DEPTH: 0.5
 	EMISSION: #FFFFFF
 },
 {
 	TYPE: CAMERA
-	POSITION: 0 0 0
+	POSITION: 0 0 -1
 	DIRECTION: 0 0 -1
-	FOV: 40
+	FOV: 30
 };

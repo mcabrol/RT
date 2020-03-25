@@ -56,7 +56,6 @@ double 			deg_to_rad(double degree);
 double 			rad_to_deg(double radian);
 int 			hex_to_dec(char *hex);
 
-
 /*
 **	scene.c
 */
@@ -75,6 +74,10 @@ void 			lighting(t_scene *scene, t_ray *ray, t_obj *shape);
 */
 
 void 			texture(t_ray *ray, t_obj *shape);
+void			uv(t_ray *ray, t_obj *obj, double *u, double *v);
+int 			load_texture(t_rtv1 *rtv1, char *path, t_texture *texture);
+t_vec			texture_coord(double u, double v, t_texture *texture);
+void			color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest);
 
 /*
 **	normal.c
@@ -166,6 +169,7 @@ t_win			window(void *mlx_ptr, int width, int height, char *name);
 */
 
 void			put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v);
+t_vec 			get_pixel_vector(t_texture *texture, int x, int y);
 
 /*
 **	hook.c
@@ -193,7 +197,7 @@ void 			format(t_rtv1 *rtv1, int width, int height);
 **	gui.c
 */
 
-t_png 			init_png(void *mlx_ptr);
+t_sprite 		init_sprite(void *mlx_ptr);
 void 			put_setup(t_rtv1 *rtv1);
 int 			is_hover(int x, int y, int *button, int xmin, int xmax, int ymin, int ymax);
 
@@ -252,6 +256,7 @@ int				set_camera_matrix(t_scene *scene);
 int 			set_fov(t_obj *obj, char *value);
 int				set_ambient(t_obj *obj, char *value);
 int				set_rotation(t_obj *obj, char *value);
+int 			set_texture(t_obj *obj, char *value);
 
 /*
 **	file_error.c

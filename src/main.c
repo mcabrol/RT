@@ -35,7 +35,7 @@ int		main(int ac, char **av)
 	// Window
 	rtv1.mlx_ptr = mlx_init();
 	rtv1.main = window(rtv1.mlx_ptr, W_MAIN, H_MAIN, "Raytracer");
-	rtv1.png = init_png(rtv1.mlx_ptr);
+	rtv1.png = init_sprite(rtv1.mlx_ptr);
 	rtv1.state = SETUP;
 	rtv1.png.h_render = FALSE;
 	rtv1.png.h_cancel = FALSE;

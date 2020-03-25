@@ -18,7 +18,7 @@ void	put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v)
 	size_t 	i;
 
 	win = &rtv1->image[rtv1->id_win];
-	i = (x * 4 + win->size_line * y);
+	i = (x * win->bits_per_pixel / 8 + win->size_line * y);
 	if (x < rtv1->scene.width)
 		if (y < rtv1->scene.height)
 		{
@@ -26,4 +26,16 @@ void	put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v)
 			win->data_ptr[i + 1] = (char)to_byte(v->y, GAMMA);
 			win->data_ptr[i] = (char)to_byte(v->z, GAMMA);
 		}
+}
+
+t_vec 	get_pixel_vector(t_texture *texture, int x, int y)
+{
+	size_t	i;
+	t_vec 	dest;
+
+	i = (x * texture->bits_per_pixel / 8) + (y * texture->size_line);
+	dest.x = (double)(texture->data[i + 2] / 255.0);
+	dest.y = (double)(texture->data[i] / 255.0);
+ 	dest.z = (double)(texture->data[i + 1] / 255.0);
+	return (dest);
 }

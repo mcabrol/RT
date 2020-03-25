@@ -12,9 +12,9 @@
 
 #include "rtv1.h"
 
-t_png 		init_png(void *mlx_ptr)
+t_sprite 		init_sprite(void *mlx_ptr)
 {
-	t_png png;
+	t_sprite png;
 	int width;
 	int height;
 

@@ -99,7 +99,6 @@ int extract_obj_data(char *start, char *end, t_scene *scene, int j)
 	char	**opt;
 	int		i = 0;
 
-
 	str = ft_strnew((end - start) - 2);
 	if (!str)
 	{

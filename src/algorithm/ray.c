@@ -30,12 +30,8 @@ void		prepare_ray(t_render *render, t_radiance *target, t_scene *scene)
 	u2 = 2.0 * erand48(render->xseed);
 	dx = (u1 < 1.0f) ? sqrt(u1) - 1.0 : 1.0 - sqrt(2.0 - u1);
 	dy = (u2 < 1.0f) ? sqrt(u2) - 1.0 : 1.0 - sqrt(2.0 - u2);
-	nmulti(&scene->cam.cx, (((render->sx + dx) + render->x)
-							/ scene->width), &target->a);
-	nmulti(&scene->cam.cy, (((render->sy + dy) + render->y)
-							/ scene->height), &target->b);
-
-
+	nmulti(&scene->cam.cx, (render->sx + dx + render->x) / scene->width, &target->a);
+	nmulti(&scene->cam.cy, (render->sy + dy + render->y) / scene->height, &target->b);
 	sum(&target->a, &target->b, &target->ab);
 	sum(&scene->cam.point, &target->ab, &target->direction);
 	sub_(&target->direction, &scene->cam.position);

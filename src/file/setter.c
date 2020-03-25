@@ -257,7 +257,7 @@ int set_fov(t_obj *obj, char *value)
 		}
 		i = i + 1;
 	}
-	obj->fov = ft_atoi(value) * M_PI / 180;;
+	obj->fov = deg_to_rad(ft_atoi(value));
 	return (0);
 }
 
@@ -283,6 +283,18 @@ int	set_rotation(t_obj *obj, char *value)
 	}
 	free(data);
 	return (0);
+}
+
+int set_texture(t_obj *obj, char *value)
+{
+	obj->texture.path = NULL;
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
+	obj->texture.path = ft_strdup(value + 1);
+	return (EXIT_SUCCESS);
 }
 
 int	set_camera_matrix(t_scene *scene)
