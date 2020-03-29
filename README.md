@@ -48,3 +48,31 @@ _file.c_ todo
 | rtv1.c        | _cylinder.c_      | sample.c     |           |            |
 | specular.c    | _cube.c_          |              |           |            |
 | srand48.c     | _plan.c_          |              |           |            |
+
+
+## Bonus
+
+Fichier de scene: oui
+Ficher ++: oui
+Lumière d'ambiance: non
+Ambiance ++ (reglable dans le .rt): non
+Objects limité: non
+Perturbation: non
+Lumière Direct: non
+Lumière Parrallele: non
+Reflection et transparence: non
+Ombre et transparence: non
+Texture: non
+Autre application de texture: non
+Objet composé (deja fait): non
+Objet négatif: non
+Objet natif simple: non
+Effet visuel classique: non
+Effet technique: oui
+Environnement: oui
+Objet exotique: non
+Ruban de Moebius: non
+Caustic/Global illumination: oui
+C'est beau: oui
+
+6/22
