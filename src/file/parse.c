@@ -11,38 +11,6 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
-
-double		ft_atod(const char *s)
-{
-	double	rez;
-	double	fact;
-	int		d;
-	int		point_seen;
-
-	rez = 0.0;
-	fact = (*s == '-') ? -1.0 : 1.0;
-	s += (fact < 0) ? 1 : 0;
-	point_seen = 0;
-	while (*s)
-	{
-		if (*s == '.' || *s == ',')
-			point_seen = 1;
-		else
-		{
-			d = *s - '0';
-			if (d >= 0 && d <= 9)
-			{
-				fact /= (point_seen) ? 10.0f : 1;
-				rez = rez * 10.0f + (double)d;
-			}
-		}
-		s++;
-	}
-	return (rez * fact);
-}
-
-
 
 int	in_type_array(char *s, char **t)
 {

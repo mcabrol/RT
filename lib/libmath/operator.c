@@ -63,6 +63,11 @@ void		nmulti(t_vec *v1, double n, t_vec *dest)
 	vec(v1->x * n, v1->y * n, v1->z * n, dest);
 }
 
+void		multin(double n, t_vec *v1, t_vec *dest)
+{
+	vec(n * v1->x, n * v1->y, n * v1->z, dest);
+}
+
 void		nmulti_(t_vec *v1, double n)
 {
 	v1->x *= n;

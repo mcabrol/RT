@@ -29,7 +29,7 @@ void 		image(t_rtv1 *rtv1)
 		while (++x <= rtv1->scene.width)
 		{
 			i = (rtv1->scene.height - 1 - y) * rtv1->scene.width + x;
-			put_pixel_vector(rtv1, x, rtv1->scene.height - y, &screen[i]);
+			put_pixel_vector(rtv1, x, y, &screen[i]);
 		}
 	}
 	mlx_put_image_to_window(rtv1->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);

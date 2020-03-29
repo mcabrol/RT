@@ -14,6 +14,7 @@
 # define FT_STDLIB_H
 
 int					ft_atoi(const char *str);
+double				ft_atod(const char *s);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(unsigned long long nbr, int base);
 

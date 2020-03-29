@@ -71,6 +71,7 @@ void			sum_(t_vec *v1, t_vec *v2);
 void			sum3(t_vec *v1, t_vec *v2, t_vec *v3, t_vec *dest);
 void			multi_(t_vec *v1, t_vec *v2);
 void			nmulti_(t_vec *v1, double n);
+void			multin(double n, t_vec *v1, t_vec *dest);
 void			ndivide_(t_vec *v1, double n);
 
 void 			operator_addv(t_vec *src_1, t_vec *src_2, t_vec *dest);

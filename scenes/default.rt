@@ -4,7 +4,8 @@ OBJECT:
 	POSITION: 0 0 -10
 	RADIUS: 2
 	COLOR: #FFFFFF
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/aluminium.png
+	REFLECTION: REFRACTION
+	INDEX: 1.52 1.000293
 },
 {
 	TYPE: BOX
@@ -12,14 +13,6 @@ OBJECT:
 	HEIGHT: 0.1
 	WIDTH: 10
 	DEPTH: 10
-	EMISSION: #FFFFFF
-},
-{
-	TYPE: BOX
-	POSITION: -5 -5 1
-	HEIGHT: 10
-	WIDTH: 10
-	DEPTH: 0.5
 	EMISSION: #FFFFFF
 },
 {

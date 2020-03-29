@@ -62,6 +62,8 @@ int 			hex_to_dec(char *hex);
 
 void 			init_scene(t_rtv1 *rtv1, char *file);
 options_func 	*setup_obj_setter(void);
+void 			build_camera(t_scene *scene);
+
 
 /*
 **	light.c
@@ -155,7 +157,8 @@ int 			russian_roulette(t_ray *ray, t_obj *shape, t_render *render);
 */
 
 void 			reflect(t_ray *ray, t_render *render, t_obj *shape);
-void			specular_reflect(t_vec *d, t_vec *n);
+t_vec			*specular_reflect(t_vec *d, t_vec *n);
+void 			refractive_reflect(t_ray *ray, unsigned short xseed[3], t_obj *obj);
 void 			diffuse_reflect(t_vec *d, t_vec *n, unsigned short xseed[3]);
 
 /*
@@ -192,7 +195,6 @@ int				key(int keycode, t_rtv1 *rtv1);
 int				mouse(int button, int x, int y, t_rtv1 *rtv1);
 void 			format(t_rtv1 *rtv1, int width, int height);
 
-
 /*
 **	gui.c
 */
@@ -223,7 +225,6 @@ void 			write_ppm(t_rtv1 *rtv1);
 
 int 			render(t_rtv1 *rtv1);
 int				multithread(t_rtv1 *rtv1);
-
 
 /*
 **	file.c
@@ -257,6 +258,7 @@ int 			set_fov(t_obj *obj, char *value);
 int				set_ambient(t_obj *obj, char *value);
 int				set_rotation(t_obj *obj, char *value);
 int 			set_texture(t_obj *obj, char *value);
+int				set_index(t_obj *obj, char *value);
 
 /*
 **	file_error.c

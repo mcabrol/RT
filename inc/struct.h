@@ -77,6 +77,7 @@ typedef struct			s_ray
 	t_vec 				mask;			// Mask
 	t_vec				light;			// Light
 	t_vec				blank;			// Blank
+	double				pr;				// Light mask refraction
 }						t_ray;
 
 typedef struct			s_obj
@@ -103,6 +104,8 @@ typedef struct			s_obj
 	t_vec				point;			// Plane bottom left point camera
 	t_vec 				ambient;		// Ambient light
 	t_texture 			texture;		// Texture struct
+	double				index_out;		// Index out refracton
+	double				index_in;		// Index out refraction
 }						t_obj;
 
 typedef					int (*options_func)(t_obj *obj, char *value);

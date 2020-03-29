@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-double		ft_atod(const char *s);
 
 int			value_is_vector(const char *str)
 {
@@ -152,7 +151,9 @@ int	set_reflection(t_obj *obj, char *value)
 	}
 	if (ft_strcmp(value, " SPECULAR") == 0)
 		obj->reflect = SPEC;
-	else if (ft_strcmp(value, " DIFFUSE") == 0)
+	else if (ft_strcmp(value, " REFRACTION") == 0)
+		obj->reflect = REFR;
+	else
 		obj->reflect = DIFF;
 	return (0);
 }
@@ -275,6 +276,26 @@ int	set_rotation(t_obj *obj, char *value)
 	if (!data)
 		return (-1);
 	vec(ft_atod(data[0]), ft_atod(data[1]), ft_atod(data[2]), &obj->direction);
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i = i + 1;
+	}
+	free(data);
+	return (0);
+}
+
+int	set_index(t_obj *obj, char *value)
+{
+	char	**data;
+	int		i;
+
+	data = ft_strsplit(value, ' ');
+	if (!data)
+		return (-1);
+	obj->index_in = ft_atod(data[0]);
+	obj->index_out = ft_atod(data[1]);
 	i = 0;
 	while (data[i])
 	{

@@ -16,12 +16,6 @@ void	init_cam(t_scene *scene)
 {
 	int		i;
 	t_obj	*obj;
-	t_vec	up;
-	double	half_height;
-	double	half_width;
-	t_vec 	horizontal;
-	t_vec 	vertical;
-	t_vec	tmp;
 
 	i = 0;
 	obj = NULL;
@@ -35,6 +29,7 @@ void	init_cam(t_scene *scene)
 	{
 		veccp(&obj->position, &scene->cam.position);
 		veccp(&obj->direction, &scene->cam.direction);
+		norm(&scene->cam.direction);
 		scene->cam.fov = obj->fov;
 		scene->cam.ambient = obj->ambient;
 	}
@@ -45,18 +40,29 @@ void	init_cam(t_scene *scene)
 		scene->cam.fov = deg_to_rad(30);
 		vec(0, 0, 0, &scene->cam.ambient);
 	}
-	norm(&scene->cam.direction);
+	build_camera(scene);
+}
+
+void 		build_camera(t_scene *scene)
+{
+	t_vec	up;
+	double	half_height;
+	double	half_width;
+	t_vec 	horizontal;
+	t_vec 	vertical;
+	t_vec	tmp;
 
 	vec(0, 1, 0, &up);
 
 	half_height = tan(scene->cam.fov / 2);
-	half_width = ((double)scene->width / (double)scene->height) * half_height;
+	half_width = ((double)scene->width / (double)scene->height) / 2;
 
 	cross(&scene->cam.direction, &up, &horizontal);
 	norm(&horizontal);
 
 	cross(&horizontal, &scene->cam.direction, &vertical);
 	norm(&vertical);
+	minus_(&vertical);
 
 	sum(&scene->cam.position, &scene->cam.direction, &scene->cam.point);
 
@@ -68,31 +74,6 @@ void	init_cam(t_scene *scene)
 
 	nmulti(&horizontal, 2 * half_width, &scene->cam.cx);
 	nmulti(&vertical, 2 * half_height, &scene->cam.cy);
-
-
-	// // minus_(&scene->cam.cy);
-	//
-	// sum(&scene->cam.position, &scene->cam.direction, &v1);
-	// nmulti(&scene->cam.cy, half_height, &v2);
-	// nmulti(&scene->cam.cx, half_width, &v3);
-	//
-	// sub3(&v1, &v2, &v3, &scene->cam.point);
-
-
-
-
-	// nmulti_(&scene->cam.cx, 2 * half_width);
-	// ndivide(&tmp, scene->width, &scene->cam.cx);
-
-	// nmulti_(&scene->cam.cy, 2 * half_height);
-	// ndivide(&tmp, scene->height, &scene->cam.cy);
-
-
-
-	// vec(scene->width * scene->cam.fov / scene->height, 0.0, 0.0, &scene->cam.cx);
-  	// cross(&scene->cam.cx, &scene->cam.direction, &scene->cam.cy);
-	// norm(&scene->cam.cy);
-	// nmulti_(&scene->cam.cy, scene->cam.fov);
 }
 
 void		cut_direction(t_obj *obj)
