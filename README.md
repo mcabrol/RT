@@ -23,18 +23,18 @@ The configuration file is in _.rt_ extension.
 
 | Options       	   | Sphere 	 | Plane  	| Cylinder	| Cone	| Box	  | Camera	|
 | ------------------ | --------- | -------- | --------- | ----- | ----- | ------- |
-| radius (_double_)	 | ✔️		     | ❌   		| ✔️		    | ❌	  | ❌	  | ❌      |
-| height (_double_)	 | ✘		     | ❌		    | ✔️ 	    	| ✔️  	| ❌  	| ❌  		|
-| position (_t_vec_) | ✔️		     | ✔️		    | ✔️		    | ✔️	  | ✔️	  | ✔️     |
-| direction (_t_vec_)| ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ✔️		|
-| emission (_t_vec_) | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ❌		|
-| reflect (_int_)    | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ❌		|
-| color (_t_vec_)	 | ✔️		 | ✔️		| ✔️		| ✔️	| ✔️	| ❌		|
-| angle (_double_)	 | ❌		 | ❌		| ❌		| ✔️	| ❌	| ❌		|
-| a (_double_)		 | ❌		 | ❌		| ❌		| ❌	| ✔️	| ❌		|
-| b (_double_)		 | ❌		 | ❌		| ❌		| ❌	| ✔️	| ❌		|
-| c (_double_)		 | ❌		 | ❌		| ❌		| ❌	| ✔️	| ❌		|
-| fov (_double_)	 | ❌		 | ❌		| ❌		| ❌	| ❌	| ✔️		|
+| radius (_double_)	 | <span style="color: green">yes</span>		     | <span style="color:red">no</span>   		| <span style="color: green">yes</span>		    | <span style="color:red">no</span>	  | <span style="color:red">no</span>	  | <span style="color:red">no</span>      |
+| height (_double_)	 | ✘		     | <span style="color:red">no</span>		    | <span style="color: green">yes</span> 	    	| <span style="color: green">yes</span>  	| <span style="color:red">no</span>  	| <span style="color:red">no</span>  		|
+| position (_t_vec_) | <span style="color: green">yes</span>		     | <span style="color: green">yes</span>		    | <span style="color: green">yes</span>		    | <span style="color: green">yes</span>	  | <span style="color: green">yes</span>	  | <span style="color: green">yes</span>     |
+| direction (_t_vec_)| <span style="color: green">yes</span>		 | <span style="color: green">yes</span>		| <span style="color: green">yes</span>		| <span style="color: green">yes</span>	| <span style="color: green">yes</span>	| <span style="color: green">yes</span>		|
+| emission (_t_vec_) | <span style="color: green">yes</span>		 | <span style="color: green">yes</span>		| <span style="color: green">yes</span>		| <span style="color: green">yes</span>	| <span style="color: green">yes</span>	| <span style="color:red">no</span>		|
+| reflect (_int_)    | <span style="color: green">yes</span>		 | <span style="color: green">yes</span>		| <span style="color: green">yes</span>		| <span style="color: green">yes</span>	| <span style="color: green">yes</span>	| <span style="color:red">no</span>		|
+| color (_t_vec_)	 | <span style="color: green">yes</span>		 | <span style="color: green">yes</span>		| <span style="color: green">yes</span>		| <span style="color: green">yes</span>	| <span style="color: green">yes</span>	| <span style="color:red">no</span>		|
+| angle (_double_)	 | <span style="color:red">no</span>		 | <span style="color:red">no</span>		| <span style="color:red">no</span>		| <span style="color: green">yes</span>	| <span style="color:red">no</span>	| <span style="color:red">no</span>		|
+| a (_double_)		 | <span style="color:red">no</span>		 | <span style="color:red">no</span>		| <span style="color:red">no</span>		| <span style="color:red">no</span>	| <span style="color: green">yes</span>	| <span style="color:red">no</span>		|
+| b (_double_)		 | <span style="color:red">no</span>		 | <span style="color:red">no</span>		| <span style="color:red">no</span>		| <span style="color:red">no</span>	| <span style="color: green">yes</span>	| <span style="color:red">no</span>		|
+| c (_double_)		 | <span style="color:red">no</span>		 | <span style="color:red">no</span>		| <span style="color:red">no</span>		| <span style="color:red">no</span>	| <span style="color: green">yes</span>	| <span style="color:red">no</span>		|
+| fov (_double_)	 | <span style="color:red">no</span>		 | <span style="color:red">no</span>		| <span style="color:red">no</span>		| <span style="color:red">no</span>	| <span style="color:red">no</span>	| <span style="color: green">yes</span>		|
 
 ## Architecture
 
