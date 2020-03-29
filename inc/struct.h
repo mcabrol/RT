@@ -40,7 +40,7 @@ typedef struct			s_render
 	t_vec				l;
 	t_vec				accucolor;  // Color accumulation
 	t_vec				color;		// Color calculated
-	unsigned short		xseed[3];	// Generate random float
+	unsigned short		xseed[3];
 }						t_render;
 
 typedef struct			s_radiance

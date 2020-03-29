@@ -14,10 +14,18 @@
 
 int 	render(t_rtv1 *rtv1)
 {
+	time_t	before;
+	time_t	after;
+	double	second;
+
 	mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, rtv1->png.success, 0, 0);
 	rtv1->screen = (t_vec *)malloc(rtv1->scene.width * rtv1->scene.height * sizeof(t_vec));
+	before = time(NULL);
 	if (multithread(rtv1))
 		return (error("Thread error.\n"));
+	after = time(NULL);
+	second = difftime(after, before);
+	timer(second);
 	rtv1->state = RENDER;
 	return (EXIT_SUCCESS);
 }

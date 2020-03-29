@@ -33,3 +33,33 @@ char 		*stamp(t_rtv1 *rtv1)
 	stamp = ft_strcat(stamp, ".ppm");
 	return (stamp);
 }
+
+void		timer(int time)
+{
+	int 	second;
+	int 	minute;
+	int 	hour;
+
+	second = 0;
+	minute = 0;
+	hour = 0;
+	while (time)
+	{
+		if (time > 60 * 60)
+		{
+			hour++;
+			time -= 60 * 60;
+		}
+		else if (time > 60)
+		{
+			minute++;
+			time -= 60;
+		}
+		else
+		{
+			second++;
+			time--;
+		}
+	}
+	ft_printf(" -> %.2d:%.2d:%.2d", hour, minute, second);
+}

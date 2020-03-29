@@ -209,6 +209,8 @@ int 			is_hover(int x, int y, int *button, int xmin, int xmax, int ymin, int yma
 
 void 	 		loading_text(int height, int y);
 char 			*stamp(t_rtv1 *rtv1);
+void			timer(int time);
+
 
 
 /*

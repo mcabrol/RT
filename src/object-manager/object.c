@@ -55,7 +55,7 @@ void 		build_camera(t_scene *scene)
 	vec(0, 1, 0, &up);
 
 	half_height = tan(scene->cam.fov / 2);
-	half_width = ((double)scene->width / (double)scene->height) / 2;
+	half_width = ((double)scene->width / (double)scene->height) * half_height;
 
 	cross(&scene->cam.direction, &up, &horizontal);
 	norm(&horizontal);
