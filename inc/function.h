@@ -165,6 +165,7 @@ void 			diffuse_reflect(t_vec *d, t_vec *n, unsigned short xseed[3]);
 **	window.c
 */
 
+void 			init_window(t_rtv1 *rtv1);
 t_win			window(void *mlx_ptr, int width, int height, char *name);
 
 /*
