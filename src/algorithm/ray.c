@@ -12,11 +12,11 @@
 
 #include "rtv1.h"
 
-void		init_ray(t_vec o, t_vec d, int depth, t_ray *dest)
+void		init_ray(t_vec o, t_vec d, t_ray *dest)
 {
 	dest->origin = o;
 	dest->direction = d;
-	dest->depth = depth;
+	dest->depth = 0;
 }
 
 void		prepare_ray(t_render *render, t_radiance *target, t_scene *scene)
@@ -28,10 +28,10 @@ void		prepare_ray(t_render *render, t_radiance *target, t_scene *scene)
 
 	u1 = 2.0 * erand48(render->xseed);
 	u2 = 2.0 * erand48(render->xseed);
-	dx = (u1 < 1.0f) ? sqrt(u1) - 1.0 : 1.0 - sqrt(2.0 - u1);
-	dy = (u2 < 1.0f) ? sqrt(u2) - 1.0 : 1.0 - sqrt(2.0 - u2);
-	nmulti(&scene->cam.cx, (render->sx + dx + render->x) / scene->width, &target->a);
-	nmulti(&scene->cam.cy, (render->sy + dy + render->y) / scene->height, &target->b);
+	dx = (u1 < 1.0) ? (sqrt(u1) - 1.0) : (1.0 - sqrt(2.0 - u1));
+	dy = (u2 < 1.0) ? (sqrt(u2) - 1.0) : (1.0 - sqrt(2.0 - u2));
+	nmulti(&scene->cam.cx, (dx + (double)render->x), &target->a);
+	nmulti(&scene->cam.cy, (dy + (double)render->y), &target->b);
 	sum(&target->a, &target->b, &target->ab);
 	sum(&scene->cam.point, &target->ab, &target->direction);
 	sub_(&target->direction, &scene->cam.position);
@@ -39,12 +39,10 @@ void		prepare_ray(t_render *render, t_radiance *target, t_scene *scene)
 	norm(&target->direction);
 }
 
-void		eval(t_ray *r, double t, t_vec *dest)
+void		eval(t_ray *r, double distance, t_vec *dest)
 {
-	t_vec dt;
-
-	nmulti(&r->direction, t, &dt);
-	sum(&r->origin, &dt, dest);
+	nmulti(&r->direction, distance, dest);
+	sum_(dest, &r->origin);
 }
 
 void		printr(t_ray *r)

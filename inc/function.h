@@ -25,10 +25,10 @@ int				error(char *strerror);
 **	ray.c
 */
 
-void			init_ray(t_vec o, t_vec d, int depth, t_ray *dest);
+void			init_ray(t_vec o, t_vec d, t_ray *dest);
 void 			prepare_ray(t_render *render, t_radiance *target, t_scene *scene);
 void			init_cam(t_scene *scene);
-void			eval(t_ray *r, double t, t_vec *dest);
+void			eval(t_ray *r, double distance, t_vec *dest);
 void			printr(t_ray *r);
 void			printv(t_vec *v);
 

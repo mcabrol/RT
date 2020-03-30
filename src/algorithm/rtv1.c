@@ -41,17 +41,17 @@ void		sampling(t_rtv1 *rtv1, t_render *render)
 	scene = &rtv1->scene;
 	render->i = (scene->height - 1 - render->y) * scene->width + render->x;
 	render->sy = -1;
-	while (++(render->sy) < 3)
+	while (++(render->sy) < 2)
 	{
 		render->sx = -1;
-		while (++(render->sx) < 3)
+		while (++(render->sx) < 2)
 		{
-			vec(0.0, 0.0, 0.0, &render->accucolor);
+			vec(BLANK, &render->accucolor);
 			render->s = -1;
 			while (++(render->s) < scene->samples)
 			{
 				prepare_ray(render, &target, scene);
-				init_ray(target.origin, target.direction, 0, &ray);
+				init_ray(target.origin, target.direction, &ray);
 				radiance(scene, &ray, render);
 				ndivide(&render->color, (double)scene->samples, &render->l);
 				sum_(&render->accucolor, &render->l);

@@ -258,7 +258,7 @@ int set_fov(t_obj *obj, char *value)
 		}
 		i = i + 1;
 	}
-	obj->fov = deg_to_rad(ft_atoi(value));
+	obj->fov = ft_atoi(value);
 	return (0);
 }
 

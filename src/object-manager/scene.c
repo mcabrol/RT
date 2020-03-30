@@ -23,7 +23,6 @@ void 	init_scene(t_rtv1 *rtv1, char *file)
 	scene->obj_setter = setup_obj_setter();
 	if (scene->obj_type && scene->obj_options && scene->obj_setter)
 		parse(file, scene);
-	init_cam(&rtv1->scene);
 	// if (scene->m)
 	// 	free(scene->m);
 	// set_camera_matrix(scene);

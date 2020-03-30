@@ -20,6 +20,6 @@ void		cosine_weighted_sample(double u1, double u2, t_vec *dest)
 
 	cos_theta = sqrt(1.0 - u1);
 	sin_theta = sqrt(u1);
-	phi = 2.0 * PI * u2;
+	phi = 2.0 * M_PI * u2;
 	return (vec(cos(phi) * sin_theta, sin(phi) * sin_theta, cos_theta, dest));
 }

@@ -30,14 +30,14 @@ void	init_cam(t_scene *scene)
 		veccp(&obj->position, &scene->cam.position);
 		veccp(&obj->direction, &scene->cam.direction);
 		norm(&scene->cam.direction);
-		scene->cam.fov = obj->fov;
+		scene->cam.fov = deg_to_rad(obj->fov * 0.5);
 		scene->cam.ambient = obj->ambient;
 	}
 	else
 	{
 		vec(0, 0, 0, &scene->cam.position);
 		vec(0, 0, -1, &scene->cam.direction);
-		scene->cam.fov = deg_to_rad(30);
+		scene->cam.fov = deg_to_rad(FOV * 0.5);
 		vec(0, 0, 0, &scene->cam.ambient);
 	}
 	build_camera(scene);
@@ -54,7 +54,7 @@ void 		build_camera(t_scene *scene)
 
 	vec(0, 1, 0, &up);
 
-	half_height = tan(scene->cam.fov / 2);
+	half_height = tan(scene->cam.fov);
 	half_width = ((double)scene->width / (double)scene->height) * half_height;
 
 	cross(&scene->cam.direction, &up, &horizontal);
@@ -72,8 +72,11 @@ void 		build_camera(t_scene *scene)
 	nmulti(&horizontal, half_width, &tmp);
 	sub_(&scene->cam.point, &tmp);
 
-	nmulti(&horizontal, 2 * half_width, &scene->cam.cx);
-	nmulti(&vertical, 2 * half_height, &scene->cam.cy);
+	nmulti(&horizontal, 2.0 * half_width, &scene->cam.cx);
+	nmulti(&vertical, 2.0 * half_height, &scene->cam.cy);
+
+	ndivide_(&scene->cam.cx, (double)scene->width);
+	ndivide_(&scene->cam.cy, (double)scene->height);
 }
 
 void		cut_direction(t_obj *obj)
