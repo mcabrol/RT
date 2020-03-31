@@ -3,9 +3,8 @@ OBJECT:
 	TYPE: SPHERE
 	POSITION: 0 0 -10
 	RADIUS: 2
-	COLOR: #FFFFFF
-	REFLECTION: REFRACTION
-	INDEX: 1.52 1.000293
+	COLOR: #FEFEFE
+	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/damier.png
 },
 {
 	TYPE: BOX

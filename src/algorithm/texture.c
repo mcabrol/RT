@@ -54,11 +54,11 @@ t_vec		texture_coord(double u, double v, t_texture *texture)
 	int		y;
 	t_vec	res;
 
-	x = (double)(texture->width - 1) * u * 2;
-   	y = (double)(texture->height - 1) * v * 2;
+	x = (double)(texture->width - 1.0) * u * 2.0;
+   	y = (double)(texture->height - 1.0) * v * 2.0;
    	x = x % (texture->width - 1);
     y = y % (texture->height - 1);
-	vec((double)x, (double)y, 0, &res);
+	vec((double)x, (double)y, 0.0, &res);
     return (res);
 }
 
@@ -71,7 +71,7 @@ void		color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest)
 	x = sample->x;
 	y = sample->y;
 	img = get_pixel_vector(texture, x, y);
-	dest->z = img.x;
+	dest->x = img.x;
 	dest->y = img.y;
-	dest->x = img.z;
+	dest->z = img.z;
 }

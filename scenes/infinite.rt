@@ -10,7 +10,8 @@ OBJECT:
 	TYPE: SPHERE
 	RADIUS: 2.5
 	POSITION: -5.5 -0.5 -15
-	COLOR: #A92738
+	COLOR: #FFFFFF
+	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/rocks.png
 },
 {
 	TYPE: SPHERE
