@@ -82,6 +82,14 @@ t_vec			texture_coord(double u, double v, t_texture *texture);
 void			color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest);
 
 /*
+**	uv.c
+*/
+
+void 			uv_sphere(double *u, double *v, t_ray *ray);
+void 			uv_plane(double *u, double *v, t_ray *ray);
+
+
+/*
 **	normal.c
 */
 

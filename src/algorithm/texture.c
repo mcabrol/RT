@@ -30,10 +30,32 @@ void		texture(t_ray *ray, t_obj *shape)
 void		uv(t_ray *ray, t_obj *obj, double *u, double *v)
 {
 	if (obj->type == SPHERE)
-	{
-		*u = (double)(0.5 + (atan2(ray->n.z, ray->n.x) / (2.0 * M_PI)));
-		*v = (double)(0.5 - (asin(ray->n.y) / M_PI));
-	}
+		uv_sphere(u, v, ray);
+	else if (obj->type == PLANE)
+		uv_plane(u, v, ray);
+}
+
+void 		uv_sphere(double *u, double *v, t_ray *ray)
+{
+	*u = (double)(0.5 + (atan2(ray->n.z, ray->n.x) / (2.0 * M_PI)));
+	*v = (double)(0.5 - (asin(ray->n.y) / M_PI));
+}
+
+void 		uv_plane(double *u, double *v, t_ray *ray)
+{
+	t_vec n;
+	t_vec z;
+	t_vec tmp;
+
+	vec(0, 0, 1, &z);
+	cross(&ray->n, &z, &n);
+	if (dot(&n, &n) < 0.001)
+		vec(1, 0, 0, &n);
+	else
+		norm(&n);
+	cross(&n, &ray->n, &tmp);
+	*u = fabs(dot(&ray->x, &n));
+	*v = fabs(dot(&ray->x, &tmp));
 }
 
 int 		load_texture(t_rtv1 *rtv1, char *path, t_texture *texture)
@@ -54,8 +76,8 @@ t_vec		texture_coord(double u, double v, t_texture *texture)
 	int		y;
 	t_vec	res;
 
-	x = (double)(texture->width - 1.0) * u * 2.0;
-   	y = (double)(texture->height - 1.0) * v * 2.0;
+	x = (double)(texture->width - 1.0) * u * 0.05 * 2.0;
+   	y = (double)(texture->height - 1.0) * v * 0.05 * 2.0;
    	x = x % (texture->width - 1);
     y = y % (texture->height - 1);
 	vec((double)x, (double)y, 0.0, &res);
@@ -68,7 +90,7 @@ void		color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest)
 	int 	y;
 	t_vec	img;
 
-	x = sample->x;
+	x = texture->width - sample->x;
 	y = sample->y;
 	img = get_pixel_vector(texture, x, y);
 	dest->x = img.x;

@@ -11,7 +11,7 @@ OBJECT:
 	RADIUS: 2.5
 	POSITION: -5.5 -0.5 -15
 	COLOR: #FFFFFF
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/rocks.png
+	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/damier.png
 },
 {
 	TYPE: SPHERE
@@ -31,8 +31,9 @@ OBJECT:
 },
 {
 	TYPE: PLANE
-	POSITION: 0 -3 0
+	POSITION: -6 -3 0
 	COLOR: #FFFFFF
+	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/damier.png
 },
 {
 	TYPE: CAMERA

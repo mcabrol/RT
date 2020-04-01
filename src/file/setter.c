@@ -186,7 +186,7 @@ int	set_angle(t_obj *obj, char *value)
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
 	}
-	obj->angle = ft_atod(value);
+	obj->angle = deg_to_rad(ft_atod(value));
 	return (0);
 }
 
