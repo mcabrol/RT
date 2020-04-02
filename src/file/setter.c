@@ -17,18 +17,15 @@ int			value_is_vector(const char *str)
 	int		i;
 	int		space;
 
-	i = 0;
+	i = -1;
 	space = 0;
-	while (*(str + i))
+	while (*(str + (++i)))
 	{
 		if (!ft_isdigit(*(str + i)))
-		{
 			if (*(str + i) != '.' && *(str + i) != ',' && *(str + i) != ' ' && *(str + i) != '-')
 				return (-1);
-		}
 		if (*(str + i) == ' ')
 			space = space + 1;
-		i = i + 1;
 	}
 	if (space != 3)
 		return (-2);
@@ -39,23 +36,17 @@ int			value_is_double(const char *str)
 {
 	int		i;
 
-	i = 0;
-	while (*(str + i))
-	{
+	i = -1;
+	while (*(str + (++i)))
 		if (!ft_isdigit(*(str + i)))
-		{
 			if (*(str + i) != '.' && *(str + i) != ',' && *(str + i) != '-')
 				return (-1);
-		}
-		i = i + 1;
-	}
 	return (0);
 }
 
 int	set_position(t_obj *obj, char *value)
 {
 	char	**data;
-	int		i;
 
 	if (value_is_vector(value) != 0)
 	{
@@ -66,20 +57,13 @@ int	set_position(t_obj *obj, char *value)
 	if (!data)
 		return (-1);
 	vec(ft_atod(data[0]), ft_atod(data[1]), ft_atod(data[2]), &obj->position);
-	i = 0;
-	while (data[i])
-	{
-		free(data[i]);
-		i = i + 1;
-	}
-	free(data);
+	ft_tabdel(data);
 	return (0);
 }
 
 int	set_direction(t_obj *obj, char *value)
 {
 	char	**data;
-	int		i;
 
 	if (value_is_vector(value) != 0)
 	{
@@ -90,13 +74,7 @@ int	set_direction(t_obj *obj, char *value)
 	if (!data)
 		return (-1);
 	vec(ft_atod(data[0]), ft_atod(data[1]), ft_atod(data[2]), &obj->direction);
-	i = 0;
-	while (data[i])
-	{
-		free(data[i]);
-		i = i + 1;
-	}
-	free(data);
+	ft_tabdel(data);
 	return (0);
 }
 
@@ -240,23 +218,15 @@ int set_depth(t_obj *obj, char *value)
 
 int set_fov(t_obj *obj, char *value)
 {
-	int		i;
-
-
 	if (!value)
 	{
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
 	}
-	i = 0;
-	while (*(value + i))
+	if (value_is_double(&value[1]) != 0)
 	{
-		if (*(value + i) != ' ' && !ft_isdigit(*(value + i)))
-		{
-			throw_error_file(BAD_VALUE, NULL, NULL, -1);
-			return (-1);
-		}
-		i = i + 1;
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
 	}
 	obj->fov = ft_atoi(value);
 	return (0);
@@ -265,7 +235,6 @@ int set_fov(t_obj *obj, char *value)
 int	set_rotation(t_obj *obj, char *value)
 {
 	char	**data;
-	int		i;
 
 	if (value_is_vector(value) != 0)
 	{
@@ -276,33 +245,20 @@ int	set_rotation(t_obj *obj, char *value)
 	if (!data)
 		return (-1);
 	vec(ft_atod(data[0]), ft_atod(data[1]), ft_atod(data[2]), &obj->direction);
-	i = 0;
-	while (data[i])
-	{
-		free(data[i]);
-		i = i + 1;
-	}
-	free(data);
+	ft_tabdel(data);
 	return (0);
 }
 
 int	set_index(t_obj *obj, char *value)
 {
 	char	**data;
-	int		i;
 
 	data = ft_strsplit(value, ' ');
 	if (!data)
 		return (-1);
 	obj->index_in = ft_atod(data[0]);
 	obj->index_out = ft_atod(data[1]);
-	i = 0;
-	while (data[i])
-	{
-		free(data[i]);
-		i = i + 1;
-	}
-	free(data);
+	ft_tabdel(data);
 	return (0);
 }
 
@@ -315,6 +271,22 @@ int set_texture(t_obj *obj, char *value)
 		return (-1);
 	}
 	obj->texture.path = ft_strdup(value + 1);
+	return (EXIT_SUCCESS);
+}
+
+int set_texture_scale(t_obj *obj, char *value)
+{
+	if (!value)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
+	if (value_is_double(&value[1]) != 0)
+	{
+		throw_error_file(BAD_VALUE, NULL, NULL, -1);
+		return (-1);
+	}
+	obj->texture.scale = ft_atod(value);
 	return (EXIT_SUCCESS);
 }
 

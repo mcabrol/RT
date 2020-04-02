@@ -87,7 +87,7 @@ void			color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest);
 
 void 			uv_sphere(double *u, double *v, t_ray *ray);
 void 			uv_plane(double *u, double *v, t_ray *ray);
-
+void 			uv_cylinder(double *u, double *v, t_ray *ray, t_obj *obj);
 
 /*
 **	normal.c
@@ -269,6 +269,7 @@ int 			set_fov(t_obj *obj, char *value);
 int				set_ambient(t_obj *obj, char *value);
 int				set_rotation(t_obj *obj, char *value);
 int 			set_texture(t_obj *obj, char *value);
+int 			set_texture_scale(t_obj *obj, char *value);
 int				set_index(t_obj *obj, char *value);
 
 /*

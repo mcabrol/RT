@@ -64,6 +64,7 @@ typedef struct 			s_texture
 	int					endian;
 	int 				width;
 	int 				height;
+	double				scale;
 }						t_texture;
 
 typedef struct			s_ray

@@ -39,6 +39,7 @@ int set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 	{
 		// ft_printf("scene->obj_type : %p\n", scene->obj_type);
 		obj->type = in_type_array(data, scene->obj_type);
+		obj->texture.scale = 1.0;
 		if (obj->type == CONE || obj->type == CYLINDER || obj->type == PLANE)
 			set_direction(obj, " 0 -1 0");
 		if (obj->type == -1)

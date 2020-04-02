@@ -33,12 +33,28 @@ void		uv(t_ray *ray, t_obj *obj, double *u, double *v)
 		uv_sphere(u, v, ray);
 	else if (obj->type == PLANE)
 		uv_plane(u, v, ray);
+	else if (obj->type == CYLINDER)
+		uv_cylinder(u, v, ray, obj);
 }
 
 void 		uv_sphere(double *u, double *v, t_ray *ray)
 {
 	*u = (double)(0.5 + (atan2(ray->n.z, ray->n.x) / (2.0 * M_PI)));
 	*v = (double)(0.5 - (asin(ray->n.y) / M_PI));
+}
+
+void 		uv_cylinder(double *u, double *v, t_ray *ray, t_obj *obj)
+{
+	t_vec	tmp;
+	double 	lenght;
+	double 	h;
+
+	*u = 0.5 + atan2(ray->n.z, ray->n.x) / (2 * M_PI);
+	sub(&obj->direction, &obj->position, &tmp);
+	lenght = len(&tmp);
+	sub(&ray->x, &obj->position, &tmp);
+	h = len(&tmp);
+	*v = sqrt(h * h - obj->radius * obj->radius) / lenght / 2 * obj->radius;
 }
 
 void 		uv_plane(double *u, double *v, t_ray *ray)
@@ -76,8 +92,8 @@ t_vec		texture_coord(double u, double v, t_texture *texture)
 	int		y;
 	t_vec	res;
 
-	x = (double)(texture->width - 1.0) * u * 0.05 * 2.0;
-   	y = (double)(texture->height - 1.0) * v * 0.05 * 2.0;
+	x = (double)(texture->width - 1.0) * u * texture->scale * 2.0;
+   	y = (double)(texture->height - 1.0) * v * texture->scale * 2.0;
    	x = x % (texture->width - 1);
     y = y % (texture->height - 1);
 	vec((double)x, (double)y, 0.0, &res);

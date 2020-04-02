@@ -47,4 +47,7 @@ char				*ft_strnew(size_t size);
 void				ft_strclr(char *s);
 void				ft_strdel(char **ap);
 
+void				ft_tabdel(char **tab);
+
+
 #endif
