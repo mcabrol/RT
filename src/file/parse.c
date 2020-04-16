@@ -12,32 +12,25 @@
 
 #include "rtv1.h"
 
-int	in_type_array(char *s, char **t)
+int		in_type_array(char *s, char **t)
 {
 	int		i;
 
-	i = 0;
-	i = 0;
+	i = -1;
 	if (s && t && *t)
-	{
-		while (t[i])
-		{
+		while (t[++i])
 			if (ft_strcmp((s + 1), t[i]) == 0)
 				return (i);
-			i = i + 1;
-		}
-	}
 	return (-1);
 }
 
-int set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
+int 	set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 {
 	int		setter;
 
 	setter = 0;
 	if (ft_strcmp(opt, "\tTYPE") == 0)
 	{
-		// ft_printf("scene->obj_type : %p\n", scene->obj_type);
 		obj->type = in_type_array(data, scene->obj_type);
 		obj->texture.scale = 1.0;
 		if (obj->type == CONE || obj->type == CYLINDER || obj->type == PLANE)
@@ -61,13 +54,14 @@ int set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 	return (0);
 }
 
-int extract_obj_data(char *start, char *end, t_scene *scene, int j)
+int 	extract_obj_data(char *start, char *end, t_scene *scene, int j)
 {
 	char	*str;
 	char	**data;
 	char	**opt;
-	int		i = 0;
+	int		i;
 
+	i = -1;
 	str = ft_strnew((end - start) - 2);
 	if (!str)
 	{
@@ -77,7 +71,7 @@ int extract_obj_data(char *start, char *end, t_scene *scene, int j)
 	ft_memmove(str, start + 1, (end - start - 2));
 	data = ft_strsplit(str, '\n');
 	free(str);
-	while (data[i])
+	while (data[++i])
 	{
 		opt = ft_strsplit(data[i], ':');
 		if (set_obj(opt[0], opt[1], &scene->obj[j], scene) == -1)
@@ -88,13 +82,12 @@ int extract_obj_data(char *start, char *end, t_scene *scene, int j)
 		}
 		clean_opt(opt);
 		free(data[i]);
-		i = i + 1;
 	}
 	free(data);
 	return (0);
 }
 
-int setup_obj(char *start, char *end, t_scene *scene)
+int 	setup_obj(char *start, char *end, t_scene *scene)
 {
 	char	*sub;
 	int		j;
@@ -126,7 +119,7 @@ int setup_obj(char *start, char *end, t_scene *scene)
 	return (0);
 }
 
-void init_obj_tab(char *str, t_scene *scene)
+void 	init_obj_tab(char *str, t_scene *scene)
 {
 	char	*start;
 	char	*end;
@@ -192,6 +185,5 @@ int 	parse(char *str, t_scene *scene)
 		throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
 	}
 	free(str);
-
 	return (EXIT_SUCCESS);
 }

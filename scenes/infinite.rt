@@ -12,7 +12,7 @@ OBJECT:
 	POSITION: -5.5 -0.5 -15
 	COLOR: #FFFFFF
 	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/balloon.png
-	SCALE: 0.05
+	SCALE: 0.8
 },
 {
 	TYPE: SPHERE

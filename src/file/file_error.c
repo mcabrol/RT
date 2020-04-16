@@ -65,29 +65,29 @@ void		throw_error_file(int errorcode, char **data,
 void throw_error(int errorcode)
 {
 	if (errorcode == CAMERA_SETTINGS_NOT_FOUND_FILE)
-		ft_printf("ERROR #%.4d - can't find camera settings.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - can't find camera settings.\n", errorcode);
 	else if (errorcode == OBJECT_SETTINGS_NOT_FOUND_FILE)
-		ft_printf("ERROR #%.4d - can't find object settings.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - can't find object settings.\n", errorcode);
 	else if (errorcode == INIT_SCENE_OBJ_FAILED)
-		ft_printf("ERROR #%.4d - can't allocate memory for objects.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - can't allocate memory for objects.\n", errorcode);
 	else if (errorcode == INIT_OBJ_BAD_ARGS)
-		ft_printf("ERROR #%.4d - bad arguments.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - bad arguments.\n", errorcode);
 	else if (errorcode == OBJECT_BAD_FORMAT)
-		ft_printf("ERROR #%.4d - bad objects format.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - bad objects format.\n", errorcode);
 	else if (errorcode == EXTRACT_DATA_FAILED)
-		ft_printf("ERROR #%.4d - can't extract subpart of data.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - can't extract subpart of data.\n", errorcode);
 	else if (errorcode == BAD_TYPE_OBJECT)
-		ft_printf("ERROR #%.4d - unknown object type.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - unknown object type.\n", errorcode);
 	else if (errorcode == SET_OBJECT_FAILED)
-		ft_printf("ERROR #%.4d - can't set objects.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - can't set objects.\n", errorcode);
 	else if (errorcode == BAD_OPTIONS)
-		ft_printf("ERROR #%.4d - options not found.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - options not found.\n", errorcode);
 	else if (errorcode == SETUP_OBJ_FAILED)
-		ft_printf("ERROR #%.4d - can't setup data.\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - can't setup data.\n", errorcode);
 	else if (errorcode == VECTOR_BAD_VALUE)
-		ft_printf("ERROR #%.4d - vector value is not a valid value\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - vector value is not a valid value\n", errorcode);
 	else if (errorcode == BAD_VALUE)
-		ft_printf("ERROR #%.4d - bad value\n", errorcode);
+		ft_printf("./rtv1: ERROR #%.4d - bad value\n", errorcode);
 }
 
 void clean_opt(char **opt)
