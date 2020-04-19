@@ -12,11 +12,13 @@
 
 #include "rtv1.h"
 
-void	init_cam(t_scene *scene)
+void	init_cam(t_rtv1 *rtv1)
 {
 	int		i;
 	t_obj	*obj;
+	t_scene *scene;
 
+	scene = &rtv1->scene;
 	i = 0;
 	obj = NULL;
 	while (i < scene->n)
@@ -32,6 +34,15 @@ void	init_cam(t_scene *scene)
 		norm(&scene->cam.direction);
 		scene->cam.fov = deg_to_rad(obj->fov * 0.5);
 		scene->cam.ambient = obj->ambient;
+		if (obj->environment[0].path)
+		{
+			load_texture(rtv1, obj->environment[RIGHT].path, &scene->cam.environment[RIGHT]);
+			load_texture(rtv1, obj->environment[LEFT].path, &scene->cam.environment[LEFT]);
+			load_texture(rtv1, obj->environment[TOP].path, &scene->cam.environment[TOP]);
+			load_texture(rtv1, obj->environment[BOTTOM].path, &scene->cam.environment[BOTTOM]);
+			load_texture(rtv1, obj->environment[FRONT].path, &scene->cam.environment[FRONT]);
+			load_texture(rtv1, obj->environment[BACK].path, &scene->cam.environment[BACK]);
+		}
 	}
 	else
 	{
@@ -77,21 +88,6 @@ void 		build_camera(t_scene *scene)
 
 	ndivide_(&scene->cam.cx, (double)scene->width);
 	ndivide_(&scene->cam.cy, (double)scene->height);
-}
-
-void		cut_direction(t_obj *obj)
-{
-	if (obj->cut >= -3 && obj->cut <= 3 && obj->cut != 0)
-	{
-		if (obj->cut == 1 || obj->cut == -1)
-			vec(1.0, 0.0, 0.0, &obj->cut_direction);
-		else if (obj->cut == 2 || obj->cut == -2)
-			vec(0.0, 1.0, 0.0, &obj->cut_direction);
-		else if (obj->cut == 3 || obj->cut == -3)
-			vec(0.0, 0.0, 1.0, &obj->cut_direction);
-		if (obj->cut > 0)
-			nmulti(&obj->cut_direction, -1.0, &obj->cut_direction);
-	}
 }
 
 void		prepare_obj(t_obj *obj)

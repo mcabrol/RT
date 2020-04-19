@@ -22,8 +22,9 @@ int 	render(t_rtv1 *rtv1)
 							rtv1->main.win_ptr,
 							rtv1->png.success, 0, 0);
 	rtv1->screen = (t_vec *)malloc(rtv1->scene.width * rtv1->scene.height * sizeof(t_vec));
-	init_cam(&rtv1->scene);
+	init_cam(rtv1);
 	before = time(NULL);
+	// ft_printf("%s\n", rtv1->scene.cam.environment[RIGHT].path);
 	if (multithread(rtv1))
 		return (error("Thread error.\n"));
 	after = time(NULL);

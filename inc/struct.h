@@ -94,9 +94,6 @@ typedef struct			s_obj
 	t_vec				color;			// color
 	double				angle;			// angle
 	t_vec				rotation;		// rotation
-	int					cut;			// type of cut
-	t_vec 				cut_direction;	// cut direction
-	t_vec 				cut_shift;		// cut shift
 	int					reflect;		// material type
 	double				fov;			// field-of-view
 	double				intersect_type; // For closed obj
@@ -105,6 +102,7 @@ typedef struct			s_obj
 	t_vec				point;			// Plane bottom left point camera
 	t_vec 				ambient;		// Ambient light
 	t_texture 			texture;		// Texture struct
+	t_texture 			environment[6];	// Environment cube map
 	double				index_out;		// Index out refracton
 	double				index_in;		// Index out refraction
 }						t_obj;

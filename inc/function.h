@@ -27,7 +27,7 @@ int				error(char *strerror);
 
 void			init_ray(t_vec o, t_vec d, t_ray *dest);
 void 			prepare_ray(t_render *render, t_radiance *target, t_scene *scene);
-void			init_cam(t_scene *scene);
+void			init_cam(t_rtv1 *rtv1);
 void			eval(t_ray *r, double distance, t_vec *dest);
 void			printr(t_ray *r);
 void			printv(t_vec *v);
@@ -80,6 +80,7 @@ void			uv(t_ray *ray, t_obj *obj, double *u, double *v);
 int 			load_texture(t_rtv1 *rtv1, char *path, t_texture *texture);
 t_vec			texture_coord(double u, double v, t_texture *texture);
 void			color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest);
+void 			environment_texture(t_scene *scene, t_ray *ray, t_vec *dest);
 
 /*
 **	uv.c
@@ -271,6 +272,12 @@ int				set_rotation(t_obj *obj, char *value);
 int 			set_texture(t_obj *obj, char *value);
 int 			set_texture_scale(t_obj *obj, char *value);
 int				set_index(t_obj *obj, char *value);
+int				set_right(t_obj *obj, char *value);
+int				set_left(t_obj *obj, char *value);
+int				set_top(t_obj *obj, char *value);
+int				set_bottom(t_obj *obj, char *value);
+int				set_front(t_obj *obj, char *value);
+int				set_back(t_obj *obj, char *value);
 
 /*
 **	file_error.c

@@ -19,7 +19,7 @@ void 	init_scene(t_rtv1 *rtv1, char *file)
 
 	scene = &rtv1->scene;
 	scene->obj_type = ft_strsplit("SPHERE PLANE CYLINDER CONE BOX CAMERA", ' ');
-	scene->obj_options = ft_strsplit("POSITION DIRECTION EMISSION COLOR REFLECTION RADIUS ANGLE HEIGHT WIDTH DEPTH FOV AMBIENT ROTATION TEXTURE SCALE INDEX", ' ');
+	scene->obj_options = ft_strsplit("POSITION DIRECTION EMISSION COLOR REFLECTION RADIUS ANGLE HEIGHT WIDTH DEPTH FOV AMBIENT ROTATION TEXTURE SCALE INDEX RIGHT LEFT TOP BOTTOM FRONT BACK", ' ');
 	scene->obj_setter = setup_obj_setter();
 	if (scene->obj_type && scene->obj_options && scene->obj_setter)
 		parse(file, scene);
@@ -41,7 +41,7 @@ options_func *setup_obj_setter(void)
 {
 	options_func *obj_setter;
 
-	obj_setter = (options_func*)ft_memalloc(sizeof(options_func) * 16);
+	obj_setter = (options_func*)ft_memalloc(sizeof(options_func) * 22);
 	obj_setter[0] = &set_position;
 	obj_setter[1] = &set_direction;
 	obj_setter[2] = &set_emission;
@@ -58,5 +58,12 @@ options_func *setup_obj_setter(void)
 	obj_setter[13] = &set_texture;
 	obj_setter[14] = &set_texture_scale;
 	obj_setter[15] = &set_index;
+	obj_setter[16] = &set_right;
+	obj_setter[17] = &set_left;
+	obj_setter[18] = &set_top;
+	obj_setter[19] = &set_bottom;
+	obj_setter[20] = &set_front;
+	obj_setter[21] = &set_back;
+
 	return (obj_setter);
 }

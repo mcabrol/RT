@@ -50,6 +50,17 @@
 # define T_MAX 					1e20
 # define FOV                    30
 
+# define RIGHT					0
+# define LEFT					1
+# define TOP					2
+# define BOTTOM					3
+# define FRONT					4
+# define BACK					5
+
+
+# define MINI(X, Y) 				(((X) < (Y)) ? (X) : (Y))
+# define MAXI(X, Y) 				(((X) > (Y)) ? (X) : (Y))
+
 typedef int 					BOOL;
 
 #endif

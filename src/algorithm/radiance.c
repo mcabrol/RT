@@ -22,7 +22,12 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *render)
 	while (TRUE)
 	{
 		if (!intersect(ray, &id, scene))
-			return (veccp(&ray->blank, &render->color));
+		{
+			if (scene->cam.environment[0].path)
+				return (environment_texture(scene, ray, &render->color));
+			else
+				return (veccp(&ray->blank, &render->color));
+		}
 		shape = &scene->obj[id];
 		eval(ray, ray->distance, &ray->x);
 		normal(ray, shape);

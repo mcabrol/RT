@@ -3,35 +3,12 @@ OBJECT:
 	TYPE: SPHERE
 	RADIUS: 2.5
 	POSITION: 0 -0.5 -15
-	COLOR: #FEFEFE
+	COLOR:  #B00000
 	REFLECTION: SPECULAR
 },
 {
-	TYPE: SPHERE
-	RADIUS: 2.5
-	POSITION: -5.5 -0.5 -15
-	COLOR: #FFFFFF
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/balloon.png
-	SCALE: 0.8
-},
-{
-	TYPE: SPHERE
-	RADIUS: 2.5
-	POSITION: 5.5 -0.5 -15
-	COLOR: #9496FD
-	REFLECTION: REFRACTION
-	INDEX: 1.52 1.000293
-},
-{
-	TYPE: PLANE
-	POSITION: -6 -3 0
-	COLOR: #FFFFFF
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/damier.png
-	SCALE: 0.05
-},
-{
 	TYPE: CAMERA
-	POSITION: 0 -0.7 4
+	POSITION: 0 -0.7 -5
 	DIRECTION: 0 0 -1
 	RIGHT: /Users/Famille/Documents/Martin/rtv1/textures/right.png
 	LEFT: /Users/Famille/Documents/Martin/rtv1/textures/left.png
@@ -39,5 +16,5 @@ OBJECT:
 	BOTTOM: /Users/Famille/Documents/Martin/rtv1/textures/bottom.png
 	FRONT: /Users/Famille/Documents/Martin/rtv1/textures/front.png
 	BACK: /Users/Famille/Documents/Martin/rtv1/textures/back.png
-	FOV: 30
+	FOV: 60
 };
