@@ -21,7 +21,7 @@ void		texture(t_ray *ray, t_obj *shape)
 	if (shape->texture.path)
 	{
 		uv(ray, shape, &u, &v);
-		sample = texture_coord(u, v, &shape->texture);
+		sample = texture_coord(u, v, &shape->texture, NORMAL);
 		color_from_texture(&sample, &shape->texture, &shape->color);
 	}
 	multi_(&ray->mask, &shape->color);
@@ -40,18 +40,51 @@ int 		load_texture(t_rtv1 *rtv1, char *path, t_texture *texture)
 	return (EXIT_SUCCESS);
 }
 
-t_vec		texture_coord(double u, double v, t_texture *texture)
+t_vec		texture_coord(double u, double v, t_texture *texture, int index)
 {
 	int		x;
 	int		y;
 	t_vec	res;
 
-	x = (double)(texture->width - 1.0) * u * 0.5 * 2.0;
-   	y = (double)(texture->height - 1.0) * v * 0.5 * 2.0;
+	if (index >= 0)
+		texture->scale = 0.5;
+	x = (double)(texture->width - 1.0) * u * texture->scale * 2.0;
+   	y = (double)(texture->height - 1.0) * v * texture->scale * 2.0;
    	x = x % (texture->width - 1);
     y = y % (texture->height - 1);
 	vec((double)(texture->width - x), (double)(texture->height - y), 0.0, &res);
-    return (res);
+	cubemap_offset(&res, index, texture);
+	return (res);
+}
+
+void 		cubemap_offset(t_vec *coord, int index, t_texture *texture)
+{
+	if (index == RIGHT)
+	{
+		coord->x += (texture->width * 2);
+		coord->y += (texture->height * 1);
+	}
+	if (index == LEFT)
+		coord->y += (texture->height * 1);
+	if (index == TOP)
+	{
+		coord->x += (texture->width * 3);
+	}
+	if (index == BOTTOM)
+	{
+		coord->x += (texture->width * 3);
+		coord->y += (texture->height * 2);
+	}
+	if (index == FRONT)
+	{
+		coord->x += (texture->width * 3);
+		coord->y += (texture->height * 1);
+	}
+	if (index == BACK)
+	{
+		coord->x += (texture->width * 1);
+		coord->y += (texture->height * 1);
+	}
 }
 
 void		color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest)
@@ -135,6 +168,6 @@ void 		environment_texture(t_scene *scene, t_ray *ray, t_vec *dest)
   	}
   	u = 0.5 * (u / maxAxis + 1.0);
   	v = 0.5 * (v / maxAxis + 1.0);
-	coord = texture_coord(u, v, &scene->cam.environment[index]);
-	color_from_texture(&coord, &scene->cam.environment[index], dest);
+	coord = texture_coord(u, v, &scene->cam.environment, index);
+	color_from_texture(&coord, &scene->cam.environment, dest);
 }

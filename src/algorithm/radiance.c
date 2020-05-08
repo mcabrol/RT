@@ -23,10 +23,10 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *render)
 	{
 		if (!intersect(ray, &id, scene))
 		{
-			if (scene->cam.environment[0].path)
+			if (scene->cam.environment.path)
 				return (environment_texture(scene, ray, &render->color));
 			else
-				return (veccp(&ray->blank, &render->color));
+				return (veccp(&scene->cam.background, &render->color));
 		}
 		shape = &scene->obj[id];
 		eval(ray, ray->distance, &ray->x);

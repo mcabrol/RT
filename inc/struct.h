@@ -102,9 +102,10 @@ typedef struct			s_obj
 	t_vec				point;			// Plane bottom left point camera
 	t_vec 				ambient;		// Ambient light
 	t_texture 			texture;		// Texture struct
-	t_texture 			environment[6];	// Environment cube map
+	t_texture 			environment;	// Environment cube map
 	double				index_out;		// Index out refracton
 	double				index_in;		// Index out refraction
+	t_vec 				background; 	// Background Color
 }						t_obj;
 
 typedef					int (*options_func)(t_obj *obj, char *value);

@@ -3,18 +3,12 @@ OBJECT:
 	TYPE: SPHERE
 	RADIUS: 2.5
 	POSITION: 0 -0.5 -15
-	COLOR:  #B00000
-	REFLECTION: SPECULAR
+	COLOR: #FF0000
 },
 {
 	TYPE: CAMERA
 	POSITION: 0 -0.7 -5
 	DIRECTION: 0 0 -1
-	RIGHT: /Users/Famille/Documents/Martin/rtv1/textures/right.png
-	LEFT: /Users/Famille/Documents/Martin/rtv1/textures/left.png
-	TOP: /Users/Famille/Documents/Martin/rtv1/textures/top.png
-	BOTTOM: /Users/Famille/Documents/Martin/rtv1/textures/bottom.png
-	FRONT: /Users/Famille/Documents/Martin/rtv1/textures/front.png
-	BACK: /Users/Famille/Documents/Martin/rtv1/textures/back.png
+	MAP: /Users/Famille/Documents/Martin/rtv1/textures/forest.png
 	FOV: 60
 };

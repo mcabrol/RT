@@ -19,14 +19,11 @@ void	init_cam(t_rtv1 *rtv1)
 	t_scene *scene;
 
 	scene = &rtv1->scene;
-	i = 0;
+	i = -1;
 	obj = NULL;
-	while (i < scene->n)
-	{
+	while (++i < scene->n)
 		if (scene->obj[i].type == CAMERA)
 			obj = &scene->obj[i];
-		i = i + 1;
-	}
 	if (obj)
 	{
 		veccp(&obj->position, &scene->cam.position);
@@ -34,14 +31,13 @@ void	init_cam(t_rtv1 *rtv1)
 		norm(&scene->cam.direction);
 		scene->cam.fov = deg_to_rad(obj->fov * 0.5);
 		scene->cam.ambient = obj->ambient;
-		if (obj->environment[0].path)
+		if (obj->background.x > 0 || obj->background.y > 0 || obj->background.z > 0)
+			veccp(&obj->background, &scene->cam.background);
+		if (obj->environment.path)
 		{
-			load_texture(rtv1, obj->environment[RIGHT].path, &scene->cam.environment[RIGHT]);
-			load_texture(rtv1, obj->environment[LEFT].path, &scene->cam.environment[LEFT]);
-			load_texture(rtv1, obj->environment[TOP].path, &scene->cam.environment[TOP]);
-			load_texture(rtv1, obj->environment[BOTTOM].path, &scene->cam.environment[BOTTOM]);
-			load_texture(rtv1, obj->environment[FRONT].path, &scene->cam.environment[FRONT]);
-			load_texture(rtv1, obj->environment[BACK].path, &scene->cam.environment[BACK]);
+			load_texture(rtv1, obj->environment.path, &scene->cam.environment);
+			scene->cam.environment.width /= 4.0;
+			scene->cam.environment.height /= 3.0;
 		}
 	}
 	else

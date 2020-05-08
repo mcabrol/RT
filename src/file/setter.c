@@ -290,75 +290,15 @@ int set_texture_scale(t_obj *obj, char *value)
 	return (EXIT_SUCCESS);
 }
 
-int set_right(t_obj *obj, char *value)
+int set_map(t_obj *obj, char *value)
 {
-	obj->environment[RIGHT].path = NULL;
+	obj->environment.path = NULL;
 	if (!value)
 	{
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);
 	}
-	obj->environment[RIGHT].path = ft_strdup(value + 1);
-	return (EXIT_SUCCESS);
-}
-
-int set_left(t_obj *obj, char *value)
-{
-	obj->environment[LEFT].path = NULL;
-	if (!value)
-	{
-		throw_error_file(BAD_VALUE, NULL, NULL, -1);
-		return (-1);
-	}
-	obj->environment[LEFT].path = ft_strdup(value + 1);
-	return (EXIT_SUCCESS);
-}
-
-int set_top(t_obj *obj, char *value)
-{
-	obj->environment[TOP].path = NULL;
-	if (!value)
-	{
-		throw_error_file(BAD_VALUE, NULL, NULL, -1);
-		return (-1);
-	}
-	obj->environment[TOP].path = ft_strdup(value + 1);
-	return (EXIT_SUCCESS);
-}
-
-int set_bottom(t_obj *obj, char *value)
-{
-	obj->environment[BOTTOM].path = NULL;
-	if (!value)
-	{
-		throw_error_file(BAD_VALUE, NULL, NULL, -1);
-		return (-1);
-	}
-	obj->environment[BOTTOM].path = ft_strdup(value + 1);
-	return (EXIT_SUCCESS);
-}
-
-int set_front(t_obj *obj, char *value)
-{
-	obj->environment[FRONT].path = NULL;
-	if (!value)
-	{
-		throw_error_file(BAD_VALUE, NULL, NULL, -1);
-		return (-1);
-	}
-	obj->environment[FRONT].path = ft_strdup(value + 1);
-	return (EXIT_SUCCESS);
-}
-
-int set_back(t_obj *obj, char *value)
-{
-	obj->environment[BACK].path = NULL;
-	if (!value)
-	{
-		throw_error_file(BAD_VALUE, NULL, NULL, -1);
-		return (-1);
-	}
-	obj->environment[BACK].path = ft_strdup(value + 1);
+	obj->environment.path = ft_strdup(value + 1);
 	return (EXIT_SUCCESS);
 }
 

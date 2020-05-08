@@ -50,6 +50,7 @@
 # define T_MAX 					1e20
 # define FOV                    30
 
+# define NORMAL					-1
 # define RIGHT					0
 # define LEFT					1
 # define TOP					2

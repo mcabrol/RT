@@ -78,9 +78,10 @@ void 			lighting(t_scene *scene, t_ray *ray, t_obj *shape);
 void 			texture(t_ray *ray, t_obj *shape);
 void			uv(t_ray *ray, t_obj *obj, double *u, double *v);
 int 			load_texture(t_rtv1 *rtv1, char *path, t_texture *texture);
-t_vec			texture_coord(double u, double v, t_texture *texture);
+t_vec			texture_coord(double u, double v, t_texture *texture, int index);
 void			color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest);
 void 			environment_texture(t_scene *scene, t_ray *ray, t_vec *dest);
+void 			cubemap_offset(t_vec *coord, int index, t_texture *texture);
 
 /*
 **	uv.c
@@ -272,12 +273,7 @@ int				set_rotation(t_obj *obj, char *value);
 int 			set_texture(t_obj *obj, char *value);
 int 			set_texture_scale(t_obj *obj, char *value);
 int				set_index(t_obj *obj, char *value);
-int				set_right(t_obj *obj, char *value);
-int				set_left(t_obj *obj, char *value);
-int				set_top(t_obj *obj, char *value);
-int				set_bottom(t_obj *obj, char *value);
-int				set_front(t_obj *obj, char *value);
-int				set_back(t_obj *obj, char *value);
+int				set_map(t_obj *obj, char *value);
 
 /*
 **	file_error.c
