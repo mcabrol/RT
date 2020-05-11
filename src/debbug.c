@@ -63,3 +63,23 @@ void		timer(int time)
 	}
 	ft_printf(" -> %.2d:%.2d:%.2d", hour, minute, second);
 }
+
+void 		print_obj(t_obj *obj)
+{
+	ft_printf("TYPE : %d\n", obj->type);
+	ft_printf("RADIUS : %f\n", obj->radius);
+	ft_printf("POSITION : ");
+	printv(&obj->position);
+	ft_printf("DIRECTION : ");
+	printv(&obj->direction);
+	ft_printf("COLOR : ");
+	printv(&obj->color);
+	// ft_printf("COLOR : %#.8X\n", obj->color);
+	ft_printf("EMISSION : ");
+	printv(&obj->emission);
+	ft_printf("REFLECTION : %d\n", obj->reflect);
+	ft_printf("ANGLE : %f\n", obj->angle);
+	ft_printf("HEIGHT : %f\n", obj->height);
+	ft_printf("WIDTH : %f\n", obj->width);
+	ft_printf("DEPTH : %f\n", obj->depth);
+}

@@ -25,8 +25,8 @@ OBJECT:
 },
 {
 	TYPE: CAMERA
-	POSITION: 100 145 700
-	DIRECTION: -0.2 -0.35 -1
+	POSITION: 0 0 -10
+	DIRECTION: 0 0 -1
+	MAP: /Users/Famille/Documents/Martin/rtv1/textures/sky.png
 	FOV: 40
-	AMBIENT: #FFFFFF
 };

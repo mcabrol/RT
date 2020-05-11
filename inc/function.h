@@ -27,7 +27,6 @@ int				error(char *strerror);
 
 void			init_ray(t_vec o, t_vec d, t_ray *dest);
 void 			prepare_ray(t_render *render, t_radiance *target, t_scene *scene);
-void			init_cam(t_rtv1 *rtv1);
 void			eval(t_ray *r, double distance, t_vec *dest);
 void			printr(t_ray *r);
 void			printv(t_vec *v);
@@ -42,9 +41,17 @@ void			radiance(t_scene *scene, t_ray *ray, t_render *render);
 **	object.c
 */
 
-void			cut_direction(t_obj *obj);
 void			prepare_obj(t_obj *obj);
-void 			print_obj(t_obj *obj);
+
+/*
+**	camera.c
+*/
+
+void			init_cam(t_rtv1 *rtv1);
+t_obj 			*assign_camera(t_scene *scene);
+void 			set_camera(t_obj *camera, t_rtv1 *rtv1);
+void 			set_default_camera(t_rtv1 *rtv1);
+void 			build_camera(t_scene *scene);
 
 /*
 **	convert.c
@@ -62,7 +69,6 @@ int 			hex_to_dec(char *hex);
 
 void 			init_scene(t_rtv1 *rtv1, char *file);
 options_func 	*setup_obj_setter(void);
-void 			build_camera(t_scene *scene);
 
 
 /*
@@ -221,8 +227,7 @@ int 			is_hover(int x, int y, int *button, int xmin, int xmax, int ymin, int yma
 void 	 		loading_text(int height, int y);
 char 			*stamp(t_rtv1 *rtv1);
 void			timer(int time);
-
-
+void 			print_obj(t_obj *obj);
 
 /*
 **	image.c

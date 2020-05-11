@@ -48,7 +48,6 @@
 # define GAMMA 					2.2
 # define T_MIN					0.01
 # define T_MAX 					1e20
-# define FOV                    30
 
 # define NORMAL					-1
 # define RIGHT					0
