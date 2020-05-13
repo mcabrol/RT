@@ -41,7 +41,7 @@ void			radiance(t_scene *scene, t_ray *ray, t_render *render);
 **	object.c
 */
 
-void			prepare_obj(t_obj *obj);
+void			prepare_obj(t_rtv1 *rtv1);
 
 /*
 **	camera.c

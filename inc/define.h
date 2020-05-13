@@ -15,8 +15,8 @@
 
 # define THREAD					16
 
-# define H_MAIN					600
-# define W_MAIN					400
+# define H_MAIN					275
+# define W_MAIN					300
 
 # define BLANK					0.0, 0.0, 0.0
 # define FALSE					0

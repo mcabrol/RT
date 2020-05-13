@@ -12,10 +12,9 @@
 
 #include "rtv1.h"
 
-void 	init_scene(t_rtv1 *rtv1, char *file)
+void 		init_scene(t_rtv1 *rtv1, char *file)
 {
 	t_scene *scene;
-	int		i;
 
 	scene = &rtv1->scene;
 	scene->obj_type = ft_strsplit("SPHERE PLANE CYLINDER CONE BOX CAMERA", ' ');
@@ -24,18 +23,7 @@ void 	init_scene(t_rtv1 *rtv1, char *file)
 	scene->cam.environment.path = NULL;
 	if (scene->obj_type && scene->obj_options && scene->obj_setter)
 		parse(file, scene);
-	// if (scene->m)
-	// 	free(scene->m);
-	// set_camera_matrix(scene);
-	// matrix_print(scene->m, WOLFRAM);
-	i = 0;
-	while (i < scene->n)
-	{
-		if (scene->obj[i].texture.path)
-			load_texture(rtv1, scene->obj[i].texture.path, &scene->obj[i].texture);
-		prepare_obj(&scene->obj[i]);
-		i = i + 1;
-	}
+	prepare_obj(rtv1);
 }
 
 options_func *setup_obj_setter(void)
@@ -61,4 +49,27 @@ options_func *setup_obj_setter(void)
 	obj_setter[15] = &set_index;
 	obj_setter[16] = &set_map;
 	return (obj_setter);
+}
+
+void		prepare_obj(t_rtv1 *rtv1)
+{
+	int 	i;
+	t_scene	*scene;
+	t_obj	*obj;
+
+	i = -1;
+	scene = &rtv1->scene;
+	while (++i < scene->n)
+	{
+		obj = &scene->obj[i];
+		if (obj->texture.path)
+			load_texture(rtv1, obj->texture.path, &obj->texture);
+		if (obj->rotation.x > 0 || obj->rotation.y > 0 || obj->rotation.z > 0)
+			obj->direction = rotate_point(deg_to_rad(obj->rotation.x),
+							 deg_to_rad(obj->rotation.y),
+							 deg_to_rad(obj->rotation.z),
+							 *norm(&obj->direction));
+		else
+			obj->direction = *norm(&obj->direction);
+	}
 }
