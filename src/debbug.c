@@ -17,20 +17,14 @@ void 	 	loading_text(int height, int y)
 	ft_dprintf(1, "\r%3.0f%%", 100.0 * y / (height - 1));
 }
 
-char 		*stamp(t_rtv1 *rtv1)
+char 		*stamp(void)
 {
-	char 	*num;
-	char 	*dimension;
-	char 	*sample;
+	time_t	now;
 	char 	*stamp;
 
-	num = ft_strcat(ft_itoa(rtv1->id_ppm), " - ");
-	dimension = ft_strcat(ft_itoa(rtv1->scene.width), "x");
-	dimension = ft_strcat(dimension, ft_itoa(rtv1->scene.height));
-	sample = ft_strcat(dimension, " x");
-	sample = ft_strcat(sample, ft_itoa(rtv1->scene.samples));
-	stamp = ft_strcat(num, sample);
-	stamp = ft_strcat(stamp, ".ppm");
+	now = time(NULL);
+	stamp = ctime(&now);
+	ft_strcat(stamp, ".ppm");
 	return (stamp);
 }
 
@@ -82,4 +76,19 @@ void 		print_obj(t_obj *obj)
 	ft_printf("HEIGHT : %f\n", obj->height);
 	ft_printf("WIDTH : %f\n", obj->width);
 	ft_printf("DEPTH : %f\n", obj->depth);
+}
+
+void		printr(t_ray *r)
+{
+	ft_printf("o: [%f %f %f]\nd: [%f %f %f]\n", r->origin.x,
+												r->origin.y,
+												r->origin.z,
+												r->direction.x,
+												r->direction.y,
+												r->direction.z);
+}
+
+void		printv(t_vec *v)
+{
+	ft_printf("[%f %f %f]\n", v->x, v->y, v->z);
 }

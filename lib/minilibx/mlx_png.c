@@ -218,6 +218,9 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
     }
   if ((ret = mipng_fill_img(img, buffer, pi)))
     return (ret);
+
+	// Leaks
+	free(buffer);
   return (0);
 }
 

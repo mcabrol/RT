@@ -1,14 +1,15 @@
 OBJECT:
 {
 	TYPE: SPHERE
-	RADIUS: 2.5
-	POSITION: 0 -0.5 -15
+	REFLECTION: SPECULAR
+	RADIUS: 6
+	POSITION: 0 0 -15
 	COLOR: #FF0000
 },
 {
 	TYPE: CAMERA
-	POSITION: 0 -0.7 -5
+	POSITION: 0 0 0
 	DIRECTION: 0 0 -1
-	MAP: /Users/Famille/Documents/Martin/rtv1/textures/forest.png
-	FOV: 60
+	MAP: /Users/Famille/Documents/Martin/rtv1/textures/parking.png
+	FOV: 50
 };

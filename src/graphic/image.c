@@ -42,7 +42,7 @@ int		init_image(t_rtv1 *rtv1)
 	if (rtv1->id_win == 0)
 		rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
 	if (rtv1->image)
-		rtv1->image[rtv1->id_win] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, ft_itoa(rtv1->id_win + 1));
+		rtv1->image[rtv1->id_win] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, "Render");
 	return (EXIT_SUCCESS);
 }
 
@@ -55,8 +55,8 @@ void 	write_ppm(t_rtv1 *rtv1)
 
 	scene = &rtv1->scene;
 	i = -1;
-	name = stamp(rtv1);
-	fd = open(stamp(rtv1), O_WRONLY | O_APPEND | O_CREAT, 0644);
+	name = stamp();
+	fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	ft_dprintf(fd, "P3\n%d %d\n%d\n", scene->width, scene->height, 255);
 	while (++i < scene->width * scene->height)
 		ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[i].x, GAMMA),

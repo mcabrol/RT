@@ -18,21 +18,21 @@ t_sprite 		init_sprite(void *mlx_ptr)
 	int width;
 	int height;
 
-	png.background = mlx_png_file_to_image(mlx_ptr, "img/background.png", &width, &height);
-	png.success = mlx_png_file_to_image(mlx_ptr, "img/success.png", &width, &height);
-	png.failure = mlx_png_file_to_image(mlx_ptr, "img/failure.png", &width, &height);
-	png.render = mlx_png_file_to_image(mlx_ptr, "img/render.png", &width, &height);
-	png.cancel = mlx_png_file_to_image(mlx_ptr, "img/cancel.png", &width, &height);
-	png.save = mlx_png_file_to_image(mlx_ptr, "img/save.png", &width, &height);
-	png.show = mlx_png_file_to_image(mlx_ptr, "img/show.png", &width, &height);
-	png.f480 = mlx_png_file_to_image(mlx_ptr, "img/480p.png", &width, &height);
-	png.f720 = mlx_png_file_to_image(mlx_ptr, "img/720p.png", &width, &height);
-	png.f1080 = mlx_png_file_to_image(mlx_ptr, "img/1080p.png", &width, &height);
-	png.s8 = mlx_png_file_to_image(mlx_ptr, "img/8s.png", &width, &height);
-	png.s40 = mlx_png_file_to_image(mlx_ptr, "img/40s.png", &width, &height);
-	png.s200 = mlx_png_file_to_image(mlx_ptr, "img/200s.png", &width, &height);
-	png.s500 = mlx_png_file_to_image(mlx_ptr, "img/500s.png", &width, &height);
-	png.s1000 = mlx_png_file_to_image(mlx_ptr, "img/1000s.png", &width, &height);
+	png.background = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/background.png", &width, &height);
+	png.success = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/success.png", &width, &height);
+	png.failure = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/failure.png", &width, &height);
+	png.render = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/render.png", &width, &height);
+	png.cancel = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/cancel.png", &width, &height);
+	png.save = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/save.png", &width, &height);
+	png.show = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/show.png", &width, &height);
+	png.f480 = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/480p.png", &width, &height);
+	png.f720 = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/720p.png", &width, &height);
+	png.f1080 = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/1080p.png", &width, &height);
+	png.s8 = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/8s.png", &width, &height);
+	png.s40 = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/40s.png", &width, &height);
+	png.s200 = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/200s.png", &width, &height);
+	png.s500 = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/500s.png", &width, &height);
+	png.s1000 = mlx_png_file_to_image(mlx_ptr, "/Users/Famille/Documents/Martin/rtv1/img/1000s.png", &width, &height);
 	return (png);
 }
 

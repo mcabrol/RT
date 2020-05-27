@@ -31,6 +31,7 @@ int 	render(t_rtv1 *rtv1)
 	second = difftime(after, before);
 	timer(second);
 	rtv1->state = RENDER;
+	(rtv1->id_render)++;
 	return (EXIT_SUCCESS);
 }
 

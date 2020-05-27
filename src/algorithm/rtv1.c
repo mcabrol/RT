@@ -57,9 +57,14 @@ void		sampling(t_rtv1 *rtv1, t_render *render)
 				sum_(&render->accucolor, &render->l);
 				(render->s)++;
 			}
-			clamp3(&render->accucolor, 0.0, 1.0, &render->color);
-			nmulti(&render->color, 0.25, &render->l);
-			sum_(&rtv1->screen[render->i], &render->l);
+			screen(render, rtv1);
 		}
 	}
+}
+
+void 		screen(t_render *render, t_rtv1 *rtv1)
+{
+	clamp3(&render->accucolor, 0.0, 1.0, &render->color);
+	nmulti(&render->color, 0.25, &render->l);
+	sum_(&rtv1->screen[render->i], &render->l);
 }

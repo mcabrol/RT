@@ -37,9 +37,9 @@ BOOL		intersect(t_ray *ray, size_t *id, t_scene *scene)
 			distance = intersect_box(obj, ray);
 		if (distance >= T_MIN && distance < ray->distance)
 		{
-			hit = TRUE;
 			ray->distance = distance;
 			*id = i;
+			hit = TRUE;
 		}
 	}
 	return (hit);
@@ -175,10 +175,9 @@ double		intersect_box(t_obj *box, t_ray *ray)
 	t_vec		pos;
 
 	divide3(1, &ray->direction, &rev_ov);
-	vec(box->position.x
-		+ box->width, box->position.y
-		+ box->height, box->position.z
-		+ box->depth, &pos);
+	vec(box->position.x + box->width,
+		box->position.y + box->height,
+		box->position.z + box->depth, &pos);
 	if (rev_ov.x >= 0)
 	{
 		min[0] = (box->position.x - ray->origin.x) * rev_ov.x;

@@ -19,6 +19,7 @@
 
 void 			*pathtracer(void *var);
 void 			sampling(t_rtv1 *rtv1, t_render *render);
+void 			screen(t_render *render, t_rtv1 *rtv1);
 int				error(char *strerror);
 
 /*
@@ -68,7 +69,7 @@ int 			hex_to_dec(char *hex);
 */
 
 void 			init_scene(t_rtv1 *rtv1, char *file);
-options_func 	*setup_obj_setter(void);
+options_func 	*setup_obj_setter(int nb_options);
 
 
 /*
@@ -225,7 +226,7 @@ int 			is_hover(int x, int y, int *button, int xmin, int xmax, int ymin, int yma
 */
 
 void 	 		loading_text(int height, int y);
-char 			*stamp(t_rtv1 *rtv1);
+char 			*stamp(void);
 void			timer(int time);
 void 			print_obj(t_obj *obj);
 
@@ -288,5 +289,13 @@ void			throw_error_file(int errorcode, char **data,
 				t_scene *scene, int d_allocated);
 void 			throw_error(int errorcode);
 void 			clean_opt(char **opt);
+
+/*
+**	free.c
+*/
+
+void 			free_scene(t_scene *scene);
+void 			free_obj(t_obj *obj);
+void 			free_texture(t_scene *scene);
 
 #endif

@@ -20,8 +20,14 @@ int		main(int ac, char **av)
 	file_str = NULL;
 	rtv1.ac = ac;
 	rtv1.av = av;
+	rtv1.path = realpath("./", NULL);
+
 	if (file(ac, av, &file_str))
 		return (EXIT_FAILURE);
+
+	rtv1.id_render = 0;
+	rtv1.id_ppm = 0;
+	rtv1.id_win = 0;
 
 	// Default scene
 	rtv1.scene.samples = 8;

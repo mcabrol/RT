@@ -23,7 +23,7 @@ int			russian_roulette(t_ray *ray, t_obj *shape, t_render *render)
 {
 	double continue_probability;
 
-	if (4u < (unsigned int)ray->depth)
+	if (4 < ray->depth)
 	{
 		continue_probability = max(&shape->color);
 		if (erand48(render->xseed) >= continue_probability)

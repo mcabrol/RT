@@ -24,8 +24,7 @@ OBJECT:
 	TYPE: SPHERE
 	RADIUS: 2.5
 	POSITION: -5.5 -0.5 -15
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/damier.png
-	SCALE: 0.5
+	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/map.png
 },
 {
 	TYPE: SPHERE
@@ -38,7 +37,7 @@ OBJECT:
 {
 	TYPE: PLANE
 	POSITION: -6 -3 0
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/damier.png
+	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/map.png
 	SCALE: 0.05
 },
 {

@@ -15,8 +15,8 @@
 
 # define THREAD					16
 
-# define H_MAIN					275
-# define W_MAIN					300
+# define H_MAIN					600
+# define W_MAIN					400
 
 # define BLANK					0.0, 0.0, 0.0
 # define FALSE					0
@@ -31,6 +31,8 @@
 # define RENDER 				1
 
 # define OBJ_TYPE				6
+# define OBJ_TYPE_STR			"SPHERE PLANE CYLINDER CONE BOX CAMERA"
+# define OBJ_OPT_STR			"POSITION DIRECTION EMISSION COLOR REFLECTION RADIUS ANGLE HEIGHT WIDTH DEPTH FOV AMBIENT ROTATION TEXTURE SCALE INDEX MAP"
 
 # define SPHERE					0
 # define PLANE					1

@@ -24,23 +24,12 @@ int		key(int keycode, t_rtv1 *rtv1)
 		// if (rtv1->scene.m != NULL)
 		// 	free(rtv1->scene.m);
 		free(rtv1->scene.obj);
-		i = 0;
-		while(rtv1->scene.obj_type[i])
-		{
-			free(rtv1->scene.obj_type[i]);
-			i = i + 1;
-		}
-		free(rtv1->scene.obj_type);
-		i = 0;
-		while(rtv1->scene.obj_options[i])
-		{
-			free(rtv1->scene.obj_options[i]);
-			i = i + 1;
-		}
-		free(rtv1->scene.obj_options);
-		free(rtv1->scene.obj_setter);
-		i = 0;
+
+		ft_tabdel(rtv1->scene.obj_type);
+		ft_tabdel(rtv1->scene.obj_options);
 		// bug si on ouvre une fenetre et la ferme avec la croix, segfault
+
+		i = 0;
 		while (i < MAX_WIN)
 		{
 			if (rtv1->image && rtv1->image[i].img_ptr)

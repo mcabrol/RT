@@ -65,7 +65,7 @@ void 		cubemap_offset(t_vec *coord, int index, t_texture *texture)
 		coord->y += (texture->height * 1);
 	}
 	if (index == LEFT)
-		coord->y += (texture->height * 1);
+		coord->y += texture->height;
 	if (index == TOP)
 	{
 		coord->x += (texture->width * 3);
@@ -78,12 +78,12 @@ void 		cubemap_offset(t_vec *coord, int index, t_texture *texture)
 	if (index == FRONT)
 	{
 		coord->x += (texture->width * 3);
-		coord->y += (texture->height * 1);
+		coord->y += texture->height;
 	}
 	if (index == BACK)
 	{
-		coord->x += (texture->width * 1);
-		coord->y += (texture->height * 1);
+		coord->x += texture->width;
+		coord->y += texture->height;
 	}
 }
 
@@ -116,13 +116,13 @@ void 		environment_texture(t_scene *scene, t_ray *ray, t_vec *dest)
 	y = ray->direction.y;
 	z = ray->direction.z;
 
-	double absX = (double)fabs(x);
-  	double absY = (double)fabs(y);
-  	double absZ = (double)fabs(z);
+	double absX = (double)fabs(ray->direction.x);
+  	double absY = (double)fabs(ray->direction.y);
+  	double absZ = (double)fabs(ray->direction.z);
 
-  	int isXPositive = x > 0 ? 1 : 0;
-  	int isYPositive = y > 0 ? 1 : 0;
-  	int isZPositive = z > 0 ? 1 : 0;
+  	int isXPositive = ray->direction.x > 0 ? 1 : 0;
+  	int isYPositive = ray->direction.y > 0 ? 1 : 0;
+  	int isZPositive = ray->direction.z > 0 ? 1 : 0;
 
   	if (isXPositive && absX >= absY && absX >= absZ)
 	{

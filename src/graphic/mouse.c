@@ -58,6 +58,9 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		}
 		else if (button == 1 && x > 156 && x < 243 && y > 527 && y < 558)
 		{
+			free_texture(&rtv1->scene);
+			free(rtv1->scene.obj);
+			free(rtv1->screen);
 			if (file(rtv1->ac, rtv1->av, &file_str))
 				return (EXIT_FAILURE);
 			init_scene(rtv1, file_str);

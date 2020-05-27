@@ -168,7 +168,9 @@ typedef struct			s_rtv1
 {
 	int					ac;
 	char				**av;
+	char 				*path;
 	int					id_win;
+	int					id_render;
 	int					id_ppm;
 	t_sprite 			png;
 	int 				state;

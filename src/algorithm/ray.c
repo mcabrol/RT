@@ -44,18 +44,3 @@ void		eval(t_ray *r, double distance, t_vec *dest)
 	nmulti(&r->direction, distance, dest);
 	sum_(dest, &r->origin);
 }
-
-void		printr(t_ray *r)
-{
-	ft_printf("o: [%f %f %f]\nd: [%f %f %f]\n", r->origin.x,
-												r->origin.y,
-												r->origin.z,
-												r->direction.x,
-												r->direction.y,
-												r->direction.z);
-}
-
-void		printv(t_vec *v)
-{
-	ft_printf("[%f %f %f]\n", v->x, v->y, v->z);
-}
