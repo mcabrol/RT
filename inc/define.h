@@ -15,8 +15,8 @@
 
 # define THREAD					16
 
-# define H_MAIN					600
-# define W_MAIN					400
+# define H_MAIN					80
+# define W_MAIN					544
 
 # define BLANK					0.0, 0.0, 0.0
 # define FALSE					0
@@ -26,6 +26,7 @@
 
 # define SETUP					0
 # define RENDER					1
+# define ERROR					2
 
 # define MAIN					0
 # define RENDER 				1

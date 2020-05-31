@@ -147,12 +147,12 @@ typedef struct 			t_sprite
 	int 				h_cancel;
 	int 				h_save;
 	int 				h_show;
-	void 				*background;
+	// void 				*background;
 	void 				*success;
 	void 				*failure;
-	void 				*render;
+	// void 				*render;
 	void 				*cancel;
-	void 				*save;
+	// void 				*save;
 	void 				*show;
 	void 				*f480;
 	void 				*f720;
@@ -162,6 +162,41 @@ typedef struct 			t_sprite
 	void 				*s200;
 	void 				*s500;
 	void 				*s1000;
+
+	// New G.U.I
+
+	int 				setup_is_hover;
+	int 				close_is_hover;
+	int 				retry_is_hover;
+	int 				save_is_hover;
+	int 				display_is_hover;
+	int 				render_is_hover;
+
+	void 				*background;
+
+	void 				*setup;
+	void 				*close;
+	void 				*retry;
+	void 				*error;
+	void 				*save;
+	void 				*display;
+	void 				*render;
+
+	void 				*setup_hover;
+	void 				*close_hover;
+	void 				*retry_hover;
+	void 				*save_hover;
+	void 				*display_hover;
+	void 				*render_hover;
+
+	void 				*setup_disabled;
+	void 				*save_disabled;
+	void 				*display_disabled;
+	void 				*render_disabled;
+
+	void 				*save_hover_disabled;
+	void 				*display_hover_disabled;
+
 }						t_sprite;
 
 typedef struct			s_rtv1

@@ -16,25 +16,25 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 {
 	char	*file_str;
 
+	file_str = NULL;
+	ft_printf("%d %d : %d", x, y, button);
+	if (button == 1 && rtv1->png.retry_is_hover)
+	{
+		free_texture(&rtv1->scene);
+		if (rtv1->state == RENDER)
+		{
+			free(rtv1->scene.obj);
+			free(rtv1->screen);
+		}
+		file(rtv1->ac, rtv1->av, &file_str);
+		if (init_scene(rtv1, file_str) == EXIT_FAILURE)
+			rtv1->state = ERROR;
+		else
+			rtv1->state = SETUP;
+	}
 	if (rtv1->state == SETUP)
 	{
-		if (button == 1 && x > 148 && x < 217 && y > 325 && y < 339)
-			format(rtv1, 640, 480);
-		else if (button == 1 && x > 148 && x < 221 && y > 343 && y < 357)
-			format(rtv1, 1280, 720);
-		else if (button == 1 && x > 148 && x < 254 && y > 361 && y < 375)
-			format(rtv1, 1920, 1080);
-		if (button == 1 && x > 148 && x < 165 && y > 448 && y < 461)
-			rtv1->scene.samples = 8;
-		else if (button == 1 && x > 171 && x < 200 && y > 448 && y < 461)
-			rtv1->scene.samples = 40;
-		else if (button == 1 && x > 204 && x < 240 && y > 448 && y < 461)
-			rtv1->scene.samples = 200;
-		else if (button == 1 && x > 246 && x < 283 && y > 448 && y < 461)
-			rtv1->scene.samples = 500;
-		else if (button == 1 && x > 289 && x < 332 && y > 448 && y < 461)
-			rtv1->scene.samples = 1000;
-		else if (button == 1 && x > 156 && x < 243 && y > 527 && y < 558)
+		if (button == 1 && rtv1->png.render_is_hover)
 		{
 			if (render(rtv1))
 				return (EXIT_FAILURE);
@@ -42,31 +42,40 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		}
 		put_setup(rtv1);
 	}
-	if (rtv1->state == RENDER)
+	else if (rtv1->state == RENDER)
 	{
-		if (button == 1 && x > 148 && x < 254 && y > 383 && y < 415)
+		if (button == 1 && rtv1->png.save_is_hover)
 		{
 			write_ppm(rtv1);
 			(rtv1->id_ppm)++;
 		}
-		else if (button == 1 && x > 148 && x < 254 && y > 429 && y < 459)
+		else if (button == 1 && rtv1->png.display_is_hover)
 		{
 			if (init_image(rtv1))
 				return (EXIT_FAILURE);
 			image(rtv1);
 			(rtv1->id_win)++;
 		}
-		else if (button == 1 && x > 156 && x < 243 && y > 527 && y < 558)
+		else if (button == 1 && rtv1->png.retry_is_hover)
 		{
-			free_texture(&rtv1->scene);
-			free(rtv1->scene.obj);
-			free(rtv1->screen);
-			if (file(rtv1->ac, rtv1->av, &file_str))
-				return (EXIT_FAILURE);
-			init_scene(rtv1, file_str);
-			rtv1->state = SETUP;
-			put_setup(rtv1);
+			// free_texture(&rtv1->scene);
+			// free(rtv1->scene.obj);
+			// free(rtv1->screen);
+			file(rtv1->ac, rtv1->av, &file_str);
+			if (init_scene(rtv1, file_str) == EXIT_FAILURE)
+				rtv1->state = ERROR;
+			else
+				rtv1->state = SETUP;
 		}
+		put_setup(rtv1);
+	}
+	else if (rtv1->state == ERROR)
+	{
+		if (button == 1 && rtv1->png.setup_is_hover)
+		{
+			clean_exit(rtv1);
+		}
+		put_setup(rtv1);
 	}
 	return (EXIT_SUCCESS);
 }

@@ -68,7 +68,7 @@ int 			hex_to_dec(char *hex);
 **	scene.c
 */
 
-void 			init_scene(t_rtv1 *rtv1, char *file);
+int 			init_scene(t_rtv1 *rtv1, char *file);
 options_func 	*setup_obj_setter(int nb_options);
 
 
@@ -297,5 +297,7 @@ void 			clean_opt(char **opt);
 void 			free_scene(t_scene *scene);
 void 			free_obj(t_obj *obj);
 void 			free_texture(t_scene *scene);
+void 			clean_exit(t_rtv1 *rtv1);
+
 
 #endif

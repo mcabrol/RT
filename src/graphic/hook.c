@@ -40,20 +40,16 @@ int		exit_hook(int keycode, t_rtv1 *rtv1)
 
 int 	hover(int x, int y, t_rtv1 *rtv1)
 {
-	if (rtv1->state == SETUP)
-	{
-		if (is_hover(x, y, &rtv1->png.h_render, 156, 243, 527, 558))
-			put_setup(rtv1);
-	}
-	if (rtv1->state == RENDER)
-	{
-		if (is_hover(x, y, &rtv1->png.h_render, 156, 243, 527, 558))
-			put_setup(rtv1);
-		if (is_hover(x, y, &rtv1->png.h_show, 148, 254, 429, 459))
-			put_setup(rtv1);
-		if (is_hover(x, y, &rtv1->png.h_save, 148, 254, 383, 415))
-			put_setup(rtv1);
-	}
+	if (is_hover(x, y, &rtv1->png.setup_is_hover, 90, 181, 0, 80))
+		put_setup(rtv1);
+	if (is_hover(x, y, &rtv1->png.retry_is_hover, 181, 272, 0, 80))
+		put_setup(rtv1);
+	if (is_hover(x, y, &rtv1->png.save_is_hover, 272, 362, 0, 80))
+		put_setup(rtv1);
+	if (is_hover(x, y, &rtv1->png.display_is_hover, 362, 453, 0, 80))
+		put_setup(rtv1);
+	if (is_hover(x, y, &rtv1->png.render_is_hover, 453, 544, 0, 80))
+		put_setup(rtv1);
 	return (EXIT_SUCCESS);
 }
 

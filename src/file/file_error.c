@@ -56,10 +56,11 @@ void		throw_error_file(int errorcode, char **data,
 		if (scene->m)
 			free(scene->m);
 	}
-	if (errorcode != OBJECT_BAD_FORMAT && errorcode != SET_OBJECT_FAILED
-		&& errorcode != EXTRACT_DATA_FAILED && errorcode != VECTOR_BAD_VALUE
-		&& errorcode != BAD_VALUE)
-		exit(errorcode);
+	// if (errorcode != OBJECT_BAD_FORMAT && errorcode != SET_OBJECT_FAILED
+	// 	&& errorcode != EXTRACT_DATA_FAILED && errorcode != VECTOR_BAD_VALUE
+	// 	&& errorcode != BAD_VALUE)
+		// exit(errorcode);
+
 }
 
 void throw_error(int errorcode)

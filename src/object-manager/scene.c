@@ -22,7 +22,7 @@ int			size_of(char **array)
 	return (i);
 }
 
-void 		init_scene(t_rtv1 *rtv1, char *file)
+int 		init_scene(t_rtv1 *rtv1, char *file)
 {
 	t_scene *scene;
 
@@ -35,8 +35,12 @@ void 		init_scene(t_rtv1 *rtv1, char *file)
 	}
 	scene->cam.environment.path = NULL;
 	if (scene->obj_type && scene->obj_options && scene->obj_setter)
-		parse(file, scene);
+	{
+		if (parse(file, scene) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+	}
 	prepare_obj(rtv1);
+	return (EXIT_SUCCESS);
 }
 
 options_func *setup_obj_setter(int nb_options)

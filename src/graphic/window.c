@@ -17,11 +17,6 @@ void 		init_window(t_rtv1 *rtv1)
 	rtv1->mlx_ptr = mlx_init();
 	rtv1->main = window(rtv1->mlx_ptr, W_MAIN, H_MAIN, "Raytracer");
 	rtv1->png = init_sprite(rtv1->mlx_ptr);
-	rtv1->state = SETUP;
-	rtv1->png.h_render = FALSE;
-	rtv1->png.h_cancel = FALSE;
-	rtv1->png.h_save = FALSE;
-	rtv1->png.h_show = FALSE;
 	rtv1->id_win = 0;
 	rtv1->id_ppm = 0;
 }

@@ -34,14 +34,30 @@ int		main(int ac, char **av)
 	rtv1.scene.width = 640;
 	rtv1.scene.height = 480;
 
+	// Hover
+	rtv1.png.setup_is_hover = 0;
+	rtv1.png.close_is_hover = 0;
+	rtv1.png.retry_is_hover = 0;
+	rtv1.png.save_is_hover = 0;
+	rtv1.png.display_is_hover = 0;
+	rtv1.png.render_is_hover = 0;
+
 	// Scene
-	init_scene(&rtv1, file_str);
+	if (init_scene(&rtv1, file_str) == EXIT_FAILURE)
+		rtv1.state = ERROR;
+	else
+		rtv1.state = SETUP;
 
 	// Window
 	init_window(&rtv1);
 	put_setup(&rtv1);
+
+	// Event
 	hook(&rtv1);
+
+	// Loop
 	mlx_loop(rtv1.mlx_ptr);
+
 	return (0);
 }
 

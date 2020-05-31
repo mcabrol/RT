@@ -38,20 +38,20 @@ int 	set_obj(char *opt, char *data, t_obj *obj, t_scene *scene)
 		if (obj->type == -1)
 		{
 			throw_error(BAD_TYPE_OBJECT);
-			return (-1);
+			return (EXIT_FAILURE);
 		}
 	}
 	else if ((setter = in_type_array(opt, scene->obj_options)) != -1)
 	{
 		if (scene->obj_setter[setter](obj, data) == -1)
-			return (-1);
+			return (EXIT_FAILURE);
 	}
 	else
 	{
 		throw_error(BAD_OPTIONS);
-		return (-1);
+		return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int 	extract_obj_data(char *start, char *end, t_scene *scene, int j)
@@ -66,7 +66,7 @@ int 	extract_obj_data(char *start, char *end, t_scene *scene, int j)
 	if (!str)
 	{
 		throw_error_file(EXTRACT_DATA_FAILED, NULL, scene, -1);
-		return (-1);
+		return (EXIT_FAILURE);
 	}
 	ft_memmove(str, start + 1, (end - start - 2));
 	data = ft_strsplit(str, '\n');
@@ -74,7 +74,7 @@ int 	extract_obj_data(char *start, char *end, t_scene *scene, int j)
 	while (data[++i])
 	{
 		opt = ft_strsplit(data[i], ':');
-		if (set_obj(opt[0], opt[1], &scene->obj[j], scene) == -1)
+		if (set_obj(opt[0], opt[1], &scene->obj[j], scene) == EXIT_FAILURE)
 		{
 			clean_opt(opt);
 			throw_error_file(SET_OBJECT_FAILED, data, scene, i);
@@ -119,14 +119,17 @@ int 	setup_obj(char *start, char *end, t_scene *scene)
 	return (0);
 }
 
-void 	init_obj_tab(char *str, t_scene *scene)
+int 	init_obj_tab(char *str, t_scene *scene)
 {
 	char	*start;
 	char	*end;
 	int		i;
 
 	if (str == NULL || scene == NULL)
+	{
 		throw_error_file(INIT_OBJ_BAD_ARGS, NULL, NULL, -1);
+		return (EXIT_FAILURE);
+	}
 	i = 1;
 	start = str;
 	while ((end = ft_strstr(start, "},\n{")) != NULL)
@@ -139,8 +142,10 @@ void 	init_obj_tab(char *str, t_scene *scene)
 	{
 		free(str);
 	 	throw_error_file(INIT_SCENE_OBJ_FAILED, NULL, NULL, -1);
+		return (EXIT_FAILURE);
 	}
 	scene->n = i;
+	return (EXIT_SUCCESS);
 }
 
 int 	parse(char *str, t_scene *scene)
@@ -150,7 +155,8 @@ int 	parse(char *str, t_scene *scene)
 	char		*end;
 
 	i = 0;
-	init_obj_tab(str, scene);
+	if (init_obj_tab(str, scene) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	while (*(str + i) != ':')
 		i = i + 1;
 	if (ft_strncmp(str, "OBJECT:", i) == 0)
@@ -162,6 +168,7 @@ int 	parse(char *str, t_scene *scene)
 			{
 				free(str);
 				throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
+				return (EXIT_FAILURE);
 			}
 			else
 			{
@@ -170,6 +177,7 @@ int 	parse(char *str, t_scene *scene)
 				{
 					free(str);
 					throw_error_file(SETUP_OBJ_FAILED, NULL, NULL, -1);
+					return (EXIT_FAILURE);
 				}
 			}
 		}
@@ -177,12 +185,14 @@ int 	parse(char *str, t_scene *scene)
 		{
 			free(str);
 			throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
+			return (EXIT_FAILURE);
 		}
 	}
 	else
 	{
 		free(str);
 		throw_error_file(OBJECT_SETTINGS_NOT_FOUND_FILE, NULL, NULL, -1);
+		return (EXIT_FAILURE);
 	}
 	free(str);
 	return (EXIT_SUCCESS);
