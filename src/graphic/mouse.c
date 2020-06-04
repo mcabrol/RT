@@ -17,65 +17,57 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 	char	*file_str;
 
 	file_str = NULL;
-	ft_printf("%d %d : %d", x, y, button);
-	if (button == 1 && rtv1->png.retry_is_hover)
+	x = 0;
+	y = 0;
+	if (button == 1 && rtv1->sprite.retry.is_hover)
 	{
 		free_texture(&rtv1->scene);
 		if (rtv1->state == RENDER)
 		{
+			ft_printf("\nfree all shit\n");
+			ft_bzero(rtv1->screen, rtv1->scene.height * rtv1->scene.width);
 			free(rtv1->scene.obj);
-			free(rtv1->screen);
 		}
-		file(rtv1->ac, rtv1->av, &file_str);
-		if (init_scene(rtv1, file_str) == EXIT_FAILURE)
+		ft_bzero(rtv1->file_str, ft_strlen(rtv1->file_str));
+		file(rtv1->ac, rtv1->av, &rtv1->file_str);
+		if (init_scene(rtv1, rtv1->file_str) == EXIT_FAILURE)
 			rtv1->state = ERROR;
 		else
 			rtv1->state = SETUP;
+		put_setup(rtv1);
+		return (EXIT_SUCCESS);
 	}
 	if (rtv1->state == SETUP)
 	{
-		if (button == 1 && rtv1->png.render_is_hover)
+		if (button == 1 && rtv1->sprite.render.is_hover)
 		{
 			if (render(rtv1))
 				return (EXIT_FAILURE);
-			return (EXIT_SUCCESS);
+			(rtv1->id_render)++;
 		}
 		put_setup(rtv1);
+		return (EXIT_SUCCESS);
 	}
 	else if (rtv1->state == RENDER)
 	{
-		if (button == 1 && rtv1->png.save_is_hover)
+		if (button == 1 && rtv1->sprite.save.is_hover)
 		{
 			write_ppm(rtv1);
 			(rtv1->id_ppm)++;
 		}
-		else if (button == 1 && rtv1->png.display_is_hover)
+		else if (button == 1 && rtv1->sprite.display.is_hover)
 		{
 			if (init_image(rtv1))
 				return (EXIT_FAILURE);
 			image(rtv1);
 			(rtv1->id_win)++;
 		}
-		else if (button == 1 && rtv1->png.retry_is_hover)
-		{
-			// free_texture(&rtv1->scene);
-			// free(rtv1->scene.obj);
-			// free(rtv1->screen);
-			file(rtv1->ac, rtv1->av, &file_str);
-			if (init_scene(rtv1, file_str) == EXIT_FAILURE)
-				rtv1->state = ERROR;
-			else
-				rtv1->state = SETUP;
-		}
-		put_setup(rtv1);
+		return (EXIT_SUCCESS);
 	}
 	else if (rtv1->state == ERROR)
 	{
-		if (button == 1 && rtv1->png.setup_is_hover)
-		{
+		if (button == 1 && rtv1->sprite.setup.is_hover)
 			clean_exit(rtv1);
-		}
-		put_setup(rtv1);
 	}
 	return (EXIT_SUCCESS);
 }

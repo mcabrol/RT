@@ -21,6 +21,7 @@ void 			*pathtracer(void *var);
 void 			sampling(t_rtv1 *rtv1, t_render *render);
 void 			screen(t_render *render, t_rtv1 *rtv1);
 int				error(char *strerror);
+void 			init_session(t_rtv1 *rtv1, int ac, char **av);
 
 /*
 **	ray.c
@@ -42,7 +43,7 @@ void			radiance(t_scene *scene, t_ray *ray, t_render *render);
 **	object.c
 */
 
-void			prepare_obj(t_rtv1 *rtv1);
+int				prepare_obj(t_rtv1 *rtv1);
 
 /*
 **	camera.c
@@ -217,9 +218,12 @@ void 			format(t_rtv1 *rtv1, int width, int height);
 **	gui.c
 */
 
-t_sprite 		init_sprite(void *mlx_ptr);
+void 			init_sprite(t_rtv1 *rtv1);
 void 			put_setup(t_rtv1 *rtv1);
-int 			is_hover(int x, int y, int *button, int xmin, int xmax, int ymin, int ymax);
+int 			is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin, int ymax);
+void 			load_button(void *mlx_ptr, t_button *button, char *name);
+void 			put_sprite(t_rtv1 *rtv1, void *image);
+
 
 /*
 **	debbug.c

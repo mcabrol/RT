@@ -19,11 +19,19 @@ void 	 	loading_text(int height, int y)
 
 char 		*stamp(void)
 {
-	time_t	now;
-	char 	*stamp;
+	time_t		now;
+	char 		*stamp;
+	int			i;
 
+	i = -1;
 	now = time(NULL);
 	stamp = ctime(&now);
+	stamp[ft_strlen(stamp) - 1] = '\0';
+	while (stamp[++i])
+		if (stamp[i] == ' ')
+			stamp[i] = '-';
+	if (stamp[8] == '-')
+		stamp[8] = '0';
 	ft_strcat(stamp, ".ppm");
 	return (stamp);
 }

@@ -9,7 +9,7 @@ OBJECT:
 {
 	TYPE: PLANE
 	POSITION: -10 4.6 -15
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/damier.png
+	TEXTURE: /Users/Famille/rtv1/textures/damier.png
 	SCALE: 0.05
 },
 {
@@ -24,7 +24,7 @@ OBJECT:
 	TYPE: SPHERE
 	RADIUS: 2.5
 	POSITION: -5.5 -0.5 -15
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/map.png
+	TEXTURE: /Users/Famille/rtv1/textures/map.png
 },
 {
 	TYPE: SPHERE
@@ -37,12 +37,12 @@ OBJECT:
 {
 	TYPE: PLANE
 	POSITION: -6 -3 0
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/map.png
+	TEXTURE: /Users/Famille/rtv1/textures/damier.png
 	SCALE: 0.05
 },
 {
 	TYPE: CAMERA
-	POSITION: 0 -0.7 4
+	POSITION: 0 -0.7 -5
 	DIRECTION: 0 0 -1
-	FOV: 30
+	FOV: 60
 };

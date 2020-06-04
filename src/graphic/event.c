@@ -40,24 +40,24 @@ int		exit_hook(int keycode, t_rtv1 *rtv1)
 
 int 	hover(int x, int y, t_rtv1 *rtv1)
 {
-	if (is_hover(x, y, &rtv1->png.setup_is_hover, 90, 181, 0, 80))
+	if (is_hover(x, y, &rtv1->sprite.setup, 90, 181, 0, 80))
 		put_setup(rtv1);
-	if (is_hover(x, y, &rtv1->png.retry_is_hover, 181, 272, 0, 80))
+	if (is_hover(x, y, &rtv1->sprite.retry, 181, 272, 0, 80))
 		put_setup(rtv1);
-	if (is_hover(x, y, &rtv1->png.save_is_hover, 272, 362, 0, 80))
+	if (is_hover(x, y, &rtv1->sprite.save, 272, 362, 0, 80))
 		put_setup(rtv1);
-	if (is_hover(x, y, &rtv1->png.display_is_hover, 362, 453, 0, 80))
+	if (is_hover(x, y, &rtv1->sprite.display, 362, 453, 0, 80))
 		put_setup(rtv1);
-	if (is_hover(x, y, &rtv1->png.render_is_hover, 453, 544, 0, 80))
+	if (is_hover(x, y, &rtv1->sprite.render, 453, 544, 0, 80))
 		put_setup(rtv1);
 	return (EXIT_SUCCESS);
 }
 
-int 	is_hover(int x, int y, int *button, int xmin, int xmax, int ymin, int ymax)
+int 	is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin, int ymax)
 {
-	int state;
+	BOOL		tmp;
 
-	state = *button;
-	*button = (x > xmin && x < xmax && y > ymin && y < ymax) ? TRUE : FALSE;
- 	return ((state != *button) ? TRUE : FALSE);
+	tmp = button->is_hover;
+	button->is_hover = (x > xmin && x < xmax && y > ymin && y < ymax) ? TRUE : FALSE;
+ 	return ((tmp != button->is_hover) ? TRUE : FALSE);
 }

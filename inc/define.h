@@ -18,6 +18,8 @@
 # define H_MAIN					80
 # define W_MAIN					544
 
+# define PATH_SPRITE			"/Users/Famille/rtv1/sprite/"
+
 # define BLANK					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
@@ -51,6 +53,9 @@
 # define GAMMA 					2.2
 # define T_MIN					0.01
 # define T_MAX 					1e20
+
+# define ACTIVE					TRUE
+# define DISABLE 				FALSE
 
 # define NORMAL					-1
 # define RIGHT					0

@@ -27,19 +27,21 @@ int 		init_scene(t_rtv1 *rtv1, char *file)
 	t_scene *scene;
 
 	scene = &rtv1->scene;
-	if (rtv1->id_render == 0)
+	if (rtv1->setter == FALSE)
 	{
 		scene->obj_type = ft_strsplit(OBJ_TYPE_STR, ' ');
 		scene->obj_options = ft_strsplit(OBJ_OPT_STR, ' ');
 		scene->obj_setter = setup_obj_setter(size_of(scene->obj_options));
+		rtv1->setter = TRUE;
 	}
 	scene->cam.environment.path = NULL;
 	if (scene->obj_type && scene->obj_options && scene->obj_setter)
 	{
 		if (parse(file, scene) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
+		if (prepare_obj(rtv1) == EXIT_FAILURE)
+			return(EXIT_FAILURE);
 	}
-	prepare_obj(rtv1);
 	return (EXIT_SUCCESS);
 }
 
@@ -68,7 +70,7 @@ options_func *setup_obj_setter(int nb_options)
 	return (obj_setter);
 }
 
-void		prepare_obj(t_rtv1 *rtv1)
+int		prepare_obj(t_rtv1 *rtv1)
 {
 	int 	i;
 	t_scene	*scene;
@@ -80,7 +82,10 @@ void		prepare_obj(t_rtv1 *rtv1)
 	{
 		obj = &scene->obj[i];
 		if (obj->texture.path)
-			load_texture(rtv1, obj->texture.path, &obj->texture);
+		{
+			if (load_texture(rtv1, obj->texture.path, &obj->texture) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
+		}
 		if (obj->rotation.x > 0 || obj->rotation.y > 0 || obj->rotation.z > 0)
 			obj->direction = rotate_point(deg_to_rad(obj->rotation.x),
 							 deg_to_rad(obj->rotation.y),
@@ -89,4 +94,5 @@ void		prepare_obj(t_rtv1 *rtv1)
 		else
 			obj->direction = *norm(&obj->direction);
 	}
+	return (EXIT_SUCCESS);
 }

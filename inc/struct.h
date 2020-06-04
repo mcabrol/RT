@@ -141,61 +141,59 @@ typedef struct			s_win
 	int					endian;
 }						t_win;
 
-typedef struct 			t_sprite
+typedef struct			s_button
 {
-	int 				h_render;
-	int 				h_cancel;
-	int 				h_save;
-	int 				h_show;
-	// void 				*background;
-	void 				*success;
-	void 				*failure;
-	// void 				*render;
-	void 				*cancel;
-	// void 				*save;
-	void 				*show;
-	void 				*f480;
-	void 				*f720;
-	void 				*f1080;
-	void 				*s8;
-	void 				*s40;
-	void 				*s200;
-	void 				*s500;
-	void 				*s1000;
+	BOOL 				is_hover;
+	BOOL 				is_active;
+	void 				*active;
+	void 				*disabled;
+	void 				*hover;
+	void 				*hover_disabled;
+}						t_button;
 
-	// New G.U.I
-
-	int 				setup_is_hover;
-	int 				close_is_hover;
-	int 				retry_is_hover;
-	int 				save_is_hover;
-	int 				display_is_hover;
-	int 				render_is_hover;
-
+typedef struct 			s_sprite
+{
 	void 				*background;
 
-	void 				*setup;
-	void 				*close;
-	void 				*retry;
-	void 				*error;
-	void 				*save;
-	void 				*display;
-	void 				*render;
+	t_button			setup;
+	t_button			close;
+	t_button			retry;
+	t_button			save;
+	t_button			display;
+	t_button			render;
+	t_button			error;
 
-	void 				*setup_hover;
-	void 				*close_hover;
-	void 				*retry_hover;
-	void 				*save_hover;
-	void 				*display_hover;
-	void 				*render_hover;
-
-	void 				*setup_disabled;
-	void 				*save_disabled;
-	void 				*display_disabled;
-	void 				*render_disabled;
-
-	void 				*save_hover_disabled;
-	void 				*display_hover_disabled;
+	// int 				setup_is_hover;
+	// int 				close_is_hover;
+	// int 				retry_is_hover;
+	// int 				save_is_hover;
+	// int 				display_is_hover;
+	// int 				render_is_hover;
+	//
+	//
+	// void 				*setup;
+	// void 				*close;
+	// void 				*retry;
+	// void 				*error;
+	// void 				*save;
+	// void 				*display;
+	// void 				*render;
+	//
+	// void 				*setup_hover;
+	// void 				*close_hover;
+	// void 				*retry_hover;
+	// void 				*save_hover;
+	// void 				*display_hover;
+	// void 				*render_hover;
+	//
+	// void 				*setup_disabled;
+	// void 				*save_disabled;
+	// void 				*display_disabled;
+	// void 				*render_disabled;
+	//
+	// void 				*save_hover_disabled;
+	// void 				*display_hover_disabled;
+	// void 				*render_hover_disabled;
 
 }						t_sprite;
 
@@ -203,11 +201,13 @@ typedef struct			s_rtv1
 {
 	int					ac;
 	char				**av;
-	char 				*path;
+	char				*file_str;
 	int					id_win;
 	int					id_render;
 	int					id_ppm;
-	t_sprite 			png;
+	int					id_parse;
+	BOOL				setter;
+	t_sprite 			sprite;
 	int 				state;
 	void				*mlx_ptr;
 	t_win 				main;
