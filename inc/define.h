@@ -18,7 +18,7 @@
 # define H_MAIN					80
 # define W_MAIN					544
 
-# define PATH_SPRITE			"/Users/Famille/rtv1/sprite/"
+# define PATH_SPRITE			"src/sprite/"
 
 # define BLANK					0.0, 0.0, 0.0
 # define FALSE					0

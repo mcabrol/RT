@@ -33,9 +33,13 @@ t_vec 	get_pixel_vector(t_texture *texture, int x, int y)
 	size_t	i;
 	t_vec 	dest;
 
+	vec(BLANK, &dest);
 	i = (x * texture->bits_per_pixel / 8) + (y * texture->size_line);
-	dest.x = (unsigned char)(texture->data[i + 2]) / 255.0;
-	dest.y = (unsigned char)(texture->data[i + 1]) / 255.0;
- 	dest.z = (unsigned char)(texture->data[i]) / 255.0;
+	if (texture->path)
+	{
+		dest.x = (unsigned char)(texture->data[i + 2]) / 255.0;
+		dest.y = (unsigned char)(texture->data[i + 1]) / 255.0;
+		dest.z = (unsigned char)(texture->data[i]) / 255.0;
+	}
 	return (dest);
 }

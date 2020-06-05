@@ -21,10 +21,9 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 	y = 0;
 	if (button == 1 && rtv1->sprite.retry.is_hover)
 	{
-		free_texture(&rtv1->scene);
 		if (rtv1->state == RENDER)
 		{
-			ft_printf("\nfree all shit\n");
+			free_texture(&rtv1->scene);
 			ft_bzero(rtv1->screen, rtv1->scene.height * rtv1->scene.width);
 			free(rtv1->scene.obj);
 		}
