@@ -19,6 +19,7 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 	file_str = NULL;
 	x = 0;
 	y = 0;
+	ft_printf("id_win = %d\nid_render = %d\n", rtv1->id_win, rtv1->id_render);
 	if (button == 1 && rtv1->sprite.retry.is_hover)
 	{
 		if (rtv1->state == RENDER)

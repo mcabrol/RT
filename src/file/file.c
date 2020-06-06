@@ -21,7 +21,7 @@ int		file(int ac, char **av, char **file_str)
 	if ((ac > 1 && check(ac, av)))
 		return (error("usage: ./rtv1 [file.csv]"));
 	else if (ac == 1)
-		filename = "/Users/Famille/Documents/Martin/rtv1/scenes/default.rt";
+		filename = "scenes/default.rt";
 	else
 		filename = av[1];
 	if ((size = get_file_size(filename)) < 0)

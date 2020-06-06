@@ -6,8 +6,9 @@ OBJECT:
 	POSITION: -1 -1 -20
 	DIRECTION: 15 1 25
 	REFLECTION: DIFFUSE
-	TEXTURE: /Users/Famille/Documents/Martin/rtv1/textures/damier.png
+	TEXTURE: textures/damier.png
 	COLOR: #FFF00F
+	SCALE: 2
 },
 {
 	TYPE: CAMERA

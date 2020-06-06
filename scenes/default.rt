@@ -1,17 +1,17 @@
 OBJECT:
 {
-	TYPE: SPERE
+	TYPE: SPHERE
 	POSITION: 2 1 -10
 	RADIUS: 3
 	COLOR: #FEFEFE
-	TEXTURE: /Users/Famille/rtv1/textures/earth.png
+	TEXTURE: textures/earth.png
 },
 {
 	TYPE: SPHERE
 	POSITION: -0.3 -0.2 -2.5
 	RADIUS: 0.1
 	COLOR: #FFFFFF
-	TEXTURE: /Users/Famille/rtv1/textures/mars.png
+	TEXTURE: textures/mars.png
 },
 {
 	TYPE: BOX
