@@ -19,16 +19,18 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 	file_str = NULL;
 	x = 0;
 	y = 0;
-	ft_printf("id_win = %d\nid_render = %d\n", rtv1->id_win, rtv1->id_render);
 	if (button == 1 && rtv1->sprite.retry.is_hover)
 	{
 		if (rtv1->state == RENDER)
 		{
-			free_texture(&rtv1->scene);
+			// free_texture(&rtv1->scene);
 			ft_bzero(rtv1->screen, rtv1->scene.height * rtv1->scene.width);
 			free(rtv1->scene.obj);
 		}
-		ft_bzero(rtv1->file_str, ft_strlen(rtv1->file_str));
+		else if (rtv1->state == SETUP)
+		{
+			ft_bzero(rtv1->file_str, ft_strlen(rtv1->file_str));
+		}
 		file(rtv1->ac, rtv1->av, &rtv1->file_str);
 		if (init_scene(rtv1, rtv1->file_str) == EXIT_FAILURE)
 			rtv1->state = ERROR;

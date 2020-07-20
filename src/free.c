@@ -77,5 +77,5 @@ void 	clean_exit(t_rtv1 *rtv1)
 	free(rtv1->image);
 	mlx_destroy_image(rtv1->mlx_ptr, rtv1->main.img_ptr);
 	mlx_destroy_window(rtv1->mlx_ptr, main->win_ptr);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
