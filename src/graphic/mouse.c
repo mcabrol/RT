@@ -14,12 +14,9 @@
 
 int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 {
-	char	*file_str;
-	int		error_file;
-
-	file_str = NULL;
 	x = 0;
 	y = 0;
+
 	if (button == 1 && rtv1->sprite.retry.is_hover)
 	{
 		if (rtv1->state == RENDER)
@@ -31,15 +28,16 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		else if (rtv1->state == SETUP)
 		{
 			ft_bzero(rtv1->file_str, ft_strlen(rtv1->file_str));
-			error_file = file(rtv1->ac, rtv1->av, &rtv1->file_str);
+			file(rtv1->ac, rtv1->av, &rtv1->file_str);
 			if (init_scene(rtv1, rtv1->file_str) == EXIT_FAILURE)
 				rtv1->state = ERROR;
 			else
 				rtv1->state = SETUP;
-			put_setup(rtv1);
+				put_setup(rtv1);
 		}
 		return (EXIT_SUCCESS);
 	}
+
 	if (rtv1->state == SETUP)
 	{
 		if (button == 1 && rtv1->sprite.render.is_hover)
@@ -72,7 +70,6 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		if (button == 1 && rtv1->sprite.setup.is_hover)
 			clean_exit(rtv1);
 	}
-	printf("----------------------------------------\n");
 	return (EXIT_SUCCESS);
 }
 
