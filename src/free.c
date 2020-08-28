@@ -56,26 +56,27 @@ void 	clean_exit(t_rtv1 *rtv1)
 	t_win 	*main;
 
 	main = &rtv1->main;
-	// if (rtv1->scene.m != NULL)
-	// 	free(rtv1->scene.m);
-	free(rtv1->scene.obj);
-
-	ft_tabdel(rtv1->scene.obj_type);
-	ft_tabdel(rtv1->scene.obj_options);
-	// bug si on ouvre une fenetre et la ferme avec la croix, segfault
-
-	i = -1;
-	while (++i < rtv1->id_win)
+	if (rtv1->state == ERROR)
 	{
-		if (rtv1->image && rtv1->image[i].img_ptr)
-		{
-			mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
-			mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
-			//peut etre d'autre chose a clean ici
-		}
+		mlx_destroy_image(rtv1->mlx_ptr, rtv1->main.img_ptr);
+		mlx_destroy_window(rtv1->mlx_ptr, main->win_ptr);
 	}
-	free(rtv1->image);
-	mlx_destroy_image(rtv1->mlx_ptr, rtv1->main.img_ptr);
-	mlx_destroy_window(rtv1->mlx_ptr, main->win_ptr);
+	else
+	{
+		if (rtv1->scene.obj == NULL)
+			free(rtv1->scene.obj);
+		ft_tabdel(rtv1->scene.obj_type);
+		ft_tabdel(rtv1->scene.obj_options);
+		i = -1;
+		while (++i < rtv1->id_win)
+		{
+			if (rtv1->image && rtv1->image[i].img_ptr)
+			{
+				mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
+				mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
+			}
+		}
+		free(rtv1->image);
+	}
 	exit(EXIT_SUCCESS);
 }
