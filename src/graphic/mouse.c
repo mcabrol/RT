@@ -19,11 +19,15 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 
 	if (button == 1 && rtv1->sprite.retry.is_hover)
 	{
+		printf("---------------------------\n");
+		printf("rtv1->state : %d\n", rtv1->state);
 		if (rtv1->state == RENDER)
 		{
-			// free_texture(&rtv1->scene);
+			free_texture(&rtv1->scene);
 			ft_bzero(rtv1->screen, rtv1->scene.height * rtv1->scene.width);
-			free(rtv1->scene.obj);
+			if (rtv1->scene.obj != NULL)
+				free(rtv1->scene.obj);
+			rtv1->state = SETUP;
 		}
 		else if (rtv1->state == SETUP)
 		{
@@ -33,8 +37,11 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 				rtv1->state = ERROR;
 			else
 				rtv1->state = SETUP;
-				put_setup(rtv1);
 		}
+		printf("rtv1->state (out): %d\n", rtv1->state);
+
+		printf("---------------------------\n");
+		put_setup(rtv1);
 		return (EXIT_SUCCESS);
 	}
 
