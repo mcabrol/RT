@@ -12,6 +12,22 @@
 
 #include "rtv1.h"
 
+static void clean_all_windows(t_rtv1 *rtv1)
+{
+		int		i;
+
+		i = 0;
+		while (i < rtv1->id_win)
+		{
+			if (rtv1->image && rtv1->image[i].img_ptr)
+			{
+				mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
+				mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
+			}
+			i = i + 1;
+		}
+}
+
 void 	free_scene(t_scene *scene)
 {
 	ft_tabdel(scene->obj_type);
@@ -67,16 +83,9 @@ void 	clean_exit(t_rtv1 *rtv1)
 			free(rtv1->scene.obj);
 		ft_tabdel(rtv1->scene.obj_type);
 		ft_tabdel(rtv1->scene.obj_options);
-		i = -1;
-		while (++i < rtv1->id_win)
-		{
-			if (rtv1->image && rtv1->image[i].img_ptr)
-			{
-				mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
-				mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
-			}
-		}
-		free(rtv1->image);
+		clean_all_windows(rtv1);
+		if (rtv1->state == RENDER && rtv1->id_win > 0)
+			free(rtv1->image);
 	}
 	exit(EXIT_SUCCESS);
 }

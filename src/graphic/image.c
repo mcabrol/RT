@@ -37,12 +37,29 @@ void 		image(t_rtv1 *rtv1)
 
 int		init_image(t_rtv1 *rtv1)
 {
+	char	*win_name;
+	char	*string_id;
+	char	*tmp;
+
 	if (rtv1->id_win > MAX_WIN)
 		return (EXIT_FAILURE);
 	if (rtv1->id_win == 0)
 		rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
 	if (rtv1->image)
-		rtv1->image[rtv1->id_win] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, "Render");
+	{
+		string_id = ft_itoa(rtv1->id_win);
+		win_name = ft_strjoin("render - win #", string_id);
+		free(string_id);
+		string_id = ft_itoa(rtv1->id_render);
+		tmp = win_name;
+		win_name = ft_strjoin(win_name, " - render #");
+		free(tmp);
+		tmp = win_name;
+		win_name = ft_strjoin(win_name, string_id);
+		free(tmp);
+		free(string_id);
+		rtv1->image[rtv1->id_win] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, win_name);
+	}
 	return (EXIT_SUCCESS);
 }
 

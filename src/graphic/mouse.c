@@ -23,7 +23,7 @@ static int		retry_is_hover(t_rtv1 *rtv1)
 		if (init_scene(rtv1, rtv1->file_str) == EXIT_FAILURE)
 			rtv1->state = ERROR;
 		else
-			rtv1->state = RENDER;
+			rtv1->state = SETUP;
 	}
 	else if (rtv1->state == RENDER)
 	{
