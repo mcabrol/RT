@@ -68,7 +68,6 @@ void free_texture(t_scene *scene)
 
 void 	clean_exit(t_rtv1 *rtv1)
 {
-	int 	i;
 	t_win 	*main;
 
 	main = &rtv1->main;
