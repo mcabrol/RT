@@ -16,12 +16,14 @@ static int		retry_is_hover(t_rtv1 *rtv1)
 {
 	if (rtv1->state == SETUP || rtv1->state == ERROR)
 	{
+		if (rtv1->state == ERROR)
+			rtv1->setter = FALSE;
 		ft_bzero(rtv1->file_str, ft_strlen(rtv1->file_str));
 		file(rtv1->ac, rtv1->av, &rtv1->file_str);
 		if (init_scene(rtv1, rtv1->file_str) == EXIT_FAILURE)
 			rtv1->state = ERROR;
 		else
-			rtv1->state = SETUP;
+			rtv1->state = RENDER;
 	}
 	else if (rtv1->state == RENDER)
 	{
@@ -55,6 +57,7 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 {
 	int		error;
 
+	printf("rtv1->state : %d\n", rtv1->state);
 	x = 0;
 	y = 0;
 	if (button == 1)
