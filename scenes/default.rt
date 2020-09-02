@@ -14,7 +14,7 @@ OBJECT:
 	TEXTURE: textures/mars.png
 },
 {
-	TYPE: BOX
+	TYPE: BX
 	POSITION: -8 5 -10
 	HEIGHT: 0.1
 	WIDTH: 10
@@ -23,7 +23,7 @@ OBJECT:
 },
 {
 	TYPE: CAMERA
-	POSITION: 0 0 0
+	POSITION: 0 0 -5
 	DIRECTION: 0 0 -1
-	FOV: 47
+	FOV: 60
 };

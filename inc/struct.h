@@ -154,6 +154,7 @@ typedef struct			s_button
 typedef struct 			s_sprite
 {
 	void 				*background;
+	void 				*background_setting;
 
 	t_button			setup;
 	t_button			close;
@@ -162,6 +163,18 @@ typedef struct 			s_sprite
 	t_button			display;
 	t_button			render;
 	t_button			error;
+
+	t_button			sample;
+	t_button			format;
+	t_button			close_setting;
+
+
+	t_button			x8;
+	t_button			x20;
+	t_button			x200;
+	t_button			x500;
+	t_button			x1000;
+	t_button			x5000;
 
 	// int 				setup_is_hover;
 	// int 				close_is_hover;
@@ -211,6 +224,7 @@ typedef struct			s_rtv1
 	int 				state;
 	void				*mlx_ptr;
 	t_win 				main;
+	t_win 				setting;
 	t_win 				*image;
 	t_scene				scene;
 	t_vec				*screen;	// Result

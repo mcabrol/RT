@@ -80,6 +80,8 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		}
 		if (rtv1->sprite.setup.is_hover && rtv1->state == ERROR)
 				clean_exit(rtv1);
+		if (rtv1->sprite.setup.is_hover && rtv1->state == SETUP)
+				put_setting(rtv1);
 	}
 	put_setup(rtv1);
 	return (EXIT_SUCCESS);

@@ -18,6 +18,9 @@
 # define H_MAIN					80
 # define W_MAIN					544
 
+# define H_SETTING				340
+# define W_SETTING				276
+
 # define PATH_SPRITE			"./src/sprite/"
 
 # define BLANK					0.0, 0.0, 0.0

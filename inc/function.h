@@ -219,6 +219,7 @@ void 			format(t_rtv1 *rtv1, int width, int height);
 */
 
 void 			init_sprite(t_rtv1 *rtv1);
+void 			put_setting(t_rtv1 *rtv1);
 void 			put_setup(t_rtv1 *rtv1);
 int 			is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin, int ymax);
 void 			load_button(void *mlx_ptr, t_button *button, char *name);
