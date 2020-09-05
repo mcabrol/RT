@@ -13,7 +13,7 @@
 #ifndef DEFINE_H
 # define DEFINE_H
 
-# define THREAD					18
+# define THREAD					1
 
 # define H_MAIN					80
 # define W_MAIN					544

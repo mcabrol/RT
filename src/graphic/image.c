@@ -76,8 +76,8 @@ void 	write_ppm(t_rtv1 *rtv1)
 	fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	ft_dprintf(fd, "P3\n%d %d\n%d\n", scene->width, scene->height, 255);
 	while (++i < scene->width * scene->height)
-		ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[i].x, GAMMA),
-			                     	to_byte(rtv1->screen[i].y, GAMMA),
-			                     	to_byte(rtv1->screen[i].z, GAMMA));
+		ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[scene->width * scene->height - i].x, GAMMA),
+			                     	to_byte(rtv1->screen[scene->width * scene->height - i].y, GAMMA),
+			                     	to_byte(rtv1->screen[scene->width * scene->height - i].z, GAMMA));
 	close(fd);
 }
