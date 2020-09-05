@@ -13,7 +13,7 @@
 #ifndef DEFINE_H
 # define DEFINE_H
 
-# define THREAD					16
+# define THREAD					18
 
 # define H_MAIN					80
 # define W_MAIN					544
@@ -32,9 +32,13 @@
 # define SETUP					0
 # define RENDER					1
 # define ERROR					2
+# define SAMPLE 				3
+# define FORMAT					4
+
 
 # define MAIN					0
 # define RENDER 				1
+# define SETTING 				2
 
 # define OBJ_TYPE				6
 # define OBJ_TYPE_STR			"SPHERE PLANE CYLINDER CONE BOX CAMERA"

@@ -168,7 +168,6 @@ typedef struct 			s_sprite
 	t_button			format;
 	t_button			close_setting;
 
-
 	t_button			x8;
 	t_button			x20;
 	t_button			x200;
@@ -176,38 +175,12 @@ typedef struct 			s_sprite
 	t_button			x1000;
 	t_button			x5000;
 
-	// int 				setup_is_hover;
-	// int 				close_is_hover;
-	// int 				retry_is_hover;
-	// int 				save_is_hover;
-	// int 				display_is_hover;
-	// int 				render_is_hover;
-	//
-	//
-	// void 				*setup;
-	// void 				*close;
-	// void 				*retry;
-	// void 				*error;
-	// void 				*save;
-	// void 				*display;
-	// void 				*render;
-	//
-	// void 				*setup_hover;
-	// void 				*close_hover;
-	// void 				*retry_hover;
-	// void 				*save_hover;
-	// void 				*display_hover;
-	// void 				*render_hover;
-	//
-	// void 				*setup_disabled;
-	// void 				*save_disabled;
-	// void 				*display_disabled;
-	// void 				*render_disabled;
-	//
-	// void 				*save_hover_disabled;
-	// void 				*display_hover_disabled;
-	// void 				*render_hover_disabled;
-
+	t_button			f320;
+	t_button			f854;
+	t_button			f1024;
+	t_button			f1280;
+	t_button			f1400;
+	t_button			f1920;
 }						t_sprite;
 
 typedef struct			s_rtv1
@@ -219,9 +192,11 @@ typedef struct			s_rtv1
 	int					id_render;
 	int					id_ppm;
 	int					id_parse;
+	int 				id_setting;
 	BOOL				setter;
 	t_sprite 			sprite;
 	int 				state;
+	int 				tabs;
 	void				*mlx_ptr;
 	t_win 				main;
 	t_win 				setting;

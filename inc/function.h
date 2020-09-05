@@ -199,6 +199,7 @@ t_vec 			get_pixel_vector(t_texture *texture, int x, int y);
 
 void 			hook(t_rtv1 *rtv1);
 int 			hover(int x, int y, t_rtv1 *rtv1);
+int 			hover_setting(int x, int y, t_rtv1 *rtv1);
 int				exit_hook(int keycode, t_rtv1 *rtv1);
 
 /*
@@ -212,6 +213,7 @@ int				key(int keycode, t_rtv1 *rtv1);
 */
 
 int				mouse(int button, int x, int y, t_rtv1 *rtv1);
+int				mouse_setting(int button, int x, int y, t_rtv1 *rtv1);
 void 			format(t_rtv1 *rtv1, int width, int height);
 
 /*
@@ -219,11 +221,12 @@ void 			format(t_rtv1 *rtv1, int width, int height);
 */
 
 void 			init_sprite(t_rtv1 *rtv1);
-void 			put_setting(t_rtv1 *rtv1);
 void 			put_setup(t_rtv1 *rtv1);
+void 			put_setting(t_rtv1 *rtv1);
+void 			create_setting(t_rtv1 *rtv1);
 int 			is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin, int ymax);
 void 			load_button(void *mlx_ptr, t_button *button, char *name);
-void 			put_sprite(t_rtv1 *rtv1, void *image);
+void 			put_sprite(t_rtv1 *rtv1, void *image, int window);
 
 
 /*
