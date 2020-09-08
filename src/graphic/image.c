@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/11 17:21:48 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/07 21:02:04 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+int		close_rcross(t_win *win)
+{
+	printf("\n\ninfos : \n\n");
+	printf("win_ptr : %p\n", win->win_ptr);
+	printf("img_ptr : %p\n", win->img_ptr);
+	printf("data_ptr : %p\n", win->data_ptr);
+	printf("active : %d\n", win->active);
+	return (0);
+}
 
 void 		image(t_rtv1 *rtv1)
 {
@@ -21,6 +30,7 @@ void 		image(t_rtv1 *rtv1)
 	t_win	*win;
 
 	win = &rtv1->image[rtv1->id_win];
+	win->active = rtv1->id_win;
 	screen = rtv1->screen;
 	y = -1;
 	while (++y <= rtv1->scene.height)
@@ -33,6 +43,7 @@ void 		image(t_rtv1 *rtv1)
 		}
 	}
 	mlx_put_image_to_window(rtv1->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
+	mlx_hook(win->win_ptr, 17, (1L << 17), close_rcross, win);
 }
 
 int		init_image(t_rtv1 *rtv1)

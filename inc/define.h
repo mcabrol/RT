@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/11 19:17:10 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/07 21:09:33 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define H_SETTING				340
 # define W_SETTING				276
 
-# define PATH_SPRITE			"./src/sprite/"
+# define PATH_SPRITE			"/Users/judrion/Desktop/martRTV1/src/sprite/"
 
 # define BLANK					0.0, 0.0, 0.0
 # define FALSE					0

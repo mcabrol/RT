@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gui.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/10 14:34:16 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/07 20:37:56 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void 		init_sprite(t_rtv1 *rtv1)
 	sprite = &rtv1->sprite;
 
 	background = ft_strjoin(PATH_SPRITE, "background.png");
+	printf("\n\nbackground : %s\n\n", background);
 	sprite->background = mlx_png_file_to_image(rtv1->mlx_ptr, background, &width, &height);
 	ft_bzero(background, ft_strlen(background));
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/03 20:06:13 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/07 21:30:08 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 
 	x = 0;
 	y = 0;
+	printf("rtv1->state : %d\n", rtv1->state);
 	if (button == 1)
 	{
 		if (rtv1->sprite.retry.is_hover)

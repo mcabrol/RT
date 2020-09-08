@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/03 19:41:17 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/07 21:05:25 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void 	init_session(t_rtv1 *rtv1, int ac, char **av)
 
 	// Default scene
 	rtv1->scene.samples = 8;
-	rtv1->scene.width = 320;
-	rtv1->scene.height = 240;
+	rtv1->scene.width = 800;
+	rtv1->scene.height = 600;
 }
 
 int		error(char *strerror)
