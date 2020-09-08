@@ -6,18 +6,40 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/07 21:02:04 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/08 20:45:26 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+static char		*init_win_name(int id_win, int id_render)
+{
+	char	*win_name;
+	char	*string_id;
+	char	*tmp;
+
+	string_id = ft_itoa(id_win);
+	win_name = ft_strjoin("render - win #", string_id);
+	free(string_id);
+	string_id = ft_itoa(id_render);
+	tmp = win_name;
+	win_name = ft_strjoin(win_name, " - render #");
+	free(tmp);
+	tmp = win_name;
+	win_name = ft_strjoin(win_name, string_id);
+	free(tmp);
+	free(string_id);
+	return (win_name);
+}
+
 int		close_rcross(t_win *win)
 {
 	printf("\n\ninfos : \n\n");
 	printf("win_ptr : %p\n", win->win_ptr);
 	printf("img_ptr : %p\n", win->img_ptr);
 	printf("data_ptr : %p\n", win->data_ptr);
-	printf("active : %d\n", win->active);
+	printf("id_windows : %d\n", win->id_window);
+	printf("available : %d\n", win->available);
 	return (0);
 }
 
@@ -30,7 +52,6 @@ void 		image(t_rtv1 *rtv1)
 	t_win	*win;
 
 	win = &rtv1->image[rtv1->id_win];
-	win->active = rtv1->id_win;
 	screen = rtv1->screen;
 	y = -1;
 	while (++y <= rtv1->scene.height)
@@ -46,30 +67,49 @@ void 		image(t_rtv1 *rtv1)
 	mlx_hook(win->win_ptr, 17, (1L << 17), close_rcross, win);
 }
 
+static	void init_win_array(t_win *win_array)
+{
+	int		i;
+
+	i = 0;
+	while (i < MAX_WIN)
+	{
+		win_array[i].available = 1;
+		win_array[i].id_window = i;
+		i = i + 1;
+	}
+}
+
 int		init_image(t_rtv1 *rtv1)
 {
 	char	*win_name;
-	char	*string_id;
-	char	*tmp;
+	int		id;
 
 	if (rtv1->id_win > MAX_WIN)
 		return (EXIT_FAILURE);
 	if (rtv1->id_win == 0)
+	{
 		rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
+		init_win_array(rtv1->image);
+	}
 	if (rtv1->image)
 	{
-		string_id = ft_itoa(rtv1->id_win);
-		win_name = ft_strjoin("render - win #", string_id);
-		free(string_id);
-		string_id = ft_itoa(rtv1->id_render);
-		tmp = win_name;
-		win_name = ft_strjoin(win_name, " - render #");
-		free(tmp);
-		tmp = win_name;
-		win_name = ft_strjoin(win_name, string_id);
-		free(tmp);
-		free(string_id);
-		rtv1->image[rtv1->id_win] = window(rtv1->mlx_ptr, rtv1->scene.width, rtv1->scene.height, win_name);
+		id = 0;
+		while (id < MAX_WIN)
+		{
+			if (rtv1->image[id].available == 1)
+				break ;
+			id = id + 1;
+		}
+		// if id == MAX_WIN ==> error
+		win_name = init_win_name(id, rtv1->id_render);
+		rtv1->image[id] = window(rtv1->mlx_ptr, rtv1->scene.width,
+								rtv1->scene.height, win_name);
+		rtv1->image[id].id_window = id;
+		rtv1->image[id].available = 0;
+		rtv1->id_win = id;
+
+		free(win_name);
 	}
 	return (EXIT_SUCCESS);
 }

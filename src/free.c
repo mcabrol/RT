@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/07 19:25:27 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/08 20:44:26 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void clean_all_windows(t_rtv1 *rtv1)
 		i = 0;
 		while (i < rtv1->id_win)
 		{
-			if (rtv1->image && rtv1->image[i].img_ptr && rtv1->image[i].active == 1)
+			if (rtv1->image && rtv1->image[i].img_ptr && rtv1->image[i].available == 0)
 			{
 				mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
 				mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
