@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/07 12:28:25 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/09 19:30:36 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int 	render(t_rtv1 *rtv1)
 	time_t	after;
 	double	second;
 
-	rtv1->screen = (t_vec *)malloc(rtv1->scene.width * rtv1->scene.height * sizeof(t_vec));
+	rtv1->screen = (t_vec *)malloc((rtv1->scene.width * rtv1->scene.height) * sizeof(t_vec));
+	ft_bzero(rtv1->screen, rtv1->scene.width * rtv1->scene.height);
 	init_cam(rtv1);
 	before = time(NULL);
 	if (multithread(rtv1))
