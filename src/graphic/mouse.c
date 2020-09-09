@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/08 20:41:23 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/09 20:14:18 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 
 	x = 0;
 	y = 0;
-	printf("rtv1->state : %d\n", rtv1->state);
+	printf("key #%d - rtv1->state : %d\n", button, rtv1->state);
 	if (button == 1)
 	{
 		if (rtv1->sprite.retry.is_hover)
@@ -73,6 +73,7 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		}
 		if (rtv1->sprite.display.is_hover)
 		{
+			printf("je bug...\n");
 			if (init_image(rtv1))
 				return (EXIT_FAILURE);
 			image(rtv1);

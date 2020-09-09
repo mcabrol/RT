@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/07 20:37:56 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/09 19:43:45 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void 		init_sprite(t_rtv1 *rtv1)
 	printf("\n\nbackground : %s\n\n", background);
 	sprite->background = mlx_png_file_to_image(rtv1->mlx_ptr, background, &width, &height);
 	ft_bzero(background, ft_strlen(background));
+	free(background);
 
 	background = ft_strjoin(PATH_SPRITE, "background-setting.png");
 	sprite->background_setting = mlx_png_file_to_image(rtv1->mlx_ptr, background, &width, &height);
@@ -168,6 +169,9 @@ void 		load_button(void *mlx_ptr, t_button *button, char *name)
 
 	button->is_active = FALSE;
 	button->is_hover = FALSE;
+	button->hover = NULL;
+	button->hover_disabled = NULL;
+	button->disabled = NULL;
 
 	pathname = ft_strjoin(PATH_SPRITE, name);
 
@@ -184,8 +188,7 @@ void 		load_button(void *mlx_ptr, t_button *button, char *name)
 
 	if (ft_strcmp(name, "render") == 0 ||
 		ft_strcmp(name, "save") == 0 ||
-		ft_strcmp(name, "display") == 0 ||
-		ft_strcmp(name, "save") == 0)
+		ft_strcmp(name, "display") == 0)
 	{
 		disabled = ft_strjoin(pathname, "-disabled.png");
 		button->disabled = mlx_png_file_to_image(mlx_ptr, disabled, &width, &height);
@@ -199,15 +202,6 @@ void 		load_button(void *mlx_ptr, t_button *button, char *name)
 		button->hover_disabled = mlx_png_file_to_image(mlx_ptr, hover_disabled, &width, &height);
 		free(hover_disabled);
 	}
-
-	if (ft_strcmp(name, "sample") == 0 ||
-		ft_strcmp(name, "format") == 0)
-	{
-		disabled = ft_strjoin(pathname, "-disabled.png");
-		button->disabled = mlx_png_file_to_image(mlx_ptr, disabled, &width, &height);
-		free(disabled);
-	}
-
 	if (ft_strcmp(name, "sample") == 0 || ft_strcmp(name, "format") == 0 ||
 		ft_strcmp(name, "x8") == 0 || ft_strcmp(name, "x20") == 0 ||
 		ft_strcmp(name, "x200") == 0 || ft_strcmp(name, "x500") == 0 ||
@@ -220,6 +214,7 @@ void 		load_button(void *mlx_ptr, t_button *button, char *name)
 		button->disabled = mlx_png_file_to_image(mlx_ptr, disabled, &width, &height);
 		free(disabled);
 	}
+
 	free(pathname);
 }
 
