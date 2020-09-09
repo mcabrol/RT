@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/08 20:39:36 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/09 19:58:16 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ t_vec 	get_pixel_vector(t_texture *texture, int x, int y)
 	t_vec 	dest;
 
 	vec(BLANK, &dest);
+	if (x >= texture->width)
+		x--;
+	if (y >= texture->width)
+		y--;
 	i = (x * texture->bits_per_pixel / 8) + (y * texture->size_line);
 	if (texture->path)
 	{
