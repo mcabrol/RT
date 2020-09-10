@@ -1,3 +1,5 @@
 Norme: ./src/algorithm/reflect.c
-Crash when load_texture()
 Remove error "isPrefsCreateCacheFromEnabledAndDefaultInputSources - can't find anything from GetInputSourceEnabledPrefs, use defaultASCIIKeyLayoutDict"
+
+Crash quand load_texture() sur un obj
+Crash en cas d'erreur lorsqu'on retry plusieurs fois sans changer le fichier.

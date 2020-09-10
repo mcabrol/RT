@@ -83,8 +83,8 @@ int		prepare_obj(t_rtv1 *rtv1)
 		obj = &scene->obj[i];
 		if (obj->texture.path)
 		{
-			if (load_texture(rtv1, obj->texture.path, &obj->texture) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
+			ft_printf("Yeah\n");
+			load_texture(rtv1, obj->texture.path, &obj->texture);
 		}
 		if (obj->rotation.x > 0 || obj->rotation.y > 0 || obj->rotation.z > 0)
 			obj->direction = rotate_point(deg_to_rad(obj->rotation.x),

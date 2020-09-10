@@ -24,7 +24,7 @@ OBJ = $(SRC:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) libs
-	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIB) $(FRAMEWORK) -o $(NAME) $(SANATIZE)
+	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIB) $(FRAMEWORK) -o $(NAME) 
 	install_name_tool -change libmlx.dylib lib/minilibx/libmlx.dylib ./rtv1
 
 libs:

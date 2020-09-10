@@ -10,6 +10,6 @@ OBJECT:
 	TYPE: CAMERA
 	POSITION: 0 0 0
 	DIRECTION: 0 0 -1
-	MAP: /Users/Famille/Documents/Martin/rtv1/textures/parking.png
+	MAP: textures/sky.png
 	FOV: 50
 };
