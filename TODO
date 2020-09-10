@@ -1,0 +1,3 @@
+Norme: ./src/algorithm/reflect.c
+Crash when load_texture()
+Remove error "isPrefsCreateCacheFromEnabledAndDefaultInputSources - can't find anything from GetInputSourceEnabledPrefs, use defaultASCIIKeyLayoutDict"

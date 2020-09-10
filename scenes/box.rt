@@ -4,7 +4,7 @@ OBJECT:
 	POSITION: 0 -1 -14
 	RADIUS: 3
 	COLOR: #FEFEFE
-	TEXTURE: /Users/Famille/rtv1/textures/earth.png
+	TEXTURE: textures/earth.png
 },
 {
 	TYPE: BOX

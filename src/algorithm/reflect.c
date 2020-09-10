@@ -72,7 +72,7 @@ void		diffuse_reflect(t_vec *d, t_vec *n, unsigned short xseed[3])
 	norm(d);
 }
 
-void 		refractive_reflect(t_ray *ray, unsigned short xseed[3], t_obj *obj)
+void		refractive_reflect(t_ray *ray, unsigned short xseed[3], t_obj *obj)
 {
 	t_vec 	d_re;
 	BOOL	out_to_in;
@@ -97,26 +97,23 @@ void 		refractive_reflect(t_ray *ray, unsigned short xseed[3], t_obj *obj)
 		nl = ray->n;
 	else
 		minus(&ray->n, &nl);
-	nn = out_to_in ? obj->index_out / obj->index_in : obj->index_in / obj->index_out;
+	nn = out_to_in ? obj->index_out / obj->index_in : \
+	obj->index_in / obj->index_out;
 	cos_theta = dot(&ray->direction, &nl);
 	cos2_phi = 1.0 - nn * nn * (1.0 - cos_theta * cos_theta);
-
 	if (0.0 > cos2_phi)
 	{
 		ray->pr = 1.0;
 		veccp(&d_re, &ray->direction);
 		return ;
 	}
-
 	multin(nn, &ray->direction, &a);
 	nmulti(&nl, (nn * cos_theta + sqrt(cos2_phi)), &b);
 	sub(&a, &b, &d_tr);
 	norm(&d_tr);
-
 	c = 1.0 - (out_to_in ? -cos_theta : dot(&d_tr, &ray->n));
 	re = schlick_reflectance(obj->index_out, obj->index_in, c);
 	p_re = 0.25 + 0.5 * re;
-
 	if (erand48(xseed) < p_re)
 	{
 		ray->pr = (re / p_re);

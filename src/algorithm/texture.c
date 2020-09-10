@@ -31,7 +31,7 @@ int 		load_texture(t_rtv1 *rtv1, char *path, t_texture *texture)
 {
 	texture->image = NULL;
 	texture->path = path;
-	if ((texture->image = mlx_png_file_to_image(&rtv1->mlx_ptr, path, &texture->width, &texture->height)) == NULL)
+	if ((texture->image = mlx_png_file_to_image(rtv1->mlx_ptr, path, &texture->width, &texture->height)) == NULL)
 		return (EXIT_FAILURE);
 	texture->data = mlx_get_data_addr(texture->image,
 									&(texture->bits_per_pixel),

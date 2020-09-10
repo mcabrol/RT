@@ -53,13 +53,12 @@ static int		render_is_hover(t_rtv1 *rtv1)
 	return (EXIT_SUCCESS);
 }
 
-int		mouse(int button, int x, int y, t_rtv1 *rtv1)
+int				mouse(int button, int x, int y, t_rtv1 *rtv1)
 {
-	int		error;
+	int	error;
 
 	x = 0;
 	y = 0;
-	printf("key #%d - rtv1->state : %d\n", button, rtv1->state);
 	if (button == 1)
 	{
 		if (rtv1->sprite.retry.is_hover)
@@ -67,16 +66,12 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		if (rtv1->sprite.render.is_hover)
 			error = render_is_hover(rtv1);
 		if (rtv1->sprite.save.is_hover)
-		{
-			write_ppm(rtv1);
-			(rtv1->id_ppm)++;
-		}
+			rtv1->id_ppm += write_ppm(rtv1);
 		if (rtv1->sprite.display.is_hover)
 		{
 			if (init_image(rtv1))
 				return (EXIT_FAILURE);
-			image(rtv1);
-			(rtv1->id_win)++;
+			rtv1->id_win += image(rtv1);
 		}
 		if (rtv1->sprite.setup.is_hover && rtv1->state == ERROR)
 			clean_exit(rtv1);
@@ -87,9 +82,7 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 	return (EXIT_SUCCESS);
 }
 
-
-
-void 		format(t_rtv1 *rtv1, int width, int height)
+void			format(t_rtv1 *rtv1, int width, int height)
 {
 	rtv1->scene.width = width;
 	rtv1->scene.height = height;

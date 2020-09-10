@@ -40,7 +40,7 @@ int		main(int ac, char **av)
 	// Loop
 	mlx_loop(rtv1.mlx_ptr);
 
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 void 	init_session(t_rtv1 *rtv1, int ac, char **av)
@@ -57,8 +57,8 @@ void 	init_session(t_rtv1 *rtv1, int ac, char **av)
 
 	// Default scene
 	rtv1->scene.samples = 8;
-	rtv1->scene.width = 800;
-	rtv1->scene.height = 600;
+	rtv1->scene.width = 320;
+	rtv1->scene.height = 240;
 }
 
 int		error(char *strerror)

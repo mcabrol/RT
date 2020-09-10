@@ -233,6 +233,7 @@ void 			put_sprite(t_rtv1 *rtv1, void *image, int window);
 
 int 			init_button(t_rtv1 *rtv1, int error);
 int 			load_button(t_rtv1 *rtv1, t_button *button, char *name);
+void			*load(t_rtv1 *rtv1, char *pathname, char *attr);
 
 /*
 **	debbug.c
@@ -247,9 +248,9 @@ void 			print_obj(t_obj *obj);
 **	image.c
 */
 
-void 			image(t_rtv1 *rtv1);
+int 			image(t_rtv1 *rtv1);
 int				init_image(t_rtv1 *rtv1);
-void 			write_ppm(t_rtv1 *rtv1);
+int 			write_ppm(t_rtv1 *rtv1);
 
 /*
 **	render.c

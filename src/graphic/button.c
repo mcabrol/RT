@@ -39,7 +39,7 @@ int				init_button(t_rtv1 *rtv1, int error)
 	return ((error) ? EXIT_FAILURE : EXIT_SUCCESS);
 }
 
-static void		*load(t_rtv1 *rtv1, char *pathname, char *attr)
+void			*load(t_rtv1 *rtv1, char *pathname, char *attr)
 {
 	int		width;
 	int		height;

@@ -43,7 +43,7 @@ int		close_rcross(t_win *win)
 	return (0);
 }
 
-void 		image(t_rtv1 *rtv1)
+int 		image(t_rtv1 *rtv1)
 {
 	int		x;
 	int		y;
@@ -65,6 +65,7 @@ void 		image(t_rtv1 *rtv1)
 	}
 	mlx_put_image_to_window(rtv1->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
 	mlx_hook(win->win_ptr, 17, (1L << 17), close_rcross, win);
+	return (1);
 }
 
 static	void init_win_array(t_win *win_array)
@@ -94,13 +95,10 @@ int		init_image(t_rtv1 *rtv1)
 	}
 	if (rtv1->image)
 	{
-		id = 0;
-		while (id < MAX_WIN)
-		{
+		id = -1;
+		while (++id < MAX_WIN)
 			if (rtv1->image[id].available == 1)
 				break ;
-			id = id + 1;
-		}
 		// if id == MAX_WIN ==> error
 		win_name = init_win_name(id, rtv1->id_render);
 		rtv1->image[id] = window(rtv1->mlx_ptr, rtv1->scene.width,
@@ -108,13 +106,12 @@ int		init_image(t_rtv1 *rtv1)
 		rtv1->image[id].id_window = id;
 		rtv1->image[id].available = 0;
 		rtv1->id_win = id;
-
 		free(win_name);
 	}
 	return (EXIT_SUCCESS);
 }
 
-void 	write_ppm(t_rtv1 *rtv1)
+int 	write_ppm(t_rtv1 *rtv1)
 {
 	int 	i;
 	int 	fd;
@@ -131,4 +128,5 @@ void 	write_ppm(t_rtv1 *rtv1)
 			                     	to_byte(rtv1->screen[scene->width * scene->height - i].y, GAMMA),
 			                     	to_byte(rtv1->screen[scene->width * scene->height - i].z, GAMMA));
 	close(fd);
+	return (1);
 }

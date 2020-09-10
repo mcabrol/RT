@@ -21,10 +21,10 @@ void		init_ray(t_vec o, t_vec d, t_ray *dest)
 
 void		prepare_ray(t_render *render, t_radiance *target, t_scene *scene)
 {
-	double 	u1;
-	double 	u2;
-	double 	dx;
-	double 	dy;
+	double	u1;
+	double	u2;
+	double	dx;
+	double	dy;
 
 	u1 = 2.0 * erand48(render->xseed);
 	u2 = 2.0 * erand48(render->xseed);

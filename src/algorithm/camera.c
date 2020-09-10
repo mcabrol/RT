@@ -28,7 +28,7 @@ void		init_cam(t_rtv1 *rtv1)
 
 t_obj		*assign_camera(t_scene *scene)
 {
-	int 	i;
+	int	i;
 
 	i = -1;
 	while (++i < scene->n)
@@ -37,7 +37,7 @@ t_obj		*assign_camera(t_scene *scene)
 	return (NULL);
 }
 
-void 		set_camera(t_obj *camera, t_rtv1 *rtv1)
+void		set_camera(t_obj *camera, t_rtv1 *rtv1)
 {
 	t_scene *scene;
 
@@ -55,7 +55,7 @@ void 		set_camera(t_obj *camera, t_rtv1 *rtv1)
 	}
 }
 
-void 		set_default_camera(t_rtv1 *rtv1)
+void		set_default_camera(t_rtv1 *rtv1)
 {
 	t_scene *scene;
 
@@ -67,38 +67,30 @@ void 		set_default_camera(t_rtv1 *rtv1)
 	scene->cam.environment.path = NULL;
 }
 
-void 		build_camera(t_scene *scene)
+void		build_camera(t_scene *scene)
 {
 	t_vec	up;
 	double	half_height;
 	double	half_width;
-	t_vec 	horizontal;
-	t_vec 	vertical;
+	t_vec	horizontal;
+	t_vec	vertical;
 	t_vec	tmp;
 
 	vec(0, 1, 0, &up);
-
 	half_height = tan(scene->cam.fov);
 	half_width = ((double)scene->width / (double)scene->height) * half_height;
-
 	cross(&scene->cam.direction, &up, &horizontal);
 	norm(&horizontal);
-
 	cross(&horizontal, &scene->cam.direction, &vertical);
 	norm(&vertical);
 	minus_(&vertical);
-
 	sum(&scene->cam.position, &scene->cam.direction, &scene->cam.point);
-
 	nmulti(&vertical, half_height, &tmp);
 	sub_(&scene->cam.point, &tmp);
-
 	nmulti(&horizontal, half_width, &tmp);
 	sub_(&scene->cam.point, &tmp);
-
 	nmulti(&horizontal, 2.0 * half_width, &scene->cam.cx);
 	nmulti(&vertical, 2.0 * half_height, &scene->cam.cy);
-
 	ndivide_(&scene->cam.cx, (double)scene->width);
 	ndivide_(&scene->cam.cy, (double)scene->height);
 }
