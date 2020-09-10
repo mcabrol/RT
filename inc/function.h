@@ -183,7 +183,7 @@ void 			diffuse_reflect(t_vec *d, t_vec *n, unsigned short xseed[3]);
 **	window.c
 */
 
-void 			init_window(t_rtv1 *rtv1);
+int 			init_window(t_rtv1 *rtv1);
 t_win			window(void *mlx_ptr, int width, int height, char *name);
 
 /*
@@ -220,14 +220,19 @@ void 			format(t_rtv1 *rtv1, int width, int height);
 **	gui.c
 */
 
-void 			init_sprite(t_rtv1 *rtv1);
+int 			init_sprite(t_rtv1 *rtv1);
 void 			put_setup(t_rtv1 *rtv1);
 void 			put_setting(t_rtv1 *rtv1);
 void 			create_setting(t_rtv1 *rtv1);
 int 			is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin, int ymax);
-void 			load_button(void *mlx_ptr, t_button *button, char *name);
 void 			put_sprite(t_rtv1 *rtv1, void *image, int window);
 
+/*
+**	button.c
+*/
+
+int 			init_button(t_rtv1 *rtv1, int error);
+int 			load_button(t_rtv1 *rtv1, t_button *button, char *name);
 
 /*
 **	debbug.c

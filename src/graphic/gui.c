@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-void 		init_sprite(t_rtv1 *rtv1)
+int 		init_sprite(t_rtv1 *rtv1)
 {
 	t_sprite 	*sprite;
 	char 		*background;
@@ -31,33 +31,11 @@ void 		init_sprite(t_rtv1 *rtv1)
 	sprite->background_setting = mlx_png_file_to_image(rtv1->mlx_ptr, background, &width, &height);
 	free(background);
 
-	load_button(rtv1->mlx_ptr, &sprite->setup, "setup");
-	load_button(rtv1->mlx_ptr, &sprite->close, "close");
-	load_button(rtv1->mlx_ptr, &sprite->retry, "retry");
-	load_button(rtv1->mlx_ptr, &sprite->save, "save");
-	load_button(rtv1->mlx_ptr, &sprite->display, "display");
-	load_button(rtv1->mlx_ptr, &sprite->render, "render");
-	load_button(rtv1->mlx_ptr, &sprite->error, "error");
-
-	load_button(rtv1->mlx_ptr, &sprite->sample, "sample");
-	load_button(rtv1->mlx_ptr, &sprite->format, "format");
-	load_button(rtv1->mlx_ptr, &sprite->close_setting, "close-setting");
-
-	load_button(rtv1->mlx_ptr, &sprite->x8, "x8");
-	load_button(rtv1->mlx_ptr, &sprite->x20, "x20");
-	load_button(rtv1->mlx_ptr, &sprite->x200, "x200");
-	load_button(rtv1->mlx_ptr, &sprite->x500, "x500");
-	load_button(rtv1->mlx_ptr, &sprite->x1000, "x1000");
-	load_button(rtv1->mlx_ptr, &sprite->x5000, "x5000");
-
-	load_button(rtv1->mlx_ptr, &sprite->f320, "320x240");
-	load_button(rtv1->mlx_ptr, &sprite->f854, "854x480");
-	load_button(rtv1->mlx_ptr, &sprite->f1024, "1024x768");
-	load_button(rtv1->mlx_ptr, &sprite->f1280, "1280x720");
-	load_button(rtv1->mlx_ptr, &sprite->f1400, "1400x1050");
-	load_button(rtv1->mlx_ptr, &sprite->f1920, "1920x1080");
+	if (init_button(rtv1, 0))
+		return (EXIT_FAILURE);
 
 	put_sprite(rtv1, rtv1->sprite.background, MAIN);
+	return (EXIT_SUCCESS);
 }
 
 void 		toggle_button(t_rtv1 *rtv1, t_button *button, BOOL status, int window)
@@ -155,68 +133,6 @@ void 		create_setting(t_rtv1 *rtv1)
 	put_setting(rtv1);
 }
 
-void 		load_button(void *mlx_ptr, t_button *button, char *name)
-{
-	int width;
-	int height;
-
-	char *pathname;
-
-	char *active;
-	char *hover;
-	char *disabled;
-	char *hover_disabled;
-
-	button->is_active = FALSE;
-	button->is_hover = FALSE;
-	button->hover = NULL;
-	button->hover_disabled = NULL;
-	button->disabled = NULL;
-
-	pathname = ft_strjoin(PATH_SPRITE, name);
-
-	active = ft_strjoin(pathname, ".png");
-	button->active = mlx_png_file_to_image(mlx_ptr, active, &width, &height);
-	free(active);
-
-	if (ft_strcmp(name, "retry") == 0 || ft_strcmp(name, "setup") == 0)
-	{
-		hover = ft_strjoin(pathname, "-hover.png");
-		button->hover = mlx_png_file_to_image(mlx_ptr, hover, &width, &height);
-		free(hover);
-	}
-
-	if (ft_strcmp(name, "render") == 0 ||
-		ft_strcmp(name, "save") == 0 ||
-		ft_strcmp(name, "display") == 0)
-	{
-		disabled = ft_strjoin(pathname, "-disabled.png");
-		button->disabled = mlx_png_file_to_image(mlx_ptr, disabled, &width, &height);
-		free(disabled);
-
-		hover = ft_strjoin(pathname, "-hover.png");
-		button->hover = mlx_png_file_to_image(mlx_ptr, hover, &width, &height);
-		free(hover);
-
-		hover_disabled = ft_strjoin(pathname, "-hover-disabled.png");
-		button->hover_disabled = mlx_png_file_to_image(mlx_ptr, hover_disabled, &width, &height);
-		free(hover_disabled);
-	}
-	if (ft_strcmp(name, "sample") == 0 || ft_strcmp(name, "format") == 0 ||
-		ft_strcmp(name, "x8") == 0 || ft_strcmp(name, "x20") == 0 ||
-		ft_strcmp(name, "x200") == 0 || ft_strcmp(name, "x500") == 0 ||
-		ft_strcmp(name, "x1000") == 0 || ft_strcmp(name, "x5000") == 0 ||
-		ft_strcmp(name, "320x240") == 0 || ft_strcmp(name, "854x480") == 0 ||
-		ft_strcmp(name, "1024x768") == 0 || ft_strcmp(name, "1280x720") == 0 ||
-		ft_strcmp(name, "1400x1050") == 0 || ft_strcmp(name, "1920x1080") == 0)
-	{
-		disabled = ft_strjoin(pathname, "-disabled.png");
-		button->disabled = mlx_png_file_to_image(mlx_ptr, disabled, &width, &height);
-		free(disabled);
-	}
-
-	free(pathname);
-}
 
 void 	put_sprite(t_rtv1 *rtv1, void *image, int window)
 {

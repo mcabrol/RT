@@ -28,7 +28,8 @@ int		main(int ac, char **av)
 		rtv1.state = SETUP;
 
 	// Window
-	init_window(&rtv1);
+	if (init_window(&rtv1))
+		return (EXIT_FAILURE);
 
 	// Start session
 	put_setup(&rtv1);

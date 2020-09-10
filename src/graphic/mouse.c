@@ -73,7 +73,6 @@ int		mouse(int button, int x, int y, t_rtv1 *rtv1)
 		}
 		if (rtv1->sprite.display.is_hover)
 		{
-			printf("je bug...\n");
 			if (init_image(rtv1))
 				return (EXIT_FAILURE);
 			image(rtv1);

@@ -12,13 +12,15 @@
 
 #include "rtv1.h"
 
-void 		init_window(t_rtv1 *rtv1)
+int 		init_window(t_rtv1 *rtv1)
 {
 	rtv1->mlx_ptr = mlx_init();
 	rtv1->main = window(rtv1->mlx_ptr, W_MAIN, H_MAIN, "Raytracer");
-	init_sprite(rtv1);
+	if (init_sprite(rtv1))
+		return (EXIT_FAILURE);
 	rtv1->id_win = 0;
 	rtv1->id_ppm = 0;
+	return (EXIT_SUCCESS);
 }
 
 t_win		window(void *mlx_ptr, int width, int height, char *name)

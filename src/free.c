@@ -126,7 +126,6 @@ void 	clean_exit(t_rtv1 *rtv1)
 		ft_tabdel(rtv1->scene.obj_type);
 		ft_tabdel(rtv1->scene.obj_options);
 		free(rtv1->scene.obj_setter);
-		printf("clean exit cam env path : %s", rtv1->scene.cam.environment.path);
 	}
 	free(rtv1->scene.obj);
 	clean_all_windows(rtv1);
