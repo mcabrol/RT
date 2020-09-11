@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/10 15:14:49 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/11 17:35:22 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		file(int ac, char **av, char **file_str)
 	int		size;
 
 	if ((ac > 1 && check(ac, av)))
-		return (error("usage: ./rtv1 [file.csv]"));
+		return (error("usage: ./rtv1 [file.rt]"));
 	else if (ac == 1)
 		filename = "scenes/default.rt";
 	else
