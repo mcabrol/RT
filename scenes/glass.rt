@@ -37,8 +37,9 @@ OBJECT:
 },
 {
 	TYPE: CAMERA
-	POSITION: 0 5 5
-	DIRECTION: -0.2 -1 -1
-	MAP: textures/forest.png
+	POSITION: 0 5 1
+	DIRECTION: 0 0 -1
+	ROTATION: -25 0 0
+	MAP: textures/parking.png
 	FOV: 50
 };

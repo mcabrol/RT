@@ -1,9 +1,13 @@
-[ ] Norme: ./src/algorithm/reflect.c
-
 [x] Remove error "isPrefsCreateCacheFromEnabledAndDefaultInputSources - can't find anything from GetInputSourceEnabledPrefs, use defaultASCIIKeyLayoutDict"
 	-> seulement sur les postes non montés
 
 [ ] Crash quand load_texture() sur un obj
+	-> minilibx ?
 [ ] Crash en cas d'erreur lorsqu'on retry plusieurs fois sans changer le fichier.
-[ ] Disable les buttons
-[ ] Faire les rotation (box)
+	-> minilibx ?
+
+[x] Faire les rotation
+
+[ ] Crash sur les states
+
+[ ] Norme
