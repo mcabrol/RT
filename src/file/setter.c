@@ -3,32 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   setter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judrion <judrion@student.42.fr>            +#+  +:+       +#+        */
+/*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 09:38:01 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/11 16:49:33 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/11 17:42:33 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
+// int			value_is_vector(const char *str)
+// {
+// 	int		i;
+// 	int		space;
+//
+// 	i = 0;
+// 	space = 0;
+// 	while (*(str + i))
+// 	{
+// 		if (!ft_isdigit(*(str + i)))
+// 		{
+// 			if (*(str + i) != '.' && *(str + i) != ',' && *(str + i) != ' ' && *(str + i) != '-')
+// 				return (-1);
+// 		}
+// 		if (*(str + i) == ' ')
+// 		{
+// 			if (space == 3 && *(str + i + 1) == '\n')
+// 				space = -1;
+// 			else
+// 				space = space + 1;
+// 		}
+// 		i = i + 1;
+// 	}
+// 	printf("space = %d\n", space);
+// 	if (space != 3)
+// 		return (-2);
+// 	return (0);
+// }
+
 int			value_is_vector(const char *str)
 {
+	char 	**vector;
 	int		i;
-	int		space;
-
-	i = -1;
-	space = 0;
-	while (*(str + (++i)))
+	vector = ft_strsplit(str, ' ');
+	i = 0;
+	while (vector[i])
 	{
-		if (!ft_isdigit(*(str + i)))
-			if (*(str + i) != '.' && *(str + i) != ',' && *(str + i) != ' ' && *(str + i) != '-')
-				return (-1);
-		if (*(str + i) == ' ')
-			space = space + 1;
+		free(vector[i]);
+		i = i + 1;
 	}
-	if (space != 3)
-		return (-2);
+	free(vector);
+	if (i != 3)
+		return (-1);
 	return (0);
 }
 
@@ -36,11 +62,16 @@ int			value_is_double(const char *str)
 {
 	int		i;
 
-	i = -1;
-	while (*(str + (++i)))
+	i = 0;
+	while (*(str + i))
+	{
 		if (!ft_isdigit(*(str + i)))
+		{
 			if (*(str + i) != '.' && *(str + i) != ',' && *(str + i) != '-')
 				return (-1);
+		}
+		i = i + 1;
+	}
 	return (0);
 }
 
