@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/09 19:30:36 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/11 16:28:31 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int 	render(t_rtv1 *rtv1)
 
 	rtv1->screen = (t_vec *)malloc((rtv1->scene.width * rtv1->scene.height) * sizeof(t_vec));
 	ft_bzero(rtv1->screen, rtv1->scene.width * rtv1->scene.height);
-	init_cam(rtv1);
+	if (init_cam(rtv1))
+		return (EXIT_FAILURE);
 	before = time(NULL);
 	if (multithread(rtv1))
 		return (error("Thread error.\n"));

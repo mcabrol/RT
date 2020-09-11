@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/11 18:48:22 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/11 16:27:03 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int				prepare_obj(t_rtv1 *rtv1);
 **	camera.c
 */
 
-void			init_cam(t_rtv1 *rtv1);
+int				init_cam(t_rtv1 *rtv1);
 t_obj 			*assign_camera(t_scene *scene);
-void 			set_camera(t_obj *camera, t_rtv1 *rtv1);
+int 			set_camera(t_obj *camera, t_rtv1 *rtv1);
 void 			set_default_camera(t_rtv1 *rtv1);
 void 			build_camera(t_scene *scene);
 

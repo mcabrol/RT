@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/11 19:15:05 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/11 16:50:44 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,12 @@ int		prepare_obj(t_rtv1 *rtv1)
 		obj = &scene->obj[i];
 		if (obj->texture.path)
 		{
-			ft_printf("Yeah\n");
-			load_texture(rtv1, obj->texture.path, &obj->texture);
+			ft_printf("Texture on obj[%d]\n", i);
+			if (load_texture(rtv1, obj->texture.path, &obj->texture))
+			{
+				ft_printf("Can't load texture.\n");
+				return (EXIT_FAILURE);
+			}
 		}
 		if (obj->rotation.x > 0 || obj->rotation.y > 0 || obj->rotation.z > 0)
 			obj->direction = rotate_point(deg_to_rad(obj->rotation.x),

@@ -30,6 +30,6 @@ OBJECT:
 	TYPE: CAMERA
 	POSITION: -5 -1.1 -5
 	DIRECTION: 1 0.1 -1
-	MAP: /Users/Famille/Documents/Martin/rtv1/textures/sky.png
+	MAP: textures/sky.png
 	FOV: 40
 };

@@ -6,7 +6,7 @@
 #    By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/10 11:25:08 by mcabrol           #+#    #+#              #
-#    Updated: 2020/09/09 21:02:27 by mcabrol          ###   ########.fr        #
+#    Updated: 2020/09/11 17:16:45 by mcabrol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ = $(SRC:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) libs
-	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIB) $(FRAMEWORK) -o $(NAME) 
+	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIB) $(FRAMEWORK) -o $(NAME)
 	install_name_tool -change libmlx.dylib lib/minilibx/libmlx.dylib ./rtv1
 
 libs:

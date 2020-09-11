@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.c                                           :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/11 19:19:49 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/11 16:26:53 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		init_cam(t_rtv1 *rtv1)
+int		init_cam(t_rtv1 *rtv1)
 {
 	t_obj	*camera;
 	t_scene *scene;
@@ -20,10 +20,14 @@ void		init_cam(t_rtv1 *rtv1)
 	scene = &rtv1->scene;
 	camera = assign_camera(scene);
 	if (camera)
-		set_camera(camera, rtv1);
+	{
+		if (set_camera(camera, rtv1))
+			return (EXIT_FAILURE);
+	}
 	else
 		set_default_camera(rtv1);
 	build_camera(scene);
+	return (EXIT_SUCCESS);
 }
 
 t_obj		*assign_camera(t_scene *scene)
@@ -37,7 +41,7 @@ t_obj		*assign_camera(t_scene *scene)
 	return (NULL);
 }
 
-void		set_camera(t_obj *camera, t_rtv1 *rtv1)
+int		set_camera(t_obj *camera, t_rtv1 *rtv1)
 {
 	t_scene *scene;
 
@@ -49,10 +53,12 @@ void		set_camera(t_obj *camera, t_rtv1 *rtv1)
 	scene->cam.ambient = camera->ambient;
 	if (camera->environment.path)
 	{
-		load_texture(rtv1, camera->environment.path, &scene->cam.environment);
+		if (load_texture(rtv1, camera->environment.path, &scene->cam.environment))
+			return (EXIT_FAILURE);
 		scene->cam.environment.width /= 4.0;
 		scene->cam.environment.height /= 3.0;
 	}
+	return (EXIT_SUCCESS);
 }
 
 void		set_default_camera(t_rtv1 *rtv1)
