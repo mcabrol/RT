@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/11 16:50:44 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/11 18:54:39 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		prepare_obj(t_rtv1 *rtv1)
 				return (EXIT_FAILURE);
 			}
 		}
-		if (obj->rotation.x > 0 || obj->rotation.y > 0 || obj->rotation.z > 0)
+		if (obj->rotation.x != 0 || obj->rotation.y != 0 || obj->rotation.z != 0)
 			obj->direction = rotate_point(deg_to_rad(obj->rotation.x),
 							 deg_to_rad(obj->rotation.y),
 							 deg_to_rad(obj->rotation.z),

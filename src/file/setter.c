@@ -6,40 +6,11 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 09:38:01 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/11 17:42:33 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/11 18:48:36 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-// int			value_is_vector(const char *str)
-// {
-// 	int		i;
-// 	int		space;
-//
-// 	i = 0;
-// 	space = 0;
-// 	while (*(str + i))
-// 	{
-// 		if (!ft_isdigit(*(str + i)))
-// 		{
-// 			if (*(str + i) != '.' && *(str + i) != ',' && *(str + i) != ' ' && *(str + i) != '-')
-// 				return (-1);
-// 		}
-// 		if (*(str + i) == ' ')
-// 		{
-// 			if (space == 3 && *(str + i + 1) == '\n')
-// 				space = -1;
-// 			else
-// 				space = space + 1;
-// 		}
-// 		i = i + 1;
-// 	}
-// 	printf("space = %d\n", space);
-// 	if (space != 3)
-// 		return (-2);
-// 	return (0);
-// }
 
 int			value_is_vector(const char *str)
 {
@@ -275,7 +246,7 @@ int	set_rotation(t_obj *obj, char *value)
 	data = ft_strsplit(value, ' ');
 	if (!data)
 		return (-1);
-	vec(ft_atod(data[0]), ft_atod(data[1]), ft_atod(data[2]), &obj->direction);
+	vec(ft_atod(data[0]), ft_atod(data[1]), ft_atod(data[2]), &obj->rotation);
 	ft_tabdel(data);
 	return (0);
 }

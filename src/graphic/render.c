@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/11 16:28:31 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/11 19:35:33 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int 	render(t_rtv1 *rtv1)
 	return (EXIT_SUCCESS);
 }
 
+
 int		multithread(t_rtv1 *rtv1)
 {
 	int			i;
@@ -43,6 +44,8 @@ int		multithread(t_rtv1 *rtv1)
 		thread[i].id = i + 1;
 		thread[i].x = i * (rtv1->scene.width - 1) / THREAD;
 		thread[i].max = (i + 1) * rtv1->scene.width / THREAD;
+		if (i > 0 && thread[i - 1].max == thread[i].x)
+			thread[i].x = thread[i].x - 1;
 		thread[i].rtv1 = rtv1;
 		if (pthread_create(&thread[i].thread, NULL, pathtracer, &thread[i]))
 			return (EXIT_FAILURE);
