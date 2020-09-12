@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 14:46:32 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/12 17:16:27 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 */
 
 double			intersect_box(t_obj *box, t_ray *ray);
+void			box_normal(t_obj *box, t_ray *ray);
+double			ft_check_pnt_box(double min[3], double max[3]);
+void			define_norm(t_ray *ray, int face);
+void 			check_box(t_ray *ray, double min[3], double max[3],
+				t_vec rev_ov);
 
 /*
 **	camera.c
@@ -168,14 +173,6 @@ int				set_map(t_obj *obj, char *value);
 */
 
 /*
-**	event.c
-*/
-
-void 			hook(t_rtv1 *rtv1);
-int				exit_hook(int keycode, t_rtv1 *rtv1);
-int 			is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin, int ymax);
-
-/*
 **	button.c
 */
 
@@ -184,100 +181,36 @@ int 			load_button(t_rtv1 *rtv1, t_button *button, char *name);
 void			*load(t_rtv1 *rtv1, char *pathname, char *attr);
 
 /*
-**	object.c
+**	event.c
 */
 
-int				prepare_obj(t_rtv1 *rtv1);
-
+void 			hook(t_rtv1 *rtv1);
+int				exit_hook(int keycode, t_rtv1 *rtv1);
+int 			is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin, int ymax);
 
 /*
-**	convert.c
+**	gui.c
 */
 
-t_vec 			hex_to_vec(int hex);
-t_vec 			hex_to_light(int hex);
-double 			deg_to_rad(double degree);
-double 			rad_to_deg(double radian);
-int 			hex_to_dec(char *hex);
+int 			init_sprite(t_rtv1 *rtv1);
+void 			put_setup(t_rtv1 *rtv1);
+void			toggle_button(t_rtv1 *rtv1, t_button *button, BOOL status);
+void 			put_sprite(t_rtv1 *rtv1, void *image, int window);
 
 /*
-**	scene.c
-*/
-
-int 			init_scene(t_rtv1 *rtv1, char *file);
-options_func 	*setup_obj_setter(int nb_options);
-
-/*
-**	normal.c
-*/
-
-void 			normal(t_ray *ray, t_obj *shape);
-void 			sphere_normal(t_obj *sphere, t_ray *ray);
-void 			plane_normal(t_obj *plane, t_ray *ray);
-void 			cylinder_normal(t_obj *cylinder, t_ray *ray);
-void 			cylinder_normal_closed(t_obj *cylinder, t_ray *ray);
-void 			cone_normal(t_obj *cone, t_ray *ray);
-void			box_normal(t_obj *box, t_ray *ray);
-
-/*
-**	calcul.c
-*/
-
-double			len(t_vec *v);
-double			dot(t_vec *v1, t_vec *v2);
-double			max(t_vec *v);
-double			clamp(double x, double low, double high);
-void			clamp3(t_vec *v, double low, double high, t_vec *dest);
-uint8_t			to_byte(double x, double gamma);
-double			reflectance(double n1, double n2);
-double			schlick_reflectance(double n1, double n2, double c);
-double			quadratic(double k1, double k2, double k3);
-void    		quadratic_base(t_vec k, t_vec *t);
-double			check_cut(double t_min, t_obj *obj, t_vec *p);
-double			define_tmin(t_vec t);
-double			define_ttmin(double t1, double t2);
-double 			check_pnt(t_vec *k, t_vec *direction, t_vec *origin, t_obj *obj);
-double			ft_check_pnt_box(double min[3], double max[3]);
-void			define_norm(t_ray *ray, int face);
-void 			check_box(t_ray *ray, double min[3], double max[3], t_vec rev_ov);
-
-/*
-**	rotate.c
-*/
-
-t_vec			v_matrix_mult(double mat[4][4], t_vec pt);
-t_vec			rotate_x(t_vec pt, double theta);
-t_vec			rotate_y(t_vec pt, double theta);
-t_vec			rotate_z(t_vec pt, double theta);
-t_vec			rotate_point(double alpha, double beta, double gamma, t_vec pt);
-
-
-/*
-**	sample.c
-*/
-
-void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
-
-/*
-**	window.c
-*/
-
-int 			init_window(t_rtv1 *rtv1);
-t_win			window(void *mlx_ptr, int width, int height, char *name);
-
-/*
-**	pixel.c
-*/
-
-void			put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v);
-t_vec 			get_pixel_vector(t_texture *texture, int x, int y);
-
-/*
-**	hook.c
+**	hover.c
 */
 
 int 			hover(int x, int y, t_rtv1 *rtv1);
 int 			hover_setting(int x, int y, t_rtv1 *rtv1);
+
+/*
+**	image.c
+*/
+
+int 			image(t_rtv1 *rtv1);
+int				init_image(t_rtv1 *rtv1);
+int 			write_ppm(t_rtv1 *rtv1);
 
 /*
 **	key.c
@@ -290,18 +223,137 @@ int				key(int keycode, t_rtv1 *rtv1);
 */
 
 int				mouse(int button, int x, int y, t_rtv1 *rtv1);
-int				mouse_setting(int button, int x, int y, t_rtv1 *rtv1);
-void 			format(t_rtv1 *rtv1, int width, int height);
 
 /*
-**	gui.c
+**	pixel.c
 */
 
-int 			init_sprite(t_rtv1 *rtv1);
-void 			put_setup(t_rtv1 *rtv1);
+void			put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v);
+t_vec 			get_pixel_vector(t_texture *texture, int x, int y);
+
+/*
+**	render.c
+*/
+
+int				render(t_rtv1 *rtv1);
+int				multithread(t_rtv1 *rtv1);
+
+/*
+**	setting.c
+*/
+
 void 			put_setting(t_rtv1 *rtv1);
 void 			create_setting(t_rtv1 *rtv1);
-void 			put_sprite(t_rtv1 *rtv1, void *image, int window);
+int				mouse_setting(int button, int x, int y, t_rtv1 *rtv1);
+
+/*
+**	window.c
+*/
+
+int 			init_window(t_rtv1 *rtv1);
+t_win			window(void *mlx_ptr, int width, int height, char *name);
+
+/*
+**	MATH
+*/
+
+/*
+**	calcul.c
+*/
+
+double			len(t_vec *v);
+double			dot(t_vec *v1, t_vec *v2);
+double			max(t_vec *v);
+double 			check_point(t_vec *k, t_vec *direction, t_vec *origin,\
+				t_obj *obj);
+
+/*
+**	clamp.c
+*/
+
+double			clamp(double x, double low, double high);
+void			clamp3(t_vec *v, double low, double high, t_vec *dest);
+
+/*
+**	convert.c
+*/
+
+t_vec 			hex_to_vec(int hex);
+t_vec 			hex_to_light(int hex);
+double 			deg_to_rad(double degree);
+double 			rad_to_deg(double radian);
+int 			hex_to_dec(char *hex);
+uint8_t			to_byte(double x, double gamma);
+
+/*
+**	distance.c
+*/
+
+double			define_tmin(t_vec t);
+double			define_ttmin(double t1, double t2);
+
+/*
+**	normal.c
+*/
+
+void 			normal(t_ray *ray, t_obj *shape);
+void 			sphere_normal(t_obj *sphere, t_ray *ray);
+void 			plane_normal(t_obj *plane, t_ray *ray);
+void 			cylinder_normal(t_obj *cylinder, t_ray *ray);
+void 			cone_normal(t_obj *cone, t_ray *ray);
+
+/*
+**	quadratic.c
+*/
+
+double			quadratic(double k1, double k2, double k3);
+void    		quadratic_base(t_vec k, t_vec *t);
+
+/*
+**	reflectance.c
+*/
+
+double			reflectance(double n1, double n2);
+double			schlick_reflectance(double n1, double n2, double c);
+
+/*
+**	rotate.c
+*/
+
+t_vec			v_matrix_mult(double mat[4][4], t_vec pt);
+t_vec			rotate_x(t_vec pt, double theta);
+t_vec			rotate_y(t_vec pt, double theta);
+t_vec			rotate_z(t_vec pt, double theta);
+t_vec			rotate_point(double alpha, double beta, double gamma, t_vec pt);
+
+/*
+**	sample.c
+*/
+
+void			cosine_weighted_sample(double u1, double u2, t_vec *dest);
+
+
+/*
+**	OBJECT-MANAGER
+*/
+
+
+/*
+**	object.c
+*/
+
+int				prepare_obj(t_rtv1 *rtv1);
+
+/*
+**	scene.c
+*/
+
+int 			init_scene(t_rtv1 *rtv1, char *file);
+options_func 	*setup_obj_setter(int nb_options);
+
+/*
+**	TOOLS
+*/
 
 /*
 **	debbug.c
@@ -313,21 +365,7 @@ void			timer(int time);
 void 			print_obj(t_obj *obj);
 void			printr(t_ray *r);
 void			printv(t_vec *v);
-
-/*
-**	image.c
-*/
-
-int 			image(t_rtv1 *rtv1);
-int				init_image(t_rtv1 *rtv1);
-int 			write_ppm(t_rtv1 *rtv1);
-
-/*
-**	render.c
-*/
-
-int 			render(t_rtv1 *rtv1);
-int				multithread(t_rtv1 *rtv1);
+int				close_rcross(t_win *win);
 
 /*
 **	free.c

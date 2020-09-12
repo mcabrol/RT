@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-int 		init_window(t_rtv1 *rtv1)
+int			init_window(t_rtv1 *rtv1)
 {
 	rtv1->mlx_ptr = mlx_init();
 	rtv1->main = window(rtv1->mlx_ptr, W_MAIN, H_MAIN, "Raytracer");

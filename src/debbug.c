@@ -100,3 +100,14 @@ void		printv(t_vec *v)
 {
 	ft_printf("[%f %f %f]\n", v->x, v->y, v->z);
 }
+
+int				close_rcross(t_win *win)
+{
+	printf("\n\ninfos : \n\n");
+	printf("win_ptr : %p\n", win->win_ptr);
+	printf("img_ptr : %p\n", win->img_ptr);
+	printf("data_ptr : %p\n", win->data_ptr);
+	printf("id_windows : %d\n", win->id_window);
+	printf("available : %d\n", win->available);
+	return (0);
+}

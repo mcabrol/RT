@@ -14,8 +14,8 @@
 
 void	put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v)
 {
-	t_win 	*win;
-	size_t 	i;
+	t_win	*win;
+	size_t	i;
 
 	win = &rtv1->image[rtv1->id_win];
 	i = (x * win->bits_per_pixel / 8) + (y * win->size_line);
@@ -28,10 +28,10 @@ void	put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v)
 		}
 }
 
-t_vec 	get_pixel_vector(t_texture *texture, int x, int y)
+t_vec	get_pixel_vector(t_texture *texture, int x, int y)
 {
 	size_t	i;
-	t_vec 	dest;
+	t_vec	dest;
 
 	vec(BLANK, &dest);
 	i = (x * texture->bits_per_pixel / 8) + (y * texture->size_line);

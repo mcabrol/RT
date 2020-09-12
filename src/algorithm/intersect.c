@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 13:49:47 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/12 16:55:53 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ double		intersect_cylinder(t_obj *cylinder, t_ray *ray)
 		- pow(dot(&oc, &cylinder->direction), 2)
 		- cylinder->radius
 		* cylinder->radius;
-	t_min = check_pnt(&k, &ray->direction, &ray->origin, cylinder);
+	t_min = check_point(&k, &ray->direction, &ray->origin, cylinder);
 	return (t_min);
 }
 
@@ -115,6 +115,6 @@ double		intersect_cone(t_obj *cone, t_ray *ray)
 		* dot(&oc, &cone->direction));
 	k.z = dot(&oc, &oc)
 		- a * pow(dot(&oc, &cone->direction), 2);
-	t_min = check_pnt(&k, &ray->direction, &ray->origin, cone);
+	t_min = check_point(&k, &ray->direction, &ray->origin, cone);
 	return (t_min);
 }

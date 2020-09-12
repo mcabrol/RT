@@ -17,7 +17,8 @@ int					init_sprite(t_rtv1 *rtv1)
 	t_sprite	*sprite;
 
 	sprite = &rtv1->sprite;
-	if ((sprite->background = load(rtv1, PATH_SPRITE, "background.png")) == NULL)
+	if ((sprite->background = load(rtv1, PATH_SPRITE,\
+		"background.png")) == NULL)
 		return (EXIT_FAILURE);
 	if ((sprite->background_setting = load(rtv1, PATH_SPRITE,\
 		"background-setting.png")) == NULL)
@@ -28,27 +29,9 @@ int					init_sprite(t_rtv1 *rtv1)
 	return (EXIT_SUCCESS);
 }
 
-static void			toggle_button(t_rtv1 *rtv1, t_button *button, BOOL status)
-{
-	if (status)
-	{
-		if (button->is_hover)
-			put_sprite(rtv1, button->hover, MAIN);
-		else
-			put_sprite(rtv1, button->active, MAIN);
-	}
-	else
-	{
-		if (button->is_hover)
-			put_sprite(rtv1, button->hover_disabled, MAIN);
-		else
-			put_sprite(rtv1, button->disabled, MAIN);
-	}
-}
-
 void				put_setup(t_rtv1 *rtv1)
 {
-	t_sprite 	*sprite;
+	t_sprite	*sprite;
 
 	sprite = &rtv1->sprite;
 	if (rtv1->state == SETUP)
@@ -73,10 +56,29 @@ void				put_setup(t_rtv1 *rtv1)
 	toggle_button(rtv1, &sprite->retry, ACTIVE);
 }
 
+void				toggle_button(t_rtv1 *rtv1, t_button *button, BOOL status)
+{
+	if (status)
+	{
+		if (button->is_hover)
+			put_sprite(rtv1, button->hover, MAIN);
+		else
+			put_sprite(rtv1, button->active, MAIN);
+	}
+	else
+	{
+		if (button->is_hover)
+			put_sprite(rtv1, button->hover_disabled, MAIN);
+		else
+			put_sprite(rtv1, button->disabled, MAIN);
+	}
+}
+
 void				put_sprite(t_rtv1 *rtv1, void *image, int window)
 {
 	if (window == MAIN)
 		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->main.win_ptr, image, 0, 0);
 	else if (window == SETTING)
-		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->setting.win_ptr, image, 0, 0);
+		mlx_put_image_to_window(rtv1->mlx_ptr, rtv1->setting.win_ptr, image,\
+			0, 0);
 }

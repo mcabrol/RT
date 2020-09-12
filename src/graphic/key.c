@@ -11,11 +11,9 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-// #include "minilibx-linux/mlx_int.h"
 
 int		key(int keycode, t_rtv1 *rtv1)
 {
-	printf("key #%d\n", keycode);
 	if (keycode == 53)
 		clean_exit(rtv1);
 	return (EXIT_SUCCESS);

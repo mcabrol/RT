@@ -32,18 +32,7 @@ static char		*init_win_name(int id_win, int id_render)
 	return (win_name);
 }
 
-int		close_rcross(t_win *win)
-{
-	printf("\n\ninfos : \n\n");
-	printf("win_ptr : %p\n", win->win_ptr);
-	printf("img_ptr : %p\n", win->img_ptr);
-	printf("data_ptr : %p\n", win->data_ptr);
-	printf("id_windows : %d\n", win->id_window);
-	printf("available : %d\n", win->available);
-	return (0);
-}
-
-int 		image(t_rtv1 *rtv1)
+int				image(t_rtv1 *rtv1)
 {
 	int		x;
 	int		y;
@@ -68,7 +57,7 @@ int 		image(t_rtv1 *rtv1)
 	return (1);
 }
 
-static	void init_win_array(t_win *win_array)
+static void		init_win_array(t_win *win_array)
 {
 	int		i;
 
@@ -81,7 +70,7 @@ static	void init_win_array(t_win *win_array)
 	}
 }
 
-int		init_image(t_rtv1 *rtv1)
+int				init_image(t_rtv1 *rtv1)
 {
 	char	*win_name;
 	int		id;
@@ -99,7 +88,6 @@ int		init_image(t_rtv1 *rtv1)
 		while (++id < MAX_WIN)
 			if (rtv1->image[id].available == 1)
 				break ;
-		// if id == MAX_WIN ==> error
 		win_name = init_win_name(id, rtv1->id_render);
 		rtv1->image[id] = window(rtv1->mlx_ptr, rtv1->scene.width,
 								rtv1->scene.height, win_name);
@@ -111,12 +99,12 @@ int		init_image(t_rtv1 *rtv1)
 	return (EXIT_SUCCESS);
 }
 
-int 	write_ppm(t_rtv1 *rtv1)
+int				write_ppm(t_rtv1 *rtv1)
 {
-	int 	i;
-	int 	fd;
+	int		i;
+	int		fd;
 	t_scene	*scene;
-	char 	*name;
+	char	*name;
 
 	scene = &rtv1->scene;
 	i = -1;
@@ -124,9 +112,12 @@ int 	write_ppm(t_rtv1 *rtv1)
 	fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	ft_dprintf(fd, "P3\n%d %d\n%d\n", scene->width, scene->height, 255);
 	while (++i < scene->width * scene->height)
-		ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[scene->width * scene->height - i].x, GAMMA),
-			                     	to_byte(rtv1->screen[scene->width * scene->height - i].y, GAMMA),
-			                     	to_byte(rtv1->screen[scene->width * scene->height - i].z, GAMMA));
+		ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[scene->width * \
+										scene->height - i].x, GAMMA),
+									to_byte(rtv1->screen[scene->width * \
+										scene->height - i].y, GAMMA),
+									to_byte(rtv1->screen[scene->width * \
+										scene->height - i].z, GAMMA));
 	close(fd);
 	return (1);
 }

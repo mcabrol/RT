@@ -12,13 +12,14 @@
 
 #include "rtv1.h"
 
-int 	render(t_rtv1 *rtv1)
+int		render(t_rtv1 *rtv1)
 {
 	time_t	before;
 	time_t	after;
 	double	second;
 
-	rtv1->screen = (t_vec *)malloc((rtv1->scene.width * rtv1->scene.height) * sizeof(t_vec));
+	rtv1->screen = (t_vec *)malloc((rtv1->scene.width * rtv1->scene.height) \
+	* sizeof(t_vec));
 	ft_bzero(rtv1->screen, rtv1->scene.width * rtv1->scene.height);
 	if (init_cam(rtv1))
 		return (EXIT_FAILURE);
@@ -31,7 +32,6 @@ int 	render(t_rtv1 *rtv1)
 	rtv1->state = RENDER;
 	return (EXIT_SUCCESS);
 }
-
 
 int		multithread(t_rtv1 *rtv1)
 {
