@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 13:26:04 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/12 17:38:12 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static int		render_is_hover(t_rtv1 *rtv1)
 		rtv1->state = RENDER;
 		(rtv1->id_render)++;
 	}
-	else
-		return (EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
 
