@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
+/*   uv.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:25:45 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/10 18:38:59 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/12 14:30:57 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void		uv(t_ray *ray, t_obj *obj, double *u, double *v)
 		uv_cylinder(u, v, ray, obj);
 }
 
-void 		uv_sphere(double *u, double *v, t_ray *ray)
+void		uv_sphere(double *u, double *v, t_ray *ray)
 {
 	*u = (double)(0.5 + (atan2(ray->n.z, ray->n.x) / (2.0 * M_PI)));
 	*v = (double)(0.5 - (asin(ray->n.y) / M_PI));
 }
 
-void 		uv_cylinder(double *u, double *v, t_ray *ray, t_obj *obj)
+void		uv_cylinder(double *u, double *v, t_ray *ray, t_obj *obj)
 {
 	t_vec	tmp;
-	double 	lenght;
-	double 	h;
+	double	lenght;
+	double	h;
 
 	*u = 0.5 + atan2(ray->n.z, ray->n.x) / (2 * M_PI);
 	sub(&obj->direction, &obj->position, &tmp);
@@ -42,7 +42,7 @@ void 		uv_cylinder(double *u, double *v, t_ray *ray, t_obj *obj)
 	*v = sqrt(h * h - obj->radius * obj->radius) / lenght / 2 * obj->radius;
 }
 
-void 		uv_plane(double *u, double *v, t_ray *ray)
+void		uv_plane(double *u, double *v, t_ray *ray)
 {
 	t_vec n;
 	t_vec z;

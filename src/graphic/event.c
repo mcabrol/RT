@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/07 18:59:51 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/12 14:41:16 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	hook(t_rtv1 *rtv1)
 	setting = &rtv1->setting;
 	image = &rtv1->image[rtv1->id_win];
 	mlx_hook(main->win_ptr, 2, 1L << 2, key, rtv1);
-	// mlx_hook(image->win_ptr, 2, 1L << 2, exit_hook, rtv1);
 	mlx_hook(main->win_ptr, 6, (1L << 6), hover, rtv1);
 	mlx_mouse_hook(main->win_ptr, mouse, rtv1);
 }
@@ -46,6 +45,7 @@ int		is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin,
 	BOOL	tmp;
 
 	tmp = button->is_hover;
-	button->is_hover = (x > xmin && x < xmax && y > ymin && y < ymax) ? TRUE : FALSE;
- 	return ((tmp != button->is_hover) ? TRUE : FALSE);
+	button->is_hover = (x > xmin && x < xmax && y > ymin && y < ymax) ? \
+	TRUE : FALSE;
+	return ((tmp != button->is_hover) ? TRUE : FALSE);
 }

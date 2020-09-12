@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/11 18:54:39 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/12 13:00:39 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int 		init_scene(t_rtv1 *rtv1, char *file)
 		if (parse(file, scene) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		if (prepare_obj(rtv1) == EXIT_FAILURE)
-			return(EXIT_FAILURE);
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

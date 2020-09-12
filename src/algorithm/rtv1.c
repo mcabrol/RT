@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/11 16:41:32 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/12 14:01:37 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		sampling(t_rtv1 *rtv1, t_render *render)
 	}
 }
 
-void 		screen(t_render *render, t_rtv1 *rtv1)
+void		screen(t_render *render, t_rtv1 *rtv1)
 {
 	clamp3(&render->accucolor, 0.0, 1.0, &render->color);
 	nmulti(&render->color, 0.25, &render->l);

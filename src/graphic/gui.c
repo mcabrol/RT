@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gui.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/09 19:43:45 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/12 14:43:20 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int					init_sprite(t_rtv1 *rtv1)
 	sprite = &rtv1->sprite;
 	if ((sprite->background = load(rtv1, PATH_SPRITE, "background.png")) == NULL)
 		return (EXIT_FAILURE);
-	if ((sprite->background_setting = load(rtv1, PATH_SPRITE, "background-setting.png")) == NULL)
+	if ((sprite->background_setting = load(rtv1, PATH_SPRITE,\
+		"background-setting.png")) == NULL)
 		return (EXIT_FAILURE);
 	if (init_button(rtv1, 0))
 		return (EXIT_FAILURE);

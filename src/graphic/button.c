@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gui.c                                              :+:      :+:    :+:   */
+/*   button.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/09 19:43:45 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/12 14:45:19 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void			*load(t_rtv1 *rtv1, char *pathname, char *attr)
 	char	*button;
 
 	name = ft_strjoin(pathname, attr);
-	if ((button = mlx_png_file_to_image(rtv1->mlx_ptr, name, &width, &height)) == NULL)
+	if ((button = mlx_png_file_to_image(rtv1->mlx_ptr, name, &width, &height)) \
+	== NULL)
 		return (NULL);
 	free(name);
 	return (button);
@@ -72,7 +73,8 @@ int				load_button(t_rtv1 *rtv1, t_button *button, char *name)
 		if ((button->disabled = load(rtv1, pathname, "-disabled.png")) == NULL)
 			return (EXIT_FAILURE);
 	if ((ft_strstr(LIST_HOVER_DISABLED, name)))
-		if ((button->hover_disabled = load(rtv1, pathname, "-hover-disabled.png")) == NULL)
+		if ((button->hover_disabled = load(rtv1, pathname, \
+			"-hover-disabled.png")) == NULL)
 			return (EXIT_FAILURE);
 	free(pathname);
 	return (EXIT_SUCCESS);

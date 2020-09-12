@@ -6,13 +6,13 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/11 16:26:53 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/12 13:36:21 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		init_cam(t_rtv1 *rtv1)
+int			init_cam(t_rtv1 *rtv1)
 {
 	t_obj	*camera;
 	t_scene *scene;
@@ -41,7 +41,7 @@ t_obj		*assign_camera(t_scene *scene)
 	return (NULL);
 }
 
-int		set_camera(t_obj *camera, t_rtv1 *rtv1)
+int			set_camera(t_obj *camera, t_rtv1 *rtv1)
 {
 	t_scene *scene;
 
@@ -53,7 +53,8 @@ int		set_camera(t_obj *camera, t_rtv1 *rtv1)
 	scene->cam.ambient = camera->ambient;
 	if (camera->environment.path)
 	{
-		if (load_texture(rtv1, camera->environment.path, &scene->cam.environment))
+		if (load_texture(rtv1, camera->environment.path, \
+			&scene->cam.environment))
 			return (EXIT_FAILURE);
 		scene->cam.environment.width /= 4.0;
 		scene->cam.environment.height /= 3.0;
@@ -76,27 +77,26 @@ void		set_default_camera(t_rtv1 *rtv1)
 void		build_camera(t_scene *scene)
 {
 	t_vec	up;
-	double	half_height;
-	double	half_width;
+	double	half[2];
 	t_vec	horizontal;
 	t_vec	vertical;
 	t_vec	tmp;
 
 	vec(0, 1, 0, &up);
-	half_height = tan(scene->cam.fov);
-	half_width = ((double)scene->width / (double)scene->height) * half_height;
+	half[0] = tan(scene->cam.fov);
+	half[1] = ((double)scene->width / (double)scene->height) * half[0];
 	cross(&scene->cam.direction, &up, &horizontal);
 	norm(&horizontal);
 	cross(&horizontal, &scene->cam.direction, &vertical);
 	norm(&vertical);
 	minus_(&vertical);
 	sum(&scene->cam.position, &scene->cam.direction, &scene->cam.point);
-	nmulti(&vertical, half_height, &tmp);
+	nmulti(&vertical, half[0], &tmp);
 	sub_(&scene->cam.point, &tmp);
-	nmulti(&horizontal, half_width, &tmp);
+	nmulti(&horizontal, half[1], &tmp);
 	sub_(&scene->cam.point, &tmp);
-	nmulti(&horizontal, 2.0 * half_width, &scene->cam.cx);
-	nmulti(&vertical, 2.0 * half_height, &scene->cam.cy);
+	nmulti(&horizontal, 2.0 * half[1], &scene->cam.cx);
+	nmulti(&vertical, 2.0 * half[0], &scene->cam.cy);
 	ndivide_(&scene->cam.cx, (double)scene->width);
 	ndivide_(&scene->cam.cy, (double)scene->height);
 }
