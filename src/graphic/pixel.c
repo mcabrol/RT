@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/11 16:41:29 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/14 20:49:20 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,21 @@ void	put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v)
 	size_t	i;
 
 	win = &rtv1->image[rtv1->id_win];
+	printf("win[%d] : %p\n", rtv1->id_win, win);
+	printf("win[%d] : %p\n", rtv1->id_win, win->data_ptr);
 	i = (x * win->bits_per_pixel / 8) + (y * win->size_line);
+	printf("[%d:%d]\n", x, y);
 	if (x < rtv1->scene.width)
+	{
 		if (y < rtv1->scene.height)
 		{
 			win->data_ptr[i + 2] = (char)to_byte(v->x, GAMMA);
 			win->data_ptr[i + 1] = (char)to_byte(v->y, GAMMA);
 			win->data_ptr[i] = (char)to_byte(v->z, GAMMA);
 		}
+		printf("[%d:%d] - %p\n", x, y, &win->data_ptr[i]);
+
+	}
 }
 
 t_vec	get_pixel_vector(t_texture *texture, int x, int y)
@@ -35,7 +42,9 @@ t_vec	get_pixel_vector(t_texture *texture, int x, int y)
 
 	vec(BLANK, &dest);
 	i = (x * texture->bits_per_pixel / 8) + (y * texture->size_line);
-	if (texture->path)
+	// printf("texture> %s\n", texture->path);
+	// printf("texture> %p\n", texture->data);
+	if (texture->data)
 	{
 		dest.x = (unsigned char)(texture->data[i + 2]) / 255.0;
 		dest.y = (unsigned char)(texture->data[i + 1]) / 255.0;

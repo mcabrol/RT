@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 17:10:57 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/14 19:09:44 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int 		init_scene(t_rtv1 *rtv1, char *file)
 	if (scene->obj_type && scene->obj_options && scene->obj_setter)
 	{
 		if (parse(file, scene) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		if (prepare_obj(rtv1) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

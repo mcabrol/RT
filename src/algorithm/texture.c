@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:25:45 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 14:25:09 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/14 20:37:17 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void		texture(t_ray *ray, t_obj *shape)
 	double	v;
 	t_vec	sample;
 
-	if (shape->texture.path)
+	// ft_printf("texture > %p\n", shape->texture.data);
+	if (shape->texture.data)
 	{
 		uv(ray, shape, &u, &v);
 		sample = texture_coord(u, v, &shape->texture, NORMAL);

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 12:59:43 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/14 19:07:10 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		main(int ac, char **av)
 		return (EXIT_FAILURE);
 
 	// Scene
+
 	if (init_scene(&rtv1, rtv1.file_str) == EXIT_FAILURE)
 		rtv1.state = ERROR;
 	else
@@ -29,6 +30,9 @@ int		main(int ac, char **av)
 
 	// Window
 	if (init_window(&rtv1))
+		return (EXIT_FAILURE);
+
+	if (prepare_obj(&rtv1) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
 	// Start session

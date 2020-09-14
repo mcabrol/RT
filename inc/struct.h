@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/09 18:36:14 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/14 19:59:13 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct			s_radiance
 	t_vec				direction;
 }						t_radiance;
 
-typedef struct 			s_texture
+typedef struct			s_texture
 {
 	char 				*path;
 	void				*image;
@@ -108,7 +108,7 @@ typedef struct			s_obj
 	t_vec 				background; 	// Background Color
 }						t_obj;
 
-typedef					int (*options_func)(t_obj *obj, char *value);
+typedef int				(*options_func)(t_obj *obj, char *value);
 
 typedef struct 			s_scene
 {
@@ -123,6 +123,7 @@ typedef struct 			s_scene
 	int					n;			// Number of object
 	options_func		*obj_setter;
 	t_matrix			*m;
+	pthread_mutex_t 	lock;
 }						t_scene;
 
 typedef struct			s_point

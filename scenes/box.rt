@@ -4,7 +4,7 @@ OBJECT:
 	POSITION: 0 -1 -14
 	RADIUS: 3
 	COLOR: #FEFEFE
-	TEXTURE: textures/parking.png
+	TEXTURE: /Users/mcabrol/Documents/rtv1/textures/earth.png
 },
 {
 	TYPE: BOX
