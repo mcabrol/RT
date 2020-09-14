@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 18:54:56 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/14 21:41:15 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int				russian_roulette(t_ray *ray, t_obj *shape, t_render *render);
 */
 
 void			texture(t_ray *ray, t_obj *shape);
-int				load_texture(t_rtv1 *rtv1, char *path, t_texture *texture);
+int				load_texture(t_rtv1 *rtv1, t_obj *obj);
 t_vec			texture_coord(double u, double v, t_texture *texture,
 				int index);
 void			color_from_texture(t_vec *sample, t_texture *texture,

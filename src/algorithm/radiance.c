@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 21:02:40 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/14 21:05:23 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,10 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *render)
 				return (environment_texture(scene, ray, &render->color));
 		}
 		shape = &scene->obj[id];
-		// ft_printf("BOOOM texture > %p\n", shape->texture.data);
 		eval(ray, ray->distance, &ray->x);
 		normal(ray, shape);
 		lighting(scene, ray, shape);
-		// pthread_mutex_lock(&scene->lock);
 		texture(ray, shape);
-		// pthread_mutex_unlock(&scene->lock);
 		if (russian_roulette(ray, shape, render))
 			return ;
 		reflect(ray, render, shape);

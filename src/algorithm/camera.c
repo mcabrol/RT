@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 13:36:21 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/14 22:01:31 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ int			set_camera(t_obj *camera, t_rtv1 *rtv1)
 	scene->cam.ambient = camera->ambient;
 	if (camera->environment.path)
 	{
-		if (load_texture(rtv1, camera->environment.path, \
-			&scene->cam.environment))
+		ft_printf("p > %s\n", camera->environment.path);
+		rtv1->scene.cam.environment.path = camera->environment.path;
+		if (load_texture(rtv1, &rtv1->scene.cam))
 			return (EXIT_FAILURE);
 		scene->cam.environment.width /= 4.0;
 		scene->cam.environment.height /= 3.0;

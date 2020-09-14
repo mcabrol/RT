@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:25:45 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 20:37:17 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/14 21:56:52 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void		texture(t_ray *ray, t_obj *shape)
 	double	v;
 	t_vec	sample;
 
-	// ft_printf("texture > %p\n", shape->texture.data);
-	if (shape->texture.data)
+	if (shape->texture.path)
 	{
 		uv(ray, shape, &u, &v);
 		sample = texture_coord(u, v, &shape->texture, NORMAL);
@@ -28,17 +27,28 @@ void		texture(t_ray *ray, t_obj *shape)
 	multi_(&ray->mask, &shape->color);
 }
 
-int			load_texture(t_rtv1 *rtv1, char *path, t_texture *texture)
+int			load_texture(t_rtv1 *rtv1, t_obj *obj)
 {
-	texture->image = NULL;
-	texture->path = path;
-	if ((texture->image = mlx_png_file_to_image(rtv1->mlx_ptr, path, \
-		&texture->width, &texture->height)) == NULL)
-		return (EXIT_FAILURE);
-	texture->data = mlx_get_data_addr(texture->image,
-									&(texture->bits_per_pixel),
-									&(texture->size_line),
-									&(texture->endian));
+	obj->texture.image = NULL;
+	// obj->texture.path = path;
+	ft_printf("path > %s\n", obj->environment.path);
+	if (obj->type == CAMERA)
+	{
+		if ((obj->environment.image = mlx_png_file_to_image(rtv1->mlx_ptr, obj->environment.path, \
+			&obj->environment.width, &obj->environment.height)) == NULL)
+			return (EXIT_FAILURE);
+	}
+	else
+	{
+		if ((obj->texture.image = mlx_png_file_to_image(rtv1->mlx_ptr, obj->texture.path, \
+			&obj->texture.width, &obj->texture.height)) == NULL)
+			return (EXIT_FAILURE);
+	}
+	obj->texture.data = mlx_get_data_addr(obj->texture.image,
+									&(obj->texture.bits_per_pixel),
+									&(obj->texture.size_line),
+									&(obj->texture.endian));
+	ft_printf("data > %p\n", obj->texture.data);
 	return (EXIT_SUCCESS);
 }
 
