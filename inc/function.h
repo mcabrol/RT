@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 21:41:15 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/15 20:54:02 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int				load_texture(t_rtv1 *rtv1, t_obj *obj);
 t_vec			texture_coord(double u, double v, t_texture *texture,
 				int index);
 void			color_from_texture(t_vec *sample, t_texture *texture,
-				t_vec *dest);
+				t_vec *dest, int type);
 
 /*
 **	uv.c
@@ -234,7 +234,7 @@ int				mouse(int button, int x, int y, t_rtv1 *rtv1);
 */
 
 void			put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v);
-t_vec			get_pixel_vector(t_texture *texture, int x, int y);
+t_vec			get_pixel_vector(t_texture *texture, int x, int y, int type);
 
 /*
 **	render.c
