@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/09 20:08:13 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/15 19:55:45 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,17 @@ void 	free_scene(t_scene *scene)
 	// free_obj(&scene->cam);
 }
 
-void 	free_obj(t_obj *obj)
-{
-	if (obj->texture.path)
-	{
-		// free(obj->texture.path);
-		// free(obj->texture.data);
-		// free(obj->texture.image);
-	}
-
-
-}
-
-void free_texture(t_scene *scene)
+void free_texture(t_rtv1 *rtv1)
 {
 	int i;
-	t_obj *obj;
 
 	i = -1;
-	obj = NULL;
-	while (++i < scene->n)
+	while (++i < rtv1->scene.n)
 	{
-		obj = &scene->obj[i];
-		if (obj->texture.path)
+		if (rtv1->scene.obj[i].texture.data)
 		{
-			free(obj->texture.path);
-			free(obj->texture.data);
-			free(obj->texture.image);
+			free(rtv1->scene.obj[i].texture.path);
+			mlx_destroy_image(rtv1->mlx_ptr, rtv1->scene.obj[i].texture.image);
 		}
 	}
 }

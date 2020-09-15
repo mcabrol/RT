@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 21:41:15 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/15 19:39:32 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -376,7 +376,7 @@ int				close_rcross(t_win *win);
 
 void			free_scene(t_scene *scene);
 void			free_obj(t_obj *obj);
-void			free_texture(t_scene *scene);
+void			free_texture(t_rtv1 *rtv1);
 void			clean_exit(t_rtv1 *rtv1);
 
 #endif
