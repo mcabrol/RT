@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/15 18:52:29 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/15 20:54:41 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@
 
 # define ACTIVE					TRUE
 # define DISABLE 				FALSE
+
+# define	TEXTURE				0
+# define ENVIRONMENT			1
 
 # define NORMAL					-1
 # define RIGHT					0

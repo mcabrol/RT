@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 14:23:52 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 14:31:25 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/15 20:53:48 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		environment_texture(t_scene *scene, t_ray *ray, t_vec *dest)
 	u = 0.5 * (u / maxaxis + 1.0);
 	v = 0.5 * (v / maxaxis + 1.0);
 	coord = texture_coord(u, v, &scene->cam.environment, index);
-	color_from_texture(&coord, &scene->cam.environment, dest);
+	color_from_texture(&coord, &scene->cam.environment, dest, ENVIRONMENT);
 }
 
 void		cubemap_offset(t_vec *coord, int index, t_texture *texture)

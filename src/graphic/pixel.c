@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/15 18:46:42 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/15 21:03:59 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,20 @@ void	put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v)
 	}
 }
 
-t_vec	get_pixel_vector(t_texture *texture, int x, int y)
+t_vec	get_pixel_vector(t_texture *texture, int x, int y, int type)
 {
 	size_t	i;
 	t_vec	dest;
 
 	vec(BLANK, &dest);
 	i = (x * texture->bits_per_pixel / 8) + (y * texture->size_line);
-	// if (x > texture->width || y > texture->height)
-	// 	return (dest);
-	if (texture->path)
+	if (type == TEXTURE && x < texture->width && y < texture->height)
+	{
+		dest.x = (unsigned char)(texture->data[i + 2]) / 255.0;
+		dest.y = (unsigned char)(texture->data[i + 1]) / 255.0;
+		dest.z = (unsigned char)(texture->data[i]) / 255.0;
+	}
+	else if (type == ENVIRONMENT)
 	{
 		dest.x = (unsigned char)(texture->data[i + 2]) / 255.0;
 		dest.y = (unsigned char)(texture->data[i + 1]) / 255.0;
