@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:25:45 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/15 18:31:48 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/15 20:55:30 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		texture(t_ray *ray, t_obj *shape)
 	{
 		uv(ray, shape, &u, &v);
 		sample = texture_coord(u, v, &shape->texture, NORMAL);
-		color_from_texture(&sample, &shape->texture, &shape->color);
+		color_from_texture(&sample, &shape->texture, &shape->color, TEXTURE);
 	}
 	multi_(&ray->mask, &shape->color);
 }
@@ -72,7 +72,7 @@ t_vec		texture_coord(double u, double v, t_texture *texture, int index)
 	return (res);
 }
 
-void		color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest)
+void		color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest, int type)
 {
 	int		x;
 	int		y;
@@ -80,7 +80,7 @@ void		color_from_texture(t_vec *sample, t_texture *texture, t_vec *dest)
 
 	x = texture->width - sample->x;
 	y = sample->y;
-	img = get_pixel_vector(texture, x, y);
+	img = get_pixel_vector(texture, x, y, type);
 	dest->x = img.x;
 	dest->y = img.y;
 	dest->z = img.z;
