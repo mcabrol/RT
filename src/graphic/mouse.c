@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 20:24:47 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/15 18:56:12 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		render_is_hover(t_rtv1 *rtv1)
 {
 	if (rtv1->state == SETUP)
 	{
-		retry_is_hover(rtv1);
+		// retry_is_hover(rtv1);
 		if (render(rtv1))
 			return (EXIT_FAILURE);
 		rtv1->state = RENDER;

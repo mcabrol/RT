@@ -9,7 +9,6 @@ OBJECT:
 {
 	TYPE: PLANE
 	POSITION: -10 4.6 -15
-	TEXTURE: textures/damier.png
 	SCALE: 0.05
 },
 {
@@ -19,6 +18,12 @@ OBJECT:
 	WIDTH: 10
 	DEPTH: 10
 	EMISSION: #FFFFFF
+},
+{
+	TYPE: PLANE
+	POSITION: -6 -3 0
+	TEXTURE: textures/damier.png
+	SCALE: 0.05
 },
 {
 	TYPE: SPHERE
@@ -33,12 +38,6 @@ OBJECT:
 	COLOR: #9496FD
 	REFLECTION: REFRACTION
 	INDEX: 1.52 1.000293
-},
-{
-	TYPE: PLANE
-	POSITION: -6 -3 0
-	TEXTURE: textures/damier.png
-	SCALE: 0.05
 },
 {
 	TYPE: CAMERA

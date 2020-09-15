@@ -28,7 +28,16 @@ OBJECT:
 	POSITION: 0 -1 -14
 	RADIUS: 3
 	COLOR: #FEFEFE
+	ROTATION: 0 0 0
 	TEXTURE: textures/earth.png
+},
+{
+	TYPE: SPHERE
+	POSITION: 3 -1 -14
+	RADIUS: 3
+	COLOR: #FEFEFE
+	ROTATION: 0 0 0
+	TEXTURE: textures/map.png
 },
 {
 	TYPE: BOX

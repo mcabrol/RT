@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 22:01:31 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/15 18:14:36 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int			set_camera(t_obj *camera, t_rtv1 *rtv1)
 	veccp(&camera->position, &scene->cam.position);
 	veccp(&camera->direction, &scene->cam.direction);
 	norm(&scene->cam.direction);
+	scene->cam.type = CAMERA;
 	scene->cam.fov = deg_to_rad(camera->fov * 0.5);
 	scene->cam.ambient = camera->ambient;
+	scene->cam.environment.path = camera->environment.path;
 	if (camera->environment.path)
 	{
-		ft_printf("p > %s\n", camera->environment.path);
-		rtv1->scene.cam.environment.path = camera->environment.path;
 		if (load_texture(rtv1, &rtv1->scene.cam))
 			return (EXIT_FAILURE);
 		scene->cam.environment.width /= 4.0;

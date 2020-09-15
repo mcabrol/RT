@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:25:45 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 21:56:52 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/15 18:31:48 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,28 @@ void		texture(t_ray *ray, t_obj *shape)
 int			load_texture(t_rtv1 *rtv1, t_obj *obj)
 {
 	obj->texture.image = NULL;
-	// obj->texture.path = path;
-	ft_printf("path > %s\n", obj->environment.path);
+	obj->environment.image = NULL;
 	if (obj->type == CAMERA)
 	{
+		print_obj(obj);
 		if ((obj->environment.image = mlx_png_file_to_image(rtv1->mlx_ptr, obj->environment.path, \
 			&obj->environment.width, &obj->environment.height)) == NULL)
 			return (EXIT_FAILURE);
+		obj->environment.data = mlx_get_data_addr(obj->environment.image,
+										&(obj->environment.bits_per_pixel),
+										&(obj->environment.size_line),
+										&(obj->environment.endian));
 	}
 	else
 	{
 		if ((obj->texture.image = mlx_png_file_to_image(rtv1->mlx_ptr, obj->texture.path, \
 			&obj->texture.width, &obj->texture.height)) == NULL)
 			return (EXIT_FAILURE);
+		obj->texture.data = mlx_get_data_addr(obj->texture.image,
+										&(obj->texture.bits_per_pixel),
+										&(obj->texture.size_line),
+										&(obj->texture.endian));
 	}
-	obj->texture.data = mlx_get_data_addr(obj->texture.image,
-									&(obj->texture.bits_per_pixel),
-									&(obj->texture.size_line),
-									&(obj->texture.endian));
-	ft_printf("data > %p\n", obj->texture.data);
 	return (EXIT_SUCCESS);
 }
 
