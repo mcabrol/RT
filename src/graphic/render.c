@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/15 18:22:40 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/17 15:27:43 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,17 @@ int		render(t_rtv1 *rtv1)
 	double	second;
 	int 	i;
 
+	ft_printf("screen before> %p\n", rtv1->screen);
+	if (rtv1->screen)
+	{
+		ft_printf("BOOOM\n");
+		free(rtv1->screen);
+	}
 	rtv1->screen = (t_vec *)malloc((rtv1->scene.width * rtv1->scene.height) \
 	* sizeof(t_vec));
-	ft_bzero(rtv1->screen, rtv1->scene.width * rtv1->scene.height);
+	ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.width * rtv1->scene.height);
+	ft_printf("screen after> %p\n", rtv1->screen);
+	rtv1->scene.loading = 0;
 	i = -1;
 	while (++i < rtv1->scene.n)
 	{
@@ -31,6 +39,7 @@ int		render(t_rtv1 *rtv1)
 				return (EXIT_FAILURE);
 		}
 	}
+
 	if (init_cam(rtv1))
 		return (EXIT_FAILURE);
 

@@ -8,8 +8,8 @@ OBJECT:
 },
 {
 	TYPE: CAMERA
-	POSITION: 0 0 0
+	POSITION: 0 0 10
 	DIRECTION: 0 0 -1
-	MAP: textures/sky.png
+	MAP: textures/field.png
 	FOV: 50
 };

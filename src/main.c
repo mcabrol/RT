@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 19:07:10 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/17 15:23:22 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		main(int ac, char **av)
 	if (init_window(&rtv1))
 		return (EXIT_FAILURE);
 
-	if (prepare_obj(&rtv1) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+	// if (prepare_obj(&rtv1) == EXIT_FAILURE)
+	// 	return (EXIT_FAILURE);
 
 	// Start session
 	put_setup(&rtv1);

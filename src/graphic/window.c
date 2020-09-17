@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/08 20:43:21 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/17 14:54:29 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ t_win		window(void *mlx_ptr, int width, int height, char *name)
 									&(win.bits_per_pixel),
 									&(win.size_line),
 									&(win.endian));
+	mlx_clear_window(mlx_ptr, win.win_ptr);
 	return (win);
 }

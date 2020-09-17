@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 21:13:51 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/17 15:43:19 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,23 +101,45 @@ int				init_image(t_rtv1 *rtv1)
 
 int				write_ppm(t_rtv1 *rtv1)
 {
+	// int		i;
+	// int		fd;
+	// t_scene	*scene;
+	// char	*name;
+	//
+	// scene = &rtv1->scene;
+	// i = -1;
+	// name = stamp();
+	// fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	// ft_dprintf(fd, "P3\n%d %d\n%d\n", scene->width, scene->height, 255);
+	// while (++i < scene->width * scene->height)
+	// 	ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[i].x, GAMMA),
+	// 								to_byte(rtv1->screen[i].y, GAMMA),
+	// 								to_byte(rtv1->screen[i].z, GAMMA));
+	// close(fd);
+	// return (1);
+
+	int		x;
+	int		y;
 	int		i;
 	int		fd;
-	t_scene	*scene;
 	char	*name;
 
-	scene = &rtv1->scene;
-	i = -1;
+	y = -1;
 	name = stamp();
 	fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	ft_dprintf(fd, "P3\n%d %d\n%d\n", scene->width, scene->height, 255);
-	while (++i < scene->width * scene->height)
-		ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[scene->width * \
-										scene->height - i].x, GAMMA),
-									to_byte(rtv1->screen[scene->width * \
-										scene->height - i].y, GAMMA),
-									to_byte(rtv1->screen[scene->width * \
-										scene->height - i].z, GAMMA));
+	ft_dprintf(fd, "P3\n%d %d\n%d\n", rtv1->scene.width, rtv1->scene.height, 255);
+	while (++y < rtv1->scene.height)
+	{
+		x = -1;
+		while (++x < rtv1->scene.width)
+		{
+			i = (rtv1->scene.height - 1 - y) * rtv1->scene.width + x;
+			ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[i].x, GAMMA),
+											to_byte(rtv1->screen[i].y, GAMMA),
+											to_byte(rtv1->screen[i].z, GAMMA));
+		}
+	}
 	close(fd);
 	return (1);
+
 }

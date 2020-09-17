@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/09/15 19:39:32 by judrion          ###   ########.fr       */
-=======
-/*   Updated: 2020/09/15 20:54:02 by mcabrol          ###   ########.fr       */
->>>>>>> 2903e52c9db82a133395568983335f14ec4e1ea2
+/*   Updated: 2020/09/17 13:49:29 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,7 +362,7 @@ options_func	*setup_obj_setter(int nb_options);
 **	debbug.c
 */
 
-void			loading_text(int height, int y);
+void			loading_text(t_scene *scene, int y);
 char			*stamp(void);
 void			timer(int time);
 void			print_obj(t_obj *obj);

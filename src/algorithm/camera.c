@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/15 18:14:36 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/17 15:27:25 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int			set_camera(t_obj *camera, t_rtv1 *rtv1)
 	scene->cam.fov = deg_to_rad(camera->fov * 0.5);
 	scene->cam.ambient = camera->ambient;
 	scene->cam.environment.path = camera->environment.path;
+	veccp(&camera->rotation, &scene->cam.rotation);
 	if (camera->environment.path)
 	{
 		if (load_texture(rtv1, &rtv1->scene.cam))

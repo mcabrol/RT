@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 20:39:30 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/17 14:43:04 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		*pathtracer(void *var)
 	render.y = -1;
 	while (++(render.y) < scene->height)
 	{
-		loading_text(scene->height, render.y);
+		// loading_text(scene, render.y);
 		render.x = thread->x;
 		while (++(render.x) < thread->max)
 			sampling(thread->rtv1, &render);

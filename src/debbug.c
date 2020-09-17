@@ -6,15 +6,30 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/14 22:02:35 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/17 15:14:39 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	 	loading_text(int height, int y)
+void 	 	loading_text(t_scene *scene, int y)
 {
-	ft_dprintf(1, "\r%3.0f%%", 100.0 * y / (height - 1));
+	y = 0;
+	if (scene->loading == 0)
+		printf("\r.");
+	else if (scene->loading == 1)
+		ft_printf("\r..");
+	else if (scene->loading == 2)
+		ft_printf("\r...");
+	else if (scene->loading == 3)
+		ft_printf("\r...");
+	scene->loading++;
+	// double a;
+	//
+	// a = 100.0 * y / (scene->height - 1);
+	// if (a > scene->loading)
+	// 	scene->loading = a;
+	// ft_dprintf(1, "\r%3.0f%%", "...");
 }
 
 char 		*stamp(void)
@@ -84,6 +99,9 @@ void 		print_obj(t_obj *obj)
 	ft_printf("HEIGHT : %f\n", obj->height);
 	ft_printf("WIDTH : %f\n", obj->width);
 	ft_printf("DEPTH : %f\n", obj->depth);
+	ft_printf("ROTATION : ");
+	printv(&obj->rotation);
+	ft_printf("\n");
 }
 
 void		printr(t_ray *r)
