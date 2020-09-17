@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/15 19:55:45 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/17 18:06:30 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void free_all_sprite(t_sprite *sprite, void *mlx_ptr)
 	mlx_destroy_image(mlx_ptr, sprite->background_setting);
 }
 
-
 void 	clean_exit(t_rtv1 *rtv1)
 {
 	t_win 	*main;
@@ -107,14 +106,16 @@ void 	clean_exit(t_rtv1 *rtv1)
 	main = &rtv1->main;
 	if (rtv1->scene.obj != NULL)
 	{
-		ft_tabdel(rtv1->scene.obj_type);
-		ft_tabdel(rtv1->scene.obj_options);
-		free(rtv1->scene.obj_setter);
+		if (rtv1->state != ERROR)
+		{
+			ft_tabdel(rtv1->scene.obj_type);
+			ft_tabdel(rtv1->scene.obj_options);
+			free(rtv1->scene.obj_setter);
+			free(rtv1->scene.obj);
+		}
 	}
-	free(rtv1->scene.obj);
 	clean_all_windows(rtv1);
 	free_all_sprite(&rtv1->sprite, rtv1->mlx_ptr);
 	mlx_destroy_image(rtv1->mlx_ptr, rtv1->main.img_ptr);
-	// mlx_destroy_window(rtv1->mlx_ptr, rtv1->main.win_ptr);
 	exit(EXIT_SUCCESS);
 }

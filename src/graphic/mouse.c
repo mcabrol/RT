@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 15:28:33 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/17 17:39:32 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int		retry_is_hover(t_rtv1 *rtv1)
 		ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.height * rtv1->scene.width);
 		if (rtv1->scene.obj != NULL)
 		{
-			ft_printf("BIIIM\n");
 			free_texture(rtv1);
 			free(rtv1->scene.obj);
 		}

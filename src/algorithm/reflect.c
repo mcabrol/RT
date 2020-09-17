@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 16:44:35 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 14:00:08 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/17 17:29:40 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		diffuse_reflect(t_vec *d, t_vec *n, unsigned short xseed[3])
 	norm(d);
 }
 
-void static refractive_stop(t_ray *ray, t_vec *d_re, double pr)
+static void refractive_stop(t_ray *ray, t_vec *d_re, double pr)
 {
 	ray->pr = pr;
 	veccp(d_re, &ray->direction);

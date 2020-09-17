@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
+/*   By: judrion <judrion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 09:38:01 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/11 18:48:36 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/17 18:12:06 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,25 +302,4 @@ int set_map(t_obj *obj, char *value)
 	}
 	obj->environment.path = ft_strdup(value + 1);
 	return (EXIT_SUCCESS);
-}
-
-int	set_camera_matrix(t_scene *scene)
-{
-	int		i;
-	t_obj	*obj;
-
-	i = 0;
-	// ft_printf("scene->m : %p\n", scene->m);
-	while (i < scene->n)
-	{
-		if (scene->obj[i].type == CAMERA)
-			obj = &scene->obj[i];
-		i = i + 1;
-	}
-	scene->m = matrix_lookat(&obj->position, &obj->direction);
-	// vec(scene->width * scene->cam.fov / scene->height, 0, 0, &scene->cam.cx);
-	// cross(&scene->cam.cx, &scene->cam.direction, &scene->cam.cy);
-	// norm(&scene->cam.cy);
-	// nmulti_(&scene->cam.cy, scene->cam.fov);
-	return (0);
 }

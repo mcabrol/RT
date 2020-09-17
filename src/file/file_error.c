@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
+/*   By: judrion <judrion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 10:47:42 by judrion           #+#    #+#             */
-/*   Updated: 2020/03/09 14:27:53 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/17 17:53:03 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void		throw_error_file(int errorcode, char **data,
 		}
 		if (scene->obj_setter)
 			free(scene->obj_setter);
-		if (scene->m)
-			free(scene->m);
 	}
 	// if (errorcode != OBJECT_BAD_FORMAT && errorcode != SET_OBJECT_FAILED
 	// 	&& errorcode != EXTRACT_DATA_FAILED && errorcode != VECTOR_BAD_VALUE
