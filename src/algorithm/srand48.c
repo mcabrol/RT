@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 09:31:16 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/10 18:28:26 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/18 22:11:51 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ int			russian_roulette(t_ray *ray, t_obj *shape, t_render *render)
 {
 	double continue_probability;
 
+	continue_probability = max(&shape->color);
 	if (4 < ray->depth)
 	{
-		continue_probability = max(&shape->color);
+		// ft_printf("[Stop]\n");
+		// ft_printf("%f\n", continue_probability);
 		if (erand48(render->xseed) >= continue_probability)
 		{
 			veccp(&ray->blank, &render->color);
@@ -33,5 +35,7 @@ int			russian_roulette(t_ray *ray, t_obj *shape, t_render *render)
 		}
 		ndivide_(&ray->mask, continue_probability);
 	}
+	// else
+	// 	ft_printf("[Ok]\n");
 	return (CONTINUE);
 }

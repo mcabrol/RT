@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debbug.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/18 18:10:28 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/18 21:04:21 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,7 @@
 
 void 	 	loading_text(t_scene *scene, int y)
 {
-	y = 0;
-	if (scene->loading == 0)
-		printf("\r.");
-	else if (scene->loading == 1)
-		ft_printf("\r..");
-	else if (scene->loading == 2)
-		ft_printf("\r...");
-	else if (scene->loading == 3)
-		ft_printf("\r...");
-	scene->loading++;
-	// double a;
-	//
-	// a = 100.0 * y / (scene->height - 1);
-	// if (a > scene->loading)
-	// 	scene->loading = a;
-	// ft_dprintf(1, "\r%3.0f%%", "...");
+	ft_printf("\r%3.0f%%", 100.0 * y / (scene->height - 1));
 }
 
 char 		*stamp(void)

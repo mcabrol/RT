@@ -9,7 +9,7 @@ OBJECT:
 {
 	TYPE: PLANE
 	POSITION: -10 4.6 -15
-	SCALE: 0.05
+	SCALE: 0.5
 	TEXTURE: textures/damier.png
 },
 {
