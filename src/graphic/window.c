@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 14:54:29 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/18 18:11:04 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int			init_window(t_rtv1 *rtv1)
 		return (EXIT_FAILURE);
 	rtv1->id_win = 0;
 	rtv1->id_ppm = 0;
+	rtv1->main.available = -1;
 	return (EXIT_SUCCESS);
 }
 

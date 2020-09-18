@@ -6,12 +6,12 @@
 #    By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/10 11:25:08 by mcabrol           #+#    #+#              #
-#    Updated: 2020/09/17 17:46:09 by mcabrol          ###   ########.fr        #
+#    Updated: 2020/09/17 18:41:34 by judrion          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = rtv1
-CFLAGS = -O3 -Wall -Wextra -Werror
+CFLAGS = -g -O3 -Wall -Wextra -Werror
 INC = -Iinc -Ilib/minilibx -Ilib/libft/inc -Ilib/libmath
 SRC := $(shell find src -type f -regex ".*\.c")
 LIB = lib/libft/libft.a lib/libmath/libmath.a lib/minilibx/libmlx.dylib

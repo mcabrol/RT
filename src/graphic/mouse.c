@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 17:39:32 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/18 19:30:48 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 static int		retry_is_hover(t_rtv1 *rtv1)
 {
-	printf("rtv1->state : %d\n", rtv1->state);
 	if (rtv1->state == SETUP || rtv1->state == ERROR)
 	{
 		if (rtv1->state == ERROR)
 			rtv1->setter = FALSE;
-		ft_bzero(rtv1->file_str, ft_strlen(rtv1->file_str));
 	}
 	else if (rtv1->state == RENDER)
 	{

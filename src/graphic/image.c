@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 15:43:19 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/18 18:11:25 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int				image(t_rtv1 *rtv1)
 		}
 	}
 	mlx_put_image_to_window(rtv1->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
-	mlx_hook(win->win_ptr, 17, (1L << 17), close_rcross, win);
 	return (1);
 }
 
@@ -91,6 +90,7 @@ int				init_image(t_rtv1 *rtv1)
 		win_name = init_win_name(id, rtv1->id_render);
 		rtv1->image[id] = window(rtv1->mlx_ptr, rtv1->scene.width,
 								rtv1->scene.height, win_name);
+		mlx_hook(rtv1->image[id].win_ptr, 17, (1L << 17), close_rcross, &rtv1->image[id]);
 		rtv1->image[id].id_window = id;
 		rtv1->image[id].available = 0;
 		rtv1->id_win = id;

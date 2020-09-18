@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debbug.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 15:14:39 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/18 18:10:28 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,14 @@ void		printv(t_vec *v)
 
 int				close_rcross(t_win *win)
 {
-	printf("\n\ninfos : \n\n");
+	printf("\n\nwin : %p\n", win);
+	printf("infos : \n\n");
 	printf("win_ptr : %p\n", win->win_ptr);
 	printf("img_ptr : %p\n", win->img_ptr);
 	printf("data_ptr : %p\n", win->data_ptr);
 	printf("id_windows : %d\n", win->id_window);
 	printf("available : %d\n", win->available);
+	if (win->available == -1)
+		printf("Main windows closed. Need to clean");
 	return (0);
 }
