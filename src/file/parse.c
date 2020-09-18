@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 17:49:43 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/18 19:07:30 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int 	extract_obj_data(char *start, char *end, t_scene *scene, int j)
 		opt = ft_strsplit(data[i], ':');
 		if (set_obj(opt[0], opt[1], &scene->obj[j], scene) == EXIT_FAILURE)
 		{
-			clean_opt(opt);			
+			clean_opt(opt);
 			throw_error_file(SET_OBJECT_FAILED, data, scene, i);
 			return (-1);
 		}

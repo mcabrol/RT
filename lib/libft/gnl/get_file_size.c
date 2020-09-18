@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 14:12:54 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/02/26 15:36:38 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/18 19:22:14 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 int			get_file_size(const char *filename)
 {
@@ -22,7 +23,11 @@ int			get_file_size(const char *filename)
 	i = 0;
 	a = 0;
 	if ((fd = open(filename, O_RDONLY)) < 0 || fd > OPEN_MAX)
+	{
+		if (fd > 0)
+			close(fd);
 		return (-1);
+	}
 	while (1)
 	{
 		i = read(fd, buffer, BUFF_SIZE);
@@ -37,5 +42,6 @@ int			get_file_size(const char *filename)
 			*buffer -= BUFF_SIZE;
 		}
 	}
+	close(fd);
 	return (0);
 }
