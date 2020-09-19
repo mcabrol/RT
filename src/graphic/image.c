@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/18 18:11:25 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/19 11:45:01 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,20 @@ int				image(t_rtv1 *rtv1)
 	return (1);
 }
 
-static void		init_win_array(t_win *win_array)
+static t_win		*init_win_array(void)
 {
 	int		i;
+	t_win	*image;
 
+	image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
 	i = 0;
 	while (i < MAX_WIN)
 	{
-		win_array[i].available = 1;
-		win_array[i].id_window = i;
+		image[i].available = 1;
+		image[i].id_window = i;
 		i = i + 1;
 	}
+	return (image);
 }
 
 int				init_image(t_rtv1 *rtv1)
@@ -78,11 +81,11 @@ int				init_image(t_rtv1 *rtv1)
 		return (EXIT_FAILURE);
 	if (rtv1->id_win == 0)
 	{
-		rtv1->image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
-		init_win_array(rtv1->image);
+		rtv1->image = init_win_array();
 	}
 	if (rtv1->image)
 	{
+		clean_image_array(rtv1);
 		id = -1;
 		while (++id < MAX_WIN)
 			if (rtv1->image[id].available == 1)
@@ -101,23 +104,6 @@ int				init_image(t_rtv1 *rtv1)
 
 int				write_ppm(t_rtv1 *rtv1)
 {
-	// int		i;
-	// int		fd;
-	// t_scene	*scene;
-	// char	*name;
-	//
-	// scene = &rtv1->scene;
-	// i = -1;
-	// name = stamp();
-	// fd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	// ft_dprintf(fd, "P3\n%d %d\n%d\n", scene->width, scene->height, 255);
-	// while (++i < scene->width * scene->height)
-	// 	ft_dprintf(fd, "%d %d %d ", to_byte(rtv1->screen[i].x, GAMMA),
-	// 								to_byte(rtv1->screen[i].y, GAMMA),
-	// 								to_byte(rtv1->screen[i].z, GAMMA));
-	// close(fd);
-	// return (1);
-
 	int		x;
 	int		y;
 	int		i;

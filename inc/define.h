@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 13:25:26 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/19 12:34:51 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define OBJ_OPT_STR			"POSITION DIRECTION EMISSION COLOR REFLECTION RADIUS ANGLE HEIGHT WIDTH DEPTH FOV AMBIENT ROTATION TEXTURE SCALE INDEX MAP"
 
 # define LIST_HOVER				"save render retry setup display"
-# define LIST_DISABLED			"sample format render display save x8 x20 x200 x500 x1000 x5000 320x240 854x480 1024x768 1280x720 1400x1050 1920x1080"
+# define LIST_DISABLED			"setup sample format render display save x8 x20 x200 x500 x1000 x5000 320x240 854x480 1024x768 1280x720 1400x1050 1920x1080"
 # define LIST_HOVER_DISABLED	"save render display"
 
 # define SPHERE					0

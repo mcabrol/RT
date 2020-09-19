@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/18 18:10:28 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/19 12:04:25 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,4 @@ void		printr(t_ray *r)
 void		printv(t_vec *v)
 {
 	ft_printf("[%f %f %f]\n", v->x, v->y, v->z);
-}
-
-int				close_rcross(t_win *win)
-{
-	printf("\n\nwin : %p\n", win);
-	printf("infos : \n\n");
-	printf("win_ptr : %p\n", win->win_ptr);
-	printf("img_ptr : %p\n", win->img_ptr);
-	printf("data_ptr : %p\n", win->data_ptr);
-	printf("id_windows : %d\n", win->id_window);
-	printf("available : %d\n", win->available);
-	if (win->available == -1)
-		printf("Main windows closed. Need to clean");
-	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 18:06:30 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/19 12:30:12 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void free_sprite(t_button button, char *nom, void *mlx_ptr)
 	printf("disabled : %p\n", button.disabled);
 
 
-	mlx_destroy_image(mlx_ptr, button.active);
+	if (button.active != NULL)
+		mlx_destroy_image(mlx_ptr, button.active);
 	if (button.disabled != NULL)
 		mlx_destroy_image(mlx_ptr, button.disabled);
 	if (button.hover != NULL)
@@ -99,6 +100,36 @@ void free_all_sprite(t_sprite *sprite, void *mlx_ptr)
 	mlx_destroy_image(mlx_ptr, sprite->background_setting);
 }
 
+void	clean_image_array(t_rtv1 *rtv1)
+{
+	int		i;
+
+	i = 0;
+	while (i < MAX_WIN)
+	{
+		if (rtv1->image[i].available == 2)
+		{
+			rtv1->image[i].available = 1;
+			mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
+			mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
+		}
+		i = i + 1;
+	}
+}
+
+int				close_rcross(t_win *win)
+{
+	win->available = 2;
+	return (0);
+}
+
+int		close_rcross_main(t_rtv1 *rtv1)
+{
+	printf("Hey la! %p\n", &rtv1);
+	clean_exit(rtv1);
+	return (0);
+}
+
 void 	clean_exit(t_rtv1 *rtv1)
 {
 	t_win 	*main;
@@ -108,10 +139,14 @@ void 	clean_exit(t_rtv1 *rtv1)
 	{
 		if (rtv1->state != ERROR)
 		{
-			ft_tabdel(rtv1->scene.obj_type);
-			ft_tabdel(rtv1->scene.obj_options);
-			free(rtv1->scene.obj_setter);
-			free(rtv1->scene.obj);
+			printf("rtv1->scene.obj_type : %p\n", rtv1->scene.obj_type);
+			if (rtv1->scene.obj_type && rtv1->scene.obj_options)
+			{
+				ft_tabdel(rtv1->scene.obj_type);
+				ft_tabdel(rtv1->scene.obj_options);
+				free(rtv1->scene.obj_setter);
+				free(rtv1->scene.obj);
+			}
 		}
 	}
 	clean_all_windows(rtv1);

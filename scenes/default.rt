@@ -14,7 +14,7 @@ OBJECT:
 	TEXTURE: textures/mars.png
 },
 {
-	TYPE: BX
+	TYPE: BOX
 	POSITION: -8 5 -10
 	HEIGHT: 0.1
 	WIDTH: 10
