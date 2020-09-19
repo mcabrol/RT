@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/18 21:55:44 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/19 14:50:00 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		*pathtracer(void *var)
 	render.y = -1;
 	while (++(render.y) < scene->height)
 	{
-		// loading_text(scene, render.y);
+		loading_text(scene, render.y);
 		render.x = thread->x;
 		while (++(render.x) < thread->max)
 			sampling(thread->rtv1, &render);

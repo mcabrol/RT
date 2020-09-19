@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 12:16:52 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/19 14:47:48 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -374,13 +374,16 @@ void			printv(t_vec *v);
 **	free.c
 */
 
-void			free_scene(t_scene *scene);
+void 			free_sprite(t_button button, void *mlx_ptr);
+void 			free_all_sprite(t_sprite *sprite, void *mlx_ptr);
 void			free_obj(t_obj *obj);
 void			free_texture(t_rtv1 *rtv1);
 void			clean_exit(t_rtv1 *rtv1);
 void			clean_image_array(t_rtv1 *rtv1);
 int				close_rcross(t_win *win);
 int				close_rcross_main(t_rtv1 *rtv1);
+int				close_rcross_s(t_rtv1 *rtv1);
+
 
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 14:26:27 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/19 14:45:34 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void			create_setting(t_rtv1 *rtv1)
 		rtv1->setting = window(rtv1->mlx_ptr, W_SETTING, H_SETTING, "Settings");
 		mlx_hook(rtv1->setting.win_ptr, 6, (1L << 6), hover_setting, rtv1);
 		mlx_mouse_hook(rtv1->setting.win_ptr, mouse_setting, rtv1);
+		mlx_hook(rtv1->setting.win_ptr, 17, (1L << 17), close_rcross_s, rtv1);
 		(rtv1->id_setting)++;
 	}
 	put_setting(rtv1);
