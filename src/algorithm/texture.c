@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:25:45 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/18 21:31:25 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/19 14:04:11 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,20 @@ t_vec		texture_coord(double u, double v, t_texture *texture, int index)
 {
 	int		x;
 	int		y;
+	int		environment;
 	t_vec	res;
 
-	if (index >= 0)
+	environment = (index >= 0) ? TRUE : FALSE;
+	if (environment)
 		texture->scale = 0.5;
-	x = (double)(texture->width - 1.0) * u * texture->scale;
-	y = (double)(texture->height - 1.0) * v * texture->scale;
+	x = (double)(texture->width - 1.0) * u * texture->scale * 2.0;
+	y = (double)(texture->height - 1.0) * v * texture->scale * 2.0;
 	x = x % (texture->width - 1);
 	y = y % (texture->height - 1);
-	vec((double)(x), (double)(y), 0.0, &res);
+	if (environment)
+		vec((double)(texture->width - x), (double)(texture->height - y), 0.0, &res);
+	else
+		vec((double)(x), (double)(y), 0.0, &res);
 	cubemap_offset(&res, index, texture);
 	return (res);
 }
