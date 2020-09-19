@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/15 18:33:23 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/18 22:01:46 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void		radiance(t_scene *scene, t_ray *ray, t_render *render)
 {
+	int			hit;
 	size_t		id;
 	t_obj		*shape;
 
 	vec(0.0, 0.0, 0.0, &ray->blank);
 	vec(1.0, 1.0, 1.0, &ray->mask);
+	hit = 0;
 	while (TRUE)
 	{
 		if (!intersect(ray, &id, scene))
@@ -26,8 +28,11 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *render)
 			if (scene->cam.environment.path == NULL)
 				return (veccp(&ray->blank, &render->color));
 			else
-				return (environment_texture(scene, ray, &render->color));
+				return ((hit) ? environment_texture(scene, ray, &render->color)\
+				: veccp(&ray->blank, &render->color));
 		}
+		else
+			hit++;
 		shape = &scene->obj[id];
 		eval(ray, ray->distance, &ray->x);
 		normal(ray, shape);

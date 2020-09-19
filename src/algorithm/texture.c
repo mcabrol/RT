@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:25:45 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/15 20:55:30 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/18 21:31:25 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int			load_texture(t_rtv1 *rtv1, t_obj *obj)
 	obj->environment.image = NULL;
 	if (obj->type == CAMERA)
 	{
-		print_obj(obj);
 		if ((obj->environment.image = mlx_png_file_to_image(rtv1->mlx_ptr, obj->environment.path, \
 			&obj->environment.width, &obj->environment.height)) == NULL)
 			return (EXIT_FAILURE);
@@ -63,11 +62,11 @@ t_vec		texture_coord(double u, double v, t_texture *texture, int index)
 
 	if (index >= 0)
 		texture->scale = 0.5;
-	x = (double)(texture->width - 1.0) * u * texture->scale * 2.0;
-	y = (double)(texture->height - 1.0) * v * texture->scale * 2.0;
+	x = (double)(texture->width - 1.0) * u * texture->scale;
+	y = (double)(texture->height - 1.0) * v * texture->scale;
 	x = x % (texture->width - 1);
 	y = y % (texture->height - 1);
-	vec((double)(texture->width - x), (double)(texture->height - y), 0.0, &res);
+	vec((double)(x), (double)(y), 0.0, &res);
 	cubemap_offset(&res, index, texture);
 	return (res);
 }

@@ -6,14 +6,14 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 12:34:51 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/19 13:42:04 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_H
 # define DEFINE_H
 
-# define THREAD					18
+# define THREAD					16
 
 # define H_MAIN					80
 # define W_MAIN					544
