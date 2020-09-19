@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:25:45 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 14:04:11 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/19 17:27:00 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ t_vec		texture_coord(double u, double v, t_texture *texture, int index)
 
 	environment = (index >= 0) ? TRUE : FALSE;
 	if (environment)
-		texture->scale = 0.5;
-	x = (double)(texture->width - 1.0) * u * texture->scale * 2.0;
-	y = (double)(texture->height - 1.0) * v * texture->scale * 2.0;
+		texture->scale = 1.0;
+	x = (double)(texture->width - 1.0) * u * texture->scale;
+	y = (double)(texture->height - 1.0) * v * texture->scale;
 	x = x % (texture->width - 1);
 	y = y % (texture->height - 1);
 	if (environment)
