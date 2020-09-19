@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 11:45:01 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/19 17:43:35 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,19 @@ int				init_image(t_rtv1 *rtv1)
 	char	*win_name;
 	int		id;
 
+
+
 	if (rtv1->id_win > MAX_WIN)
+	{
+		clean_image_array(rtv1);
 		return (EXIT_FAILURE);
+	}
 	if (rtv1->id_win == 0)
 	{
 		rtv1->image = init_win_array();
 	}
 	if (rtv1->image)
 	{
-		clean_image_array(rtv1);
 		id = -1;
 		while (++id < MAX_WIN)
 			if (rtv1->image[id].available == 1)

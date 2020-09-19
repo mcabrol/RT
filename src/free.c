@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 14:47:40 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/19 17:40:18 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	clean_image_array(t_rtv1 *rtv1)
 			rtv1->image[i].available = 1;
 			mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
 			mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
+			printf("rtv1->id_win : %d\n", rtv1->id_win);
+			rtv1->id_win = rtv1->id_win - 1;
 		}
 		i = i + 1;
 	}
