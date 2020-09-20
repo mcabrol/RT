@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 15:56:11 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 22:48:20 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ double		intersect_box(t_obj *box, t_ray *ray)
 
 	minmax = set_min_max(box, ray);
 	ret = ft_check_pnt_box(minmax[0], minmax[1]);
+	free(minmax[0]);
+	free(minmax[1]);
 	free(minmax);
 	return (ret);
 }
@@ -31,6 +33,8 @@ void		box_normal(t_obj *box, t_ray *ray)
 	divide3(1, &ray->direction, &rev_ov);
 	minmax = set_min_max(box, ray);
 	check_box(ray, minmax[0], minmax[1], rev_ov);
+	free(minmax[0]);
+	free(minmax[1]);
 	free(minmax);
 }
 
