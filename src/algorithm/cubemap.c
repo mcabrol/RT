@@ -3,87 +3,112 @@
 /*                                                        :::      ::::::::   */
 /*   cubemap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 14:23:52 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 17:11:38 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 13:03:10 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
+static	void setup_data(t_env_texture *data, t_ray *ray)
+{
+	data->xyz[0] = ray->direction.x;
+	data->xyz[1] = ray->direction.y;
+	data->xyz[2] = ray->direction.z;
+	data->abs[0] = (double)fabs(ray->direction.x);
+	data->abs[1] = (double)fabs(ray->direction.y);
+	data->abs[2] = (double)fabs(ray->direction.z);
+	data->positive[0] = ray->direction.x > 0 ? 1 : 0;
+	data->positive[1] = ray->direction.y > 0 ? 1 : 0;
+	data->positive[2] = ray->direction.z > 0 ? 1 : 0;
+}
+
+static void positive(t_env_texture *data, int whichone)
+{
+	if (whichone == 0)
+	{
+		data->maxaxis = data->abs[0];
+		data->uv[0] = data->xyz[2] * -1;
+		data->uv[1] = data->xyz[1];
+		data->index = RIGHT;
+	}
+	else if (whichone == 1)
+	{
+		data->maxaxis = data->abs[2];
+		data->uv[0] = data->xyz[0];
+		data->uv[1] = data->xyz[1];
+		data->index = FRONT;
+	}
+	else if (whichone == 2)
+	{
+		data->maxaxis = data->abs[1];
+		data->uv[0] = data->xyz[0];
+		data->uv[1] = data->xyz[2] * -1;
+		data->index = TOP;
+	}
+}
+
+static void not_positive(t_env_texture *data, int whichone)
+{
+	if (whichone == 0)
+	{
+		data->maxaxis = data->abs[0];
+		data->uv[0] = data->xyz[2];
+		data->uv[1] = data->xyz[1];
+		data->index = LEFT;
+	}
+	else if (whichone == 1)
+	{
+		data->maxaxis = data->abs[1];
+		data->uv[0] = data->xyz[0];
+		data->uv[1] = data->xyz[1];
+		data->index = BOTTOM;
+	}
+	else if (whichone == 2)
+	{
+		data->maxaxis = data->abs[2];
+		data->uv[0] = data->xyz[0] * -1;
+		data->uv[1] = data->xyz[1];
+		data->index = BACK;
+	}
+
+}
+
+// static void debbug_struct(t_env_texture *data)
+// {
+// 	printf("xyz : [%f:%f:%f]\n", data->xyz[0], data->xyz[1], data->xyz[2]);
+// 	printf("uv : [%f:%f]\n", data->uv[0], data->uv[1]);
+// 	printf("abs: [%f:%f:%f]\n", data->xyz[0], data->xyz[1], data->xyz[2]);
+// 	printf("positive : [%d:%d:%d]\n", data->positive[0], data->positive[1], data->positive[2]);
+// 	printf("maxaxis : %f\n", data->maxaxis);
+// 	printf("index : %d\n", data->index);
+// }
+
 void		environment_texture(t_scene *scene, t_ray *ray, t_vec *dest)
 {
-	double	x;
-	double	y;
-	double	z;
-	double	maxaxis;
-	double	u;
-	double	v;
-	int		index;
-	t_vec	coord;
-	double	absx;
-	double	absy;
-	double	absz;
-	int		isxpositive;
-	int		isypositive;
-	int		iszpositive;
+	t_env_texture		d;
+	t_vec				coord;
 
-	x = ray->direction.x;
-	y = ray->direction.y;
-	z = ray->direction.z;
-	absx = (double)fabs(ray->direction.x);
-	absy = (double)fabs(ray->direction.y);
-	absz = (double)fabs(ray->direction.z);
-	isxpositive = ray->direction.x > 0 ? 1 : 0;
-	isypositive = ray->direction.y > 0 ? 1 : 0;
-	iszpositive = ray->direction.z > 0 ? 1 : 0;
-	if (isxpositive && absx >= absy && absx >= absz)
-	{
-		maxaxis = absx;
-		u = -z;
-		v = y;
-		index = RIGHT;
-	}
-	if (!isxpositive && absx >= absy && absx >= absz)
-	{
-		maxaxis = absx;
-		u = z;
-		v = y;
-		index = LEFT;
-	}
-	if (isypositive && absy >= absx && absy >= absz)
-	{
-		maxaxis = absy;
-		u = x;
-		v = -z;
-		index = TOP;
-	}
-	if (!isypositive && absy >= absx && absy >= absz)
-	{
-		maxaxis = absy;
-		u = x;
-		v = z;
-		index = BOTTOM;
-	}
-	if (iszpositive && absz >= absx && absz >= absy)
-	{
-		maxaxis = absz;
-		u = x;
-		v = y;
-		index = FRONT;
-	}
-	if (!iszpositive && absz >= absx && absz >= absy)
-	{
-		maxaxis = absz;
-		u = -x;
-		v = y;
-		index = BACK;
-	}
-	u = 0.5 * (u / maxaxis + 1.0);
-	v = 0.5 * (v / maxaxis + 1.0);
-	coord = texture_coord(u, v, &scene->cam.environment, index);
+	setup_data(&d, ray);
+	if (d.positive[0] && d.abs[0] >= d.abs[1] && d.abs[0] >= d.abs[2])
+		positive(&d, 0);
+	if (d.positive[2] && d.abs[2] >= d.abs[0] && d.abs[2] >= d.abs[1])
+		positive(&d, 1);
+	if (d.positive[1] && d.abs[1] >= d.abs[0] && d.abs[1] >= d.abs[2])
+		positive(&d, 2);
+	if (!d.positive[0] && d.abs[0] >= d.abs[1] && d.abs[0] >= d.abs[2])
+		not_positive(&d, 0);
+	if (!d.positive[1] && d.abs[1] >= d.abs[0] && d.abs[1] >= d.abs[2])
+		not_positive(&d, 1);
+	if (!d.positive[2] && d.abs[2] >= d.abs[0] && d.abs[2] >= d.abs[1])
+		not_positive(&d, 2);
+	d.uv[0] = 0.5 * (d.uv[0] / d.maxaxis + 1.0);
+	d.uv[1] = 0.5 * (d.uv[1] / d.maxaxis + 1.0);
+	coord = texture_coord(d.uv[0], d.uv[1], &scene->cam.environment, d.index);
 	color_from_texture(&coord, &scene->cam.environment, dest, ENVIRONMENT);
+	printv(dest);
 }
 
 void		cubemap_offset(t_vec *coord, int index, t_texture *texture)

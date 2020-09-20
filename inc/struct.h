@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 11:18:49 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 13:00:25 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ typedef struct			s_texture
 	int 				height;
 	double				scale;
 }						t_texture;
+
+typedef	struct			s_env_texture
+{
+	double				xyz[3];
+	double				maxaxis;
+	double				uv[2];
+	int					index;
+	double				abs[3];
+	int					positive[3];
+}						t_env_texture;
 
 typedef struct			s_ray
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radiance.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 16:32:18 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 13:21:04 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		radiance(t_scene *scene, t_ray *ray, t_render *render)
 	vec(1.0, 1.0, 1.0, &ray->mask);
 	while (TRUE)
 	{
+
 		if (!intersect(ray, &id, scene))
 		{
 			if (scene->cam.environment.path == NULL)
