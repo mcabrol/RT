@@ -1,5 +1,6 @@
 SRC_FILE = matrix matrix_2 point_matrix \
-			 vector_matrix operator vector #operator_2 vector vector_2
+			 vector_matrix operator operator_2 operator_3 operator_4 \
+			 vector vector_2 vector_3
 SRCS = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(SRCS:.c=.o)
 OBJS = $(SRCS:%.c=%.o)

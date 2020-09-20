@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:27:19 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/20 17:26:11 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:39:50 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	point_matrix_mult(t_vec *p, t_matrix *m, t_vec *dst)
 			+ tmp.z * m->data[2][3]
 			+ m->data[3][3];
 	if (w != 1 && w != 0)
-		ndivide(&dst, w, &dst);
+		ndivide(dst, w, dst);
 }
 
 void	point_translate(t_vec *p, t_matrix *m, t_vec *dst)

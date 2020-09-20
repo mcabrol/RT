@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 10:14:35 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/20 17:15:03 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:49:42 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ double		operator_distance(t_vec *p1, t_vec *p2)
 	t_vec	p_tmp;
 	double	dist;
 
-	operator_subv(p1, p2, &p_tmp);
+	sub(p1, p2, &p_tmp);
 	dist = vector_dotproduct(&p_tmp, &p_tmp);
 	return (sqrtf(dist));
 }

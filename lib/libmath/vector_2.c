@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 11:15:31 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/20 17:31:47 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:48:09 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		vector_normalize(t_vec *src, t_vec *dst)
 	if (lenght != 0)
 	{
 		magnitude = 1 / vector_length(src);
-		operator_mult(src, magnitude, dst);
+		nmulti(src, magnitude, dst);
 	}
 }
 
