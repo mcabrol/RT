@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 15:33:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 11:58:51 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:11:40 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void				ft_strclr(char *s);
 void				ft_strdel(char **ap);
 
 void				ft_tabdel(char **tab);
-void 				ft_tabdel_partial(char **data, int d_allocated);
-
+void				ft_tabdel_partial(char **data, int d_allocated);
 
 #endif
