@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_tabdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:55:21 by mcabrol           #+#    #+#             */
-/*   Updated: 2018/10/25 20:28:31 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 11:57:40 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,14 @@ void	ft_tabdel(char **tab)
 	while (tab[++i])
 		free(tab[i]);
 	free(tab);
+}
+
+void 	ft_tabdel_partial(char **data, int d_allocated)
+{
+	while (data[d_allocated])
+	{
+		free(data[d_allocated]);
+		d_allocated = d_allocated + 1;
+	}
+	free(data);
 }

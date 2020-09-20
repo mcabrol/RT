@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 14:47:48 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 12:00:25 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void			uv_cylinder(double *u, double *v, t_ray *ray, t_obj *obj);
 void			throw_error_file(int errorcode, char **data,
 				t_scene *scene, int d_allocated);
 void			throw_error(int errorcode);
-void			clean_opt(char **opt);
 
 /*
 **	file.c
@@ -152,6 +151,8 @@ int				parse(char *str, t_scene *scene);
 /*
 **	setter.c
 */
+int				value_is_vector(const char *str);
+int				value_is_double(const char *str);
 
 int				set_position(t_obj *obj, char *value);
 int				set_direction(t_obj *obj, char *value);
@@ -353,6 +354,12 @@ int				prepare_obj(t_rtv1 *rtv1);
 
 int				init_scene(t_rtv1 *rtv1, char *file);
 options_func	*setup_obj_setter(int nb_options);
+int				setup_obj(char *start, char *end, t_scene *scene);
+int				extract_obj_data(char *start, char *end, t_scene *scene, int j);
+int				set_obj(char *opt, char *data, t_obj *obj, t_scene *scene);
+int				parse(char *str, t_scene *scene);
+int				init_obj_tab(char *str, t_scene *scene);
+int				in_type_array(char *s, char **t);
 
 /*
 **	TOOLS

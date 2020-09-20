@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/18 19:17:40 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 11:08:58 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		file(int ac, char **av, char **file_str)
 {
-	char 	*filename;
-	int 	fd;
+	char	*filename;
+	int		fd;
 	int		size;
 
 	if ((ac > 1 && check(ac, av)))

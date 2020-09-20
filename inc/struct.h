@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 17:52:55 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 11:18:49 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef enum			e_error
 {
-	OBJECT_SETTINGS_NOT_FOUND_FILE = 1,
+	OBJECT_STNGS_NOT_FOUND_FILE = 1,
 	CAMERA_SETTINGS_NOT_FOUND_FILE,
 	INIT_SCENE_OBJ_FAILED,
 	INIT_OBJ_BAD_ARGS,
