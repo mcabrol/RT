@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:50:48 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 19:06:14 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define SETTING 				2
 
 # define OBJ_TYPE				6
-# define OBJ_TYPE_STR			"./src/object-manager/obj_type.txt"
+# define OBJ_TYPE_STR			"./src/object-manager/obj_tpe.txt"
 # define OBJ_OPT_STR			"./src/object-manager/obj_opt.txt"
 
 # define LIST_HOVER				"save render retry setup display"
