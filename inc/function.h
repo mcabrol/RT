@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:48:20 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 19:22:25 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ double			ft_check_pnt_box(double min[3], double max[3]);
 void			define_norm(t_ray *ray, int face);
 void			check_box(t_ray *ray, double min[3], double max[3],
 				t_vec rev_ov);
-double 			**set_min_max(t_obj *box, t_ray *ray);
+double			**set_min_max(t_obj *box, t_ray *ray);
 int				face_in(double *min, t_vec *rev_ov, double *t);
 int				face_out(double *max, t_vec *rev_ov, double *t);
 
@@ -97,7 +97,7 @@ void			*pathtracer(void*var);
 void			sampling(t_rtv1 *rtv1, t_render *render);
 void			screen(t_render *render, t_rtv1 *rtv1);
 int				error(char *strerror);
-void			init_session(t_rtv1 *rtv1, int ac, char **av);
+int				init_session(t_rtv1 *rtv1, int ac, char **av);
 
 /*
 **	srand48.c
@@ -272,7 +272,6 @@ void			display_window(t_rtv1 *rtv1);
 void			create_setting(t_rtv1 *rtv1);
 int				close_settings(t_rtv1 *rtv1);
 
-
 /*
 **	MATH
 */
@@ -375,7 +374,12 @@ int				parse(char *str, t_scene *scene);
 int				init_obj_tab(char *str, t_scene *scene);
 int				in_type_array(char *s, char **t);
 
+/*
+**	setter_opt.c
+*/
+
 char			**get_opt(const char *filename);
+char			*get_opt_str(const char *filename);
 
 /*
 **	TOOLS
@@ -392,13 +396,12 @@ void			print_obj(t_obj *obj);
 void			printr(t_ray *r);
 void			printv(t_vec *v);
 
-
 /*
 **	free.c
 */
 
-void 			free_sprite(t_button button, void *mlx_ptr);
-void 			free_all_sprite(t_sprite *sprite, void *mlx_ptr);
+void			free_sprite(t_button button, void *mlx_ptr);
+void			free_all_sprite(t_sprite *sprite, void *mlx_ptr);
 void			free_obj(t_obj *obj);
 void			free_texture(t_rtv1 *rtv1);
 void			clean_exit(t_rtv1 *rtv1);
@@ -406,7 +409,5 @@ void			clean_image_array(t_rtv1 *rtv1);
 int				close_rcross(t_win *win);
 int				close_rcross_main(t_rtv1 *rtv1);
 int				close_rcross_s(t_rtv1 *rtv1);
-
-
 
 #endif

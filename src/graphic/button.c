@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 17:32:49 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 19:17:24 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int					load_button(t_rtv1 *rtv1, t_button *button, \
 	if ((ft_strstr(LIST_HOVER, name)))
 		if ((button->hover = load(rtv1, pathname, "-hover.png")) == NULL)
 			return (EXIT_FAILURE);
-	if ((ft_strstr(LIST_DISABLED, name)))
+	if ((ft_strstr(rtv1->list_disabled, name)))
 		if ((button->disabled = load(rtv1, pathname, "-disabled.png")) == NULL)
 			return (EXIT_FAILURE);
 	if ((ft_strstr(LIST_HOVER_DISABLED, name)))

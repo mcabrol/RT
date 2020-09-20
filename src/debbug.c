@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   debbug.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 13:41:40 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 19:29:56 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 	 	loading_text(t_scene *scene, int y)
+void		loading_text(t_scene *scene, int y)
 {
 	ft_printf("\r%3.0f%%", 100.0 * y / (scene->height - 1));
 }
 
-char 		*stamp(void)
+char		*stamp(void)
 {
 	time_t		now;
-	char 		*stamp;
+	char		*stamp;
 	int			i;
 
 	i = -1;
@@ -38,15 +38,14 @@ char 		*stamp(void)
 
 void		timer(int time)
 {
-	int 	second;
-	int 	minute;
-	int 	hour;
+	int		second;
+	int		minute;
+	int		hour;
 
 	second = 0;
 	minute = 0;
 	hour = 0;
 	while (time)
-	{
 		if (time > 60 * 60)
 		{
 			hour++;
@@ -62,11 +61,10 @@ void		timer(int time)
 			second++;
 			time--;
 		}
-	}
 	ft_printf(" -> %.2d:%.2d:%.2d", hour, minute, second);
 }
 
-void 		print_obj(t_obj *obj)
+void		print_obj(t_obj *obj)
 {
 	ft_printf("TYPE : %d\n", obj->type);
 	ft_printf("RADIUS : %f\n", obj->radius);
@@ -76,7 +74,6 @@ void 		print_obj(t_obj *obj)
 	printv(&obj->direction);
 	ft_printf("COLOR : ");
 	printv(&obj->color);
-	// ft_printf("COLOR : %#.8X\n", obj->color);
 	ft_printf("EMISSION : ");
 	printv(&obj->emission);
 	ft_printf("REFLECTION : %d\n", obj->reflect);

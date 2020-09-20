@@ -9,12 +9,12 @@ OBJECT:
 {
 	TYPE: PLANE
 	POSITION: -10 4.6 -15
-	SCALE: 1
+	SCALE: 0.5
 	TEXTURE: textures/damier.png
 },
 {
 	TYPE: SPHERE
-	RADIUS: 3
+	RADIUS: 2.5
 	POSITION: -5.5 -0.5 -15
 	TEXTURE: textures/map.png
 },

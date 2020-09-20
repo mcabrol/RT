@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 19:06:14 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 19:19:07 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@
 # define SETTING 				2
 
 # define OBJ_TYPE				6
-# define OBJ_TYPE_STR			"./src/object-manager/obj_tpe.txt"
+# define OBJ_TYPE_STR			"./src/object-manager/obj_type.txt"
 # define OBJ_OPT_STR			"./src/object-manager/obj_opt.txt"
 
 # define LIST_HOVER				"save render retry setup display"
 
-# define LIST_DISABLED			"setup sample format render display save x8 x20 x200 x500 x1000 x5000 320x240 854x480 1024x768 1280x720 1400x1050 1920x1080"
+# define LIST_DISABLED			"./src/graphic/list_disabled.txt"
 # define LIST_HOVER_DISABLED	"save render display"
 
 # define SPHERE					0
