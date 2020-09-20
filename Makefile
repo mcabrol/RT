@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+         #
+#    By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/10 11:25:08 by mcabrol           #+#    #+#              #
-#    Updated: 2020/09/20 17:58:39 by judrion          ###   ########.fr        #
+#    Updated: 2020/09/20 20:29:16 by mcabrol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ = $(SRC:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) libs
-	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIB) $(FRAMEWORK) -o $(NAME) $(SANATIZE)
+	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIB) $(FRAMEWORK) -o $(NAME)
 	install_name_tool -change libmlx.dylib lib/minilibx/libmlx.dylib ./rtv1
 
 libs:
