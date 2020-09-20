@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 10:49:37 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/20 17:39:18 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 19:40:07 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ void		matrix_print(t_matrix *m, int format)
 				ft_printf("}");
 		}
 		else
-			printf("\n");
+			ft_printf("\n");
 		i = i + 1;
 	}
 	if (format == WOLFRAM)
 	{
-		printf("}");
-		printf("\n");
+		ft_printf("}");
+		ft_printf("\n");
 	}
 }
 

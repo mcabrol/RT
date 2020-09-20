@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 19:27:32 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 19:36:22 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 19:39:39 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void		clean_image_array(t_rtv1 *rtv1)
 			rtv1->image[i].available = 1;
 			mlx_destroy_image(rtv1->mlx_ptr, rtv1->image[i].img_ptr);
 			mlx_destroy_window(rtv1->mlx_ptr, rtv1->image[i].win_ptr);
-			printf("rtv1->id_win : %d\n", rtv1->id_win);
 			rtv1->id_win = rtv1->id_win - 1;
 		}
 		i = i + 1;
