@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 13:47:03 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 16:24:59 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void			radiance(t_scene *scene, t_ray *ray, t_render *render)
 			if (scene->cam.environment.path == NULL)
 				return (veccp(&ray->blank, &render->color));
 			else
-				return ((ray->depth) ? \
-				environment_texture(scene, ray, &render->color) \
-				: veccp(&ray->blank, &render->color));
+				return (environment_texture(scene, ray, &render->color));
 		}
 		shape = &scene->obj[id];
 		inner_radiance(scene, ray, shape);

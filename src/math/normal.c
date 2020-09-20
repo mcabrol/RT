@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:55:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 17:14:08 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 16:21:58 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,35 +70,25 @@ void	cylinder_normal(t_obj *cylinder, t_ray *ray)
 
 void	cone_normal(t_obj *cone, t_ray *ray)
 {
-	t_vec		nl;
-	t_vec		ac;
-	t_vec		a;
-	t_vec		b;
-	t_vec		oc;
-	double		m;
-	t_vec		c;
-	t_vec		d;
-	double		len_ac;
-	double		radius;
-	double		koef;
-	double		k;
+	t_vec		vec[7];
+	double		doub[5];
 
-	sub(&ray->origin, &cone->position, &oc);
-	m = (dot(&ray->direction, &cone->direction) * ray->distance) + \
-	dot(&oc, &cone->direction);
-	nmulti(&cone->direction, m, &a);
-	sub(&cone->position, &cone->position, &b);
-	sum(&a, &b, &ac);
-	len_ac = len(&ac);
-	radius = len_ac * cone->angle;
-	k = radius / m;
-	koef = (1 + k * k) * m;
-	nmulti(&cone->direction, koef, &d);
-	sub(&ray->x, &cone->position, &c);
-	sub(&c, &d, &ray->n);
-	nl = *norm(&ray->n);
-	if (dot(&nl, &ray->direction) < 0)
-		ray->n = nl;
+	sub(&ray->origin, &cone->position, &vec[4]);
+	doub[0] = (dot(&ray->direction, &cone->direction) * ray->distance) + \
+	dot(&vec[4], &cone->direction);
+	nmulti(&cone->direction, doub[0], &vec[2]);
+	sub(&cone->position, &cone->position, &vec[3]);
+	sum(&vec[2], &vec[3], &vec[1]);
+	doub[1] = len(&vec[1]);
+	doub[2] = doub[1] * cone->angle;
+	doub[4] = doub[2] / doub[0];
+	doub[3] = (1 + doub[4] * doub[4]) * doub[0];
+	nmulti(&cone->direction, doub[3], &vec[6]);
+	sub(&ray->x, &cone->position, &vec[5]);
+	sub(&vec[5], &vec[6], &ray->n);
+	vec[0] = *norm(&ray->n);
+	if (dot(&vec[0], &ray->direction) < 0)
+		ray->n = vec[0];
 	else
-		minus(&nl, &ray->n);
+		minus(&vec[0], &ray->n);
 }
