@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 17:34:34 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:42:59 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		is_hover(int x, int y, t_button *button)
 {
-	BOOL		tmp;
+	t_bool		tmp;
 	t_position	*position;
 
 	position = &button->position;

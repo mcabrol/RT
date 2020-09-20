@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/15 21:03:59 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:20:15 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_vec	get_pixel_vector(t_texture *texture, int x, int y, int type)
 	size_t	i;
 	t_vec	dest;
 
-	vec(BLANK, &dest);
+	vec(0.0, 0.0, 0.0, &dest);
 	i = (x * texture->bits_per_pixel / 8) + (y * texture->size_line);
 	if (type == TEXTURE && x < texture->width && y < texture->height)
 	{

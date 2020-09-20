@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 16:22:31 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:42:26 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ typedef enum			e_error
 
 typedef struct			s_render
 {
-	int					x;			// Screen x counter
-	int					y;			// Screen y counter
-	int					s;			// Sample counter
-	unsigned int		i;			// Cursor
-	int					sx;			// Zone render x
-	int					sy;			// Zone render y
+	int					x;
+	int					y;
+	int					s;
+	unsigned int		i;
+	int					sx;
+	int					sy;
 	t_vec				l;
-	t_vec				accucolor;  // Color accumulation
-	t_vec				color;		// Color calculated
+	t_vec				accucolor;
+	t_vec				color;
 	unsigned short		xseed[3];
 }						t_render;
 
@@ -48,22 +48,22 @@ typedef struct			s_radiance
 	t_vec				a;
 	t_vec				b;
 	t_vec				ab;
-	t_vec				d_t;		// Directon tmp
-	t_vec				origin;		// Eye tmp
-	t_vec				d;			// Vector for ray
+	t_vec				d_t;
+	t_vec				origin;
+	t_vec				d;
 	t_vec				direction;
 }						t_radiance;
 
 typedef struct			s_texture
 {
-	char 				*path;
+	char				*path;
 	void				*image;
 	char				*data;
 	int					bits_per_pixel;
 	int					size_line;
 	int					endian;
-	int 				width;
-	int 				height;
+	int					width;
+	int					height;
 	double				scale;
 }						t_texture;
 
@@ -79,61 +79,61 @@ typedef	struct			s_env_texture
 
 typedef struct			s_ray
 {
-	t_vec				origin; 		// Origin
-	t_vec				direction;		// Direction
-	double				distance;		// Distance
-	int					depth;			// Depth
-	t_vec				x;				// Point intersect
-	t_vec				n;				// Norm obj
-	t_vec 				mask;			// Mask
-	t_vec				light;			// Light
-	t_vec				blank;			// Blank
-	double				pr;				// Light mask refraction
+	t_vec				origin;
+	t_vec				direction;
+	double				distance;
+	int					depth;
+	t_vec				x;
+	t_vec				n;
+	t_vec				mask;
+	t_vec				light;
+	t_vec				blank;
+	double				pr;
 }						t_ray;
 
 typedef struct			s_obj
 {
-	int 				type;			// type
-	double				radius;			// radius
-	double 				height; 		// height
+	int					type;
+	double				radius;
+	double				height;
 	double				width;
 	double				depth;
-	t_vec				position;		// position
-	t_vec				direction;		// direction
-	t_vec				emission;		// emission
-	t_vec				color;			// color
-	double				angle;			// angle
-	t_vec				rotation;		// rotation
-	int					reflect;		// material type
-	double				fov;			// field-of-view
-	double				intersect_type; // For closed obj
-	t_vec				cx;				// cam_x
-	t_vec				cy;				// cam_y
-	t_vec				point;			// Plane bottom left point camera
-	t_vec 				ambient;		// Ambient light
-	t_texture 			texture;		// Texture struct
-	t_texture 			environment;	// Environment cube map
-	double				index_out;		// Index out refracton
-	double				index_in;		// Index out refraction
-	t_vec 				background; 	// Background Color
+	t_vec				position;
+	t_vec				direction;
+	t_vec				emission;
+	t_vec				color;
+	double				angle;
+	t_vec				rotation;
+	int					reflect;
+	double				fov;
+	double				intersect_type;
+	t_vec				cx;
+	t_vec				cy;
+	t_vec				point;
+	t_vec				ambient;
+	t_texture			texture;
+	t_texture			environment;
+	double				index_out;
+	double				index_in;
+	t_vec				background;
 }						t_obj;
 
-typedef int				(*options_func)(t_obj *obj, char *value);
+typedef int				(*t_options_func)(t_obj *obj, char *value);
 
-typedef struct 			s_scene
+typedef struct			s_scene
 {
 	char				*file;
-	int 				width;
+	int					width;
 	int					height;
 	int					samples;
-	t_obj 				cam;
+	t_obj				cam;
 	char				**obj_type;
 	char				**obj_options;
 	t_obj				*obj;
-	int					n;			// Number of object
+	int					n;
 	options_func		*obj_setter;
-	double 				loading;
-	pthread_mutex_t 	lock;
+	double				loading;
+	pthread_mutex_t		lock;
 }						t_scene;
 
 typedef struct			s_point
@@ -156,28 +156,27 @@ typedef struct			s_win
 
 typedef struct			s_position
 {
-	int 				xmin;
-	int 				xmax;
+	int					xmin;
+	int					xmax;
 	int					ymin;
-	int 				ymax;
+	int					ymax;
 }						t_position;
-
 
 typedef struct			s_button
 {
-	BOOL 				is_hover;
-	BOOL 				is_active;
-	void 				*active;
-	void 				*disabled;
-	void 				*hover;
-	void 				*hover_disabled;
+	t_bool				is_hover;
+	t_bool				is_active;
+	void				*active;
+	void				*disabled;
+	void				*hover;
+	void				*hover_disabled;
 	t_position			position;
 }						t_button;
 
-typedef struct 			s_sprite
+typedef struct			s_sprite
 {
-	void 				*background;
-	void 				*background_setting;
+	void				*background;
+	void				*background_setting;
 	t_button			setup;
 	t_button			close;
 	t_button			retry;
@@ -211,23 +210,23 @@ typedef struct			s_rtv1
 	int					id_render;
 	int					id_ppm;
 	int					id_parse;
-	int 				id_setting;
-	BOOL				setter;
-	t_sprite 			sprite;
-	int 				state;
-	int 				tabs;
+	int					id_setting;
+	t_bool				setter;
+	t_sprite			sprite;
+	int					state;
+	int					tabs;
 	void				*mlx_ptr;
-	t_win 				main;
-	t_win 				setting;
-	t_win 				*image;
+	t_win				main;
+	t_win				setting;
+	t_win				*image;
 	t_scene				scene;
-	t_vec				*screen;	// Result
+	t_vec				*screen;
 }						t_rtv1;
 
 typedef struct			s_thread
 {
 	pthread_t			thread;
-	int 				id;
+	int					id;
 	int					x;
 	int					max;
 	t_rtv1				*rtv1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reflect.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 16:44:35 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 14:46:37 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:42:45 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			refractive_reflect(t_ray *ray, unsigned short xseed[3], \
 									t_obj *obj)
 {
 	t_vec	vec[6];
-	BOOL	out_to_in;
+	t_bool	out_to_in;
 	double	doub[4];
 	double	cos[2];
 

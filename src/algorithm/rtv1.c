@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 13:51:34 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:19:54 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			sampling(t_rtv1 *rtv1, t_render *render)
 		render->sx = -1;
 		while (++(render->sx) < 2)
 		{
-			vec(BLANK, &render->accucolor);
+			vec(0.0, 0.0, 0.0, &render->accucolor);
 			render->s = -1;
 			while (++(render->s) < scene->samples)
 			{

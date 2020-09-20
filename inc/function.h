@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 17:57:25 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:42:03 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			cubemap_offset(t_vec *coord, int index, t_texture *texture);
 **	intersect.c
 */
 
-BOOL			intersect(t_ray *ray, size_t *id, t_scene *scene);
+t_bool			intersect(t_ray *ray, size_t *id, t_scene *scene);
 double			intersect_sphere(t_obj *sphere, t_ray *ray);
 double			intersect_plane(t_obj *sphere, t_ray *ray);
 double			intersect_cylinder(t_obj *cylinder, t_ray *ray);
@@ -210,7 +210,7 @@ int				exit_hook(int keycode, t_rtv1 *rtv1);
 
 int				init_sprite(t_rtv1 *rtv1);
 void			put_setup(t_rtv1 *rtv1);
-void			toggle_button(t_rtv1 *rtv1, t_button *button, BOOL status);
+void			toggle_button(t_rtv1 *rtv1, t_button *button, t_bool status);
 void			put_sprite(t_rtv1 *rtv1, void*image, int window);
 
 /*

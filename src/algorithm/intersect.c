@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 13:43:09 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:42:36 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	intersect_inner(t_obj *obj, double *distance, t_ray *ray)
 		*distance = intersect_box(obj, ray);
 }
 
-BOOL		intersect(t_ray *ray, size_t *id, t_scene *scene)
+t_bool		intersect(t_ray *ray, size_t *id, t_scene *scene)
 {
-	BOOL		hit;
+	t_bool		hit;
 	double		distance;
 	int			i;
 

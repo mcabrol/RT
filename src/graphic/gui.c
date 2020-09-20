@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/12 14:43:20 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:42:53 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void				put_setup(t_rtv1 *rtv1)
 	toggle_button(rtv1, &sprite->retry, ACTIVE);
 }
 
-void				toggle_button(t_rtv1 *rtv1, t_button *button, BOOL status)
+void				toggle_button(t_rtv1 *rtv1, t_button *button, t_bool status)
 {
 	if (status)
 	{

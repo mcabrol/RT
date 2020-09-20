@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 17:14:57 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:44:58 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # define PATH_SPRITE			"./src/sprite/"
 
-# define BLANK					0.0, 0.0, 0.0
 # define FALSE					0
 # define TRUE					1
 # define CONTINUE				0
@@ -35,17 +34,21 @@
 # define SAMPLE 				3
 # define FORMAT					4
 
-
 # define MAIN					0
 # define RENDER 				1
 # define SETTING 				2
 
 # define OBJ_TYPE				6
 # define OBJ_TYPE_STR			"SPHERE PLANE CYLINDER CONE BOX CAMERA"
-# define OBJ_OPT_STR			"POSITION DIRECTION EMISSION COLOR REFLECTION RADIUS ANGLE HEIGHT WIDTH DEPTH FOV AMBIENT ROTATION TEXTURE SCALE INDEX MAP"
+# define OBJ_OPT_STR			"POSITION DIRECTION EMISSION COLOR REFLECTION "\
+ 								"RADIUS ANGLE HEIGHT WIDTH DEPTH FOV AMBIENT "\
+								"ROTATION TEXTURE SCALE INDEX MAP"
 
 # define LIST_HOVER				"save render retry setup display"
-# define LIST_DISABLED			"setup sample format render display save x8 x20 x200 x500 x1000 x5000 320x240 854x480 1024x768 1280x720 1400x1050 1920x1080"
+
+# define LIST_DISABLED			"setup sample format render display save x8 "\
+								"x20 x200 x500 x1000 x5000 320x240 854x480 "\
+								"1024x768 1280x720 1400x1050 1920x1080"
 # define LIST_HOVER_DISABLED	"save render display"
 
 # define SPHERE					0
@@ -68,7 +71,7 @@
 # define ACTIVE					TRUE
 # define DISABLE 				FALSE
 
-# define	TEXTURE				0
+# define TEXTURE				0
 # define ENVIRONMENT			1
 
 # define NORMAL					-1
@@ -79,9 +82,6 @@
 # define FRONT					4
 # define BACK					5
 
-# define MINI(X, Y) 				(((X) < (Y)) ? (X) : (Y))
-# define MAXI(X, Y) 				(((X) > (Y)) ? (X) : (Y))
-
-typedef int 					BOOL;
+typedef int						t_bool;
 
 #endif
