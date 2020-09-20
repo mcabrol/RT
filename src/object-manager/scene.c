@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/18 21:46:04 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 13:30:26 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,25 @@ int			size_of(char **array)
 		i++;
 	return (i);
 }
+static void protect_color_spec(t_rtv1 *rtv1)
+{
+	int		i;
 
+	i = 0;
+	while (i < rtv1->scene.n)
+	{
+		if (rtv1->scene.obj[i].reflect == SPEC)
+		{
+			if (rtv1->scene.obj[i].color.x == 1.0)
+				rtv1->scene.obj[i].color.x -= 0.01;
+			if (rtv1->scene.obj[i].color.y == 1.0)
+				rtv1->scene.obj[i].color.y -= 0.01;
+			if (rtv1->scene.obj[i].color.z == 1.0)
+				rtv1->scene.obj[i].color.z -= 0.01;
+		}
+		i = i + 1;
+	}
+}
 int 		init_scene(t_rtv1 *rtv1, char *file)
 {
 	t_scene *scene;
@@ -41,6 +59,7 @@ int 		init_scene(t_rtv1 *rtv1, char *file)
 			return (EXIT_FAILURE);
 		if (prepare_obj(rtv1) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
+		protect_color_spec(rtv1);
 	}
 	return (EXIT_SUCCESS);
 }
