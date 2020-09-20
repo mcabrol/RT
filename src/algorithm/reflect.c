@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   reflect.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 16:44:35 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 17:29:40 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 14:46:37 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		reflect(t_ray *ray, t_render *render, t_obj *shape)
+void			reflect(t_ray *ray, t_render *render, t_obj *shape)
 {
 	if (shape->reflect == SPEC)
 	{
@@ -35,7 +35,7 @@ void		reflect(t_ray *ray, t_render *render, t_obj *shape)
 	}
 }
 
-t_vec		*specular_reflect(t_vec *d, t_vec *n)
+t_vec			*specular_reflect(t_vec *d, t_vec *n)
 {
 	t_vec a;
 
@@ -44,7 +44,7 @@ t_vec		*specular_reflect(t_vec *d, t_vec *n)
 	return (d);
 }
 
-void		diffuse_reflect(t_vec *d, t_vec *n, unsigned short xseed[3])
+void			diffuse_reflect(t_vec *d, t_vec *n, unsigned short xseed[3])
 {
 	t_vec tmp;
 	t_vec uvw[3];
@@ -72,51 +72,38 @@ void		diffuse_reflect(t_vec *d, t_vec *n, unsigned short xseed[3])
 	norm(d);
 }
 
-static void refractive_stop(t_ray *ray, t_vec *d_re, double pr)
+static void		refractive_stop(t_ray *ray, t_vec *d_re, double pr)
 {
 	ray->pr = pr;
 	veccp(d_re, &ray->direction);
-	return ;
 }
 
-void		refractive_reflect(t_ray *ray, unsigned short xseed[3], t_obj *obj)
+void			refractive_reflect(t_ray *ray, unsigned short xseed[3], \
+									t_obj *obj)
 {
-	t_vec 	d_re;
+	t_vec	vec[6];
 	BOOL	out_to_in;
-	t_vec 	nl;
-	double 	nn;
-	double	cos_theta;
-	double	cos2_phi;
-	t_vec	a;
-	t_vec	b;
-	t_vec	d_tr;
-	double	c;
-	double	re;
-	double	p_re;
-	t_vec	d_tmp;
+	double	doub[4];
+	double	cos[2];
 
-	veccp(&ray->direction, &d_tmp);
-	d_re = *specular_reflect(&d_tmp, &ray->n);
+	veccp(&ray->direction, &vec[5]);
+	vec[0] = *specular_reflect(&vec[5], &ray->n);
 	out_to_in = dot(&ray->n, &ray->direction) < 0;
-	if (out_to_in)
-		nl = ray->n;
-	else
-		minus(&ray->n, &nl);
-	nn = out_to_in ? obj->index_out / obj->index_in : \
-	obj->index_in / obj->index_out;
-	cos_theta = dot(&ray->direction, &nl);
-	cos2_phi = 1.0 - nn * nn * (1.0 - cos_theta * cos_theta);
-	if (0.0 > cos2_phi)
-		return (refractive_stop(ray, &d_re, 1.0));
-	multin(nn, &ray->direction, &a);
-	nmulti(&nl, (nn * cos_theta + sqrt(cos2_phi)), &b);
-	sub(&a, &b, &d_tr);
-	norm(&d_tr);
-	c = 1.0 - (out_to_in ? -cos_theta : dot(&d_tr, &ray->n));
-	re = schlick_reflectance(obj->index_out, obj->index_in, c);
-	p_re = 0.25 + 0.5 * re;
-	if (erand48(xseed) < p_re)
-		return (refractive_stop(ray, &d_re, (re / p_re)));
-	else
-		return (refractive_stop(ray, &d_tr, ((1.0 - re) / (1.0 - p_re))));
+	out_to_in ? vec[1] = ray->n : minus(&ray->n, &vec[1]);
+	doub[0] = out_to_in ? obj->index_out / obj->index_in : \
+						obj->index_in / obj->index_out;
+	cos[0] = dot(&ray->direction, &vec[1]);
+	cos[1] = 1.0 - doub[0] * doub[0] * (1.0 - cos[0] * cos[0]);
+	if (0.0 > cos[1])
+		return (refractive_stop(ray, &vec[0], 1.0));
+	multin(doub[0], &ray->direction, &vec[2]);
+	nmulti(&vec[1], (doub[0] * cos[0] + sqrt(cos[1])), &vec[3]);
+	sub(&vec[2], &vec[3], &vec[4]);
+	norm(&vec[4]);
+	doub[1] = 1.0 - (out_to_in ? -cos[0] : dot(&vec[4], &ray->n));
+	doub[2] = schlick_reflectance(obj->index_out, obj->index_in, doub[1]);
+	doub[3] = 0.25 + 0.5 * doub[2];
+	if (erand48(xseed) < doub[3])
+		return (refractive_stop(ray, &vec[0], (doub[2] / doub[3])));
+	return (refractive_stop(ray, &vec[4], ((1.0 - doub[2]) / (1.0 - doub[3]))));
 }

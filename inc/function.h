@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 12:00:25 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 15:52:01 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ double			ft_check_pnt_box(double min[3], double max[3]);
 void			define_norm(t_ray *ray, int face);
 void			check_box(t_ray *ray, double min[3], double max[3],
 				t_vec rev_ov);
+double 			**set_min_max(t_obj *box, t_ray *ray);
+int				face_in(double *min, t_vec *rev_ov, double *t);
+int				face_out(double *max, t_vec *rev_ov, double *t);
 
 /*
 **	camera.c

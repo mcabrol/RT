@@ -6,13 +6,13 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 14:50:00 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 13:51:34 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		*pathtracer(void *var)
+void			*pathtracer(void *var)
 {
 	t_thread		*thread;
 	t_scene			*scene;
@@ -32,7 +32,17 @@ void		*pathtracer(void *var)
 	pthread_exit(EXIT_SUCCESS);
 }
 
-void		sampling(t_rtv1 *rtv1, t_render *render)
+static void		inner_sampling(t_render *render, t_radiance *target, \
+								t_ray *ray, t_scene *scene)
+{
+	prepare_ray(render, target, scene);
+	init_ray(target->origin, target->direction, ray);
+	radiance(scene, ray, render);
+	ndivide(&render->color, (double)scene->samples, &render->l);
+	sum_(&render->accucolor, &render->l);
+}
+
+void			sampling(t_rtv1 *rtv1, t_render *render)
 {
 	t_ray			ray;
 	t_radiance		target;
@@ -50,11 +60,7 @@ void		sampling(t_rtv1 *rtv1, t_render *render)
 			render->s = -1;
 			while (++(render->s) < scene->samples)
 			{
-				prepare_ray(render, &target, scene);
-				init_ray(target.origin, target.direction, &ray);
-				radiance(scene, &ray, render);
-				ndivide(&render->color, (double)scene->samples, &render->l);
-				sum_(&render->accucolor, &render->l);
+				inner_sampling(render, &target, &ray, scene);
 				(render->s)++;
 			}
 			screen(render, rtv1);
@@ -62,7 +68,7 @@ void		sampling(t_rtv1 *rtv1, t_render *render)
 	}
 }
 
-void		screen(t_render *render, t_rtv1 *rtv1)
+void			screen(t_render *render, t_rtv1 *rtv1)
 {
 	clamp3(&render->accucolor, 0.0, 1.0, &render->color);
 	nmulti(&render->color, 0.25, &render->l);
