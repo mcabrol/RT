@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 12:00:42 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:55:07 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int				extract_obj_data(char *start, char *end, t_scene *scene, int j)
 		if (set_obj(opt[0], opt[1], &scene->obj[j], scene) == EXIT_FAILURE)
 		{
 			ft_tabdel(opt);
+			printf("i : %d\n", i);
 			throw_error_file(SET_OBJECT_FAILED, data, scene, i);
 			return (-1);
 		}

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 11:42:20 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:03:01 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,10 @@ static int		inner_parse(char *str, int i, t_scene *scene)
 	char		*end;
 
 	if (*(str + i + 2) != '{')
-		return (-1);
+		return (EXIT_FAILURE);
 	start = str + i + 2;
 	if ((end = ft_strstr(start, "};")) == NULL)
 	{
-		free(str);
 		throw_error_file(OBJECT_STNGS_NOT_FOUND_FILE, NULL, NULL, -1);
 		return (EXIT_FAILURE);
 	}
@@ -72,7 +71,6 @@ static int		inner_parse(char *str, int i, t_scene *scene)
 		end = end + 1;
 		if (setup_obj(start, end, scene) == -1)
 		{
-			free(str);
 			throw_error_file(SETUP_OBJ_FAILED, NULL, NULL, -1);
 			return (EXIT_FAILURE);
 		}
@@ -91,7 +89,7 @@ int				parse(char *str, t_scene *scene)
 		i = i + 1;
 	if (ft_strncmp(str, "OBJECT:", i) == 0)
 	{
-		if (inner_parse(str, i, scene) == -1)
+		if (inner_parse(str, i, scene) == EXIT_FAILURE)
 		{
 			free(str);
 			throw_error_file(OBJECT_STNGS_NOT_FOUND_FILE, NULL, NULL, -1);
