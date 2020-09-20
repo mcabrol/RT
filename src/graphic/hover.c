@@ -6,19 +6,19 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 15:52:05 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 16:09:48 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static int		is_hover(int x, int y, t_button *button)
+static int		is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin, int ymax)
 {
 	BOOL	tmp;
 
 	tmp = button->is_hover;
-	button->is_hover = (x > button->xmin && x < button->xmax \
-		&& y > button->ymin && y < button->ymax) ? TRUE : FALSE;
+	button->is_hover = (x > xmin && x < xmax \
+		&& y > ymin && y < ymax) ? TRUE : FALSE;
 	return ((tmp != button->is_hover) ? TRUE : FALSE);
 }
 
