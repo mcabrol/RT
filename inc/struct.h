@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 15:59:40 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 16:22:31 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,15 @@ typedef struct			s_win
 	int					available;
 }						t_win;
 
+typedef struct			s_position
+{
+	int 				xmin;
+	int 				xmax;
+	int					ymin;
+	int 				ymax;
+}						t_position;
+
+
 typedef struct			s_button
 {
 	BOOL 				is_hover;
@@ -162,10 +171,7 @@ typedef struct			s_button
 	void 				*disabled;
 	void 				*hover;
 	void 				*hover_disabled;
-	int					xmin;
-	int					xmax;
-	int					ymin;
-	int					ymax;
+	t_position			position;
 }						t_button;
 
 typedef struct 			s_sprite

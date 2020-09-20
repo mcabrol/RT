@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 15:59:50 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:57:25 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,17 @@ int				set_map(t_obj *obj, char *value);
 */
 
 int				init_button(t_rtv1 *rtv1, int error);
-int				load_button(t_rtv1 *rtv1, t_button *button, char *name);
+int				load_button(t_rtv1 *rtv1, t_button *button, char *name, \
+				t_position position);
 void			*load(t_rtv1 *rtv1, char *pathname, char *attr);
+
+/*
+**	display.c
+*/
+
+char			*init_win_name(int id_win, int id_render);
+t_win			*init_win_array(void);
+void			display_window(t_rtv1 *rtv1);
 
 /*
 **	event.c
@@ -230,6 +239,7 @@ int				key(int keycode, t_rtv1 *rtv1);
 */
 
 int				mouse(int button, int x, int y, t_rtv1 *rtv1);
+int				mouse_setting(int button, int x, int y, t_rtv1 *rtv1);
 
 /*
 **	pixel.c
@@ -250,8 +260,7 @@ int				multithread(t_rtv1 *rtv1);
 */
 
 void			put_setting(t_rtv1 *rtv1);
-void			create_setting(t_rtv1 *rtv1);
-int				mouse_setting(int button, int x, int y, t_rtv1 *rtv1);
+void			set_format(t_rtv1 *rtv1, int sample, int width, int height);
 
 /*
 **	window.c
@@ -259,6 +268,10 @@ int				mouse_setting(int button, int x, int y, t_rtv1 *rtv1);
 
 int				init_window(t_rtv1 *rtv1);
 t_win			window(void*mlx_ptr, int width, int height, char *name);
+void			display_window(t_rtv1 *rtv1);
+void			create_setting(t_rtv1 *rtv1);
+int				close_settings(t_rtv1 *rtv1);
+
 
 /*
 **	MATH

@@ -6,18 +6,29 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 15:07:45 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:48:04 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		render(t_rtv1 *rtv1)
+static int	prepare_texture(t_rtv1 *rtv1)
+{
+	int i;
+
+	i = -1;
+	while (++i < rtv1->scene.n)
+		if (rtv1->scene.obj[i].texture.path)
+			if (load_texture(rtv1, &rtv1->scene.obj[i]))
+				return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int			render(t_rtv1 *rtv1)
 {
 	time_t	before;
 	time_t	after;
 	double	second;
-	int		i;
 
 	if (rtv1->screen)
 		free(rtv1->screen);
@@ -26,11 +37,8 @@ int		render(t_rtv1 *rtv1)
 	ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.width * \
 	rtv1->scene.height);
 	rtv1->scene.loading = 0;
-	i = -1;
-	while (++i < rtv1->scene.n)
-		if (rtv1->scene.obj[i].texture.path)
-			if (load_texture(rtv1, &rtv1->scene.obj[i]))
-				return (EXIT_FAILURE);
+	if (prepare_texture(rtv1))
+		return (EXIT_FAILURE);
 	if (init_cam(rtv1))
 		return (EXIT_FAILURE);
 	before = time(NULL);
@@ -43,7 +51,7 @@ int		render(t_rtv1 *rtv1)
 	return (EXIT_SUCCESS);
 }
 
-int		multithread(t_rtv1 *rtv1)
+int			multithread(t_rtv1 *rtv1)
 {
 	int			i;
 	t_thread	thread[THREAD];

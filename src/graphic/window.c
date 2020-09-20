@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 11:45:33 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:50:50 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,25 @@ t_win		window(void *mlx_ptr, int width, int height, char *name)
 									&(win.endian));
 	mlx_clear_window(mlx_ptr, win.win_ptr);
 	return (win);
+}
+
+void		create_setting(t_rtv1 *rtv1)
+{
+	if (!rtv1->id_setting)
+	{
+		rtv1->setting = window(rtv1->mlx_ptr, W_SETTING, H_SETTING, "Settings");
+		mlx_hook(rtv1->setting.win_ptr, 6, (1L << 6), hover_setting, rtv1);
+		mlx_mouse_hook(rtv1->setting.win_ptr, mouse_setting, rtv1);
+		mlx_hook(rtv1->setting.win_ptr, 17, (1L << 17), close_rcross_s, rtv1);
+		(rtv1->id_setting)++;
+	}
+	put_setting(rtv1);
+}
+
+int			close_settings(t_rtv1 *rtv1)
+{
+	mlx_destroy_image(rtv1->mlx_ptr, rtv1->setting.img_ptr);
+	mlx_destroy_window(rtv1->mlx_ptr, rtv1->setting.win_ptr);
+	(rtv1->id_setting)--;
+	return (EXIT_SUCCESS);
 }
