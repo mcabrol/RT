@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:42:03 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:46:53 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -374,6 +374,8 @@ int				set_obj(char *opt, char *data, t_obj *obj, t_scene *scene);
 int				parse(char *str, t_scene *scene);
 int				init_obj_tab(char *str, t_scene *scene);
 int				in_type_array(char *s, char **t);
+
+char			**get_opt(const char *filename);
 
 /*
 **	TOOLS

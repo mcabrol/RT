@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:44:58 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:46:44 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@
 # define SETTING 				2
 
 # define OBJ_TYPE				6
-# define OBJ_TYPE_STR			"SPHERE PLANE CYLINDER CONE BOX CAMERA"
-# define OBJ_OPT_STR			"POSITION DIRECTION EMISSION COLOR REFLECTION "\
- 								"RADIUS ANGLE HEIGHT WIDTH DEPTH FOV AMBIENT "\
-								"ROTATION TEXTURE SCALE INDEX MAP"
+# define OBJ_TYPE_STR			"src/object-manager/obj_type.txt"
+# define OBJ_OPT_STR			"src/object-manager/obj_opt.txt"
 
 # define LIST_HOVER				"save render retry setup display"
 

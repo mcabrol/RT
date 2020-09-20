@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 16:30:51 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:40:39 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int				init_scene(t_rtv1 *rtv1, char *file)
 	scene = &rtv1->scene;
 	if (rtv1->setter == FALSE)
 	{
-		scene->obj_type = ft_strsplit(OBJ_TYPE_STR, ' ');
-		scene->obj_options = ft_strsplit(OBJ_OPT_STR, ' ');
+		scene->obj_type = get_opt(OBJ_TYPE_STR);
+		scene->obj_options = get_opt(OBJ_OPT_STR);
 		scene->obj_setter = setup_obj_setter(size_of(scene->obj_options));
 		rtv1->setter = TRUE;
 	}
