@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 13:42:04 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 15:50:25 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,21 @@
 # define FRONT					4
 # define BACK					5
 
+# define P_SETUP				"90, 181, 0, 80"
+# define P_RETRY				"181, 272, 0, 80"
+# define P_SAVE					"272, 362, 0, 80"
+# define P_DISPLAY				"362, 453, 0, 80"
+# define P_RENDER				"453, 544, 0, 80"
+
+# define P_CLOSE_SETTING		"0, 92, 0, 80"
+# define P_SAMPLE				"92, 183, 0, 80"
+# define P_FORMAT				"183, 276, 0, 80"
+# define P_X8					"0, 276, 79, 122"
+# define P_X20					"0, 276, 122, 164"
+# define P_X200					"0, 276, 164, 207"
+# define P_X500					"0, 276, 207, 251"
+# define P_X1000				"0, 276, 251, 294"
+# define P_X5000				"0, 276, 294, 340"
 
 # define MINI(X, Y) 				(((X) < (Y)) ? (X) : (Y))
 # define MAXI(X, Y) 				(((X) > (Y)) ? (X) : (Y))

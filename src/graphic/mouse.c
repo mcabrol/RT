@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/18 19:30:48 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 15:05:39 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int		retry_is_hover(t_rtv1 *rtv1)
 	}
 	else if (rtv1->state == RENDER)
 	{
-		ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.height * rtv1->scene.width);
+		ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.height * \
+		rtv1->scene.width);
 		if (rtv1->scene.obj != NULL)
 		{
 			free_texture(rtv1);
@@ -71,7 +72,8 @@ int				mouse(int button, int x, int y, t_rtv1 *rtv1)
 			error = display_is_hover(rtv1);
 		if (rtv1->sprite.setup.is_hover && rtv1->state == ERROR)
 			clean_exit(rtv1);
-		else if (rtv1->sprite.setup.is_hover && rtv1->state != ERROR && rtv1->state != RENDER)
+		else if (rtv1->sprite.setup.is_hover && rtv1->state != ERROR && \
+			rtv1->state != RENDER)
 			create_setting(rtv1);
 	}
 	put_setup(rtv1);

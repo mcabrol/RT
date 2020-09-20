@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 15:52:01 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 15:59:50 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,8 +194,6 @@ void			*load(t_rtv1 *rtv1, char *pathname, char *attr);
 
 void			hook(t_rtv1 *rtv1);
 int				exit_hook(int keycode, t_rtv1 *rtv1);
-int				is_hover(int x, int y, t_button *button, int xmin, int xmax,
-				int ymin, int ymax);
 
 /*
 **	gui.c

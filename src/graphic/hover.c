@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   hover.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/03/07 12:28:25 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 15:52:05 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		hover(int x, int y, t_rtv1 *rtv1)
+static int		is_hover(int x, int y, t_button *button)
+{
+	BOOL	tmp;
+
+	tmp = button->is_hover;
+	button->is_hover = (x > button->xmin && x < button->xmax \
+		&& y > button->ymin && y < button->ymax) ? TRUE : FALSE;
+	return ((tmp != button->is_hover) ? TRUE : FALSE);
+}
+
+int				hover(int x, int y, t_rtv1 *rtv1)
 {
 	if (is_hover(x, y, &rtv1->sprite.setup, 90, 181, 0, 80))
 		put_setup(rtv1);
@@ -27,7 +37,7 @@ int		hover(int x, int y, t_rtv1 *rtv1)
 	return (EXIT_SUCCESS);
 }
 
-int		hover_setting(int x, int y, t_rtv1 *rtv1)
+int				hover_setting(int x, int y, t_rtv1 *rtv1)
 {
 	if (is_hover(x, y, &rtv1->sprite.close_setting, 0, 92, 0, 80))
 		put_setting(rtv1);

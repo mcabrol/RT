@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 16:32:12 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 15:07:45 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,25 @@ int		render(t_rtv1 *rtv1)
 	time_t	before;
 	time_t	after;
 	double	second;
-	int 	i;
+	int		i;
 
 	if (rtv1->screen)
 		free(rtv1->screen);
 	rtv1->screen = (t_vec *)malloc((rtv1->scene.width * rtv1->scene.height) \
 	* sizeof(t_vec));
-	ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.width * rtv1->scene.height);
+	ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.width * \
+	rtv1->scene.height);
 	rtv1->scene.loading = 0;
 	i = -1;
 	while (++i < rtv1->scene.n)
-	{
 		if (rtv1->scene.obj[i].texture.path)
-		{
 			if (load_texture(rtv1, &rtv1->scene.obj[i]))
 				return (EXIT_FAILURE);
-		}
-	}
-
 	if (init_cam(rtv1))
 		return (EXIT_FAILURE);
-
 	before = time(NULL);
-
 	if (multithread(rtv1))
 		return (error("Thread error.\n"));
-
 	after = time(NULL);
 	second = difftime(after, before);
 	timer(second);
@@ -56,9 +49,8 @@ int		multithread(t_rtv1 *rtv1)
 	t_thread	thread[THREAD];
 
 	i = -1;
-
-    if (pthread_mutex_init(&rtv1->scene.lock, NULL) != 0)
-        return (EXIT_FAILURE);
+	if (pthread_mutex_init(&rtv1->scene.lock, NULL) != 0)
+		return (EXIT_FAILURE);
 	while (++i < THREAD)
 	{
 		thread[i].id = i + 1;
@@ -72,10 +64,8 @@ int		multithread(t_rtv1 *rtv1)
 	}
 	i = -1;
 	while (++i < THREAD)
-	{
 		if (pthread_join(thread[i].thread, NULL))
 			return (EXIT_FAILURE);
-	}
 	pthread_mutex_destroy(&rtv1->scene.lock);
 	return (EXIT_SUCCESS);
 }

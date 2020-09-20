@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 13:00:25 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 15:59:40 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,13 +162,16 @@ typedef struct			s_button
 	void 				*disabled;
 	void 				*hover;
 	void 				*hover_disabled;
+	int					xmin;
+	int					xmax;
+	int					ymin;
+	int					ymax;
 }						t_button;
 
 typedef struct 			s_sprite
 {
 	void 				*background;
 	void 				*background_setting;
-
 	t_button			setup;
 	t_button			close;
 	t_button			retry;
@@ -176,18 +179,15 @@ typedef struct 			s_sprite
 	t_button			display;
 	t_button			render;
 	t_button			error;
-
 	t_button			sample;
 	t_button			format;
 	t_button			close_setting;
-
 	t_button			x8;
 	t_button			x20;
 	t_button			x200;
 	t_button			x500;
 	t_button			x1000;
 	t_button			x5000;
-
 	t_button			f320;
 	t_button			f854;
 	t_button			f1024;

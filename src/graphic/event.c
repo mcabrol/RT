@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/19 14:37:40 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 15:21:31 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,4 @@ int		exit_hook(int keycode, t_rtv1 *rtv1)
 		exit(0);
 	}
 	return (EXIT_SUCCESS);
-}
-
-int		is_hover(int x, int y, t_button *button, int xmin, int xmax, int ymin,
-	int ymax)
-{
-	BOOL	tmp;
-
-	tmp = button->is_hover;
-	button->is_hover = (x > xmin && x < xmax && y > ymin && y < ymax) ? \
-	TRUE : FALSE;
-	return ((tmp != button->is_hover) ? TRUE : FALSE);
 }
