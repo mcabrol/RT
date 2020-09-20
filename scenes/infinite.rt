@@ -30,7 +30,7 @@ OBJECT:
 	TYPE: PLANE
 	POSITION: -6 -3 0
 	TEXTURE: textures/damier.png
-	SCALE: 0.05
+	SCALE: 0.5
 },
 {
 	TYPE: SPHERE
