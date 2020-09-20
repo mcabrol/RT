@@ -6,13 +6,13 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 13:30:26 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 16:30:51 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int			size_of(char **array)
+int				size_of(char **array)
 {
 	int i;
 
@@ -21,7 +21,8 @@ int			size_of(char **array)
 		i++;
 	return (i);
 }
-static void protect_color_spec(t_rtv1 *rtv1)
+
+static void		protect_color_spec(t_rtv1 *rtv1)
 {
 	int		i;
 
@@ -40,7 +41,8 @@ static void protect_color_spec(t_rtv1 *rtv1)
 		i = i + 1;
 	}
 }
-int 		init_scene(t_rtv1 *rtv1, char *file)
+
+int				init_scene(t_rtv1 *rtv1, char *file)
 {
 	t_scene *scene;
 
@@ -64,7 +66,7 @@ int 		init_scene(t_rtv1 *rtv1, char *file)
 	return (EXIT_SUCCESS);
 }
 
-options_func *setup_obj_setter(int nb_options)
+options_func	*setup_obj_setter(int nb_options)
 {
 	options_func *obj_setter;
 
@@ -89,9 +91,9 @@ options_func *setup_obj_setter(int nb_options)
 	return (obj_setter);
 }
 
-int		prepare_obj(t_rtv1 *rtv1)
+int				prepare_obj(t_rtv1 *rtv1)
 {
-	int 	i;
+	int		i;
 	t_scene	*scene;
 	t_obj	*obj;
 
@@ -100,14 +102,12 @@ int		prepare_obj(t_rtv1 *rtv1)
 	while (++i < scene->n)
 	{
 		obj = &scene->obj[i];
-		// if (obj->texture.path)
-		// 	if (load_texture(rtv1, &scene->obj[i]))
-		// 		return (EXIT_FAILURE);
-		if (obj->rotation.x != 0 || obj->rotation.y != 0 || obj->rotation.z != 0)
+		if (obj->rotation.x != 0 || obj->rotation.y != 0 \
+			|| obj->rotation.z != 0)
 			obj->direction = rotate_point(deg_to_rad(obj->rotation.x),
-							 deg_to_rad(obj->rotation.y),
-							 deg_to_rad(obj->rotation.z),
-							 *norm(&obj->direction));
+							deg_to_rad(obj->rotation.y),
+							deg_to_rad(obj->rotation.z),
+							*norm(&obj->direction));
 		else
 			obj->direction = *norm(&obj->direction);
 	}
