@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:40:39 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:49:39 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ int				init_scene(t_rtv1 *rtv1, char *file)
 	return (EXIT_SUCCESS);
 }
 
-options_func	*setup_obj_setter(int nb_options)
+t_options_func	*setup_obj_setter(int nb_options)
 {
-	options_func *obj_setter;
+	t_options_func *obj_setter;
 
-	obj_setter = (options_func*)ft_memalloc(sizeof(options_func) * nb_options);
+	obj_setter = (t_options_func*)ft_memalloc(sizeof(t_options_func) \
+					* nb_options);
 	obj_setter[0] = &set_position;
 	obj_setter[1] = &set_direction;
 	obj_setter[2] = &set_emission;

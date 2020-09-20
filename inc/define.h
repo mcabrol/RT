@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:46:44 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:50:48 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,12 @@
 # define SETTING 				2
 
 # define OBJ_TYPE				6
-# define OBJ_TYPE_STR			"src/object-manager/obj_type.txt"
-# define OBJ_OPT_STR			"src/object-manager/obj_opt.txt"
+# define OBJ_TYPE_STR			"./src/object-manager/obj_type.txt"
+# define OBJ_OPT_STR			"./src/object-manager/obj_opt.txt"
 
 # define LIST_HOVER				"save render retry setup display"
 
-# define LIST_DISABLED			"setup sample format render display save x8 "\
-								"x20 x200 x500 x1000 x5000 320x240 854x480 "\
-								"1024x768 1280x720 1400x1050 1920x1080"
+# define LIST_DISABLED			"setup sample format render display save x8 x20 x200 x500 x1000 x5000 320x240 854x480 1024x768 1280x720 1400x1050 1920x1080"
 # define LIST_HOVER_DISABLED	"save render display"
 
 # define SPHERE					0

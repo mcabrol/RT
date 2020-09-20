@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:42:26 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:48:10 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct			s_scene
 	char				**obj_options;
 	t_obj				*obj;
 	int					n;
-	options_func		*obj_setter;
+	t_options_func		*obj_setter;
 	double				loading;
 	pthread_mutex_t		lock;
 }						t_scene;

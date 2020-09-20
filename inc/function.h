@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:46:53 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 18:48:20 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -367,7 +367,7 @@ int				prepare_obj(t_rtv1 *rtv1);
 */
 
 int				init_scene(t_rtv1 *rtv1, char *file);
-options_func	*setup_obj_setter(int nb_options);
+t_options_func	*setup_obj_setter(int nb_options);
 int				setup_obj(char *start, char *end, t_scene *scene);
 int				extract_obj_data(char *start, char *end, t_scene *scene, int j);
 int				set_obj(char *opt, char *data, t_obj *obj, t_scene *scene);
