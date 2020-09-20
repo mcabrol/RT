@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_matrix.c                                    :+:      :+:    :+:   */
+/*   operator_4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 17:01:09 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/20 17:20:51 by judrion          ###   ########.fr       */
+/*   Created: 2020/01/10 10:14:35 by judrion           #+#    #+#             */
+/*   Updated: 2020/09/20 17:19:23 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmath.h"
 
-void	vector_matrix_mult(t_vec *src, t_matrix *m, t_vec *dst)
+void		ndivide_(t_vec *v1, double n)
 {
-	int		i;
-	int		j;
-	double	output[4];
-	double	input[4];
+	double a;
 
-	i = 0;
-	ft_memcpy(input, src, sizeof(double) * 4);
-	ft_bzero(output, sizeof(double) * 4);
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			output[i] = output[i] + m->data[i][j] * input[j];
-			j = j + 1;
-		}
-		i = i + 1;
-	}
-	ft_memcpy(dst, output, sizeof(double) * 4);
+	a = 1.0 / n;
+	v1->x *= a;
+	v1->y *= a;
+	v1->z *= a;
+}
+
+void		minus(t_vec *v, t_vec *dest)
+{
+	vec(-v->x, -v->y, -v->z, dest);
+}
+
+void		minus_(t_vec *v)
+{
+	v->x = -v->x;
+	v->y = -v->y;
+	v->z = -v->z;
+}
+
+void		cross(t_vec *v1, t_vec *v2, t_vec *dest)
+{
+	vec(v1->y * v2->z - v1->z * v2->y,
+				v1->z * v2->x - v1->x * v2->z,
+				v1->x * v2->y - v1->y * v2->x, dest);
 }

@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 11:15:31 by judrion           #+#    #+#             */
-/*   Updated: 2020/01/29 16:39:46 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:31:47 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ double		vector_length(t_vec *a)
 	return (sqrtf(a->x * a->x + a->y * a->y + a->z * a->z));
 }
 
-void 		vector_print(t_vec *a, int format)
+void		vector_print(t_vec *a, int format)
 {
 	if (format == TERM)
 		printf("vector : [%.3f:%.3f:%.3f:%.3f]\n", a->x, a->y, a->z, a->w);
 	else
 		printf("{{%.3f,%.3f,%.3f,%.3f}}\n", a->x, a->y, a->z, a->w);
-
 }

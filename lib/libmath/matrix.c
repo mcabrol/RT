@@ -6,13 +6,13 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:23:58 by judrion           #+#    #+#             */
-/*   Updated: 2020/01/29 18:55:00 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:17:16 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmath.h"
 
-void matrix_mult(t_matrix *a, t_matrix *b, t_matrix *dest)
+void	matrix_mult(t_matrix *a, t_matrix *b, t_matrix *dest)
 {
 	int			i;
 	int			j;
@@ -36,7 +36,7 @@ void matrix_mult(t_matrix *a, t_matrix *b, t_matrix *dest)
 	}
 }
 
-void matrix_scaling(t_matrix *m, t_vec *scaling)
+void	matrix_scaling(t_matrix *m, t_vec *scaling)
 {
 	m->data[0][0] = scaling->x;
 	m->data[1][1] = scaling->y;
@@ -44,8 +44,7 @@ void matrix_scaling(t_matrix *m, t_vec *scaling)
 	m->data[3][3] = scaling->w;
 }
 
-
-void matrix_rotate(t_matrix *m, double angle, int axe)
+void	matrix_rotate(t_matrix *m, double angle, int axe)
 {
 	if (axe == X_AXE)
 	{
@@ -62,7 +61,6 @@ void matrix_rotate(t_matrix *m, double angle, int axe)
 		m->data[1][1] = 1;
 		m->data[2][0] = -sin((angle * M_PI) / 180);
 		m->data[2][2] = cos((angle * M_PI) / 180);
-
 	}
 	else if (axe == Z_AXE)
 	{
@@ -71,11 +69,10 @@ void matrix_rotate(t_matrix *m, double angle, int axe)
 		m->data[1][0] = sin((angle * M_PI) / 180);
 		m->data[1][1] = cos((angle * M_PI) / 180);
 		m->data[2][2] = 1;
-
 	}
 }
 
-void matrix_translate(t_matrix *a, t_vec *translate)
+void	matrix_translate(t_matrix *a, t_vec *translate)
 {
 	matrix_identity(a);
 	a->data[0][3] = translate->x;

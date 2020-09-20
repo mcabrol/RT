@@ -1,47 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operator_2.c                                       :+:      :+:    :+:   */
+/*   operator_3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 10:14:35 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/20 17:15:03 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/20 17:19:07 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmath.h"
 
-double		operator_distance(t_vec *p1, t_vec *p2)
+void		multin(double n, t_vec *v1, t_vec *dest)
 {
-	t_vec	p_tmp;
-	double	dist;
-
-	operator_subv(p1, p2, &p_tmp);
-	dist = vector_dotproduct(&p_tmp, &p_tmp);
-	return (sqrtf(dist));
+	vec(n * v1->x, n * v1->y, n * v1->z, dest);
 }
 
-void		sub_(t_vec *v1, t_vec *v2)
+void		nmulti_(t_vec *v1, double n)
 {
-	v1->x -= v2->x;
-	v1->y -= v2->y;
-	v1->z -= v2->z;
+	v1->x *= n;
+	v1->y *= n;
+	v1->z *= n;
 }
 
-void		multiplication(t_vec *v1, t_vec *v2, t_vec *dest)
+void		divide(t_vec *v1, t_vec *v2, t_vec *dest)
 {
-	vec(v1->x * v2->x, v1->y * v2->y, v1->z * v2->z, dest);
+	vec(v1->x / v2->x, v1->y / v2->y, v1->z / v2->z, dest);
 }
 
-void		multi_(t_vec *v1, t_vec *v2)
+void		ndivide(t_vec *v1, double n, t_vec *dest)
 {
-	v1->x *= v2->x;
-	v1->y *= v2->y;
-	v1->z *= v2->z;
+	double a;
+
+	a = 1.0 / n;
+	vec(v1->x * a, v1->y * a, v1->z * a, dest);
 }
 
-void		nmulti(t_vec *v1, double n, t_vec *dest)
+void		divide3(double a, t_vec *v, t_vec *dest)
 {
-	vec(v1->x * n, v1->y * n, v1->z * n, dest);
+	vec(a / v->x, a / v->y, a / v->z, dest);
 }
