@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 09:38:01 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/21 19:07:00 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 20:56:58 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int			value_is_vector(const char *str)
 	char	**vector;
 	int		i;
 
+	if (!str)
+		return (-1);
 	vector = ft_strsplit(str, ' ');
 	i = 0;
 	while (vector[i])
