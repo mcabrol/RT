@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 10:47:42 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/20 17:57:40 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 14:55:16 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void		throw_error_2(int errorcode)
 				errorcode);
 	else if (errorcode == BAD_VALUE)
 		ft_printf("./rtv1: ERROR #%.4d - bad value\n", errorcode);
+	else if (errorcode == NO_WIN_AVAILABLE)
+		ft_printf("./rtv1: ERROR #%.4d - Max windows opened\n", errorcode);
 }
 
 void			throw_error(int errorcode)

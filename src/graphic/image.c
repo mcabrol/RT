@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 17:45:14 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/21 14:57:45 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,22 @@ int				image(t_rtv1 *rtv1)
 
 int				init_image(t_rtv1 *rtv1)
 {
-	if (rtv1->id_win > MAX_WIN)
+	if (rtv1->id_win == MAX_WIN)
 	{
 		clean_image_array(rtv1);
-		return (EXIT_FAILURE);
+		rtv1->state = RENDER;
 	}
 	if (rtv1->id_win == 0)
 		rtv1->image = init_win_array();
 	if (rtv1->image)
-		display_window(rtv1);
+	{
+		if (display_window(rtv1) == EXIT_FAILURE)
+		{
+			throw_error(NO_WIN_AVAILABLE);
+			rtv1->state = ERROR;
+			return (EXIT_FAILURE);
+		}
+	}
 	return (EXIT_SUCCESS);
 }
 

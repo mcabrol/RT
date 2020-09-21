@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 17:54:36 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/21 15:50:20 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 
 static int		retry_is_hover(t_rtv1 *rtv1)
 {
-	if (rtv1->state == SETUP || rtv1->state == ERROR)
+	if (rtv1->state == ERROR)
 	{
-		if (rtv1->state == ERROR)
-			rtv1->setter = FALSE;
+		if (rtv1->id_win == MAX_WIN)
+		{
+			if (clean_image_array(rtv1) != 0)
+				rtv1->state = RENDER;
+			return (EXIT_FAILURE);
+		}
 	}
+	else if (rtv1->state == SETUP)
+		rtv1->setter = FALSE;
 	else if (rtv1->state == RENDER)
 	{
 		ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.height * \

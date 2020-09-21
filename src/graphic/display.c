@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:42:08 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 17:47:07 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/21 14:45:08 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_win		*init_win_array(void)
 	return (image);
 }
 
-void		display_window(t_rtv1 *rtv1)
+int		display_window(t_rtv1 *rtv1)
 {
 	int		id;
 	char	*win_name;
@@ -57,13 +57,18 @@ void		display_window(t_rtv1 *rtv1)
 	while (++id < MAX_WIN)
 		if (rtv1->image[id].available == 1)
 			break ;
-	win_name = init_win_name(id, rtv1->id_render);
-	rtv1->image[id] = window(rtv1->mlx_ptr, rtv1->scene.width,
-							rtv1->scene.height, win_name);
-	mlx_hook(rtv1->image[id].win_ptr, 17, (1L << 17), close_rcross, \
-	&rtv1->image[id]);
-	rtv1->image[id].id_window = id;
-	rtv1->image[id].available = 0;
-	rtv1->id_win = id;
-	free(win_name);
+	if (id != MAX_WIN)
+	{
+		win_name = init_win_name(id, rtv1->id_render);
+		rtv1->image[id] = window(rtv1->mlx_ptr, rtv1->scene.width,
+								rtv1->scene.height, win_name);
+		mlx_hook(rtv1->image[id].win_ptr, 17, (1L << 17), close_rcross, \
+		&rtv1->image[id]);
+		rtv1->image[id].id_window = id;
+		rtv1->image[id].available = 0;
+		rtv1->id_win = id;
+		free(win_name);
+		return (EXIT_SUCCESS);
+	}
+	return (EXIT_FAILURE);
 }

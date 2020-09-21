@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 17:48:04 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/21 17:09:33 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int			multithread(t_rtv1 *rtv1)
 	t_thread	thread[THREAD];
 
 	i = -1;
-	if (pthread_mutex_init(&rtv1->scene.lock, NULL) != 0)
-		return (EXIT_FAILURE);
 	while (++i < THREAD)
 	{
 		thread[i].id = i + 1;
@@ -74,6 +72,5 @@ int			multithread(t_rtv1 *rtv1)
 	while (++i < THREAD)
 		if (pthread_join(thread[i].thread, NULL))
 			return (EXIT_FAILURE);
-	pthread_mutex_destroy(&rtv1->scene.lock);
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 19:22:25 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/21 15:01:37 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void			*load(t_rtv1 *rtv1, char *pathname, char *attr);
 
 char			*init_win_name(int id_win, int id_render);
 t_win			*init_win_array(void);
-void			display_window(t_rtv1 *rtv1);
+int				display_window(t_rtv1 *rtv1);
 
 /*
 **	event.c
@@ -268,7 +268,6 @@ void			set_format(t_rtv1 *rtv1, int sample, int width, int height);
 
 int				init_window(t_rtv1 *rtv1);
 t_win			window(void*mlx_ptr, int width, int height, char *name);
-void			display_window(t_rtv1 *rtv1);
 void			create_setting(t_rtv1 *rtv1);
 int				close_settings(t_rtv1 *rtv1);
 
@@ -405,7 +404,7 @@ void			free_all_sprite(t_sprite *sprite, void *mlx_ptr);
 void			free_obj(t_obj *obj);
 void			free_texture(t_rtv1 *rtv1);
 void			clean_exit(t_rtv1 *rtv1);
-void			clean_image_array(t_rtv1 *rtv1);
+int				clean_image_array(t_rtv1 *rtv1);
 int				close_rcross(t_win *win);
 int				close_rcross_main(t_rtv1 *rtv1);
 int				close_rcross_s(t_rtv1 *rtv1);

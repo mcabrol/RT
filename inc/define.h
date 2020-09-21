@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:51:59 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 19:19:07 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/21 14:34:52 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 # define SPEC					1
 # define REFR					2
 
-# define MAX_WIN	 			50
+# define MAX_WIN	 			10
 
 # define GAMMA 					2.2
 # define T_MIN					0.01

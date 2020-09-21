@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 19:13:55 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/21 14:49:53 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef enum			e_error
 	SETUP_OBJ_FAILED,
 	VECTOR_BAD_VALUE,
 	BAD_VALUE,
+	NO_WIN_AVAILABLE,
 }						t_error;
 
 typedef struct			s_render

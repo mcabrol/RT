@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 16:24:59 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 17:10:03 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ static void		inner_radiance(t_scene *scene, t_ray *ray, t_obj *shape)
 	eval(ray, ray->distance, &ray->x);
 	normal(ray, shape);
 	lighting(scene, ray, shape);
-	pthread_mutex_lock(&scene->lock);
 	texture(ray, shape);
-	pthread_mutex_unlock(&scene->lock);
 }
 
 void			radiance(t_scene *scene, t_ray *ray, t_render *render)
