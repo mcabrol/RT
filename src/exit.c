@@ -6,12 +6,11 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 19:27:32 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 21:32:58 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 21:44:41 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
 
 static void	clean_all_windows(t_rtv1 *rtv1)
 {
