@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:42:08 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 14:45:08 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 18:01:12 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_win		*init_win_array(void)
 	return (image);
 }
 
-int		display_window(t_rtv1 *rtv1)
+int			display_window(t_rtv1 *rtv1)
 {
 	int		id;
 	char	*win_name;

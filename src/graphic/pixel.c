@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 21:12:01 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 18:00:05 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_vec	get_pixel_vector(t_texture *texture, int x, int y, int type)
 	t_vec	dest;
 
 	vec(0.0, 0.0, 0.0, &dest);
-
 	if (type == TEXTURE && x < texture->width && y < texture->height)
 	{
 		if (x < 0 || y < 0)
