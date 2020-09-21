@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 18:00:05 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 19:50:56 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	put_pixel_vector(t_rtv1 *rtv1, int x, int y, t_vec *v)
 	t_win	*win;
 	size_t	i;
 
-	win = &rtv1->image[rtv1->id_win];
+	win = &rtv1->image[rtv1->id_win_to_print];
 	i = (x * win->bits_per_pixel / 8) + (y * win->size_line);
 	if (x < rtv1->scene.width)
 	{

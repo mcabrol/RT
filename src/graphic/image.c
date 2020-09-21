@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 14:57:45 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 19:52:31 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int				image(t_rtv1 *rtv1)
 	t_vec	*screen;
 	t_win	*win;
 
-	win = &rtv1->image[rtv1->id_win];
+
+	win = &rtv1->image[rtv1->id_win_to_print];
 	screen = rtv1->screen;
 	y = -1;
 	while (++y <= rtv1->scene.height)

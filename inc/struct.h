@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 14:49:53 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 19:48:07 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,7 @@ typedef struct			s_rtv1
 	char				*file_str;
 	char				*list_disabled;
 	int					id_win;
+	int					id_win_to_print;
 	int					id_render;
 	int					id_ppm;
 	int					id_parse;

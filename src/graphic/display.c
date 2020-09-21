@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:42:08 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 18:01:12 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 19:47:49 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			display_window(t_rtv1 *rtv1)
 		&rtv1->image[id]);
 		rtv1->image[id].id_window = id;
 		rtv1->image[id].available = 0;
-		rtv1->id_win = id;
+		rtv1->id_win_to_print = id;
 		free(win_name);
 		return (EXIT_SUCCESS);
 	}
