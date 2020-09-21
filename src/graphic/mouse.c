@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 15:50:20 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 18:48:24 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int		retry_is_hover(t_rtv1 *rtv1)
 				rtv1->state = RENDER;
 			return (EXIT_FAILURE);
 		}
+		rtv1->setter = FALSE;
 	}
 	else if (rtv1->state == SETUP)
 		rtv1->setter = FALSE;

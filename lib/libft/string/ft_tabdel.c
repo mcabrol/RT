@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:55:21 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:05:58 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 19:07:31 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void	ft_tabdel(char **tab)
 
 	i = -1;
 	while (tab[++i])
-		free(tab[i]);
-	free(tab);
+	{
+		if (tab[i])
+			free(tab[i]);
+	}
+	if (tab)
+		free(tab);
 }
 
 void	ft_tabdel_partial(char **data, int d_allocated)
@@ -29,7 +33,8 @@ void	ft_tabdel_partial(char **data, int d_allocated)
 	i = 0;
 	while (i < d_allocated)
 	{
-		free(data[i]);
+		if (data[i])
+			free(data[i]);
 		i = i + 1;
 	}
 	if (data)

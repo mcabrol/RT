@@ -6,7 +6,7 @@
 /*   By: judrion <judrion@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 09:38:01 by judrion           #+#    #+#             */
-/*   Updated: 2020/09/20 11:31:21 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 19:07:00 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			set_emission(t_obj *obj, char *value)
 {
 	int		color;
 
-	if (!value)
+	if (!value || value[1] != '#')
 	{
 		throw_error_file(BAD_VALUE, NULL, NULL, -1);
 		return (-1);

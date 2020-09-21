@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 19:06:36 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 19:13:25 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		protect_color_spec(t_rtv1 *rtv1)
 	i = 0;
 	while (i < rtv1->scene.n)
 	{
-		if (rtv1->scene.obj[i].reflect == SPEC)
+		if (rtv1->scene.obj[i])
 		{
 			if (rtv1->scene.obj[i].color.x == 1.0)
 				rtv1->scene.obj[i].color.x -= 0.01;
