@@ -6,11 +6,12 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 19:27:32 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 15:12:41 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/21 21:32:58 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
 
 static void	clean_all_windows(t_rtv1 *rtv1)
 {
@@ -73,5 +74,6 @@ void		clean_exit(t_rtv1 *rtv1)
 	clean_all_windows(rtv1);
 	free_all_sprite(&rtv1->sprite, rtv1->mlx_ptr);
 	mlx_destroy_image(rtv1->mlx_ptr, rtv1->main.img_ptr);
+	mlx_destroy_window(rtv1->mlx_ptr, rtv1->main.win_ptr);
 	exit(EXIT_SUCCESS);
 }
