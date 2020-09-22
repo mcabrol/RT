@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:21:04 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 19:48:07 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:34:08 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,6 @@ typedef struct			s_scene
 	t_obj				*obj;
 	int					n;
 	t_options_func		*obj_setter;
-	double				loading;
-	pthread_mutex_t		lock;
 }						t_scene;
 
 typedef struct			s_point

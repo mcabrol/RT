@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/22 14:17:24 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:34:52 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int			render(t_rtv1 *rtv1)
 		return (EXIT_FAILURE);
 	ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.width * \
 	rtv1->scene.height);
-	rtv1->scene.loading = 0;
 	if (prepare_texture(rtv1))
 		return (EXIT_FAILURE);
 	if (init_cam(rtv1))

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/22 14:16:41 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:42:11 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static int		display_is_hover(t_rtv1 *rtv1)
 {
 	if (init_image(rtv1))
 	{
-		clean_exit(rtv1);
+		if (rtv1->id_win != MAX_WIN)
+			clean_exit(rtv1);
 		return (EXIT_FAILURE);
 	}
 	rtv1->id_win += image(rtv1);

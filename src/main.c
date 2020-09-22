@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/22 13:57:07 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:40:10 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		init_session(t_rtv1 *rtv1, int ac, char **av)
 	rtv1->scene.samples = 8;
 	rtv1->scene.width = 320;
 	rtv1->scene.height = 240;
+	rtv1->screen = NULL;
 	if ((rtv1->list_disabled = get_opt_str(LIST_DISABLED)) == NULL)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
