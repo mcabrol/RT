@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/22 14:34:52 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:48:39 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,16 @@ static int	prepare_texture(t_rtv1 *rtv1)
 
 	i = -1;
 	while (++i < rtv1->scene.n)
+	{
 		if (rtv1->scene.obj[i].texture.path)
+		{
 			if (load_texture(rtv1, &rtv1->scene.obj[i]))
+			{
+				rtv1->state = ERROR;
 				return (EXIT_FAILURE);
+			}
+		}
+	}
 	return (EXIT_SUCCESS);
 }
 

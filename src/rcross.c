@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rcross.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 19:29:14 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 19:36:34 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:52:44 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		close_rcross_main(t_rtv1 *rtv1)
 
 int		close_rcross_s(t_rtv1 *rtv1)
 {
-	mlx_destroy_image(rtv1->mlx_ptr, rtv1->setting.img_ptr);
-	mlx_destroy_window(rtv1->mlx_ptr, rtv1->setting.win_ptr);
+	close_settings(rtv1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/17 15:27:25 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:49:30 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int			init_cam(t_rtv1 *rtv1)
 	if (camera)
 	{
 		if (set_camera(camera, rtv1))
+		{
+			rtv1->state = ERROR;
 			return (EXIT_FAILURE);
+		}
 	}
 	else
 		set_default_camera(rtv1);
