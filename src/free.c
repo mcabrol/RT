@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/22 12:22:40 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 13:58:01 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ static void		free_format_sprite(t_sprite *sprite, void *mlx_ptr)
 		free_sprite(sprite->f1400, mlx_ptr);
 	if (sprite->f1920.active)
 		free_sprite(sprite->f1920, mlx_ptr);
+	if (sprite->background)
+		mlx_destroy_image(mlx_ptr, sprite->background);
+	if (sprite->background_setting)
+		mlx_destroy_image(mlx_ptr, sprite->background_setting);
 }
 
 void			free_all_sprite(t_sprite *sprite, void *mlx_ptr)
@@ -93,8 +97,6 @@ void			free_all_sprite(t_sprite *sprite, void *mlx_ptr)
 		free_sprite(sprite->format, mlx_ptr);
 	if (sprite->close_setting.active)
 		free_sprite(sprite->close_setting, mlx_ptr);
-	free_format_sprite(sprite, mlx_ptr);
 	free_sample_sprite(sprite, mlx_ptr);
-	mlx_destroy_image(mlx_ptr, sprite->background);
-	mlx_destroy_image(mlx_ptr, sprite->background_setting);
+	free_format_sprite(sprite, mlx_ptr);
 }

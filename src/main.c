@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 20:59:15 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/22 12:37:04 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 13:57:07 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int		main(int ac, char **av)
 {
 	t_rtv1	rtv1;
 
-	init_all(&rtv1, ac, av);
+	if (init_all(&rtv1, ac, av) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	put_setup(&rtv1);
 	hook(&rtv1);
 	mlx_loop(rtv1.mlx_ptr);
@@ -38,7 +39,6 @@ int		init_all(t_rtv1 *rtv1, int ac, char **av)
 		rtv1->state = SETUP;
 	if (init_window(rtv1))
 	{
-		free(rtv1->list_disabled);
 		ft_tabdel(rtv1->scene.obj_type);
 		ft_tabdel(rtv1->scene.obj_options);
 		free(rtv1->scene.obj_setter);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 19:17:24 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/22 13:46:44 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,29 @@ static t_position	button_position(int xmin, int xmax, int ymin, int ymax)
 
 static void			init_button_2(t_rtv1 *rtv1, int *error)
 {
-	error += load_button(rtv1, &rtv1->sprite.x8, "x8", \
+	*error += load_button(rtv1, &rtv1->sprite.x8, "x8", \
 		button_position(0, 276, 79, 122));
-	error += load_button(rtv1, &rtv1->sprite.x20, "x20", \
+	*error += load_button(rtv1, &rtv1->sprite.x20, "x20", \
 		button_position(0, 276, 122, 164));
-	error += load_button(rtv1, &rtv1->sprite.x200, "x200", \
+	*error += load_button(rtv1, &rtv1->sprite.x200, "x200", \
 		button_position(0, 276, 164, 207));
-	error += load_button(rtv1, &rtv1->sprite.x500, "x500", \
+	*error += load_button(rtv1, &rtv1->sprite.x500, "x500", \
 		button_position(0, 276, 207, 251));
-	error += load_button(rtv1, &rtv1->sprite.x1000, "x1000", \
+	*error += load_button(rtv1, &rtv1->sprite.x1000, "x1000", \
 		button_position(0, 276, 251, 294));
-	error += load_button(rtv1, &rtv1->sprite.x5000, "x5000", \
+	*error += load_button(rtv1, &rtv1->sprite.x5000, "x5000", \
 		button_position(0, 276, 294, 340));
-	error += load_button(rtv1, &rtv1->sprite.f320, "320x240", \
+	*error += load_button(rtv1, &rtv1->sprite.f320, "320x240", \
 		button_position(0, 0, 0, 0));
-	error += load_button(rtv1, &rtv1->sprite.f854, "854x480", \
+	*error += load_button(rtv1, &rtv1->sprite.f854, "854x480", \
 		button_position(0, 0, 0, 0));
-	error += load_button(rtv1, &rtv1->sprite.f1024, "1024x768", \
+	*error += load_button(rtv1, &rtv1->sprite.f1024, "1024x768", \
 		button_position(0, 0, 0, 0));
-	error += load_button(rtv1, &rtv1->sprite.f1280, "1280x720", \
+	*error += load_button(rtv1, &rtv1->sprite.f1280, "1280x720", \
 		button_position(0, 0, 0, 0));
-	error += load_button(rtv1, &rtv1->sprite.f1400, "1400x1050", \
+	*error += load_button(rtv1, &rtv1->sprite.f1400, "1400x1050", \
 		button_position(0, 0, 0, 0));
-	error += load_button(rtv1, &rtv1->sprite.f1920, "1920x1080", \
+	*error += load_button(rtv1, &rtv1->sprite.f1920, "1920x1080", \
 		button_position(0, 0, 0, 0));
 }
 
