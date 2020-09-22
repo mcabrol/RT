@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:56:57 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/22 12:35:13 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:15:26 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void			screen(t_render *render, t_rtv1 *rtv1);
 int				error(char *strerror);
 int				init_session(t_rtv1 *rtv1, int ac, char **av);
 int				init_all(t_rtv1 *rtv1, int ac, char **av);
-
 
 /*
 **	srand48.c

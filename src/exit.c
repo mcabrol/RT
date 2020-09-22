@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 19:27:32 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 21:44:41 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:13:05 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void		clean_exit(t_rtv1 *rtv1)
 			free(rtv1->scene.obj);
 		}
 	}
+	if (rtv1->id_setting == 1)
+		close_settings(rtv1);
 	clean_all_windows(rtv1);
 	free_all_sprite(&rtv1->sprite, rtv1->mlx_ptr);
 	mlx_destroy_image(rtv1->mlx_ptr, rtv1->main.img_ptr);

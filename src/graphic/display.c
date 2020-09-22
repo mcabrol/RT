@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:42:08 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 19:47:49 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:13:58 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_win		*init_win_array(void)
 	t_win	*image;
 
 	image = (t_win*)ft_memalloc(sizeof(t_win) * MAX_WIN);
+	if (!image)
+		return (NULL);
 	i = 0;
 	while (i < MAX_WIN)
 	{

@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 20:11:02 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:09:32 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int				init_image(t_rtv1 *rtv1)
 		clean_image_array(rtv1);
 		rtv1->state = RENDER;
 	}
-	if (rtv1->id_win == 0)
+	if (rtv1->id_win == 0 && !rtv1->image)
 		rtv1->image = init_win_array();
 	if (rtv1->image)
 	{
@@ -54,6 +54,8 @@ int				init_image(t_rtv1 *rtv1)
 			return (EXIT_FAILURE);
 		}
 	}
+	else
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

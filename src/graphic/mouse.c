@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 18:48:24 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:16:41 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static int		retry_is_hover(t_rtv1 *rtv1)
 		rtv1->setter = FALSE;
 	else if (rtv1->state == RENDER)
 	{
-		ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.height * \
-		rtv1->scene.width);
 		if (rtv1->scene.obj != NULL)
 		{
 			free_texture(rtv1);
@@ -46,7 +44,10 @@ static int		render_is_hover(t_rtv1 *rtv1)
 	if (rtv1->state == SETUP)
 	{
 		if (render(rtv1))
+		{
+			clean_exit(rtv1);
 			return (EXIT_FAILURE);
+		}
 		rtv1->state = RENDER;
 		(rtv1->id_render)++;
 	}
@@ -56,7 +57,10 @@ static int		render_is_hover(t_rtv1 *rtv1)
 static int		display_is_hover(t_rtv1 *rtv1)
 {
 	if (init_image(rtv1))
+	{
+		clean_exit(rtv1);
 		return (EXIT_FAILURE);
+	}
 	rtv1->id_win += image(rtv1);
 	return (EXIT_SUCCESS);
 }

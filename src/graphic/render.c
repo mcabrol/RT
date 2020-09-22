@@ -6,7 +6,7 @@
 /*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/21 17:09:33 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/22 14:17:24 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int			render(t_rtv1 *rtv1)
 		free(rtv1->screen);
 	rtv1->screen = (t_vec *)malloc((rtv1->scene.width * rtv1->scene.height) \
 	* sizeof(t_vec));
+	if (!rtv1->screen)
+		return (EXIT_FAILURE);
 	ft_bzero(rtv1->screen, sizeof(t_vec) * rtv1->scene.width * \
 	rtv1->scene.height);
 	rtv1->scene.loading = 0;
