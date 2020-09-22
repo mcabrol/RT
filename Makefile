@@ -6,7 +6,7 @@
 #    By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/10 11:25:08 by mcabrol           #+#    #+#              #
-#    Updated: 2020/09/21 14:39:04 by judrion          ###   ########.fr        #
+#    Updated: 2020/09/22 14:57:32 by judrion          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -g -O3 -Wall -Wextra -Werror
 INC = -Iinc -Ilib/minilibx -Ilib/libft/inc -Ilib/libmath
 SRC := $(shell find src -type f -regex ".*\.c")
 LIB = lib/libft/libft.a lib/libmath/libmath.a lib/minilibx/libmlx.dylib
-FRAMEWORK = -lmlx -framework Cocoa -framework Metal -framework MetalKit -framework QuartzCore
+FRAMEWORK = -lmlx
 SANATIZE = -fsanitize=address
 
 COMPILE.c = $(CC) $(CFLAGS) $(INC) $(TARGET_ARCH) -c
