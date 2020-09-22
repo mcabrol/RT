@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gui.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:28:42 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/20 18:42:53 by mcabrol          ###   ########.fr       */
+/*   Updated: 2020/09/22 12:26:01 by judrion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,16 @@ int					init_sprite(t_rtv1 *rtv1)
 		return (EXIT_FAILURE);
 	if ((sprite->background_setting = load(rtv1, PATH_SPRITE,\
 		"background-setting.png")) == NULL)
+	{
+		mlx_destroy_image(rtv1->mlx_ptr, sprite->background);
 		return (EXIT_FAILURE);
+	}
 	if (init_button(rtv1, 0))
+	{
+		mlx_destroy_image(rtv1->mlx_ptr, sprite->background);
+		mlx_destroy_image(rtv1->mlx_ptr, sprite->background_setting);
 		return (EXIT_FAILURE);
+	}
 	put_sprite(rtv1, rtv1->sprite.background, MAIN);
 	return (EXIT_SUCCESS);
 }
