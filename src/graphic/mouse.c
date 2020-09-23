@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcabrol <mcabrol@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mcabrol <mcabrol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:43:37 by mcabrol           #+#    #+#             */
-/*   Updated: 2020/09/22 14:48:58 by judrion          ###   ########.fr       */
+/*   Updated: 2020/09/23 16:14:17 by mcabrol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int				mouse_setting(int button, int x, int y, t_rtv1 *rtv1)
 {
 	x = 0;
 	y = 0;
-	if (button == 1)
+	if (button == 1 && rtv1->state == SETUP)
 	{
 		if (rtv1->sprite.format.is_hover)
 			rtv1->tabs = FORMAT;
