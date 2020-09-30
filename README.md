@@ -1,4 +1,4 @@
-# 💥 Ray Tracer v1
+# 💥 Ray Tracer
 
 Simple **ray pathing** algorithm written in C for _OS X_ distribution.
 
@@ -21,58 +21,47 @@ brew install gcc cmake
 
 The configuration file is in _.rt_ extension.
 
-| Options       	   | Sphere 	 | Plane  	| Cylinder	| Cone	| Box	  | Camera	|
-| ------------------ | --------- | -------- | --------- | ----- | ----- | ------- |
-| radius (_double_)	 | **Yes**		     | _No_   		| **Yes**		    | _No_	  | _No_	  | _No_      |
-| height (_double_)	 | _No_		     | _No_		    | **Yes** 	    	| **Yes**  	| _No_  	| _No_  		|
-| position (_t_vec_) | **Yes**		     | **Yes**		    | **Yes**		    | **Yes**	  | **Yes**	  | **Yes**     |
-| direction (_t_vec_)| **Yes**		 | **Yes**		| **Yes**		| **Yes**	| **Yes**	| **Yes**		|
-| emission (_t_vec_) | **Yes**		 | **Yes**		| **Yes**		| **Yes**	| **Yes**	| _No_		|
-| reflect (_int_)    | **Yes**		 | **Yes**		| **Yes**		| **Yes**	| **Yes**	| _No_		|
-| color (_t_vec_)	 | **Yes**		 | **Yes**		| **Yes**		| **Yes**	| **Yes**	| _No_		|
-| angle (_double_)	 | _No_		 | _No_		| _No_		| **Yes**	| _No_	| _No_		|
-| a (_double_)		 | _No_		 | _No_		| _No_		| _No_	| **Yes**	| _No_		|
-| b (_double_)		 | _No_		 | _No_		| _No_		| _No_	| **Yes**	| _No_		|
-| c (_double_)		 | _No_		 | _No_		| _No_		| _No_	| **Yes**	| _No_		|
-| fov (_double_)	 | _No_		 | _No_		| _No_		| _No_	| _No_	| **Yes**		|
+| Options       	   | Sphere 	 | Plane  	| Cylinder	| Cone	  | Box	    | Camera	|
+| ------------------ | --------- | -------- | --------- | ------- | ------- | ------- |
+| radius (_float_)	 | **Yes**   | _No_   	| **Yes**	  | _No_	  | _No_	  | _No_    |
+| height (_float_)	 | _No_		   | _No_		  | **Yes**  	| **Yes** | _No_  	| _No_  	|
+| width (_float_)		 | _No_		   | _No_		  | _No_		  | _No_	  | **Yes**	| _No_		|
+| height (_float_)   | _No_		   | _No_		  | _No_		  | _No_	  | **Yes**	| _No_		|
+| depth (_float_)	   | _No_		   | _No_		  | _No_		  | _No_	  | **Yes**	| _No_		|
+| position (_t_vec_) | **Yes**	 | **Yes**	| **Yes**		| **Yes**	| **Yes**	| **Yes** |
+| direction (_t_vec_)| **Yes**	 | **Yes**	| **Yes**		| **Yes**	| **Yes**	| **Yes**	|
+| emission (_t_vec_) | **Yes**	 | **Yes**	| **Yes**		| **Yes**	| **Yes**	| _No_		|
+| reflect (_int_)    | **Yes**	 | **Yes**	| **Yes**		| **Yes**	| **Yes**	| _No_		|
+| color (_t_vec_)	   | **Yes**	 | **Yes**	| **Yes**		| **Yes**	| **Yes**	| _No_		|
+| angle (_float_)	   | _No_		   | _No_		  | _No_		  | **Yes**	| _No_	  | _No_		|
+| fov (_float_)	     | _No_		   | _No_		  | _No_		  | _No_	  | _No_	  | **Yes**	|
 
 ## Architecture
 
-_file.c_ todo
+_main.c_ 
+_debbug.c_ 
+_free.c_
 
-| Algorithm     | Objects Manager   | Math         | Graphic   | Kernel     |
-| ------------- | ----------------- | ------------ | --------- | ---------- |
-| intersect.c   | scene.c           | vetor.c      | mlx.c     | opencl.c   |
-| radiance.c    | sphere.c          | operator.c   | _gui.c_   | kernel.cl  |
-| ray.c         | _cone.c_          | calcul.c     | _text.c_  |            |
-| rtv1.c        | _cylinder.c_      | sample.c     |           |            |
-| specular.c    | _cube.c_          |              |           |            |
-| srand48.c     | _plan.c_          |              |           |            |
+| Algorithm          | Objects Manager   | Math         | Graphic      | File         |
+| ------------------ | ----------------- | ------------ | ------------ | ------------ |
+| camera.c           | obj_opt.txt       | convert.c    | button.c     | file.c       |
+| cubemap.c          | obj_type.txt      | hex_conv.c   | display.c    | file_error.c |
+| intersect.c        | object.c          | quadratic.c  | event.c      | parse.c      |
+| intersect_form.c   | scene.c           | rotate.c     | gui.c        | parse_2.c    |
+| light.c            | setter_opt.c      | vetor.c      | hover.c      | setter.c     |
+| radiance.c         |                   | operator.c   | gui.c        | setter_2.c   |
+| ray.c              |                   | clamp.c      | image.c      | setter_3.c   |
+| reflect.c          |                   | calcul.c     | key.c        | setter_4.c   |
+| rtv1.c             |                   | sample.c     | list.txt     |              |
+| texture.c          |                   | distance.c   | mouse.c      |              |
+| uv.c               |                   | normal.c     | pixel.c      |              |
+| srand48.c          |                   |              | render.c     |              |
+| srand48.c          |                   |              | setting.c    |              |
+| srand48.c          |                   |              | window.c     |              |
 
 
-## Bonus
+## Reflect
 
-Fichier de scene: oui
-Ficher ++: oui
-Lumière d'ambiance: non
-Ambiance ++ (reglable dans le .rt): non
-Objects limité: non
-Perturbation: non
-Lumière Direct: non
-Lumière Parrallele: non
-Reflection et transparence: non
-Ombre et transparence: non
-Texture: non
-Autre application de texture: non
-Objet composé (deja fait): non
-Objet négatif: non
-Objet natif simple: non
-Effet visuel classique: non
-Effet technique: oui
-Environnement: oui
-Objet exotique: non
-Ruban de Moebius: non
-Caustic/Global illumination: oui
-C'est beau: oui
 
-6/22
+
+
