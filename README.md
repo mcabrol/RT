@@ -1,3 +1,5 @@
+![RT](https://raw.githubusercontent.com/mcabrol/RT/master/img/Present.png)
+
 # 💥 Ray Tracer
 
 Simple **ray pathing** algorithm written in C for _OS X_ distribution.
