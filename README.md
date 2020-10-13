@@ -19,6 +19,25 @@ brew install gcc cmake
 ./rtv1 [files]
 ```
 
+## GUI
+
+![GUI](https://raw.githubusercontent.com/mcabrol/RT/master/img/UX_main.png) <br>
+
+| Button  | Action                     |
+|---------|----------------------------|
+| SETUP   | Open **Setting** window    |
+| RETRY   | Reload the file descriptor |
+| SAVE    | Save render (.ppm)         |
+| DISPLAY | Display render             |
+| RENDER  | Start the render           |
+
+![GUI](https://raw.githubusercontent.com/mcabrol/RT/master/img/UX_setting.png) <br>
+
+| Tabs    | Set                  |
+|---------|----------------------|
+| Format  | Setup render size    |
+| Samples | Setup samples number |
+
 ## File
 
 The configuration file is in _.rt_ extension.
@@ -64,6 +83,7 @@ _free.c_
 
 ## Reflect
 
+specular / reffraction / diffuse
 
-
-
+![GUI](https://raw.githubusercontent.com/mcabrol/RT/master/img/light.png)
+![GUI](https://raw.githubusercontent.com/mcabrol/RT/master/img/cornell_box.png)
